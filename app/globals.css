@@ -1,0 +1,173 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+  --background: #080909;
+  --foreground: #f5f1e7;
+  --orange: #ff8b2a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Bradley Hand", "Segoe Print", "Marker Felt", cursive;
+}
+
+.mock-shell {
+  display: grid;
+  min-height: 100vh;
+  place-items: start center;
+  padding: 0;
+}
+
+.mock-stage {
+  position: relative;
+  width: 100vw;
+  background: #050606;
+}
+
+.mock-art {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+}
+
+.hotspot {
+  position: absolute;
+  display: block;
+  border: 0;
+  color: transparent;
+  cursor: pointer;
+  outline: 0;
+  text-decoration: none;
+}
+
+.hotspot::after {
+  position: absolute;
+  inset: -4px;
+  content: "";
+  border: 2px solid transparent;
+  transition:
+    border-color 140ms ease,
+    background 140ms ease;
+}
+
+.hotspot:hover::after,
+.hotspot:focus-visible::after {
+  border-color: rgba(255, 139, 42, 0.9);
+  background: rgba(255, 139, 42, 0.05);
+}
+
+.anchor-target {
+  position: absolute;
+  left: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.workflows-anchor {
+  top: 53%;
+}
+
+.section-anchor {
+  top: 58%;
+}
+
+.method-anchor {
+  top: 89%;
+}
+
+.brand-link {
+  left: 2.2%;
+  top: 1.6%;
+  width: 13%;
+  height: 4.7%;
+}
+
+.nav-workflows {
+  left: 45%;
+  top: 2.3%;
+  width: 10.5%;
+  height: 2.8%;
+}
+
+.nav-training {
+  left: 59.2%;
+  top: 2.3%;
+  width: 10.6%;
+  height: 2.8%;
+}
+
+.nav-systems {
+  left: 72.6%;
+  top: 2.3%;
+  width: 10.3%;
+  height: 2.8%;
+}
+
+.nav-output {
+  left: 85.3%;
+  top: 2.3%;
+  width: 9%;
+  height: 2.8%;
+}
+
+.cta-start {
+  left: 5.2%;
+  top: 39%;
+  width: 25%;
+  height: 5.1%;
+}
+
+.cta-method {
+  left: 33.3%;
+  top: 39.7%;
+  width: 13%;
+  height: 4.2%;
+}
+
+.card-people {
+  left: 7.5%;
+  top: 69%;
+  width: 20%;
+  height: 17.5%;
+}
+
+.card-ai {
+  left: 40.5%;
+  top: 59.6%;
+  width: 20%;
+  height: 27%;
+}
+
+.card-output {
+  left: 71.5%;
+  top: 69%;
+  width: 20%;
+  height: 17.5%;
+}
+
+.screen-reader-copy {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
