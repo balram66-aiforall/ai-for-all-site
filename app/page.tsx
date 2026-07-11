@@ -1,3 +1,5 @@
+import { SubscribeButton } from "./components/SubscribeButton";
+
 export default function Home() {
   return (
     <main className="mock-shell" aria-labelledby="page-title">
@@ -30,6 +32,7 @@ export default function Home() {
         <a className="hotspot card-people" href="#training" aria-label="Train people" />
         <a className="hotspot card-ai" href="#systems" aria-label="Train AI" />
         <a className="hotspot card-output" href="#output" aria-label="Ship output" />
+        <SubscribeButton className="subscribe-overlay" />
       </section>
     </main>
   );
