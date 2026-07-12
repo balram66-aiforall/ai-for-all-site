@@ -12,10 +12,12 @@ declare global {
 
 type RazorpayOptions = {
   key: string;
-  subscription_id: string;
+  amount: number;
+  currency: string;
+  order_id: string;
   name: string;
   description: string;
-  handler: () => void;
+  handler: (response: RazorpaySuccessResponse) => void;
   prefill?: {
     email?: string;
     name?: string;
@@ -23,59 +25,127 @@ type RazorpayOptions = {
   theme?: {
     color?: string;
   };
+  modal?: {
+    ondismiss?: () => void;
+  };
 };
 
-type CheckoutResponse = {
-  keyId: string;
-  subscriptionId: string;
-  customerEmail: string;
-  customerName: string;
+type RazorpaySuccessResponse = {
+  razorpay_payment_id: string;
+  razorpay_order_id: string;
+  razorpay_signature: string;
+};
+
+type RazorpayFailureResponse = {
+  error?: {
+    code?: string;
+    description?: string;
+    reason?: string;
+  };
+};
+
+type RazorpayInstance = {
+  open(): void;
+  on(event: "payment.failed", handler: (response: RazorpayFailureResponse) => void): void;
+};
+
+type CreateOrderResponse = {
+  order_id: string;
+  amount: number;
+  currency: string;
 };
 
 export function SubscribeButton({ className }: { className?: string }) {
-  const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "verifying" | "success" | "cancelled" | "error"
+  >("idle");
+  const [message, setMessage] = useState("");
 
   async function startCheckout() {
     setStatus("loading");
+    setMessage("");
     try {
       await loadRazorpayScript();
-      const response = await fetch("/api/razorpay/create-subscription", {
-        method: "POST",
-      });
-
-      if (response.status === 401) {
-        window.location.href = `/signin-with-chatgpt?return_to=${encodeURIComponent(
-          "/",
-        )}`;
-        return;
+      const keyId = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
+      if (!keyId) {
+        throw new Error("Razorpay public key is not configured.");
       }
+
+      const response = await fetch("/api/create-order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          amount: 10000,
+          currency: "INR",
+          receipt: `aifa_${Date.now()}`,
+        }),
+      });
 
       if (!response.ok) {
         throw new Error(await response.text());
       }
 
-      const checkout = (await response.json()) as CheckoutResponse;
+      const order = (await response.json()) as CreateOrderResponse;
       const razorpay = new window.Razorpay!({
-        key: checkout.keyId,
-        subscription_id: checkout.subscriptionId,
+        key: keyId,
+        amount: order.amount,
+        currency: order.currency,
+        order_id: order.order_id,
         name: "AIFA",
-        description: "AIFA membership - ₹100/month",
-        prefill: {
-          email: checkout.customerEmail,
-          name: checkout.customerName,
-        },
+        description: "AIFA membership - ₹100",
         theme: {
           color: "#ff8b2a",
         },
-        handler: () => {
-          window.location.href = "/members";
+        modal: {
+          ondismiss: () => {
+            setStatus("cancelled");
+            setMessage("Payment cancelled before completion.");
+          },
         },
+        handler: async (payment) => {
+          try {
+            setStatus("verifying");
+            const verifyResponse = await fetch("/api/verify-payment", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(payment),
+            });
+
+            if (!verifyResponse.ok) {
+              throw new Error(await verifyResponse.text());
+            }
+
+            setStatus("success");
+            setMessage("Payment verified. Thank you for subscribing.");
+          } catch (error) {
+            console.error(error);
+            setStatus("error");
+            setMessage(
+              error instanceof Error
+                ? error.message
+                : "Payment verification failed.",
+            );
+          }
+        },
+      }) as RazorpayInstance;
+      razorpay.on("payment.failed", (failure) => {
+        setStatus("error");
+        setMessage(
+          failure.error?.description ??
+            failure.error?.reason ??
+            "Payment failed. Please try again.",
+        );
       });
       razorpay.open();
       setStatus("idle");
     } catch (error) {
       console.error(error);
       setStatus("error");
+      setMessage(error instanceof Error ? error.message : "Payment failed.");
     }
   }
 
@@ -84,11 +154,21 @@ export function SubscribeButton({ className }: { className?: string }) {
       type="button"
       className={className ?? "subscribe-button"}
       onClick={startCheckout}
-      disabled={status === "loading"}
+      disabled={status === "loading" || status === "verifying"}
     >
-      {status === "loading" ? "Opening checkout..." : "Subscribe ₹100/month"}
-      {status === "error" ? (
-        <span className="subscribe-error"> Payment setup needs attention.</span>
+      {status === "loading"
+        ? "Opening checkout..."
+        : status === "verifying"
+          ? "Verifying payment..."
+          : "Subscribe ₹100"}
+      {message ? (
+        <span
+          className={
+            status === "success" ? "subscribe-message" : "subscribe-error"
+          }
+        >
+          {message}
+        </span>
       ) : null}
     </button>
   );
