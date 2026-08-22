@@ -155,23 +155,11 @@ export default function Home() {
             <span>client-ready workflows</span>
             <span>usable templates</span>
           </div>
-          <div className="whiteboard-card" aria-label="AIFA whiteboard illustration">
-            <span className="whiteboard-label label-ideas">messy ideas</span>
-            <span className="whiteboard-label label-draft">draft</span>
-            <span className="whiteboard-label label-ship">ship it</span>
-            <div className="white-guide">
-              <span className="guide-head" />
-              <span className="guide-body" />
-              <span className="guide-arm" />
-            </div>
-            <div className="white-aifa">
-              <span className="white-eye left" />
-              <span className="white-eye right" />
-              <span className="white-leg left" />
-              <span className="white-leg right" />
-            </div>
-            <span className="white-path" />
-            <span className="signature">@balramr</span>
+          <div className="collection-map" aria-label="Portfolio collection map">
+            <span>articles</span>
+            <span>tips</span>
+            <span>workflows</span>
+            <span>experiments</span>
           </div>
         </div>
         <div className="note-panel">

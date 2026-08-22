@@ -490,157 +490,31 @@ h2 {
   padding-bottom: 4px;
 }
 
-.whiteboard-card {
-  background: #ffffff;
-  border: 2px solid #111111;
-  color: #111111;
-  height: 260px;
+.collection-map {
+  border: 1px dashed rgba(245, 241, 232, 0.18);
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   margin-top: 34px;
-  overflow: hidden;
-  position: relative;
-  transform: rotate(-0.6deg);
+  padding: 18px;
+  transform: rotate(-0.3deg);
 }
 
-.whiteboard-card::before {
-  border: 1px dashed rgba(17, 17, 17, 0.2);
-  content: "";
-  inset: 12px;
-  pointer-events: none;
-  position: absolute;
-}
-
-.whiteboard-label,
-.signature {
-  font-family: "Bradley Hand", "Segoe Print", "Marker Felt", cursive;
-  position: absolute;
-}
-
-.whiteboard-label {
+.collection-map span {
+  border-bottom: 1px solid rgba(245, 241, 232, 0.2);
+  color: var(--foreground);
   font-size: 18px;
-  font-weight: 800;
+  font-weight: 850;
+  padding: 12px 4px;
+  text-align: center;
 }
 
-.label-ideas {
-  color: #111111;
-  left: 8%;
-  top: 20%;
-  transform: rotate(-5deg);
+.collection-map span:nth-child(2) {
+  color: var(--blue);
 }
 
-.label-draft {
-  color: #2d7fc4;
-  left: 46%;
-  top: 31%;
-  transform: rotate(4deg);
-}
-
-.label-ship {
-  color: #e36f1e;
-  right: 12%;
-  top: 19%;
-  transform: rotate(-3deg);
-}
-
-.white-guide {
-  height: 118px;
-  left: 13%;
-  position: absolute;
-  top: 96px;
-  width: 80px;
-}
-
-.guide-head {
-  border: 2px solid #111111;
-  border-radius: 50%;
-  display: block;
-  height: 34px;
-  margin: 0 auto;
-  width: 31px;
-}
-
-.guide-body {
-  border-left: 2px solid #111111;
-  display: block;
-  height: 62px;
-  left: 40px;
-  position: absolute;
-  top: 33px;
-  transform: rotate(4deg);
-}
-
-.guide-arm {
-  background: #111111;
-  display: block;
-  height: 2px;
-  left: 39px;
-  position: absolute;
-  top: 60px;
-  transform: rotate(-18deg);
-  width: 66px;
-}
-
-.white-aifa {
-  background: #050506;
-  border: 2px solid #111111;
-  height: 72px;
-  position: absolute;
-  right: 22%;
-  top: 112px;
-  transform: rotate(2deg);
-  width: 58px;
-}
-
-.white-eye {
-  background: #ffffff;
-  border-radius: 50%;
-  height: 4px;
-  position: absolute;
-  top: 27px;
-  width: 4px;
-}
-
-.white-eye.left {
-  left: 17px;
-}
-
-.white-eye.right {
-  right: 17px;
-}
-
-.white-leg {
-  background: #111111;
-  bottom: -18px;
-  height: 18px;
-  position: absolute;
-  width: 2px;
-}
-
-.white-leg.left {
-  left: 17px;
-  transform: rotate(8deg);
-}
-
-.white-leg.right {
-  right: 16px;
-  transform: rotate(-8deg);
-}
-
-.white-path {
-  border-top: 2px solid #e36f1e;
-  display: block;
-  height: 1px;
-  left: 31%;
-  position: absolute;
-  top: 148px;
-  transform: rotate(-7deg);
-  width: 35%;
-}
-
-.signature {
-  bottom: 14px;
-  font-size: 16px;
-  font-weight: 800;
-  right: 18px;
+.collection-map span:nth-child(4) {
+  color: var(--orange);
 }
 
 @media (max-width: 920px) {
@@ -711,15 +585,7 @@ h2 {
     font-size: 18px;
   }
 
-  .whiteboard-card {
-    height: 300px;
-  }
-
-  .label-draft {
-    left: 38%;
-  }
-
-  .white-aifa {
-    right: 13%;
+  .collection-map {
+    grid-template-columns: 1fr 1fr;
   }
 }
