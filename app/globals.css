@@ -1,7 +1,8 @@
 @import 'tailwindcss';
 
 :root {
-  --background: #0d0d0e;
+  color-scheme: dark;
+  --background: #0b0b0c;
   --foreground: #f5f1e8;
   --muted: #b8b0a3;
   --line: rgba(245, 241, 232, 0.18);
@@ -30,8 +31,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family:
-    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
+    "Bradley Hand", "Segoe Print", "Marker Felt", "Comic Sans MS", cursive;
 }
 
 a {
@@ -42,13 +42,34 @@ a {
 .site-shell {
   min-height: 100vh;
   overflow: hidden;
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    radial-gradient(circle at 20% 0%, rgba(88, 183, 255, 0.12), transparent 34%),
-    radial-gradient(circle at 88% 12%, rgba(255, 159, 67, 0.12), transparent 28%),
-    #0d0d0e;
-  background-size: 42px 42px, 42px 42px, auto, auto, auto;
+  background: var(--background);
+  position: relative;
+}
+
+.site-shell::before {
+  border-left: 1px solid rgba(245, 241, 232, 0.045);
+  border-right: 1px solid rgba(245, 241, 232, 0.045);
+  content: "";
+  inset: 0 7%;
+  pointer-events: none;
+  position: absolute;
+}
+
+.site-shell::after {
+  border-left: 1px solid rgba(88, 183, 255, 0.11);
+  border-right: 1px solid rgba(255, 159, 67, 0.12);
+  content: "";
+  inset: 0 22%;
+  pointer-events: none;
+  position: absolute;
+}
+
+.topbar,
+.hero-section,
+.ticker,
+.content-section {
+  position: relative;
+  z-index: 1;
 }
 
 .topbar {
@@ -115,9 +136,10 @@ a {
 
 .nav-links {
   border: 1px solid var(--line);
-  background: rgba(13, 13, 14, 0.66);
+  background: var(--background);
   gap: 4px;
   padding: 6px;
+  transform: rotate(-0.2deg);
 }
 
 .nav-links a {
@@ -153,7 +175,7 @@ a {
 
 .eyebrow {
   color: var(--orange);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 800;
   letter-spacing: 0.14em;
   margin: 0 0 18px;
@@ -199,6 +221,7 @@ h2 {
   font-weight: 800;
   min-height: 46px;
   padding: 13px 18px;
+  transform: rotate(-0.4deg);
 }
 
 .button.primary {
@@ -211,11 +234,8 @@ h2 {
 }
 
 .hero-board {
-  background:
-    linear-gradient(115deg, rgba(255, 255, 255, 0.08), transparent 34%),
-    rgba(8, 8, 9, 0.78);
+  background: #080809;
   border: 1px solid var(--line);
-  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.38);
   min-height: 640px;
   overflow: hidden;
   padding: 22px;
@@ -229,6 +249,19 @@ h2 {
   inset: 14px;
   pointer-events: none;
   position: absolute;
+}
+
+.hero-board::after {
+  border-bottom: 1px solid rgba(245, 241, 232, 0.08);
+  border-top: 1px solid rgba(245, 241, 232, 0.08);
+  content: "";
+  height: 54%;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 22%;
+  transform: rotate(-1.5deg);
 }
 
 .board-header {
@@ -410,6 +443,13 @@ h2 {
 .loop-card {
   min-height: 132px;
   padding: 18px;
+  transform: rotate(-0.25deg);
+}
+
+.loop-card:nth-child(even),
+.article-card:nth-child(even),
+.tip-row:nth-child(even) {
+  transform: rotate(0.25deg);
 }
 
 .loop-card span,
@@ -479,6 +519,7 @@ h2 {
 .article-card {
   min-height: 320px;
   padding: 24px;
+  transform: rotate(-0.2deg);
 }
 
 .article-card > p:first-child,
@@ -521,6 +562,7 @@ h2 {
   grid-template-columns: 52px 1fr;
   min-height: 88px;
   padding: 20px;
+  transform: rotate(-0.15deg);
 }
 
 .tip-row p {
@@ -552,6 +594,7 @@ h2 {
   color: var(--muted);
   font-weight: 750;
   padding: 10px 12px;
+  transform: rotate(-0.3deg);
 }
 
 .note-panel {
@@ -571,6 +614,159 @@ h2 {
   font-weight: 850;
   margin-top: 28px;
   padding-bottom: 4px;
+}
+
+.whiteboard-card {
+  background: #ffffff;
+  border: 2px solid #111111;
+  color: #111111;
+  height: 260px;
+  margin-top: 34px;
+  overflow: hidden;
+  position: relative;
+  transform: rotate(-0.6deg);
+}
+
+.whiteboard-card::before {
+  border: 1px dashed rgba(17, 17, 17, 0.2);
+  content: "";
+  inset: 12px;
+  pointer-events: none;
+  position: absolute;
+}
+
+.whiteboard-label,
+.signature {
+  font-family: "Bradley Hand", "Segoe Print", "Marker Felt", cursive;
+  position: absolute;
+}
+
+.whiteboard-label {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.label-ideas {
+  color: #111111;
+  left: 8%;
+  top: 20%;
+  transform: rotate(-5deg);
+}
+
+.label-draft {
+  color: #2d7fc4;
+  left: 46%;
+  top: 31%;
+  transform: rotate(4deg);
+}
+
+.label-ship {
+  color: #e36f1e;
+  right: 12%;
+  top: 19%;
+  transform: rotate(-3deg);
+}
+
+.white-guide {
+  height: 118px;
+  left: 13%;
+  position: absolute;
+  top: 96px;
+  width: 80px;
+}
+
+.guide-head {
+  border: 2px solid #111111;
+  border-radius: 50%;
+  display: block;
+  height: 34px;
+  margin: 0 auto;
+  width: 31px;
+}
+
+.guide-body {
+  border-left: 2px solid #111111;
+  display: block;
+  height: 62px;
+  left: 40px;
+  position: absolute;
+  top: 33px;
+  transform: rotate(4deg);
+}
+
+.guide-arm {
+  background: #111111;
+  display: block;
+  height: 2px;
+  left: 39px;
+  position: absolute;
+  top: 60px;
+  transform: rotate(-18deg);
+  width: 66px;
+}
+
+.white-aifa {
+  background: #050506;
+  border: 2px solid #111111;
+  height: 72px;
+  position: absolute;
+  right: 22%;
+  top: 112px;
+  transform: rotate(2deg);
+  width: 58px;
+}
+
+.white-eye {
+  background: #ffffff;
+  border-radius: 50%;
+  height: 4px;
+  position: absolute;
+  top: 27px;
+  width: 4px;
+}
+
+.white-eye.left {
+  left: 17px;
+}
+
+.white-eye.right {
+  right: 17px;
+}
+
+.white-leg {
+  background: #111111;
+  bottom: -18px;
+  height: 18px;
+  position: absolute;
+  width: 2px;
+}
+
+.white-leg.left {
+  left: 17px;
+  transform: rotate(8deg);
+}
+
+.white-leg.right {
+  right: 16px;
+  transform: rotate(-8deg);
+}
+
+.white-path {
+  border-top: 2px solid #e36f1e;
+  display: block;
+  height: 1px;
+  left: 31%;
+  position: absolute;
+  top: 148px;
+  transform: rotate(-7deg);
+  width: 35%;
+}
+
+.signature {
+  bottom: 14px;
+  font-size: 16px;
+  font-weight: 800;
+  right: 18px;
 }
 
 @media (max-width: 920px) {
@@ -658,5 +854,17 @@ h2 {
 
   .tip-row p {
     font-size: 18px;
+  }
+
+  .whiteboard-card {
+    height: 300px;
+  }
+
+  .label-draft {
+    left: 38%;
+  }
+
+  .white-aifa {
+    right: 13%;
   }
 }
