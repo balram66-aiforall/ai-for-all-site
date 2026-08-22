@@ -1,32 +1,10 @@
+import { ArticleCarousel } from "./components/ArticleCarousel";
+
 const tips = [
   'Start with the decision you need, not the prompt you want to write.',
   'Give AI examples of taste. It follows patterns better than adjectives.',
   'Ask for options first, then ask it to argue against the comfortable one.',
   'Keep a personal swipe file of prompts, bad outputs, and corrections.',
-];
-
-const featuredWriting = [
-  {
-    type: 'LinkedIn article',
-    title: 'How I think with AI now',
-    summary:
-      'A practical essay on moving from prompt tricks to context, judgment, and repeatable output systems.',
-    status: 'Featured',
-  },
-  {
-    type: 'Field note',
-    title: 'Human judgment. AI execution.',
-    summary:
-      'A sharp frame for what belongs with the person, what belongs with the model, and how the handoff works.',
-    status: 'Next',
-  },
-  {
-    type: 'Template',
-    title: 'The AI teammate brief',
-    summary:
-      'A reusable structure for giving AI enough role, context, taste, constraints, and exit criteria.',
-    status: 'Build',
-  },
 ];
 
 const learningPaths = [
@@ -141,18 +119,9 @@ export default function Home() {
       <section id="articles" className="content-section articles-section">
         <div className="section-heading">
           <p className="eyebrow">Articles and notes</p>
-          <h2>Writing that helps people think with AI, not just use it.</h2>
+          <h2>LinkedIn writing for people learning to think with AI.</h2>
         </div>
-        <div className="article-grid">
-          {featuredWriting.map((item) => (
-            <article className="article-card" key={item.title}>
-              <p>{item.type}</p>
-              <h3>{item.title}</h3>
-              <span>{item.status}</span>
-              <p>{item.summary}</p>
-            </article>
-          ))}
-        </div>
+        <ArticleCarousel />
       </section>
 
       <section id="learn" className="content-section learning-section">
