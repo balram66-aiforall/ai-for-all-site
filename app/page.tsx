@@ -80,22 +80,13 @@ export default function Home() {
             <span className="live-dot">live</span>
           </div>
           <div className="sketch-scene">
-            <div className="human">
-              <span className="head" />
-              <span className="body" />
-              <span className="arm arm-left" />
-              <span className="arm arm-right" />
-            </div>
-            <div className="aifa-character">
-              <span className="eye left" />
-              <span className="eye right" />
-              <span className="leg left" />
-              <span className="leg right" />
-            </div>
-            <div className="signal signal-one">context</div>
-            <div className="signal signal-two">draft</div>
-            <div className="signal signal-three">ship</div>
-            <div className="arrow-path" />
+            <img
+              className="hero-sketch-image"
+              src="/assets/aifa-teammate-charcoal-hero.png"
+              width="1680"
+              height="945"
+              alt="Charcoal sketch of a human guide pointing at a planning board while AIFA sorts drafts into a shipped output."
+            />
           </div>
           <div className="board-grid">
             {teammateLoops.map(([number, title, text]) => (

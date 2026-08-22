@@ -287,140 +287,14 @@ h2 {
   position: relative;
 }
 
-.human {
-  height: 190px;
-  left: 13%;
-  position: absolute;
-  top: 78px;
-  width: 112px;
-}
-
-.human .head {
-  border: 2px solid var(--foreground);
-  border-radius: 50%;
+.hero-sketch-image {
   display: block;
-  height: 54px;
-  margin: 0 auto;
-  transform: rotate(-5deg);
-  width: 48px;
-}
-
-.human .body {
-  border-left: 2px solid var(--foreground);
-  display: block;
-  height: 88px;
-  left: 55px;
-  position: absolute;
-  top: 54px;
-  transform: rotate(4deg);
-}
-
-.human .arm {
-  background: var(--foreground);
-  display: block;
-  height: 2px;
-  left: 54px;
-  position: absolute;
-  top: 92px;
-  transform-origin: left center;
-  width: 88px;
-}
-
-.human .arm-left {
-  transform: rotate(151deg);
-  width: 58px;
-}
-
-.human .arm-right {
-  transform: rotate(-24deg);
-}
-
-.aifa-character {
-  background: #050506;
-  border: 2px solid var(--foreground);
-  height: 108px;
-  position: absolute;
-  right: 18%;
-  top: 116px;
-  transform: rotate(2deg);
-  width: 86px;
-}
-
-.aifa-character .eye {
-  background: var(--foreground);
-  border-radius: 50%;
-  height: 6px;
-  position: absolute;
-  top: 39px;
-  width: 6px;
-}
-
-.aifa-character .eye.left {
-  left: 26px;
-}
-
-.aifa-character .eye.right {
-  right: 26px;
-}
-
-.aifa-character .leg {
-  background: var(--foreground);
-  bottom: -26px;
-  height: 25px;
-  position: absolute;
-  width: 2px;
-}
-
-.aifa-character .leg.left {
-  left: 26px;
-  transform: rotate(7deg);
-}
-
-.aifa-character .leg.right {
-  right: 24px;
-  transform: rotate(-8deg);
-}
-
-.signal {
-  border: 1px solid rgba(245, 241, 232, 0.42);
-  color: var(--foreground);
-  font-family: "Bradley Hand", "Segoe Print", cursive;
-  font-size: 18px;
-  padding: 8px 14px;
-  position: absolute;
-  transform: rotate(-3deg);
-}
-
-.signal-one {
-  color: var(--blue);
-  left: 34%;
-  top: 42px;
-}
-
-.signal-two {
-  color: var(--violet);
-  right: 8%;
-  top: 34px;
-  transform: rotate(4deg);
-}
-
-.signal-three {
-  bottom: 36px;
-  color: var(--orange);
-  left: 38%;
-  transform: rotate(2deg);
-}
-
-.arrow-path {
-  border: 2px solid transparent;
-  border-right-color: var(--orange);
-  border-top-color: var(--orange);
-  height: 146px;
-  left: 41%;
-  position: absolute;
-  top: 112px;
-  transform: rotate(21deg);
-  width: 178px;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  position: relative;
+  width: 100%;
+  z-index: 1;
 }
 
 .board-grid {
@@ -825,27 +699,8 @@ h2 {
     height: 300px;
   }
 
-  .human {
-    left: 4%;
-    transform: scale(0.84);
-  }
-
-  .aifa-character {
-    right: 9%;
-    transform: scale(0.88) rotate(2deg);
-  }
-
-  .signal-one {
-    left: 29%;
-  }
-
-  .signal-two {
-    right: 0;
-  }
-
-  .arrow-path {
-    left: 32%;
-    width: 126px;
+  .hero-sketch-image {
+    object-position: 42% center;
   }
 
   .tip-row {
