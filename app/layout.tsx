@@ -1,13 +1,15 @@
-import type { Metadata } from "next";
-import "./globals.css";
+import type { Metadata } from 'next';
+import './globals.css';
 
 export const metadata: Metadata = {
-  title: "AIFA Charcoal Website",
+  title: 'AIFA | AI Teammate Portfolio',
   description:
-    "A full-bleed AIFA charcoal-sketch landing page mock with clickable sections.",
-  icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
+    'A living portfolio for AI teammate thinking, LinkedIn articles, useful workflows, and practical AI tips.',
+  openGraph: {
+    title: 'AIFA | AI Teammate Portfolio',
+    description:
+      'A living portfolio for AI teammate thinking, LinkedIn articles, useful workflows, and practical AI tips.',
+    type: 'website',
   },
 };
 

@@ -1,38 +1,181 @@
-import { SubscribeButton } from "./components/SubscribeButton";
+const featuredArticles = [
+  {
+    label: 'LinkedIn article',
+    title: 'How I think with AI now',
+    excerpt:
+      'A practical look at moving from prompt tricks to context, judgment, and repeatable output systems.',
+    meta: '8 min read',
+  },
+  {
+    label: 'Field note',
+    title: 'Human judgment, AI execution',
+    excerpt:
+      'What belongs with the person, what belongs with the model, and where the handoff gets interesting.',
+    meta: 'Drafting',
+  },
+  {
+    label: 'Workflow',
+    title: 'The teammate brief',
+    excerpt:
+      'A reusable structure for giving AI enough role, context, taste, constraints, and exit criteria.',
+    meta: 'Template',
+  },
+];
+
+const tips = [
+  'Start with the decision you need, not the prompt you want to write.',
+  'Give AI examples of taste. It follows patterns better than adjectives.',
+  'Ask for options first, then ask it to argue against the comfortable one.',
+  'Keep a personal swipe file of prompts, bad outputs, and corrections.',
+];
+
+const teammateLoops = [
+  ['01', 'Frame', 'Turn messy intent into a sharp brief.'],
+  ['02', 'Draft', 'Generate options, structures, and first passes.'],
+  ['03', 'Judge', 'Compare output against taste, context, and truth.'],
+  ['04', 'Ship', 'Package the work for LinkedIn, teams, or clients.'],
+];
 
 export default function Home() {
   return (
-    <main className="mock-shell" aria-labelledby="page-title">
-      <h1 id="page-title" className="screen-reader-copy">
-        AIFA website mock: AI, made usable.
-      </h1>
+    <main className="site-shell">
+      <nav className="topbar" aria-label="Main navigation">
+        <a className="brand" href="#top" aria-label="AIFA home">
+          <span className="aifa-mark" aria-hidden="true">
+            <span />
+          </span>
+          <span>AIFA</span>
+        </a>
+        <div className="nav-links">
+          <a href="#writing">Writing</a>
+          <a href="#tips">Tips</a>
+          <a href="#lab">Lab</a>
+          <a href="https://www.linkedin.com/newsletters/ai-for-all-weekly-newsletter-7401258096209088512/">
+            LinkedIn
+          </a>
+        </div>
+      </nav>
 
-      <section className="mock-stage" aria-label="AIFA charcoal website concept">
-        <img
-          className="mock-art"
-          src="/assets/aifa-charcoal-website-concept.png"
-          width="1024"
-          height="1536"
-          alt="AIFA charcoal sketch homepage mockup with headline AI, made usable, workflow board, training sections, and method steps."
-        />
+      <section id="top" className="hero-section">
+        <div className="hero-copy">
+          <p className="eyebrow">AI teammate portfolio</p>
+          <h1>Building public proof that AI can work like a teammate.</h1>
+          <p className="hero-lede">
+            A living home for articles, field notes, prompts, teaching systems,
+            and the practical experiments behind AI for All.
+          </p>
+          <div className="hero-actions" aria-label="Primary actions">
+            <a className="button primary" href="#writing">
+              Read the latest
+            </a>
+            <a className="button secondary" href="#tips">
+              Steal a useful tip
+            </a>
+          </div>
+        </div>
 
-        <span id="workflows" className="anchor-target workflows-anchor" aria-hidden="true" />
-        <span id="training" className="anchor-target section-anchor" aria-hidden="true" />
-        <span id="systems" className="anchor-target section-anchor" aria-hidden="true" />
-        <span id="output" className="anchor-target section-anchor" aria-hidden="true" />
-        <span id="method" className="anchor-target method-anchor" aria-hidden="true" />
+        <div className="hero-board" aria-label="AI teammate sketch board">
+          <div className="board-header">
+            <span>teammate loop</span>
+            <span className="live-dot">live</span>
+          </div>
+          <div className="sketch-scene">
+            <div className="human">
+              <span className="head" />
+              <span className="body" />
+              <span className="arm arm-left" />
+              <span className="arm arm-right" />
+            </div>
+            <div className="aifa-character">
+              <span className="eye left" />
+              <span className="eye right" />
+              <span className="leg left" />
+              <span className="leg right" />
+            </div>
+            <div className="signal signal-one">context</div>
+            <div className="signal signal-two">draft</div>
+            <div className="signal signal-three">ship</div>
+            <div className="arrow-path" />
+          </div>
+          <div className="board-grid">
+            {teammateLoops.map(([number, title, text]) => (
+              <article key={number} className="loop-card">
+                <span>{number}</span>
+                <h2>{title}</h2>
+                <p>{text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
 
-        <a className="hotspot brand-link" href="#" aria-label="AIFA home" />
-        <a className="hotspot nav-workflows" href="#workflows" aria-label="Workflows" />
-        <a className="hotspot nav-training" href="#training" aria-label="Training" />
-        <a className="hotspot nav-systems" href="#systems" aria-label="Systems" />
-        <a className="hotspot nav-output" href="#output" aria-label="Output" />
-        <a className="hotspot cta-start" href="#workflows" aria-label="Start building" />
-        <a className="hotspot cta-method" href="#method" aria-label="See method" />
-        <a className="hotspot card-people" href="#training" aria-label="Train people" />
-        <a className="hotspot card-ai" href="#systems" aria-label="Train AI" />
-        <a className="hotspot card-output" href="#output" aria-label="Ship output" />
-        <SubscribeButton className="subscribe-overlay" />
+      <section className="ticker" aria-label="Portfolio themes">
+        <span>AI, made usable.</span>
+        <span>LinkedIn essays</span>
+        <span>teaching notes</span>
+        <span>workflow recipes</span>
+        <span>human judgment</span>
+      </section>
+
+      <section id="writing" className="content-section writing-section">
+        <div className="section-heading">
+          <p className="eyebrow">Publishing stream</p>
+          <h2>Articles, notes, and ideas worth returning to.</h2>
+        </div>
+        <div className="article-grid">
+          {featuredArticles.map((article) => (
+            <article className="article-card" key={article.title}>
+              <p>{article.label}</p>
+              <h3>{article.title}</h3>
+              <span>{article.meta}</span>
+              <p>{article.excerpt}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="tips" className="content-section split-section">
+        <div>
+          <p className="eyebrow">Tips and tricks</p>
+          <h2>
+            Small moves that make AI feel less like a tool and more like a
+            capable collaborator.
+          </h2>
+        </div>
+        <div className="tips-list">
+          {tips.map((tip, index) => (
+            <article key={tip} className="tip-row">
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <p>{tip}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="lab" className="content-section lab-section">
+        <div className="lab-panel">
+          <p className="eyebrow">The lab</p>
+          <h2>What this portfolio will keep collecting.</h2>
+          <div className="lab-tags">
+            <span>prompt systems</span>
+            <span>AI teaching assets</span>
+            <span>newsletter links</span>
+            <span>article banners</span>
+            <span>client-ready workflows</span>
+            <span>usable templates</span>
+          </div>
+        </div>
+        <div className="note-panel">
+          <p>Next drop</p>
+          <h3>The AI teammate brief</h3>
+          <p>
+            A simple pattern for turning a task into a repeatable collaboration
+            between human taste and AI execution.
+          </p>
+          <a href="https://www.linkedin.com/newsletters/ai-for-all-weekly-newsletter-7401258096209088512/">
+            Follow on LinkedIn
+          </a>
+        </div>
       </section>
     </main>
   );
