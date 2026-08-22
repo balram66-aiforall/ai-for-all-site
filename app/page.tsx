@@ -5,6 +5,37 @@ const tips = [
   'Keep a personal swipe file of prompts, bad outputs, and corrections.',
 ];
 
+const featuredWriting = [
+  {
+    type: 'LinkedIn article',
+    title: 'How I think with AI now',
+    summary:
+      'A practical essay on moving from prompt tricks to context, judgment, and repeatable output systems.',
+    status: 'Featured',
+  },
+  {
+    type: 'Field note',
+    title: 'Human judgment. AI execution.',
+    summary:
+      'A sharp frame for what belongs with the person, what belongs with the model, and how the handoff works.',
+    status: 'Next',
+  },
+  {
+    type: 'Template',
+    title: 'The AI teammate brief',
+    summary:
+      'A reusable structure for giving AI enough role, context, taste, constraints, and exit criteria.',
+    status: 'Build',
+  },
+];
+
+const learningPaths = [
+  ['Start', 'Understand what AI is good at, where it fails, and how to ask better questions.'],
+  ['Think', 'Use AI to reason, compare options, pressure-test ideas, and organize messy context.'],
+  ['Build', 'Turn prompts into workflows, reusable systems, assistants, and useful artifacts.'],
+  ['Ship', 'Publish articles, lessons, visuals, and work that makes your thinking visible.'],
+];
+
 const teammateLoops = [
   ['01', 'Frame', 'Turn messy intent into a sharp brief.'],
   ['02', 'Draft', 'Generate options, structures, and first passes.'],
@@ -23,8 +54,10 @@ export default function Home() {
           <span>AIFA</span>
         </a>
         <div className="nav-links">
-          <a href="#writing">Writing</a>
-          <a href="#tips">Tips</a>
+          <a href="#shelf">Shelf</a>
+          <a href="#articles">Articles</a>
+          <a href="#learn">Learn</a>
+          <a href="#about">About</a>
           <a href="#lab">Lab</a>
           <a href="https://www.linkedin.com/newsletters/ai-for-all-weekly-newsletter-7401258096209088512/">
             LinkedIn
@@ -34,18 +67,25 @@ export default function Home() {
 
       <section id="top" className="hero-section">
         <div className="hero-copy">
-          <p className="eyebrow">AI teammate portfolio</p>
-          <h1>Building public proof that AI can work like a teammate.</h1>
+          <p className="eyebrow">Balram / AI For All</p>
+          <h1 className="identity-headline" aria-label="Balram becomes bAIram">
+            <span className="name-morph" aria-hidden="true">
+              <span className="name-base">Balram</span>
+              <span className="name-final">
+                b<span>AI</span>ram
+              </span>
+            </span>
+          </h1>
           <p className="hero-lede">
-            A living home for articles, field notes, prompts, teaching systems,
-            and the practical experiments behind AI for All.
+            I help people turn AI from a tool they try into a teammate they can
+            use with judgment, taste, and confidence.
           </p>
           <div className="hero-actions" aria-label="Primary actions">
-            <a className="button primary" href="#writing">
-              Read the latest
+            <a className="button primary" href="https://www.linkedin.com/newsletters/ai-for-all-weekly-newsletter-7401258096209088512/">
+              Read AI For All
             </a>
-            <a className="button secondary" href="#tips">
-              Steal a useful tip
+            <a className="button secondary" href="#articles">
+              Browse articles
             </a>
           </div>
         </div>
@@ -77,15 +117,15 @@ export default function Home() {
       </section>
 
       <section className="ticker" aria-label="Portfolio themes">
+        <span>Balram to bAIram</span>
         <span>AI, made usable.</span>
-        <span>LinkedIn essays</span>
-        <span>teaching notes</span>
-        <span>workflow recipes</span>
+        <span>AI For All</span>
         <span>human judgment</span>
+        <span>AI execution</span>
       </section>
 
       <section
-        id="writing"
+        id="shelf"
         className="complete-shelf-section"
         aria-label="Working Volumes complete shelf"
       >
@@ -96,6 +136,39 @@ export default function Home() {
           sandbox="allow-downloads allow-forms allow-modals allow-popups allow-same-origin allow-scripts"
           loading="eager"
         />
+      </section>
+
+      <section id="articles" className="content-section articles-section">
+        <div className="section-heading">
+          <p className="eyebrow">Articles and notes</p>
+          <h2>Writing that helps people think with AI, not just use it.</h2>
+        </div>
+        <div className="article-grid">
+          {featuredWriting.map((item) => (
+            <article className="article-card" key={item.title}>
+              <p>{item.type}</p>
+              <h3>{item.title}</h3>
+              <span>{item.status}</span>
+              <p>{item.summary}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="learn" className="content-section learning-section">
+        <div className="section-heading">
+          <p className="eyebrow">Learn AI</p>
+          <h2>A practical path from curiosity to confident AI work.</h2>
+        </div>
+        <div className="learning-grid">
+          {learningPaths.map(([title, text], index) => (
+            <article className="learning-card" key={title}>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <h3>{title}</h3>
+              <p>{text}</p>
+            </article>
+          ))}
+        </div>
       </section>
 
       <section id="tips" className="content-section split-section">
@@ -113,6 +186,25 @@ export default function Home() {
               <p>{tip}</p>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section id="about" className="content-section about-section">
+        <div className="about-copy">
+          <p className="eyebrow">Who is Balram?</p>
+          <h2>The human behind AI For All.</h2>
+          <p>
+            I build learning systems, explain AI in plain language, and help
+            people use AI with more confidence at work. This site is the home
+            for my writing, experiments, workflows, and lessons from building
+            with AI in public.
+          </p>
+        </div>
+        <div className="proof-list" aria-label="Balram proof points">
+          <span>AI learning leader</span>
+          <span>AI For All newsletter</span>
+          <span>Practical workflows</span>
+          <span>Human judgment first</span>
         </div>
       </section>
 
@@ -146,6 +238,14 @@ export default function Home() {
             Follow on LinkedIn
           </a>
         </div>
+      </section>
+
+      <section className="newsletter-section" aria-label="AI For All newsletter">
+        <p className="eyebrow">AI For All weekly</p>
+        <h2>Follow the public notebook where bAIram keeps learning out loud.</h2>
+        <a className="button primary" href="https://www.linkedin.com/newsletters/ai-for-all-weekly-newsletter-7401258096209088512/">
+          Open the newsletter
+        </a>
       </section>
     </main>
   );
