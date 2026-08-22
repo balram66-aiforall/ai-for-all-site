@@ -384,6 +384,189 @@ h2 {
   max-width: 800px;
 }
 
+.shelf-stage {
+  border: 1px dashed rgba(245, 241, 232, 0.18);
+  min-height: 430px;
+  overflow: hidden;
+  padding: 28px 22px 24px;
+  position: relative;
+}
+
+.shelf-stage::before {
+  border-left: 1px solid rgba(88, 183, 255, 0.22);
+  border-right: 1px solid rgba(255, 159, 67, 0.24);
+  content: "";
+  inset: 18px 5%;
+  pointer-events: none;
+  position: absolute;
+  transform: rotate(-0.5deg);
+}
+
+.shelf-rail {
+  border-bottom: 3px solid rgba(245, 241, 232, 0.38);
+  bottom: 84px;
+  left: 28px;
+  position: absolute;
+  right: 28px;
+  transform: rotate(-0.4deg);
+}
+
+.shelf-rail::after {
+  border-bottom: 1px solid rgba(255, 159, 67, 0.55);
+  bottom: -8px;
+  content: "";
+  left: 4%;
+  position: absolute;
+  right: 7%;
+  transform: rotate(0.6deg);
+}
+
+.volume-row {
+  align-items: end;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(7, minmax(86px, 1fr));
+  min-height: 310px;
+  position: relative;
+  z-index: 1;
+}
+
+.volume-book {
+  background: #0c0c0d;
+  border: 1px solid rgba(245, 241, 232, 0.48);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 260px;
+  overflow: hidden;
+  padding: 18px 12px 14px;
+  position: relative;
+  transform: translateY(0) rotate(-1.2deg);
+  transition:
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.volume-book::before {
+  border-left: 1px solid rgba(245, 241, 232, 0.18);
+  content: "";
+  inset: 10px auto 10px 12px;
+  position: absolute;
+}
+
+.volume-book::after {
+  border: 1px solid rgba(88, 183, 255, 0.3);
+  content: "";
+  height: 54px;
+  position: absolute;
+  right: 12px;
+  top: 58px;
+  transform: rotate(4deg);
+  width: 38px;
+}
+
+.volume-book:hover {
+  border-color: rgba(255, 159, 67, 0.72);
+  transform: translateY(-16px) rotate(-0.2deg);
+}
+
+.volume-book[data-volume="2"],
+.volume-book[data-volume="5"] {
+  min-height: 285px;
+  transform: translateY(0) rotate(0.9deg);
+}
+
+.volume-book[data-volume="3"],
+.volume-book[data-volume="7"] {
+  min-height: 300px;
+  transform: translateY(0) rotate(-0.4deg);
+}
+
+.volume-book[data-volume="4"] {
+  min-height: 320px;
+  transform: translateY(0) rotate(0.3deg);
+}
+
+.volume-book[data-volume="2"]:hover,
+.volume-book[data-volume="3"]:hover,
+.volume-book[data-volume="4"]:hover,
+.volume-book[data-volume="5"]:hover,
+.volume-book[data-volume="7"]:hover {
+  transform: translateY(-16px) rotate(-0.2deg);
+}
+
+.volume-number,
+.volume-label {
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.volume-book h3 {
+  color: var(--foreground);
+  font-size: clamp(24px, 2.4vw, 36px);
+  line-height: 0.95;
+  margin: 36px 0 10px;
+  writing-mode: vertical-rl;
+}
+
+.volume-label {
+  color: var(--orange);
+  margin: 0 0 18px;
+}
+
+.volume-note {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.35;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.volume-book:hover .volume-note {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.volume-mark {
+  border-bottom: 2px solid rgba(255, 159, 67, 0.85);
+  bottom: 12px;
+  display: block;
+  left: 24px;
+  position: absolute;
+  transform: rotate(-2deg);
+  width: 36px;
+}
+
+.shelf-caption {
+  color: var(--muted);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 15px;
+  font-weight: 800;
+  gap: 14px;
+  justify-content: center;
+  margin-top: 22px;
+  position: relative;
+  z-index: 1;
+}
+
+.shelf-caption span:not(:last-child)::after {
+  color: var(--orange);
+  content: " /";
+  padding-left: 14px;
+}
+
+.compact-writing {
+  margin-top: 16px;
+}
+
 .article-grid {
   display: grid;
   gap: 14px;
@@ -537,6 +720,18 @@ h2 {
   .article-grid {
     grid-template-columns: 1fr;
   }
+
+  .volume-row {
+    grid-template-columns: repeat(4, minmax(88px, 1fr));
+  }
+
+  .shelf-stage {
+    min-height: 620px;
+  }
+
+  .shelf-rail {
+    display: none;
+  }
 }
 
 @media (max-width: 640px) {
@@ -583,6 +778,37 @@ h2 {
 
   .tip-row p {
     font-size: 18px;
+  }
+
+  .shelf-stage {
+    min-height: auto;
+    padding: 18px;
+  }
+
+  .volume-row {
+    align-items: stretch;
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .volume-book,
+  .volume-book[data-volume] {
+    min-height: 150px;
+    transform: rotate(-0.2deg);
+  }
+
+  .volume-book:hover,
+  .volume-book[data-volume]:hover {
+    transform: translateY(-4px) rotate(-0.2deg);
+  }
+
+  .volume-book h3 {
+    writing-mode: initial;
+  }
+
+  .volume-note {
+    opacity: 1;
+    transform: none;
   }
 
   .collection-map {
