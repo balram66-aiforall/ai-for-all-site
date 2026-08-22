@@ -1,48 +1,3 @@
-const shelfVolumes = [
-  {
-    roman: 'I',
-    title: 'Context',
-    label: 'what matters',
-    note: 'Inputs, constraints, examples, and taste before the model writes.',
-  },
-  {
-    roman: 'II',
-    title: 'Prompts',
-    label: 'clear asks',
-    note: 'Reusable briefs for research, writing, planning, and critique.',
-  },
-  {
-    roman: 'III',
-    title: 'Research',
-    label: 'useful signal',
-    note: 'Ways to turn open tabs, notes, and sources into a clean position.',
-  },
-  {
-    roman: 'IV',
-    title: 'Drafts',
-    label: 'rough output',
-    note: 'First passes, outlines, article starts, and alternate angles.',
-  },
-  {
-    roman: 'V',
-    title: 'Systems',
-    label: 'repeatable loops',
-    note: 'Personal operating systems for creating with an AI teammate.',
-  },
-  {
-    roman: 'VI',
-    title: 'Voice',
-    label: 'human taste',
-    note: 'Corrections, examples, and judgment that keep the work yours.',
-  },
-  {
-    roman: 'VII',
-    title: 'Ship',
-    label: 'public proof',
-    note: 'LinkedIn articles, tips, visuals, and finished artifacts.',
-  },
-];
-
 const tips = [
   'Start with the decision you need, not the prompt you want to write.',
   'Give AI examples of taste. It follows patterns better than adjectives.',
@@ -129,63 +84,18 @@ export default function Home() {
         <span>human judgment</span>
       </section>
 
-      <section id="writing" className="content-section shelf-section">
-        <div className="section-heading">
-          <p className="eyebrow">Complete shelf</p>
-          <h2>Seven working volumes for thinking with an AI teammate.</h2>
-        </div>
-        <div className="shelf-stage" aria-label="AIFA working volumes">
-          <div className="shelf-rail" aria-hidden="true" />
-          <div className="volume-row">
-            {shelfVolumes.map((volume, index) => (
-              <article
-                className="volume-book"
-                key={volume.title}
-                data-volume={index + 1}
-              >
-                <span className="volume-number">Volume {volume.roman}</span>
-                <h3>{volume.title}</h3>
-                <p className="volume-label">{volume.label}</p>
-                <p className="volume-note">{volume.note}</p>
-                <span className="volume-mark" aria-hidden="true" />
-              </article>
-            ))}
-          </div>
-          <div className="shelf-caption">
-            <span>open a volume</span>
-            <span>collect the lesson</span>
-            <span>ship the idea</span>
-          </div>
-        </div>
-        <div className="article-grid compact-writing">
-          <article className="article-card">
-            <p>LinkedIn article</p>
-            <h3>How I think with AI now</h3>
-            <span>8 min read</span>
-            <p>
-              From prompt tricks to context, judgment, and repeatable output
-              systems.
-            </p>
-          </article>
-          <article className="article-card">
-            <p>Field note</p>
-            <h3>Human judgment, AI execution</h3>
-            <span>Drafting</span>
-            <p>
-              What belongs with the person, what belongs with the model, and
-              where the handoff gets interesting.
-            </p>
-          </article>
-          <article className="article-card">
-            <p>Workflow</p>
-            <h3>The teammate brief</h3>
-            <span>Template</span>
-            <p>
-              A reusable structure for role, context, taste, constraints, and
-              exit criteria.
-            </p>
-          </article>
-        </div>
+      <section
+        id="writing"
+        className="complete-shelf-section"
+        aria-label="Working Volumes complete shelf"
+      >
+        <iframe
+          className="complete-shelf-frame"
+          title="Working Volumes — Seven Tools for Making"
+          src="/landing-pages/complete-shelf-v2.html"
+          sandbox="allow-downloads allow-forms allow-modals allow-popups allow-same-origin allow-scripts"
+          loading="eager"
+        />
       </section>
 
       <section id="tips" className="content-section split-section">
