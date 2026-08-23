@@ -21,6 +21,29 @@ const teammateLoops = [
   ['04', 'Ship', 'Package the work for LinkedIn, teams, or clients.'],
 ];
 
+const repoItems = [
+  [
+    'Agents',
+    'Reusable AI teammates for research, writing, planning, review, and shipping.',
+    'open soon',
+  ],
+  [
+    'Skills',
+    'Skill.md patterns that teach AI how Balram thinks, decides, and delivers.',
+    'building',
+  ],
+  [
+    'Templates',
+    'Briefs, prompt systems, checklists, and operating rhythms people can reuse.',
+    'coming',
+  ],
+  [
+    'Experiments',
+    'Small public tests with AI workflows, visual systems, and learning loops.',
+    'view later',
+  ],
+];
+
 export default function Home() {
   return (
     <main className="site-shell">
@@ -35,6 +58,7 @@ export default function Home() {
           <a href="#shelf">Shelf</a>
           <a href="#articles">Articles</a>
           <a href="#learn">Learn</a>
+          <a href="#repos">Repos</a>
           <a href="#about">About</a>
           <a href="#lab">Lab</a>
           <a href="https://www.linkedin.com/newsletters/ai-for-all-weekly-newsletter-7401258096209088512/">
@@ -104,16 +128,26 @@ export default function Home() {
 
       <section
         id="shelf"
-        className="complete-shelf-section"
+        className="content-section complete-shelf-section"
         aria-label="Working Volumes complete shelf"
       >
-        <iframe
-          className="complete-shelf-frame"
-          title="Working Volumes — Seven Tools for Making"
-          src="/landing-pages/complete-shelf-v2.html"
-          sandbox="allow-downloads allow-forms allow-modals allow-popups allow-same-origin allow-scripts"
-          loading="eager"
-        />
+        <div className="shelf-copy">
+          <p className="eyebrow">Working volumes</p>
+          <h2>A living shelf for the tools and ideas that shape the work.</h2>
+          <p>
+            Browse the authored bookshelf inside the portfolio, then keep
+            moving through the page when you are done exploring.
+          </p>
+        </div>
+        <div className="complete-shelf-window">
+          <iframe
+            className="complete-shelf-frame"
+            title="Working Volumes — Seven Tools for Making"
+            src="/landing-pages/complete-shelf-v2.html"
+            sandbox="allow-downloads allow-forms allow-modals allow-popups allow-same-origin allow-scripts"
+            loading="eager"
+          />
+        </div>
       </section>
 
       <section id="articles" className="content-section articles-section">
@@ -133,6 +167,22 @@ export default function Home() {
           {learningPaths.map(([title, text], index) => (
             <article className="learning-card" key={title}>
               <span>{String(index + 1).padStart(2, '0')}</span>
+              <h3>{title}</h3>
+              <p>{text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="repos" className="content-section repo-section">
+        <div className="section-heading">
+          <p className="eyebrow">Agents and skills repo</p>
+          <h2>Reusable pieces from the way I think and build with AI.</h2>
+        </div>
+        <div className="repo-grid">
+          {repoItems.map(([title, text, status]) => (
+            <article className="repo-card" key={title}>
+              <span>{status}</span>
               <h3>{title}</h3>
               <p>{text}</p>
             </article>
@@ -212,9 +262,18 @@ export default function Home() {
       <section className="newsletter-section" aria-label="AI For All newsletter">
         <p className="eyebrow">AI For All weekly</p>
         <h2>Follow the public notebook where bAIram keeps learning out loud.</h2>
-        <a className="button primary" href="https://www.linkedin.com/newsletters/ai-for-all-weekly-newsletter-7401258096209088512/">
-          Open the newsletter
-        </a>
+        <div className="final-actions">
+          <a className="button primary" href="https://www.linkedin.com/newsletters/ai-for-all-weekly-newsletter-7401258096209088512/">
+            Open the newsletter
+          </a>
+          <a className="button secondary" href="https://wa.me/qr/3EZXUASKEW5RM1">
+            Talk AI with me on WhatsApp
+          </a>
+        </div>
+        <p className="contact-note">
+          Have a question about AI learning, workflows, agents, skills, or
+          training? Send a note and we can start with the messy version.
+        </p>
       </section>
     </main>
   );
