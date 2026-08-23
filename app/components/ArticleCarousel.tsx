@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const articles = [
   {
@@ -51,6 +51,29 @@ function Chevron({ direction }: { direction: "prev" | "next" }) {
 
 export function ArticleCarousel() {
   const trackRef = useRef<HTMLDivElement>(null);
+  const [selectedArticle, setSelectedArticle] = useState<
+    (typeof articles)[number] | null
+  >(null);
+
+  useEffect(() => {
+    if (!selectedArticle) {
+      return;
+    }
+
+    function closeOnEscape(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setSelectedArticle(null);
+      }
+    }
+
+    document.addEventListener("keydown", closeOnEscape);
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.removeEventListener("keydown", closeOnEscape);
+      document.body.style.overflow = "";
+    };
+  }, [selectedArticle]);
 
   function scrollArticles(direction: -1 | 1) {
     const track = trackRef.current;
@@ -64,7 +87,7 @@ export function ArticleCarousel() {
     ).matches;
 
     track.scrollBy({
-      left: direction * track.clientWidth * 0.82,
+      left: direction * track.clientWidth * 0.58,
       behavior: reducedMotion ? "auto" : "smooth",
     });
   }
@@ -98,12 +121,11 @@ export function ArticleCarousel() {
         tabIndex={0}
       >
         {articles.map((article) => (
-          <a
+          <button
+            type="button"
             className="article-slide"
-            href={article.href}
             key={article.title}
-            target="_blank"
-            rel="noreferrer"
+            onClick={() => setSelectedArticle(article)}
           >
             <figure>
               <img
@@ -116,10 +138,53 @@ export function ArticleCarousel() {
               <p>{article.kicker}</p>
               <h3>{article.title}</h3>
               <span>{article.summary}</span>
+              <small>Open preview</small>
             </div>
-          </a>
+          </button>
         ))}
       </div>
+
+      {selectedArticle ? (
+        <div
+          className="article-preview-backdrop"
+          role="presentation"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) {
+              setSelectedArticle(null);
+            }
+          }}
+        >
+          <article
+            className="article-preview"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="article-preview-title"
+          >
+            <button
+              type="button"
+              className="article-preview-close"
+              aria-label="Close article preview"
+              onClick={() => setSelectedArticle(null)}
+            >
+              <svg aria-hidden="true" viewBox="0 0 24 24">
+                <path d="M6 6l12 12M18 6L6 18" />
+              </svg>
+            </button>
+            <img
+              src={selectedArticle.image}
+              alt={`${selectedArticle.title} article artwork`}
+            />
+            <div className="article-preview-copy">
+              <p>{selectedArticle.kicker}</p>
+              <h3 id="article-preview-title">{selectedArticle.title}</h3>
+              <span>{selectedArticle.summary}</span>
+              <a href={selectedArticle.href} target="_blank" rel="noreferrer">
+                Read the article
+              </a>
+            </div>
+          </article>
+        </div>
+      ) : null}
     </div>
   );
 }
