@@ -556,93 +556,18 @@ h2 {
   border: 1px solid rgba(245, 241, 232, 0.2);
   margin: 0;
   min-height: 100%;
-  padding: 14px;
+  overflow: hidden;
+  padding: 0;
   transform: rotate(0.12deg);
 }
 
-.training-visual svg {
+.training-visual img {
   display: block;
   height: 100%;
   min-height: 420px;
+  object-fit: cover;
+  object-position: center;
   width: 100%;
-}
-
-.tv-bg {
-  fill: #09090a;
-}
-
-.tv-frame,
-.tv-board,
-.tv-line,
-.tv-human,
-.tv-face,
-.tv-desk,
-.tv-aifa,
-.tv-aifa-leg,
-.tv-aifa-arm,
-.tv-student,
-.tv-small-line {
-  fill: none;
-  stroke: rgba(245, 241, 232, 0.9);
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 3.2;
-}
-
-.tv-frame {
-  stroke: rgba(245, 241, 232, 0.22);
-  stroke-dasharray: 8 8;
-  stroke-width: 2;
-}
-
-.tv-board {
-  stroke: rgba(245, 241, 232, 0.64);
-  stroke-width: 3;
-}
-
-.tv-line,
-.tv-small-line {
-  stroke: rgba(245, 241, 232, 0.38);
-  stroke-width: 2.2;
-}
-
-.tv-blue {
-  fill: none;
-  stroke: var(--blue);
-  stroke-linecap: round;
-  stroke-width: 3;
-}
-
-.tv-orange {
-  fill: none;
-  stroke: var(--orange);
-  stroke-linecap: round;
-  stroke-width: 4;
-}
-
-.tv-aifa {
-  fill: #050506;
-  stroke: rgba(245, 241, 232, 0.95);
-}
-
-.tv-eye {
-  fill: var(--foreground);
-}
-
-.tv-label {
-  fill: rgba(245, 241, 232, 0.9);
-  font-family: var(--font-sketch);
-  font-size: 22px;
-  font-weight: 900;
-  letter-spacing: 0.04em;
-}
-
-.tv-blue-text {
-  fill: var(--blue);
-}
-
-.tv-orange-text {
-  fill: var(--orange);
 }
 
 .training-grid {
@@ -1536,7 +1461,7 @@ h2 {
     grid-template-columns: 1fr 1fr;
   }
 
-  .training-visual svg {
+  .training-visual img {
     min-height: 360px;
   }
 
@@ -1659,11 +1584,7 @@ h2 {
     padding: 18px;
   }
 
-  .training-visual {
-    padding: 10px;
-  }
-
-  .training-visual svg {
+  .training-visual img {
     min-height: 300px;
   }
 

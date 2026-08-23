@@ -204,40 +204,14 @@ export default function Home() {
               <span>people trained through AI For All sessions, masterclasses, tool walkthroughs, and hands-on learning loops.</span>
             </div>
           </div>
-          <figure className="training-visual" aria-label="Charcoal sketch of Balram training people in a class">
-            <svg viewBox="0 0 760 520" role="img" aria-labelledby="trainingVisualTitle">
-              <title id="trainingVisualTitle">Balram teaching an AI training class with AIFA helping at the board</title>
-              <rect className="tv-bg" x="0" y="0" width="760" height="520" />
-              <path className="tv-frame" d="M33 34 H728 V484 H34 Z" />
-              <path className="tv-board" d="M248 92 H694 V324 H250 Z" />
-              <path className="tv-line" d="M286 138 H470 M286 180 H610 M286 222 H550" />
-              <path className="tv-blue" d="M524 135 h95 M524 176 h108 M524 217 h74" />
-              <path className="tv-orange" d="M296 280 C366 250 445 252 516 279 S617 303 666 272" />
-              <text className="tv-label" x="283" y="72">AI training</text>
-              <text className="tv-label tv-orange-text" x="548" y="306">practice</text>
-              <text className="tv-label tv-blue-text" x="555" y="119">context</text>
-
-              <path className="tv-human" d="M144 153 c24 -34 70 -23 78 14 c8 37 -21 61 -52 55 c-32 -5 -47 -39 -26 -69 Z" />
-              <path className="tv-human" d="M170 222 c-30 22 -48 60 -47 105 l2 92 M174 232 c45 20 70 55 76 103 M152 287 c-27 17 -52 39 -76 67 M224 291 c35 -8 72 -25 112 -51" />
-              <path className="tv-human" d="M125 419 c-14 21 -27 37 -40 50 M205 419 c10 22 27 38 50 50" />
-              <path className="tv-face" d="M158 177 h1 M186 176 h1 M164 199 c10 7 22 7 35 0" />
-
-              <path className="tv-desk" d="M50 405 H710" />
-              <path className="tv-aifa" d="M610 354 c-34 0 -55 20 -58 59 c-4 45 21 70 66 70 c42 0 65 -24 62 -69 c-3 -38 -29 -60 -70 -60 Z" />
-              <path className="tv-aifa-leg" d="M594 482 v18 M641 482 v18" />
-              <circle className="tv-eye" cx="600" cy="404" r="4" />
-              <circle className="tv-eye" cx="627" cy="404" r="4" />
-              <path className="tv-aifa-arm" d="M554 425 c-24 -13 -46 -26 -69 -36 M676 424 c18 -11 33 -24 46 -41" />
-              <text className="tv-label" x="590" y="345">AIFA</text>
-
-              <path className="tv-student" d="M93 365 c4 -31 48 -31 52 0 M84 399 c22 -20 50 -19 73 0" />
-              <path className="tv-student" d="M244 367 c4 -32 50 -32 54 0 M236 401 c24 -20 55 -20 78 0" />
-              <path className="tv-student" d="M371 371 c4 -30 46 -30 51 0 M362 403 c22 -19 50 -19 70 0" />
-              <path className="tv-small-line" d="M72 456 h103 M221 456 h112 M352 456 h101" />
-              <text className="tv-label tv-blue-text" x="78" y="446">teams</text>
-              <text className="tv-label tv-orange-text" x="231" y="446">tools</text>
-              <text className="tv-label" x="363" y="446">workflows</text>
-            </svg>
+          <figure className="training-visual">
+            <img
+              src="/assets/aifa-training-charcoal-premium.png"
+              width="1672"
+              height="941"
+              alt="Premium charcoal sketch of Balram teaching an AI training class with AIFA organizing context, examples, and output."
+              loading="lazy"
+            />
           </figure>
         </div>
         <div className="training-grid">
