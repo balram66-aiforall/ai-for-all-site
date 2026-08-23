@@ -534,6 +534,7 @@ h2 {
 
 .articles-section,
 .learning-section,
+.projects-section,
 .repo-section,
 .about-section {
   border-top: 1px solid rgba(245, 241, 232, 0.12);
@@ -857,6 +858,119 @@ h2 {
   margin-bottom: 0;
 }
 
+.project-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.project-card {
+  background: #050506;
+  border: 1px solid var(--line);
+  display: grid;
+  grid-template-rows: minmax(360px, auto) 1fr;
+  min-height: 720px;
+  overflow: hidden;
+  transform: rotate(-0.18deg);
+}
+
+.project-card:nth-child(even) {
+  transform: rotate(0.18deg);
+}
+
+.project-card figure {
+  background: #080809;
+  margin: 0;
+  overflow: hidden;
+}
+
+.project-card img {
+  display: block;
+  height: 100%;
+  max-height: 560px;
+  object-fit: cover;
+  object-position: center top;
+  width: 100%;
+}
+
+.project-card.text-led {
+  background: #080809;
+}
+
+.project-placeholder {
+  align-content: center;
+  border-bottom: 1px dashed rgba(245, 241, 232, 0.18);
+  display: grid;
+  gap: 18px;
+  justify-items: center;
+  min-height: 420px;
+  padding: 28px;
+}
+
+.project-placeholder strong {
+  border: 1px solid rgba(255, 159, 67, 0.42);
+  color: var(--foreground);
+  display: grid;
+  font-family: var(--font-sketch);
+  font-size: clamp(54px, 8vw, 92px);
+  font-weight: 850;
+  height: 180px;
+  letter-spacing: 0;
+  line-height: 1;
+  place-items: center;
+  transform: rotate(-2deg);
+  width: 180px;
+}
+
+.project-placeholder span {
+  color: var(--orange);
+  font-family: var(--font-sketch);
+  font-size: 13px;
+  font-weight: 850;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.project-copy {
+  display: grid;
+  gap: 14px;
+  padding: 24px;
+}
+
+.project-copy p {
+  color: var(--orange);
+  font-family: var(--font-sketch);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  line-height: 1.35;
+  margin-bottom: 0;
+  text-transform: uppercase;
+}
+
+.project-copy h3 {
+  font-size: clamp(30px, 3vw, 46px);
+  font-weight: 780;
+  line-height: 1;
+  margin-bottom: 0;
+}
+
+.project-copy span {
+  color: rgba(245, 241, 232, 0.76);
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.project-copy a {
+  border-bottom: 1px solid var(--orange);
+  color: var(--orange);
+  display: inline-block;
+  font-weight: 850;
+  justify-self: start;
+  margin-top: 8px;
+  padding-bottom: 4px;
+}
+
 .repo-grid {
   display: grid;
   gap: 14px;
@@ -1096,6 +1210,26 @@ h2 {
     grid-template-columns: 1fr 1fr;
   }
 
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    grid-template-rows: none;
+    min-height: 460px;
+  }
+
+  .project-card img {
+    max-height: none;
+  }
+
+  .project-placeholder {
+    border-bottom: 0;
+    border-right: 1px dashed rgba(245, 241, 232, 0.18);
+    min-height: 460px;
+  }
+
   .repo-grid {
     grid-template-columns: 1fr 1fr;
   }
@@ -1180,6 +1314,22 @@ h2 {
 
   .learning-card {
     min-height: 210px;
+  }
+
+  .project-card {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    min-height: auto;
+  }
+
+  .project-card img {
+    max-height: 520px;
+  }
+
+  .project-placeholder {
+    border-bottom: 1px dashed rgba(245, 241, 232, 0.18);
+    border-right: 0;
+    min-height: 320px;
   }
 
   .complete-shelf-window {

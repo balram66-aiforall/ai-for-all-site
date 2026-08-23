@@ -44,6 +44,36 @@ const repoItems = [
   ],
 ];
 
+const aiProjects = [
+  {
+    title: 'The Pinky Promise',
+    type: 'relationship ritual',
+    summary:
+      'A tiny promise-making experience for turning intent into something people can feel, remember, and come back to.',
+    href: 'https://pinky-promises.lovable.app/#',
+    image: null,
+    action: 'Open project',
+  },
+  {
+    title: 'Gulpy',
+    type: 'daily hydration companion',
+    summary:
+      'An intelligent, friendly hydration companion with personalized goals, AI-powered health insights, smart reminders, and Google Drive cloud sync.',
+    href: 'https://github.com/balram66-aiforall/Gulpy',
+    image: '/assets/projects/gulpy.png',
+    action: 'View GitHub',
+  },
+  {
+    title: 'Keats',
+    type: 'mindful communication companion',
+    summary:
+      'A conversation companion inspired by John Keats and Negative Capability, built to move people beyond autopilot small talk into curiosity and wonder.',
+    href: 'https://github.com/balram66-aiforall/Keats',
+    image: '/assets/projects/keats.png',
+    action: 'View GitHub',
+  },
+];
+
 export default function Home() {
   return (
     <main className="site-shell">
@@ -58,6 +88,7 @@ export default function Home() {
           <a href="#shelf">Shelf</a>
           <a href="#articles">Articles</a>
           <a href="#learn">Learn</a>
+          <a href="#projects">Projects</a>
           <a href="#repos">Repos</a>
           <a href="#about">About</a>
           <a href="#lab">Lab</a>
@@ -169,6 +200,43 @@ export default function Home() {
               <span>{String(index + 1).padStart(2, '0')}</span>
               <h3>{title}</h3>
               <p>{text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="projects" className="content-section projects-section">
+        <div className="section-heading">
+          <p className="eyebrow">AI projects</p>
+          <h2>Small products where AI becomes a daily companion.</h2>
+        </div>
+        <div className="project-grid">
+          {aiProjects.map((project) => (
+            <article
+              className={project.image ? 'project-card' : 'project-card text-led'}
+              key={project.title}
+            >
+              {project.image ? (
+                <figure>
+                  <img
+                    src={project.image}
+                    alt={`${project.title} project artwork`}
+                    loading="lazy"
+                  />
+                </figure>
+              ) : (
+                <div className="project-placeholder" aria-hidden="true">
+                  <span>promise</span>
+                  <strong>pink</strong>
+                  <span>ship</span>
+                </div>
+              )}
+              <div className="project-copy">
+                <p>{project.type}</p>
+                <h3>{project.title}</h3>
+                <span>{project.summary}</span>
+                <a href={project.href}>{project.action}</a>
+              </div>
             </article>
           ))}
         </div>
