@@ -74,6 +74,7 @@ a {
 .hero-section,
 .ticker,
 .content-section,
+.contact-section,
 .newsletter-section {
   position: relative;
   z-index: 1;
@@ -102,6 +103,7 @@ a {
   gap: 11px;
   font-weight: 800;
   letter-spacing: 0.08em;
+  white-space: nowrap;
 }
 
 .aifa-mark {
@@ -492,11 +494,19 @@ h2 {
   border-top: 1px solid rgba(245, 241, 232, 0.12);
 }
 
+.training-showcase {
+  align-items: stretch;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
+  margin-bottom: 28px;
+}
+
 .training-lead {
   display: grid;
   gap: 22px;
-  grid-template-columns: 0.72fr 1.28fr;
-  margin-bottom: 30px;
+  grid-template-columns: 1fr;
+  margin-bottom: 0;
 }
 
 .training-lead .eyebrow {
@@ -504,16 +514,135 @@ h2 {
 }
 
 .training-lead h2,
-.training-lead > p:last-child {
-  grid-column: 2;
+.training-lead > p:last-of-type {
+  grid-column: 1;
 }
 
-.training-lead > p:last-child {
+.training-lead > p:last-of-type {
   color: rgba(245, 241, 232, 0.78);
   font-size: 19px;
   line-height: 1.68;
   margin-bottom: 0;
   max-width: 720px;
+}
+
+.training-stat {
+  border: 1px solid rgba(255, 159, 67, 0.4);
+  display: grid;
+  gap: 12px;
+  margin-top: 6px;
+  padding: 22px;
+  transform: rotate(-0.2deg);
+}
+
+.training-stat strong {
+  color: var(--orange);
+  display: block;
+  font-size: clamp(46px, 7vw, 82px);
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 0.92;
+}
+
+.training-stat span {
+  color: rgba(245, 241, 232, 0.82);
+  font-size: 16px;
+  font-weight: 720;
+  line-height: 1.55;
+}
+
+.training-visual {
+  background: #09090a;
+  border: 1px solid rgba(245, 241, 232, 0.2);
+  margin: 0;
+  min-height: 100%;
+  padding: 14px;
+  transform: rotate(0.12deg);
+}
+
+.training-visual svg {
+  display: block;
+  height: 100%;
+  min-height: 420px;
+  width: 100%;
+}
+
+.tv-bg {
+  fill: #09090a;
+}
+
+.tv-frame,
+.tv-board,
+.tv-line,
+.tv-human,
+.tv-face,
+.tv-desk,
+.tv-aifa,
+.tv-aifa-leg,
+.tv-aifa-arm,
+.tv-student,
+.tv-small-line {
+  fill: none;
+  stroke: rgba(245, 241, 232, 0.9);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3.2;
+}
+
+.tv-frame {
+  stroke: rgba(245, 241, 232, 0.22);
+  stroke-dasharray: 8 8;
+  stroke-width: 2;
+}
+
+.tv-board {
+  stroke: rgba(245, 241, 232, 0.64);
+  stroke-width: 3;
+}
+
+.tv-line,
+.tv-small-line {
+  stroke: rgba(245, 241, 232, 0.38);
+  stroke-width: 2.2;
+}
+
+.tv-blue {
+  fill: none;
+  stroke: var(--blue);
+  stroke-linecap: round;
+  stroke-width: 3;
+}
+
+.tv-orange {
+  fill: none;
+  stroke: var(--orange);
+  stroke-linecap: round;
+  stroke-width: 4;
+}
+
+.tv-aifa {
+  fill: #050506;
+  stroke: rgba(245, 241, 232, 0.95);
+}
+
+.tv-eye {
+  fill: var(--foreground);
+}
+
+.tv-label {
+  fill: rgba(245, 241, 232, 0.9);
+  font-family: var(--font-sketch);
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+
+.tv-blue-text {
+  fill: var(--blue);
+}
+
+.tv-orange-text {
+  fill: var(--orange);
 }
 
 .training-grid {
@@ -593,6 +722,11 @@ h2 {
   font-size: 14px;
   font-weight: 750;
   padding: 9px 11px;
+}
+
+.training-proof span:first-child {
+  border-color: rgba(255, 159, 67, 0.55);
+  color: var(--orange);
 }
 
 .complete-shelf-section {
@@ -1279,6 +1413,76 @@ h2 {
   max-width: 900px;
 }
 
+.contact-section {
+  align-items: center;
+  border-top: 1px solid rgba(245, 241, 232, 0.14);
+  display: grid;
+  gap: 28px;
+  grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+}
+
+.contact-copy h2 {
+  max-width: 780px;
+}
+
+.contact-copy p:last-child {
+  color: rgba(245, 241, 232, 0.76);
+  font-size: 18px;
+  line-height: 1.68;
+  margin-bottom: 0;
+  max-width: 720px;
+}
+
+.contact-actions {
+  border: 1px dashed rgba(245, 241, 232, 0.22);
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+  transform: rotate(-0.18deg);
+}
+
+.contact-button {
+  align-items: center;
+  border: 1px solid rgba(245, 241, 232, 0.18);
+  display: flex;
+  gap: 14px;
+  min-height: 72px;
+  padding: 16px 18px;
+}
+
+.contact-button:hover {
+  border-color: rgba(245, 241, 232, 0.45);
+}
+
+.contact-button svg {
+  flex: 0 0 auto;
+  height: 28px;
+  width: 28px;
+}
+
+.contact-button svg path {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.contact-button span {
+  color: var(--foreground);
+  font-size: 17px;
+  font-weight: 850;
+  line-height: 1.25;
+}
+
+.contact-button.whatsapp {
+  color: #88d498;
+}
+
+.contact-button.linkedin {
+  color: var(--blue);
+}
+
 .final-actions {
   align-items: center;
   display: flex;
@@ -1299,8 +1503,10 @@ h2 {
   .hero-section,
   .section-heading,
   .shelf-copy,
+  .training-showcase,
   .training-lead,
   .training-proof,
+  .contact-section,
   .split-section,
   .lab-section,
   .about-section {
@@ -1321,13 +1527,17 @@ h2 {
   }
 
   .training-lead h2,
-  .training-lead > p:last-child,
+  .training-lead > p:last-of-type,
   .training-lead .eyebrow {
     grid-column: 1;
   }
 
   .training-grid {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .training-visual svg {
+    min-height: 360px;
   }
 
   .project-grid {
@@ -1373,6 +1583,7 @@ h2 {
 
   .hero-section,
   .content-section,
+  .contact-section,
   .newsletter-section {
     padding-inline: 18px;
   }
@@ -1446,6 +1657,23 @@ h2 {
 
   .training-proof {
     padding: 18px;
+  }
+
+  .training-visual {
+    padding: 10px;
+  }
+
+  .training-visual svg {
+    min-height: 300px;
+  }
+
+  .contact-actions {
+    padding: 14px;
+  }
+
+  .contact-button {
+    min-height: 68px;
+    padding: 14px;
   }
 
   .project-card {

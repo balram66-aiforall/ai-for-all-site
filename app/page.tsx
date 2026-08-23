@@ -45,6 +45,7 @@ const trainingLanes = [
 ];
 
 const trainingSignals = [
+  '35,000+ people trained',
   'AI For All initiative',
   'Generative AI workshops',
   'Tool walkthroughs',
@@ -110,11 +111,11 @@ export default function Home() {
   return (
     <main className="site-shell">
       <nav className="topbar" aria-label="Main navigation">
-        <a className="brand" href="#top" aria-label="AIFA home">
+        <a className="brand" href="#top" aria-label="AI For All home">
           <span className="aifa-mark" aria-hidden="true">
             <span />
           </span>
-          <span>AIFA</span>
+          <span>AI For All</span>
         </a>
         <div className="nav-links">
           <a href="#shelf">Shelf</a>
@@ -125,9 +126,7 @@ export default function Home() {
           <a href="#repos">Repos</a>
           <a href="#about">About</a>
           <a href="#lab">Lab</a>
-          <a href="https://www.linkedin.com/newsletters/ai-for-all-weekly-newsletter-7401258096209088512/">
-            LinkedIn
-          </a>
+          <a href="#contact">Contact</a>
         </div>
       </nav>
 
@@ -191,14 +190,55 @@ export default function Home() {
       </section>
 
       <section id="training" className="content-section training-section">
-        <div className="training-lead">
-          <p className="eyebrow">AI training</p>
-          <h2>Training people to use AI with clarity, judgment, and confidence.</h2>
-          <p>
-            AIFA is not just content. It is a practical learning system for
-            helping people understand AI, use the right tools, and build habits
-            they can carry into real work.
-          </p>
+        <div className="training-showcase">
+          <div className="training-lead">
+            <p className="eyebrow">AI training</p>
+            <h2>Training people to use AI with clarity, judgment, and confidence.</h2>
+            <p>
+              AIFA is not just content. It is a practical learning system for
+              helping people understand AI, use the right tools, and build habits
+              they can carry into real work.
+            </p>
+            <div className="training-stat" aria-label="More than thirty five thousand people trained">
+              <strong>35,000+</strong>
+              <span>people trained through AI For All sessions, masterclasses, tool walkthroughs, and hands-on learning loops.</span>
+            </div>
+          </div>
+          <figure className="training-visual" aria-label="Charcoal sketch of Balram training people in a class">
+            <svg viewBox="0 0 760 520" role="img" aria-labelledby="trainingVisualTitle">
+              <title id="trainingVisualTitle">Balram teaching an AI training class with AIFA helping at the board</title>
+              <rect className="tv-bg" x="0" y="0" width="760" height="520" />
+              <path className="tv-frame" d="M33 34 H728 V484 H34 Z" />
+              <path className="tv-board" d="M248 92 H694 V324 H250 Z" />
+              <path className="tv-line" d="M286 138 H470 M286 180 H610 M286 222 H550" />
+              <path className="tv-blue" d="M524 135 h95 M524 176 h108 M524 217 h74" />
+              <path className="tv-orange" d="M296 280 C366 250 445 252 516 279 S617 303 666 272" />
+              <text className="tv-label" x="283" y="72">AI training</text>
+              <text className="tv-label tv-orange-text" x="548" y="306">practice</text>
+              <text className="tv-label tv-blue-text" x="555" y="119">context</text>
+
+              <path className="tv-human" d="M144 153 c24 -34 70 -23 78 14 c8 37 -21 61 -52 55 c-32 -5 -47 -39 -26 -69 Z" />
+              <path className="tv-human" d="M170 222 c-30 22 -48 60 -47 105 l2 92 M174 232 c45 20 70 55 76 103 M152 287 c-27 17 -52 39 -76 67 M224 291 c35 -8 72 -25 112 -51" />
+              <path className="tv-human" d="M125 419 c-14 21 -27 37 -40 50 M205 419 c10 22 27 38 50 50" />
+              <path className="tv-face" d="M158 177 h1 M186 176 h1 M164 199 c10 7 22 7 35 0" />
+
+              <path className="tv-desk" d="M50 405 H710" />
+              <path className="tv-aifa" d="M610 354 c-34 0 -55 20 -58 59 c-4 45 21 70 66 70 c42 0 65 -24 62 -69 c-3 -38 -29 -60 -70 -60 Z" />
+              <path className="tv-aifa-leg" d="M594 482 v18 M641 482 v18" />
+              <circle className="tv-eye" cx="600" cy="404" r="4" />
+              <circle className="tv-eye" cx="627" cy="404" r="4" />
+              <path className="tv-aifa-arm" d="M554 425 c-24 -13 -46 -26 -69 -36 M676 424 c18 -11 33 -24 46 -41" />
+              <text className="tv-label" x="590" y="345">AIFA</text>
+
+              <path className="tv-student" d="M93 365 c4 -31 48 -31 52 0 M84 399 c22 -20 50 -19 73 0" />
+              <path className="tv-student" d="M244 367 c4 -32 50 -32 54 0 M236 401 c24 -20 55 -20 78 0" />
+              <path className="tv-student" d="M371 371 c4 -30 46 -30 51 0 M362 403 c22 -19 50 -19 70 0" />
+              <path className="tv-small-line" d="M72 456 h103 M221 456 h112 M352 456 h101" />
+              <text className="tv-label tv-blue-text" x="78" y="446">teams</text>
+              <text className="tv-label tv-orange-text" x="231" y="446">tools</text>
+              <text className="tv-label" x="363" y="446">workflows</text>
+            </svg>
+          </figure>
         </div>
         <div className="training-grid">
           {trainingLanes.map(([title, text, status]) => (
@@ -389,6 +429,33 @@ export default function Home() {
         </div>
       </section>
 
+      <section id="contact" className="content-section contact-section">
+        <div className="contact-copy">
+          <p className="eyebrow">Contact me</p>
+          <h2>Want to talk about AI training, workflows, agents, or skills?</h2>
+          <p>
+            Send a note when you want help making AI practical for yourself,
+            your team, or a learning program. We can start with the messy
+            version and turn it into something usable.
+          </p>
+        </div>
+        <div className="contact-actions" aria-label="Contact links">
+          <a className="contact-button whatsapp" href="https://wa.me/qr/3EZXUASKEW5RM1">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3.3a8.4 8.4 0 0 0-7.2 12.7l-1 4 4.1-1A8.4 8.4 0 1 0 12 3.3Z" />
+              <path d="M8.7 8.2c.2-.5.4-.5.7-.5h.6c.2 0 .4.1.5.4l.7 1.7c.1.2.1.4-.1.6l-.4.5c-.1.1-.2.3 0 .5.5.9 1.4 1.8 2.4 2.3.2.1.4.1.5-.1l.6-.7c.2-.2.4-.2.6-.1l1.7.8c.3.1.4.3.4.5 0 .8-.6 1.7-1.4 1.8-1.4.2-3.3-.5-5-2.2-1.7-1.7-2.6-3.5-2.5-4.8 0-.2 0-.4.1-.7Z" />
+            </svg>
+            <span>Talk AI with me on WhatsApp</span>
+          </a>
+          <a className="contact-button linkedin" href="https://in.linkedin.com/in/balramr66">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 8.8h3.3V19H5V8.8Zm1.7-4.9a1.9 1.9 0 1 1 0 3.8 1.9 1.9 0 0 1 0-3.8ZM10.1 8.8h3.1v1.4h.1c.4-.8 1.5-1.7 3.1-1.7 3.3 0 3.9 2.2 3.9 5V19H17v-4.9c0-1.2 0-2.7-1.6-2.7s-1.9 1.3-1.9 2.6v5h-3.3V8.8Z" />
+            </svg>
+            <span>Connect with me on LinkedIn</span>
+          </a>
+        </div>
+      </section>
+
       <section className="newsletter-section" aria-label="AI For All newsletter">
         <p className="eyebrow">AI For All weekly</p>
         <h2>Follow the public notebook where bAIram keeps learning out loud.</h2>
@@ -396,13 +463,10 @@ export default function Home() {
           <a className="button primary" href="https://www.linkedin.com/newsletters/ai-for-all-weekly-newsletter-7401258096209088512/">
             Open the newsletter
           </a>
-          <a className="button secondary" href="https://wa.me/qr/3EZXUASKEW5RM1">
-            Talk AI with me on WhatsApp
-          </a>
         </div>
         <p className="contact-note">
-          Have a question about AI learning, workflows, agents, skills, or
-          training? Send a note and we can start with the messy version.
+          Read the articles, follow the weekly notes, and come back when you
+          want practical AI patterns you can actually use.
         </p>
       </section>
     </main>
