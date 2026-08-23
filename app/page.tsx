@@ -51,7 +51,7 @@ const aiProjects = [
     summary:
       'A tiny promise-making experience for turning intent into something people can feel, remember, and come back to.',
     href: 'https://pinky-promises.lovable.app/#',
-    image: null,
+    image: '/assets/projects/pinky-promise.png',
     action: 'Open project',
   },
   {
