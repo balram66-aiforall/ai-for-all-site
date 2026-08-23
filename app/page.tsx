@@ -21,6 +21,38 @@ const teammateLoops = [
   ['04', 'Ship', 'Package the work for LinkedIn, teams, or clients.'],
 ];
 
+const trainingLanes = [
+  [
+    'Foundations',
+    'Make AI understandable for beginners, non-technical teams, and people who need confidence before tools.',
+    'start here',
+  ],
+  [
+    'Tools',
+    'Teach people how to use AI assistants, product features, and daily work tools with clear judgment.',
+    'hands-on',
+  ],
+  [
+    'Workflows',
+    'Turn scattered prompting into repeatable systems for research, writing, planning, review, and output.',
+    'practice',
+  ],
+  [
+    'Agents',
+    'Help teams understand agentic work, context, skills, MCPs, and when AI should move work forward.',
+    'next wave',
+  ],
+];
+
+const trainingSignals = [
+  'AI For All initiative',
+  'Generative AI workshops',
+  'Tool walkthroughs',
+  'Non-technical enablement',
+  'Prompting with context',
+  'Agentic workflow learning',
+];
+
 const repoItems = [
   [
     'Agents',
@@ -87,6 +119,7 @@ export default function Home() {
         <div className="nav-links">
           <a href="#shelf">Shelf</a>
           <a href="#articles">Articles</a>
+          <a href="#training">Training</a>
           <a href="#learn">Learn</a>
           <a href="#projects">Projects</a>
           <a href="#repos">Repos</a>
@@ -155,6 +188,35 @@ export default function Home() {
         <span>AI For All</span>
         <span>human judgment</span>
         <span>AI execution</span>
+      </section>
+
+      <section id="training" className="content-section training-section">
+        <div className="training-lead">
+          <p className="eyebrow">AI training</p>
+          <h2>Training people to use AI with clarity, judgment, and confidence.</h2>
+          <p>
+            AIFA is not just content. It is a practical learning system for
+            helping people understand AI, use the right tools, and build habits
+            they can carry into real work.
+          </p>
+        </div>
+        <div className="training-grid">
+          {trainingLanes.map(([title, text, status]) => (
+            <article className="training-card" key={title}>
+              <span>{status}</span>
+              <h3>{title}</h3>
+              <p>{text}</p>
+            </article>
+          ))}
+        </div>
+        <div className="training-proof">
+          <p>Training signals from the work</p>
+          <div>
+            {trainingSignals.map((signal) => (
+              <span key={signal}>{signal}</span>
+            ))}
+          </div>
+        </div>
       </section>
 
       <section
