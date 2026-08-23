@@ -1,4 +1,6 @@
+/* eslint-disable @next/next/no-img-element -- Vinext's next/image shim breaks hydration. */
 import { ArticleCarousel } from "./components/ArticleCarousel";
+import { ShelfEmbed } from "./components/ShelfEmbed";
 
 const tips = [
   'Start with the decision you need, not the prompt you want to write.',
@@ -84,7 +86,9 @@ const aiProjects = [
     summary:
       'A tiny promise-making experience for turning intent into something people can feel, remember, and come back to.',
     href: 'https://pinky-promises.lovable.app/#',
-    image: '/assets/projects/pinky-promise.png',
+    image: '/assets/projects/pinky-promise.jpg',
+    width: 1440,
+    height: 2560,
     action: 'Open project',
   },
   {
@@ -93,7 +97,9 @@ const aiProjects = [
     summary:
       'An intelligent, friendly hydration companion with personalized goals, AI-powered health insights, smart reminders, and Google Drive cloud sync.',
     href: 'https://github.com/balram66-aiforall/Gulpy',
-    image: '/assets/projects/gulpy.png',
+    image: '/assets/projects/gulpy.jpg',
+    width: 1122,
+    height: 1402,
     action: 'View GitHub',
   },
   {
@@ -102,7 +108,9 @@ const aiProjects = [
     summary:
       'A conversation companion inspired by John Keats and Negative Capability, built to move people beyond autopilot small talk into curiosity and wonder.',
     href: 'https://github.com/balram66-aiforall/Keats',
-    image: '/assets/projects/keats.png',
+    image: '/assets/projects/keats.jpg',
+    width: 1122,
+    height: 1402,
     action: 'View GitHub',
   },
 ];
@@ -110,6 +118,7 @@ const aiProjects = [
 export default function Home() {
   return (
     <main className="site-shell">
+      <div className="scroll-progress" aria-hidden="true" />
       <nav className="topbar" aria-label="Main navigation">
         <a className="brand" href="#top" aria-label="AI For All home">
           <span className="aifa-mark" aria-hidden="true">
@@ -163,10 +172,12 @@ export default function Home() {
           <div className="sketch-scene">
             <img
               className="hero-sketch-image"
-              src="/assets/aifa-teammate-charcoal-hero.png"
+              src="/assets/aifa-teammate-charcoal-hero.jpg"
               width="1680"
               height="945"
               alt="Charcoal sketch of a human guide pointing at a planning board while AIFA sorts drafts into a shipped output."
+              decoding="async"
+              fetchPriority="high"
             />
           </div>
           <div className="board-grid">
@@ -206,11 +217,12 @@ export default function Home() {
           </div>
           <figure className="training-visual">
             <img
-              src="/assets/aifa-training-charcoal-premium.png"
+              src="/assets/aifa-training-charcoal-premium.jpg"
               width="1672"
               height="941"
               alt="Premium charcoal sketch of Balram teaching an AI training class with AIFA organizing context, examples, and output."
               loading="lazy"
+              decoding="async"
             />
           </figure>
         </div>
@@ -246,15 +258,7 @@ export default function Home() {
             moving through the page when you are done exploring.
           </p>
         </div>
-        <div className="complete-shelf-window">
-          <iframe
-            className="complete-shelf-frame"
-            title="Working Volumes — Seven Tools for Making"
-            src="/landing-pages/complete-shelf-v2.html"
-            sandbox="allow-downloads allow-forms allow-modals allow-popups allow-same-origin allow-scripts"
-            loading="eager"
-          />
-        </div>
+        <ShelfEmbed />
       </section>
 
       <section id="articles" className="content-section articles-section">
@@ -296,8 +300,11 @@ export default function Home() {
                 <figure>
                   <img
                     src={project.image}
+                    width={project.width}
+                    height={project.height}
                     alt={`${project.title} project artwork`}
                     loading="lazy"
+                    decoding="async"
                   />
                 </figure>
               ) : (
