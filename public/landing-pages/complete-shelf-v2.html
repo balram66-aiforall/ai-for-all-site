@@ -2408,6 +2408,7 @@
     let hitTargets = [];
     let rafId = 0;
     let lastTime = performance.now();
+    let renderUntil = lastTime + 900;
     let mode = "hero";
     let transitionTime = 0;
     let position = 0;
@@ -4516,7 +4517,7 @@
       key.name = "shadow-key";
       key.position.set(-4.6, 7.4, 5.8);
       key.castShadow = true;
-      key.shadow.mapSize.set(2048, 2048);
+      key.shadow.mapSize.set(1024, 1024);
       key.shadow.camera.left = -6;
       key.shadow.camera.right = 6;
       key.shadow.camera.top = 6;
@@ -5934,10 +5935,15 @@
       }
     }
 
-    function requestFrame() {
+    function scheduleFrame() {
       if (!rafId && !suspended) {
         rafId = requestAnimationFrame(frame);
       }
+    }
+
+    function requestFrame(linger = 500) {
+      renderUntil = Math.max(renderUntil, performance.now() + linger);
+      scheduleFrame();
     }
 
     function getDetailOpenAmount() {
@@ -5979,12 +5985,13 @@
       renderer.render(scene, camera);
 
       const shelfMoving = Math.abs(position - targetPosition) > 0.0005 || wheelIdle > 0;
-      const shouldContinue = !reducedMotion
-        || mode === "opening"
+      const shouldContinue = mode === "opening"
         || mode === "closing"
         || shelfMoving
-        || themeIsMoving;
-      if (shouldContinue && !suspended) requestFrame();
+        || themeIsMoving
+        || pageDrag.active
+        || time < renderUntil;
+      if (shouldContinue && !suspended) scheduleFrame();
     }
 
     function resize() {
@@ -5992,7 +5999,10 @@
       viewHeight = window.innerHeight;
       configureResponsiveTargets();
       renderer.setSize(viewWidth, viewHeight, false);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, viewWidth < 820 ? 1.5 : 2));
+      renderer.setPixelRatio(
+        Math.min(window.devicePixelRatio || 1, viewWidth < 820 ? 1 : 1.25)
+      );
+      renderer.shadowMap.enabled = viewWidth >= 820;
       camera.aspect = viewWidth / viewHeight;
       camera.updateProjectionMatrix();
 
@@ -6192,9 +6202,9 @@
       try {
         renderer = new THREE.WebGLRenderer({
           canvas,
-          antialias: true,
+          antialias: (window.devicePixelRatio || 1) <= 1.5,
           alpha: true,
-          powerPreference: "high-performance"
+          powerPreference: "default"
         });
       } catch (error) {
         showFallback("WebGL is unavailable in this browser. The complete static catalog remains available.");
@@ -6236,7 +6246,7 @@
       controls.minPolarAngle = Math.PI * 0.24;
       controls.maxPolarAngle = Math.PI * 0.76;
       controls.target.copy(shelfCameraTarget);
-      controls.addEventListener("change", requestFrame);
+      controls.addEventListener("change", () => requestFrame());
 
       RectAreaLightUniformsLib.init();
       addRoom();

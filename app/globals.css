@@ -735,12 +735,72 @@ h2 {
   border: 0;
   display: block;
   height: 100%;
-  pointer-events: none;
   width: 100%;
 }
 
-.complete-shelf-window.is-active .complete-shelf-frame {
-  pointer-events: auto;
+.shelf-poster {
+  background: #25252d;
+  display: grid;
+  height: 100%;
+  overflow: hidden;
+  padding: clamp(24px, 4vw, 48px);
+  position: relative;
+}
+
+.shelf-poster::after {
+  border-bottom: 12px solid #6a3d2c;
+  bottom: 7%;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+}
+
+.shelf-poster-heading {
+  align-content: start;
+  display: grid;
+  gap: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.shelf-poster-heading strong {
+  font-family: Georgia, serif;
+  font-size: clamp(24px, 3vw, 40px);
+  font-weight: 500;
+}
+
+.shelf-poster-heading span {
+  color: rgba(245, 241, 232, 0.7);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.shelf-poster-volumes {
+  align-items: end;
+  display: flex;
+  gap: clamp(10px, 2vw, 24px);
+  inset: auto 4% 8%;
+  justify-content: center;
+  position: absolute;
+}
+
+.shelf-poster-volumes span {
+  align-items: center;
+  background: var(--volume-color);
+  border: 1px solid rgba(245, 241, 232, 0.2);
+  color: rgba(245, 241, 232, 0.85);
+  display: flex;
+  font-family: Georgia, serif;
+  font-size: clamp(12px, 1.6vw, 22px);
+  height: var(--volume-height);
+  justify-content: center;
+  max-height: 48vh;
+  padding: 18px 8px;
+  writing-mode: vertical-rl;
+  width: clamp(42px, 7vw, 84px);
 }
 
 .shelf-activate,
