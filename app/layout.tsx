@@ -2,13 +2,13 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'AI For All | Balram\'s AI Teammate Portfolio',
+  title: 'AI For All | Practical AI for real work',
   description:
-    'A living portfolio for AI teammate thinking, LinkedIn articles, useful workflows, and practical AI tips.',
+    'AI For All is Balram’s public notebook for accessible AI, tested workflows, practical training, and the best ideas worth sharing.',
   openGraph: {
-    title: 'AI For All | Balram\'s AI Teammate Portfolio',
+    title: 'AI For All | Practical AI for real work',
     description:
-      'A living portfolio for AI teammate thinking, LinkedIn articles, useful workflows, and practical AI tips.',
+      'AI For All is Balram’s public notebook for accessible AI, tested workflows, practical training, and the best ideas worth sharing.',
     type: 'website',
   },
 };
