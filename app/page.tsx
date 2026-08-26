@@ -1,6 +1,31 @@
+"use client";
+
 /* eslint-disable @next/next/no-img-element -- Vinext's next/image shim breaks hydration. */
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { ArticleCarousel } from "./components/ArticleCarousel";
 import { ShelfEmbed } from "./components/ShelfEmbed";
+
+type ThemeMode = "dark" | "light";
+type ThemePhase = "idle" | "to-light" | "to-dark";
+
+const THEME_STORAGE_KEY = "aifa-theme";
+
+function SunIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="4.5" />
+      <path d="M12 2.8v2.7M12 18.5v2.7M4.2 4.2l1.9 1.9M17.9 17.9l1.9 1.9M2.8 12h2.7M18.5 12h2.7M4.2 19.8l1.9-1.9M17.9 6.1l1.9-1.9" />
+    </svg>
+  );
+}
+
+function MoonIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24">
+      <path d="M15.5 3.8A8.8 8.8 0 1 0 20.2 15.5 8.2 8.2 0 1 1 15.5 3.8Z" />
+    </svg>
+  );
+}
 
 const tips = [
   'Start with the outcome you need, not the prompt you want to write.',
@@ -115,9 +140,68 @@ const aiProjects = [
   },
 ];
 
+function useThemeMode() {
+  return useSyncExternalStore(
+    (onStoreChange) => {
+      window.addEventListener("storage", onStoreChange);
+      window.addEventListener("aifa-theme-change", onStoreChange);
+
+      return () => {
+        window.removeEventListener("storage", onStoreChange);
+        window.removeEventListener("aifa-theme-change", onStoreChange);
+      };
+    },
+    () => (window.localStorage.getItem(THEME_STORAGE_KEY) === "light" ? "light" : "dark"),
+    () => "dark",
+  ) as ThemeMode;
+}
+
 export default function Home() {
+  const theme = useThemeMode();
+  const [themePhase, setThemePhase] = useState<ThemePhase>("idle");
+
+  useEffect(() => {
+    const root = document.documentElement;
+    root.dataset.theme = theme;
+    root.dataset.themePhase = themePhase;
+    window.localStorage.setItem(THEME_STORAGE_KEY, theme);
+    window.dispatchEvent(new Event("aifa-theme-change"));
+
+    const motionReduce = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (themePhase === "idle" || motionReduce) {
+      return;
+    }
+
+    const timeout = window.setTimeout(() => {
+      setThemePhase("idle");
+    }, 760);
+
+    return () => window.clearTimeout(timeout);
+  }, [theme, themePhase]);
+
+  function toggleTheme() {
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    const nextTheme: ThemeMode = theme === "dark" ? "light" : "dark";
+
+    window.localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
+    window.dispatchEvent(new Event("aifa-theme-change"));
+
+    if (reducedMotion) {
+      setThemePhase("idle");
+      return;
+    }
+
+    setThemePhase(nextTheme === "light" ? "to-light" : "to-dark");
+  }
+
   return (
-    <main className="site-shell">
+    <main className="site-shell" data-theme={theme} data-theme-phase={themePhase}>
+      <div className="theme-wash" aria-hidden="true" />
       <div className="scroll-progress" aria-hidden="true" />
       <nav className="topbar" aria-label="Main navigation">
         <a className="brand" href="#top" aria-label="AI For All home">
@@ -126,16 +210,29 @@ export default function Home() {
           </span>
           <span>AI For All</span>
         </a>
-        <div className="nav-links">
-          <a href="#shelf">Shelf</a>
-          <a href="#articles">Articles</a>
-          <a href="#training">Training</a>
-          <a href="#learn">Learn</a>
-          <a href="#projects">Projects</a>
-          <a href="#repos">Repos</a>
-          <a href="#about">About</a>
-          <a href="#lab">Lab</a>
-          <a href="#contact">Contact</a>
+        <div className="nav-tools">
+          <div className="nav-links">
+            <a href="#shelf">Shelf</a>
+            <a href="#articles">Articles</a>
+            <a href="#training">Training</a>
+            <a href="#learn">Learn</a>
+            <a href="#projects">Projects</a>
+            <a href="#repos">Repos</a>
+            <a href="#about">About</a>
+            <a href="#lab">Lab</a>
+            <a href="#contact">Contact</a>
+          </div>
+          <button
+            type="button"
+            className="theme-toggle"
+            aria-pressed={theme === "light"}
+            onClick={toggleTheme}
+          >
+            <span className="theme-toggle-icon" aria-hidden="true">
+              {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+            </span>
+            <span>{theme === "dark" ? "Light mode" : "Dark mode"}</span>
+          </button>
         </div>
       </nav>
 
