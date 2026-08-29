@@ -36,28 +36,28 @@
 
 html[data-theme="light"] {
   color-scheme: light;
-  --background: #f7f4ee;
+  --background: #faf7f1;
   --foreground: #151311;
-  --muted: #5d5448;
-  --line: rgba(21, 19, 17, 0.16);
-  --line-soft: rgba(21, 19, 17, 0.08);
-  --line-strong: rgba(21, 19, 17, 0.22);
-  --panel: rgba(21, 19, 17, 0.045);
-  --surface: #fffaf3;
-  --surface-strong: #f5efe5;
+  --muted: #4a4135;
+  --line: rgba(21, 19, 17, 0.2);
+  --line-soft: rgba(21, 19, 17, 0.1);
+  --line-strong: rgba(21, 19, 17, 0.28);
+  --panel: rgba(255, 255, 255, 0.88);
+  --surface: #fffdf8;
+  --surface-strong: #f6efe4;
   --surface-raised: #ffffff;
-  --surface-muted: #ece4d8;
-  --surface-dim: #f2ece1;
-  --surface-topbar: rgba(247, 244, 238, 0.92);
-  --surface-overlay: rgba(247, 244, 238, 0.88);
-  --shell-edge: rgba(21, 19, 17, 0.05);
+  --surface-muted: #eee5d6;
+  --surface-dim: #f6f0e6;
+  --surface-topbar: rgba(250, 247, 241, 0.94);
+  --surface-overlay: rgba(250, 247, 241, 0.92);
+  --shell-edge: rgba(21, 19, 17, 0.06);
   --shell-edge-blue: rgba(88, 183, 255, 0.16);
   --shell-edge-orange: rgba(255, 159, 67, 0.16);
-  --text-soft: rgba(21, 19, 17, 0.74);
-  --text-faint: rgba(21, 19, 17, 0.56);
+  --text-soft: rgba(21, 19, 17, 0.88);
+  --text-faint: rgba(21, 19, 17, 0.68);
   --action-bg: #151311;
   --action-fg: #f7f4ee;
-  --theme-wash: #fffdf9;
+  --theme-wash: #ffffff;
 }
 
 @theme inline {
@@ -106,6 +106,20 @@ a {
   overflow: clip;
   background: var(--background);
   position: relative;
+}
+
+html[data-theme="light"] .hero-lede,
+html[data-theme="light"] .training-lead > p:last-of-type,
+html[data-theme="light"] .training-stat span,
+html[data-theme="light"] .training-card p,
+html[data-theme="light"] .repo-card p,
+html[data-theme="light"] .about-copy p,
+html[data-theme="light"] .contact-note,
+html[data-theme="light"] .note-panel p,
+html[data-theme="light"] .tip-row p,
+html[data-theme="light"] .article-preview-copy span,
+html[data-theme="light"] .project-copy span {
+  color: rgba(21, 19, 17, 0.84);
 }
 
 .scroll-progress {
@@ -637,6 +651,13 @@ h2 {
   height: 360px;
   margin-top: 22px;
   position: relative;
+}
+
+.sketch-scene picture,
+.training-visual picture {
+  display: block;
+  height: 100%;
+  width: 100%;
 }
 
 .hero-sketch-image {
@@ -2002,11 +2023,12 @@ h2 {
   }
 
   .sketch-scene {
-    height: 300px;
+    height: 440px;
   }
 
   .hero-sketch-image {
-    object-position: 42% center;
+    object-fit: contain;
+    object-position: center;
   }
 
   .carousel-meta {
@@ -2060,7 +2082,8 @@ h2 {
   }
 
   .training-visual img {
-    min-height: 300px;
+    object-fit: contain;
+    min-height: 420px;
   }
 
   .contact-actions {

@@ -151,8 +151,8 @@ function useThemeMode() {
         window.removeEventListener("aifa-theme-change", onStoreChange);
       };
     },
-    () => (window.localStorage.getItem(THEME_STORAGE_KEY) === "light" ? "light" : "dark"),
-    () => "dark",
+    () => (window.localStorage.getItem(THEME_STORAGE_KEY) === "dark" ? "dark" : "light"),
+    () => "light",
   ) as ThemeMode;
 }
 
@@ -270,15 +270,21 @@ export default function Home() {
             <span className="live-dot">live</span>
           </div>
           <div className="sketch-scene">
-            <img
-              className="hero-sketch-image"
-              src="/assets/aifa-teammate-charcoal-hero.jpg"
-              width="1680"
-              height="945"
-              alt="Charcoal sketch of a human guide pointing at a planning board while AI For All sorts drafts into a shipped output."
-              decoding="async"
-              fetchPriority="high"
-            />
+            <picture>
+              <source
+                media="(max-width: 920px)"
+                srcSet="/assets/aifa-teammate-charcoal-hero-mobile.png"
+              />
+              <img
+                className="hero-sketch-image"
+                src="/assets/aifa-teammate-charcoal-hero.jpg"
+                width="1680"
+                height="945"
+                alt="Charcoal sketch of a human guide pointing at a planning board while AI For All sorts drafts into a shipped output."
+                decoding="async"
+                fetchPriority="high"
+              />
+            </picture>
           </div>
           <div className="board-grid">
             {teammateLoops.map(([number, title, text]) => (
@@ -316,14 +322,20 @@ export default function Home() {
             </div>
           </div>
           <figure className="training-visual">
-            <img
-              src="/assets/aifa-training-charcoal-premium.jpg"
-              width="1672"
-              height="941"
-              alt="Premium charcoal sketch of Balram teaching an AI training class with AI For All organizing context, examples, and output."
-              loading="lazy"
-              decoding="async"
-            />
+            <picture>
+              <source
+                media="(max-width: 920px)"
+                srcSet="/assets/aifa-training-charcoal-mobile.png"
+              />
+              <img
+                src="/assets/aifa-training-charcoal-premium.jpg"
+                width="1672"
+                height="941"
+                alt="Premium charcoal sketch of Balram teaching an AI training class with AI For All organizing context, examples, and output."
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
           </figure>
         </div>
         <div className="training-grid">
