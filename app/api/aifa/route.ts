@@ -6,11 +6,18 @@ type IncomingMessage = {
 };
 
 export async function POST(request: Request) {
-  const apiKey = process.env.OPENAI_API_KEY;
+  const novaKey = process.env.NOVA_API_KEY;
+  const novaBaseUrl = process.env.NOVA_BASE_URL ?? "https://api.nova.amazon.com/v1";
+  const novaModel = process.env.NOVA_MODEL ?? "nvidia/nemotron-3-ultra-550b-a55b:free";
+  const openRouterKey = process.env.OPENROUTER_API_KEY;
+  const openAiKey = process.env.OPENAI_API_KEY;
 
-  if (!apiKey) {
+  if (!novaKey && !openRouterKey && !openAiKey) {
     return NextResponse.json(
-      { error: "AIFA is not connected yet. Add OPENAI_API_KEY to the site secret to enable chat." },
+      {
+        error:
+          "AIFA is not connected yet. Add NOVA_API_KEY, OPENROUTER_API_KEY, or OPENAI_API_KEY to the site secret to enable chat.",
+      },
       { status: 503 },
     );
   }
@@ -45,14 +52,38 @@ export async function POST(request: Request) {
   ].join(" ");
 
   try {
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    const isNova = Boolean(novaKey);
+    const isOpenRouter = !isNova && Boolean(openRouterKey);
+    const apiKey = novaKey ?? openRouterKey ?? openAiKey;
+    const endpoint = isNova
+      ? `${novaBaseUrl.replace(/\/$/, "")}/chat/completions`
+      : isOpenRouter
+        ? "https://openrouter.ai/api/v1/chat/completions"
+        : "https://api.openai.com/v1/chat/completions";
+    const model = isNova
+      ? novaModel
+      : isOpenRouter
+        ? process.env.OPENROUTER_MODEL ?? "openrouter/free"
+        : process.env.AIFA_OPENAI_MODEL ?? "gpt-4o-mini";
+
+    const response = await fetch(endpoint, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
+        ...(isNova
+          ? {
+              "X-Title": "AI For All",
+            }
+          : isOpenRouter
+          ? {
+              "HTTP-Referer": new URL(request.url).origin,
+              "X-OpenRouter-Title": "AI For All",
+            }
+          : {}),
       },
       body: JSON.stringify({
-        model: process.env.AIFA_OPENAI_MODEL ?? "gpt-4o-mini",
+        model,
         temperature: 0.5,
         messages: [
           { role: "system", content: `${systemPrompt} Current page: ${payload.path ?? "/"}` },
@@ -88,7 +119,13 @@ export async function POST(request: Request) {
     return NextResponse.json({ reply });
   } catch {
     return NextResponse.json(
-      { error: "AIFA could not connect to OpenAI right now." },
+      {
+        error: novaKey
+          ? "AIFA could not connect to Amazon Nova right now."
+          : openRouterKey
+          ? "AIFA could not connect to OpenRouter right now."
+          : "AIFA could not connect to OpenAI right now.",
+      },
       { status: 502 },
     );
   }

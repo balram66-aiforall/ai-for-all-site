@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { AifaMascot } from "./AifaMascot";
 
 type ChatMessage = {
   role: "assistant" | "user";
@@ -116,9 +117,12 @@ export function AifaAssistant() {
       {open ? (
         <section className="aifa-assistant-panel" aria-label="AIFA chat helper">
           <header className="aifa-assistant-header">
-            <div>
-              <p>AIFA</p>
-              <span>Ask about AI learning, role guides, or site building</span>
+            <div className="aifa-assistant-header-copy">
+              <AifaMascot className="aifa-assistant-mascot" />
+              <div>
+                <p>AIFA</p>
+                <span>Ask about AI learning, role guides, or site building</span>
+              </div>
             </div>
             <button
               type="button"
@@ -187,6 +191,7 @@ export function AifaAssistant() {
           className="aifa-assistant-launcher"
           onClick={() => setOpen(true)}
         >
+          <AifaMascot className="aifa-assistant-launcher-mascot" />
           Ask AIFA
         </button>
       )}

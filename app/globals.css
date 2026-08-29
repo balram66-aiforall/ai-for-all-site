@@ -661,7 +661,9 @@ h2 {
 }
 
 .sketch-scene {
-  height: 360px;
+  aspect-ratio: 1680 / 945;
+  height: auto;
+  min-height: 360px;
   margin-top: 22px;
   position: relative;
 }
@@ -676,7 +678,7 @@ h2 {
 .hero-sketch-image {
   display: block;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
   position: relative;
   width: 100%;
@@ -760,6 +762,22 @@ h2 {
   gap: 24px;
   grid-template-columns: 0.72fr 1.28fr;
   margin-bottom: 30px;
+}
+
+.section-heading > .eyebrow {
+  grid-column: 1;
+  margin-bottom: 0;
+}
+
+.section-heading > h2 {
+  grid-column: 1;
+}
+
+.section-heading > .section-status {
+  align-self: end;
+  grid-column: 2;
+  justify-self: end;
+  margin-bottom: 2px;
 }
 
 .section-heading h2,
@@ -850,6 +868,45 @@ h2 {
   justify-self: start;
 }
 
+.section-status,
+.section-status-note,
+.hero-note,
+.guide-status-banner {
+  color: var(--text-soft);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.section-status {
+  border: 1px solid var(--line);
+  color: var(--orange);
+  font-family: var(--font-sketch);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  padding: 8px 10px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.hero-note,
+.section-status-note,
+.guide-status-banner {
+  max-width: 700px;
+}
+
+.hero-note {
+  margin: 14px 0 0;
+}
+
+.section-status-note {
+  margin: 20px 0 0;
+}
+
+.guide-status-banner {
+  margin: 8px 0 0;
+}
+
 .guide-page-hero,
 .guide-page-footer {
   display: grid;
@@ -909,10 +966,17 @@ h2 {
   background: var(--surface);
   color: var(--foreground);
   display: inline-flex;
+  gap: 12px;
   font-size: 14px;
   font-weight: 850;
   min-height: 48px;
   padding: 12px 16px;
+}
+
+.aifa-assistant-launcher-mascot {
+  display: block;
+  height: 26px;
+  width: 26px;
 }
 
 .aifa-assistant-panel {
@@ -931,6 +995,18 @@ h2 {
   display: flex;
   justify-content: space-between;
   gap: 16px;
+}
+
+.aifa-assistant-header-copy {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+}
+
+.aifa-assistant-mascot {
+  display: block;
+  height: 56px;
+  width: 56px;
 }
 
 .aifa-assistant-header p {
@@ -1092,18 +1168,20 @@ h2 {
 .training-visual {
   background: var(--surface-dim);
   border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
   margin: 0;
   min-height: 100%;
   overflow: hidden;
-  padding: 0;
+  padding: 12px;
   transform: rotate(0.12deg);
 }
 
 .training-visual img {
   display: block;
   height: 100%;
-  min-height: 420px;
-  object-fit: cover;
+  min-height: 0;
+  object-fit: contain;
   object-position: center;
   width: 100%;
 }
@@ -1190,6 +1268,97 @@ h2 {
 .training-proof span:first-child {
   border-color: rgba(255, 159, 67, 0.55);
   color: var(--orange);
+}
+
+.agent-section {
+  border-top: 1px solid var(--line-soft);
+}
+
+.agent-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+}
+
+.agent-visual,
+.agent-note {
+  background: var(--panel);
+  border: 1px solid var(--line);
+}
+
+.agent-visual {
+  display: grid;
+  gap: 22px;
+  grid-template-columns: 220px minmax(0, 1fr);
+  padding: 24px;
+}
+
+.agent-mascot {
+  display: block;
+  height: 220px;
+  width: 220px;
+}
+
+.agent-visual-copy {
+  align-content: center;
+  display: grid;
+  gap: 14px;
+}
+
+.agent-visual-copy p,
+.agent-note span {
+  color: var(--orange);
+  font-family: var(--font-sketch);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  line-height: 1.35;
+  margin-bottom: 0;
+  text-transform: uppercase;
+}
+
+.agent-visual-copy h3 {
+  font-size: clamp(30px, 3vw, 46px);
+  font-weight: 780;
+  line-height: 1;
+  margin-bottom: 0;
+}
+
+.agent-visual-copy span {
+  color: var(--text-soft);
+  font-size: 18px;
+  line-height: 1.65;
+}
+
+.agent-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.agent-actions span {
+  color: var(--text-faint);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.agent-notes {
+  display: grid;
+  gap: 12px;
+}
+
+.agent-note {
+  display: grid;
+  gap: 10px;
+  padding: 20px;
+}
+
+.agent-note p {
+  color: var(--text-soft);
+  font-size: 17px;
+  line-height: 1.65;
+  margin-bottom: 0;
 }
 
 .complete-shelf-section {
@@ -2194,8 +2363,14 @@ h2 {
   .contact-section,
   .split-section,
   .lab-section,
-  .about-section {
+  .about-section,
+  .agent-grid {
     grid-template-columns: 1fr;
+  }
+
+  .section-heading > .section-status {
+    grid-column: 1;
+    justify-self: start;
   }
 
   .hero-section {
@@ -2252,6 +2427,14 @@ h2 {
   .guide-grid,
   .community-grid {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .agent-visual {
+    grid-template-columns: 1fr;
+  }
+
+  .agent-mascot {
+    justify-self: start;
   }
 }
 
@@ -2314,6 +2497,7 @@ h2 {
   }
 
   .sketch-scene {
+    aspect-ratio: auto;
     height: 440px;
   }
 
@@ -2374,7 +2558,16 @@ h2 {
 
   .training-visual img {
     object-fit: contain;
-    min-height: 420px;
+    min-height: 320px;
+  }
+
+  .agent-visual {
+    padding: 18px;
+  }
+
+  .agent-mascot {
+    height: 180px;
+    width: 180px;
   }
 
   .guide-grid,
@@ -2392,6 +2585,11 @@ h2 {
 
   .aifa-assistant-panel {
     width: 100%;
+  }
+
+  .aifa-assistant-launcher-mascot {
+    height: 22px;
+    width: 22px;
   }
 
   .aifa-assistant-form {

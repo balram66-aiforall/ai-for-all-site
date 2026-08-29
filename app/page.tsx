@@ -3,6 +3,7 @@
 /* eslint-disable @next/next/no-img-element -- Vinext's next/image shim breaks hydration. */
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { ArticleCarousel } from "./components/ArticleCarousel";
+import { AifaMascot } from "./components/AifaMascot";
 import { communityExamples, roleGuides, simpleLearningCards } from "./site-content";
 import { ShelfEmbed } from "./components/ShelfEmbed";
 
@@ -222,6 +223,7 @@ export default function Home() {
             <a href="#community">Examples</a>
             <a href="#articles">Articles</a>
             <a href="#projects">Projects</a>
+            <a href="#agent">AIFA</a>
             <a href="#contact">Contact</a>
           </div>
           <button
@@ -240,7 +242,7 @@ export default function Home() {
 
       <section id="top" className="hero-section">
         <div className="hero-copy">
-          <p className="eyebrow">AI For All / Treasure AI</p>
+          <p className="eyebrow">AI For All</p>
           <h1 className="identity-headline" aria-label="Balram becomes bAIram">
             <span className="name-morph" aria-hidden="true">
               <span className="name-base">Balram</span>
@@ -250,20 +252,24 @@ export default function Home() {
             </span>
           </h1>
           <p className="hero-lede">
-            I turn AI into something people can actually learn, use, and trust
-            at work. Simple explanations. Practical guides. Tested ideas.
+            I make AI accessible. I break down useful AI for real work. I test
+            the ideas first so others do not have to.
           </p>
           <div className="hero-actions" aria-label="Primary actions">
             <a className="button primary" href="#learn">
               Learn AI simply
             </a>
             <a className="button secondary" href="#guides">
-              Browse guides
+              Browse guide previews
             </a>
             <button type="button" className="button secondary" onClick={openAifaAssistant}>
               Ask AIFA
             </button>
           </div>
+          <p className="hero-note">
+            Guide pages are still being built, so this section is a preview for
+            now.
+          </p>
         </div>
 
         <div className="hero-board" aria-label="AI teammate sketch board">
@@ -328,6 +334,7 @@ export default function Home() {
         <div className="section-heading">
           <p className="eyebrow">Role guides</p>
           <h2>Practical AI guides for the way corporate teams already work.</h2>
+          <span className="section-status">Preview / coming soon</span>
         </div>
         <div className="guide-grid">
           {roleGuides.map((guide) => (
@@ -340,10 +347,14 @@ export default function Home() {
                   <li key={outcome}>{outcome}</li>
                 ))}
               </ul>
-              <a href={`/guides/${guide.slug}`}>Open guide</a>
+              <a href={`/guides/${guide.slug}`}>Preview guide</a>
             </article>
           ))}
         </div>
+        <p className="section-status-note">
+          These role guides are live as previews while the fuller library gets
+          built.
+        </p>
       </section>
 
       <section id="training" className="content-section training-section">
@@ -401,6 +412,7 @@ export default function Home() {
         <div className="section-heading">
           <p className="eyebrow">Examples from others</p>
           <h2>Curated work from the community, with a path to submit more later.</h2>
+          <span className="section-status">Curated now</span>
         </div>
         <div className="community-grid">
           {communityExamples.map((example) => (
@@ -419,8 +431,8 @@ export default function Home() {
         className="content-section complete-shelf-section"
         aria-label="Working Volumes complete shelf"
       >
-          <div className="shelf-copy">
-          <p className="eyebrow">Treasure AI shelf</p>
+        <div className="shelf-copy">
+          <p className="eyebrow">Working shelf</p>
           <h2>A shelf of the best tools, ideas, and patterns I have tested.</h2>
           <p>
             This is where the useful things land after I have tried them in
@@ -438,9 +450,9 @@ export default function Home() {
         <ArticleCarousel />
       </section>
 
-      <section id="learn" className="content-section learning-section">
+      <section id="path" className="content-section learning-section">
         <div className="section-heading">
-          <p className="eyebrow">Learn AI</p>
+          <p className="eyebrow">Learning path</p>
           <h2>A simple path from curious to capable.</h2>
         </div>
         <div className="learning-grid">
@@ -458,6 +470,7 @@ export default function Home() {
         <div className="section-heading">
           <p className="eyebrow">AI projects</p>
           <h2>Small products where AI becomes something people actually use.</h2>
+          <span className="section-status">Live projects</span>
         </div>
         <div className="project-grid">
           {aiProjects.map((project) => (
@@ -498,6 +511,7 @@ export default function Home() {
         <div className="section-heading">
           <p className="eyebrow">Agents and skills repo</p>
           <h2>Reusable pieces from the way I think and build with AI.</h2>
+          <span className="section-status">In progress</span>
         </div>
         <div className="repo-grid">
           {repoItems.map(([title, text, status]) => (
@@ -507,6 +521,47 @@ export default function Home() {
               <p>{text}</p>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section id="agent" className="content-section agent-section">
+        <div className="section-heading">
+          <p className="eyebrow">AIFA agent</p>
+          <h2>A small assistant for AI questions, guide finding, and site help.</h2>
+          <span className="section-status">Live beta</span>
+        </div>
+        <div className="agent-grid">
+          <article className="agent-visual">
+            <AifaMascot className="agent-mascot" />
+            <div className="agent-visual-copy">
+              <p>AIFA</p>
+              <h3>Ask me about AI learning, role workflows, or the site.</h3>
+              <span>
+                I can answer simply, point you to the right section, or help you
+                think through a practical next step.
+              </span>
+              <div className="agent-actions">
+                <button type="button" className="button primary" onClick={openAifaAssistant}>
+                  Open AIFA
+                </button>
+                <span>Public beta</span>
+              </div>
+            </div>
+          </article>
+          <div className="agent-notes">
+            <article className="agent-note">
+              <span>What it does</span>
+              <p>Explains the site, points visitors to guides, and helps with simple AI questions.</p>
+            </article>
+            <article className="agent-note">
+              <span>What it is not</span>
+              <p>AIFA is not a full autonomous bot. It is a helpful public starting point with guardrails.</p>
+            </article>
+            <article className="agent-note">
+              <span>Best use</span>
+              <p>Ask for a clear next step, a guide recommendation, or help shaping practical AI work.</p>
+            </article>
+          </div>
         </div>
       </section>
 
@@ -549,7 +604,7 @@ export default function Home() {
       <section id="lab" className="content-section lab-section">
         <div className="lab-panel">
           <p className="eyebrow">The lab</p>
-          <h2>What Treasure AI keeps collecting.</h2>
+          <h2>What I keep collecting while I test and learn.</h2>
           <div className="lab-tags">
             <span>prompt systems</span>
             <span>AI teaching assets</span>

@@ -12,6 +12,10 @@ export default function GuidesIndexPage() {
           Each guide shows what to automate, what to keep human, and what to try
           next.
         </p>
+        <p className="guide-status-banner">
+          These guides are published as previews while the full library is still
+          being built.
+        </p>
       </section>
 
       <section className="content-section guide-index-grid">
@@ -25,7 +29,7 @@ export default function GuidesIndexPage() {
                 <li key={outcome}>{outcome}</li>
               ))}
             </ul>
-            <Link href={`/guides/${guide.slug}`}>Open guide</Link>
+            <Link href={`/guides/${guide.slug}`}>Preview guide</Link>
           </article>
         ))}
       </section>

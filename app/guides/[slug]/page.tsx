@@ -24,6 +24,10 @@ export default function GuidePage({ params }: GuidePageProps) {
         <p className="eyebrow">Guide</p>
         <h1>{guide.title}</h1>
         <p>{guide.summary}</p>
+        <p className="guide-status-banner">
+          This guide is a preview while the full role library is still taking
+          shape.
+        </p>
       </section>
 
       <section className="content-section guide-detail-grid">
