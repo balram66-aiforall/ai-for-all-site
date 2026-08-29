@@ -108,6 +108,19 @@ a {
   position: relative;
 }
 
+.sr-only {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  white-space: nowrap;
+}
+
 html[data-theme="light"] .hero-lede,
 html[data-theme="light"] .training-lead > p:last-of-type,
 html[data-theme="light"] .training-stat span,
@@ -754,6 +767,265 @@ h2 {
 .split-section h2,
 .lab-panel h2 {
   max-width: 800px;
+}
+
+.guide-hub-section,
+.community-section {
+  border-top: 1px solid var(--line-soft);
+}
+
+.guide-grid,
+.community-grid,
+.guide-index-grid,
+.guide-detail-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.guide-card,
+.community-card,
+.guide-detail-panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  display: grid;
+  gap: 14px;
+  padding: 24px;
+}
+
+.guide-card span,
+.community-card span,
+.guide-detail-panel .eyebrow {
+  color: var(--orange);
+  font-family: var(--font-sketch);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.guide-card h3,
+.community-card h3,
+.guide-detail-panel h2 {
+  font-size: clamp(24px, 2.6vw, 36px);
+  line-height: 1.02;
+  margin: 0;
+}
+
+.guide-card p,
+.community-card p,
+.guide-detail-panel p,
+.guide-detail-panel li {
+  color: var(--text-soft);
+  line-height: 1.65;
+}
+
+.guide-card ul,
+.guide-detail-panel ul {
+  display: grid;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.guide-card li,
+.guide-detail-panel li {
+  padding-left: 18px;
+  position: relative;
+}
+
+.guide-card li::before,
+.guide-detail-panel li::before {
+  color: var(--orange);
+  content: "•";
+  left: 0;
+  position: absolute;
+}
+
+.guide-card a,
+.community-card a {
+  color: var(--blue);
+  font-weight: 850;
+  justify-self: start;
+}
+
+.guide-page-hero,
+.guide-page-footer {
+  display: grid;
+  gap: 18px;
+}
+
+.guide-page-hero h1 {
+  font-size: clamp(44px, 7vw, 96px);
+  line-height: 0.96;
+  max-width: 10ch;
+}
+
+.guide-page-hero p {
+  color: var(--text-soft);
+  font-size: 20px;
+  line-height: 1.65;
+  max-width: 720px;
+}
+
+.guide-page-footer .hero-actions {
+  justify-content: flex-start;
+}
+
+.guide-index-shell,
+.guide-shell {
+  background: var(--background);
+  min-height: 100vh;
+}
+
+.guide-index-shell .content-section,
+.guide-shell .content-section {
+  padding-inline: clamp(24px, 5vw, 56px);
+}
+
+.guide-detail-grid,
+.guide-index-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.aifa-assistant-shell {
+  bottom: 24px;
+  position: fixed;
+  right: 24px;
+  z-index: 40;
+}
+
+.aifa-assistant-launcher,
+.aifa-assistant-close,
+.aifa-assistant-form button,
+.aifa-assistant-prompts button {
+  border: 1px solid var(--line);
+  cursor: pointer;
+}
+
+.aifa-assistant-launcher {
+  align-items: center;
+  background: var(--surface);
+  color: var(--foreground);
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: 850;
+  min-height: 48px;
+  padding: 12px 16px;
+}
+
+.aifa-assistant-panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.24);
+  display: grid;
+  gap: 14px;
+  max-height: min(74vh, 760px);
+  padding: 16px;
+  width: min(380px, calc(100vw - 32px));
+}
+
+.aifa-assistant-header {
+  align-items: start;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.aifa-assistant-header p {
+  font-size: 16px;
+  font-weight: 900;
+  margin: 0;
+}
+
+.aifa-assistant-header span {
+  color: var(--text-soft);
+  display: block;
+  font-size: 13px;
+  line-height: 1.4;
+  margin-top: 4px;
+}
+
+.aifa-assistant-close {
+  align-items: center;
+  background: var(--background);
+  color: var(--foreground);
+  display: inline-flex;
+  font-size: 18px;
+  height: 34px;
+  justify-content: center;
+  line-height: 1;
+  width: 34px;
+}
+
+.aifa-assistant-messages {
+  display: grid;
+  gap: 10px;
+  max-height: 240px;
+  overflow: auto;
+  padding-right: 2px;
+}
+
+.aifa-assistant-bubble {
+  border: 1px solid var(--line-soft);
+  line-height: 1.5;
+  padding: 12px 14px;
+}
+
+.aifa-assistant-bubble.assistant {
+  background: var(--surface-dim);
+  color: var(--foreground);
+}
+
+.aifa-assistant-bubble.user {
+  background: var(--background);
+  color: var(--foreground);
+  margin-left: 14px;
+}
+
+.aifa-assistant-prompts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.aifa-assistant-prompts button {
+  background: transparent;
+  color: var(--foreground);
+  font-size: 12px;
+  font-weight: 850;
+  padding: 8px 10px;
+}
+
+.aifa-assistant-form {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.aifa-assistant-form input {
+  background: var(--background);
+  border: 1px solid var(--line);
+  color: var(--foreground);
+  font: inherit;
+  min-width: 0;
+  padding: 12px 14px;
+}
+
+.aifa-assistant-form button {
+  background: var(--action-bg);
+  color: var(--action-fg);
+  font-size: 13px;
+  font-weight: 900;
+  padding: 0 16px;
+}
+
+.aifa-assistant-error {
+  color: var(--orange);
+  font-size: 13px;
+  line-height: 1.45;
+  margin: 0;
 }
 
 .training-section {
@@ -1800,6 +2072,10 @@ h2 {
 
   .content-section > :not(.complete-shelf-window),
   .newsletter-section > *,
+  .guide-grid > *,
+  .guide-index-grid > *,
+  .guide-detail-grid > *,
+  .community-grid > *,
   .training-grid > *,
   .learning-grid > *,
   .project-grid > *,
@@ -1814,6 +2090,10 @@ h2 {
 
   .training-grid > :nth-child(even),
   .learning-grid > :nth-child(even),
+  .guide-grid > :nth-child(even),
+  .guide-index-grid > :nth-child(even),
+  .guide-detail-grid > :nth-child(even),
+  .community-grid > :nth-child(even),
   .repo-grid > :nth-child(even) {
     animation-range: entry 10% entry 34%;
   }
@@ -1902,9 +2182,15 @@ h2 {
   .hero-section,
   .section-heading,
   .shelf-copy,
+  .guide-page-hero,
+  .guide-page-footer,
   .training-showcase,
   .training-lead,
   .training-proof,
+  .guide-detail-grid,
+  .guide-index-grid,
+  .guide-grid,
+  .community-grid,
   .contact-section,
   .split-section,
   .lab-section,
@@ -1960,6 +2246,11 @@ h2 {
   }
 
   .repo-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .guide-grid,
+  .community-grid {
     grid-template-columns: 1fr 1fr;
   }
 }
@@ -2086,6 +2377,31 @@ h2 {
     min-height: 420px;
   }
 
+  .guide-grid,
+  .community-grid,
+  .guide-index-grid,
+  .guide-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .aifa-assistant-shell {
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+  }
+
+  .aifa-assistant-panel {
+    width: 100%;
+  }
+
+  .aifa-assistant-form {
+    grid-template-columns: 1fr;
+  }
+
+  .aifa-assistant-form button {
+    min-height: 44px;
+  }
+
   .contact-actions {
     padding: 14px;
   }
@@ -2105,8 +2421,8 @@ h2 {
     max-height: 520px;
   }
 
-.project-placeholder {
-  border-bottom: 1px dashed var(--line);
+  .project-placeholder {
+    border-bottom: 1px dashed var(--line);
     border-right: 0;
     min-height: 320px;
   }

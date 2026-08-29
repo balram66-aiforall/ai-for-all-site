@@ -3,6 +3,7 @@
 /* eslint-disable @next/next/no-img-element -- Vinext's next/image shim breaks hydration. */
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { ArticleCarousel } from "./components/ArticleCarousel";
+import { communityExamples, roleGuides, simpleLearningCards } from "./site-content";
 import { ShelfEmbed } from "./components/ShelfEmbed";
 
 type ThemeMode = "dark" | "light";
@@ -103,6 +104,10 @@ const repoItems = [
     'View later',
   ],
 ];
+
+function openAifaAssistant() {
+  window.dispatchEvent(new Event("aifa-assistant-open"));
+}
 
 const aiProjects = [
   {
@@ -212,14 +217,11 @@ export default function Home() {
         </a>
         <div className="nav-tools">
           <div className="nav-links">
-            <a href="#shelf">Shelf</a>
-            <a href="#articles">Articles</a>
-            <a href="#training">Training</a>
             <a href="#learn">Learn</a>
+            <a href="#guides">Guides</a>
+            <a href="#community">Examples</a>
+            <a href="#articles">Articles</a>
             <a href="#projects">Projects</a>
-            <a href="#repos">Repos</a>
-            <a href="#about">About</a>
-            <a href="#lab">Lab</a>
             <a href="#contact">Contact</a>
           </div>
           <button
@@ -248,19 +250,19 @@ export default function Home() {
             </span>
           </h1>
           <p className="hero-lede">
-            I make AI accessible. I break down useful AI for real work. I test
-            the ideas first so other people do not have to.
+            I turn AI into something people can actually learn, use, and trust
+            at work. Simple explanations. Practical guides. Tested ideas.
           </p>
           <div className="hero-actions" aria-label="Primary actions">
-            <a
-              className="button primary"
-              href="https://www.linkedin.com/newsletters/ai-for-all-weekly-newsletter-7401258096209088512/"
-            >
-              Read the notebook
+            <a className="button primary" href="#learn">
+              Learn AI simply
             </a>
-            <a className="button secondary" href="#articles">
-              See what works
+            <a className="button secondary" href="#guides">
+              Browse guides
             </a>
+            <button type="button" className="button secondary" onClick={openAifaAssistant}>
+              Ask AIFA
+            </button>
           </div>
         </div>
 
@@ -300,10 +302,48 @@ export default function Home() {
 
       <section className="ticker" aria-label="Portfolio themes">
         <span>AI For All</span>
-        <span>Treasure AI</span>
-        <span>AI, made usable.</span>
-        <span>human judgment</span>
-        <span>AI execution</span>
+        <span>Simple AI learning</span>
+        <span>Role guides</span>
+        <span>Community examples</span>
+        <span>Practical AI help</span>
+      </section>
+
+      <section id="learn" className="content-section learning-section">
+        <div className="section-heading">
+          <p className="eyebrow">Learn AI simply</p>
+          <h2>A clear path for people who want AI explained without the jargon.</h2>
+        </div>
+        <div className="learning-grid">
+          {simpleLearningCards.map((card, index) => (
+            <article className="learning-card" key={card.title}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <h3>{card.title}</h3>
+              <p>{card.summary}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="guides" className="content-section guide-hub-section">
+        <div className="section-heading">
+          <p className="eyebrow">Role guides</p>
+          <h2>Practical AI guides for the way corporate teams already work.</h2>
+        </div>
+        <div className="guide-grid">
+          {roleGuides.map((guide) => (
+            <article className="guide-card" key={guide.slug}>
+              <span>guide</span>
+              <h3>{guide.title}</h3>
+              <p>{guide.summary}</p>
+              <ul>
+                {guide.outcomes.map((outcome) => (
+                  <li key={outcome}>{outcome}</li>
+                ))}
+              </ul>
+              <a href={`/guides/${guide.slug}`}>Open guide</a>
+            </article>
+          ))}
+        </div>
       </section>
 
       <section id="training" className="content-section training-section">
@@ -354,6 +394,23 @@ export default function Home() {
               <span key={signal}>{signal}</span>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section id="community" className="content-section community-section">
+        <div className="section-heading">
+          <p className="eyebrow">Examples from others</p>
+          <h2>Curated work from the community, with a path to submit more later.</h2>
+        </div>
+        <div className="community-grid">
+          {communityExamples.map((example) => (
+            <article className="community-card" key={example.title}>
+              <span>{example.tag}</span>
+              <h3>{example.title}</h3>
+              <p>{example.summary}</p>
+              <a href={example.href}>{example.byline}</a>
+            </article>
+          ))}
         </div>
       </section>
 
@@ -477,14 +534,14 @@ export default function Home() {
           <h2>The human behind AI For All.</h2>
           <p>
             I make AI understandable, practical, and worth using. This site is
-            the home for my writing, experiments, workflows, and the lessons I
-            keep learning from building with AI in public.
+            the home for simple learning, role guides, real examples, workflows,
+            and the lessons I keep learning from building with AI in public.
           </p>
         </div>
         <div className="proof-list" aria-label="Balram proof points">
           <span>AI learning leader</span>
-          <span>AI For All newsletter</span>
-          <span>Practical workflows</span>
+          <span>Role-based guides</span>
+          <span>Community examples</span>
           <span>Human judgment first</span>
         </div>
       </section>
@@ -524,11 +581,11 @@ export default function Home() {
       <section id="contact" className="content-section contact-section">
         <div className="contact-copy">
           <p className="eyebrow">Contact me</p>
-          <h2>Want to talk about AI training, workflows, agents, or skills?</h2>
+          <h2>Want to build a site or talk about practical AI help?</h2>
           <p>
             Send a note when you want help making AI practical for yourself,
-            your team, or a learning program. We can start with the messy
-            version and turn it into something usable.
+            your team, or a learning program. If you want a site built, a guide
+            shaped, or AIFA adapted for your workflow, we can start there.
           </p>
         </div>
         <div className="contact-actions" aria-label="Contact links">
