@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { SiteTopbar } from "../components/SiteTopbar";
 
 type ThemeMode = "dark" | "light";
 type Lang = "en" | "es";
@@ -123,16 +124,6 @@ type LocalizedCopy = {
 };
 
 const THEME_KEY = "croftc-theme";
-
-const sectionIds: SectionId[] = [
-  "hero",
-  "school",
-  "rewriter",
-  "builder",
-  "deepdive",
-  "example",
-  "quiz",
-];
 
 const letterMeta = [
   { key: "context", letter: "C", emoji: "🌍", color: "#f06060" },
@@ -943,14 +934,12 @@ function scoreTier(score: number, total: number, copy: LocalizedCopy) {
 export function PromptingFrameworkClient() {
   const [theme, setTheme] = useState<ThemeMode>("dark");
   const [lang, setLang] = useState<Lang>("en");
-  const [activeSection, setActiveSection] = useState<SectionId>("hero");
   const [rewriteInput, setRewriteInput] = useState(rewriteSamples.en);
   const [rewriteResult, setRewriteResult] = useState<PromptElements | null>(null);
   const [builder, setBuilder] = useState<PromptElements>(defaultBuilderValues.en);
   const [exampleIndex, setExampleIndex] = useState(0);
   const [quizAnswers, setQuizAnswers] = useState<number[]>(Array(quizQuestions.en.length).fill(-1));
   const [quizSubmitted, setQuizSubmitted] = useState(false);
-  const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
   const bootedRef = useRef(false);
 
   const copy = localizedCopy[lang];
@@ -1004,10 +993,6 @@ export function PromptingFrameworkClient() {
   }, [builder, exampleIndex, lang, theme]);
 
   useEffect(() => {
-    const sections = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter((node): node is HTMLElement => Boolean(node));
-
     const revealNodes = document.querySelectorAll<HTMLElement>("[data-reveal]");
     const revealObserver = new IntersectionObserver(
       (entries) => {
@@ -1022,25 +1007,8 @@ export function PromptingFrameworkClient() {
     );
     revealNodes.forEach((node) => revealObserver.observe(node));
 
-    const navObserver = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible?.target instanceof HTMLElement) {
-          setActiveSection(visible.target.id as SectionId);
-        }
-      },
-      {
-        rootMargin: "-25% 0px -60% 0px",
-        threshold: [0.1, 0.25, 0.45, 0.6],
-      },
-    );
-    sections.forEach((section) => navObserver.observe(section));
-
     return () => {
       revealObserver.disconnect();
-      navObserver.disconnect();
     };
   }, []);
 
@@ -1058,46 +1026,13 @@ export function PromptingFrameworkClient() {
     setRewriteResult(rewritten);
   }
 
-  function scrollToSection(id: SectionId) {
-    sectionRefs.current[id]?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-
   return (
     <div className="croftc-shell" data-theme={theme} data-lang={lang}>
-      <header className="croftc-topbar">
-        <div className="croftc-brand">
-          <span>CROFTC</span>
-          <small>{copy.hero.subtitle}</small>
-        </div>
-        <nav className="croftc-nav" aria-label="CROFTC sections">
-          {sectionIds.map((id) => (
-            <button
-              key={id}
-              type="button"
-              className={activeSection === id ? "is-active" : ""}
-              aria-current={activeSection === id ? "page" : undefined}
-              onClick={() => scrollToSection(id)}
-            >
-              {copy.nav[id]}
-            </button>
-          ))}
-        </nav>
-        <div className="croftc-controls">
-          <button type="button" className="croftc-pill" onClick={updateTheme}>
-            {theme === "dark" ? copy.controls.themeLight : copy.controls.themeDark}
-          </button>
-          <Link className="croftc-pill ghost" href="/">
-            AI For All
-          </Link>
-        </div>
-      </header>
+      <SiteTopbar theme={theme} onToggleTheme={updateTheme} activeItem="croftc" />
 
       <main className="croftc-main">
         <section
           id="hero"
-          ref={(node) => {
-            sectionRefs.current.hero = node;
-          }}
           className="croftc-section croftc-hero"
           data-reveal
         >
@@ -1129,9 +1064,6 @@ export function PromptingFrameworkClient() {
 
         <section
           id="school"
-          ref={(node) => {
-            sectionRefs.current.school = node;
-          }}
           className="croftc-section croftc-school"
           data-reveal
         >
@@ -1157,9 +1089,6 @@ export function PromptingFrameworkClient() {
 
         <section
           id="rewriter"
-          ref={(node) => {
-            sectionRefs.current.rewriter = node;
-          }}
           className="croftc-section croftc-rewriter"
           data-reveal
         >
@@ -1219,9 +1148,6 @@ export function PromptingFrameworkClient() {
 
         <section
           id="builder"
-          ref={(node) => {
-            sectionRefs.current.builder = node;
-          }}
           className="croftc-section croftc-builder"
           data-reveal
         >
@@ -1269,9 +1195,6 @@ export function PromptingFrameworkClient() {
 
         <section
           id="deepdive"
-          ref={(node) => {
-            sectionRefs.current.deepdive = node;
-          }}
           className="croftc-section croftc-deepdive"
           data-reveal
         >
@@ -1310,9 +1233,6 @@ export function PromptingFrameworkClient() {
 
         <section
           id="example"
-          ref={(node) => {
-            sectionRefs.current.example = node;
-          }}
           className="croftc-section croftc-example"
           data-reveal
         >
@@ -1334,9 +1254,6 @@ export function PromptingFrameworkClient() {
 
         <section
           id="quiz"
-          ref={(node) => {
-            sectionRefs.current.quiz = node;
-          }}
           className="croftc-section croftc-quiz"
           data-reveal
         >

@@ -4,6 +4,7 @@
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { ArticleCarousel } from "./components/ArticleCarousel";
 import { AifaMascot } from "./components/AifaMascot";
+import { SiteTopbar } from "./components/SiteTopbar";
 import { communityExamples, roleGuides, simpleLearningCards } from "./site-content";
 import { ShelfEmbed } from "./components/ShelfEmbed";
 
@@ -11,23 +12,6 @@ type ThemeMode = "dark" | "light";
 type ThemePhase = "idle" | "to-light" | "to-dark";
 
 const THEME_STORAGE_KEY = "aifa-theme";
-
-function SunIcon() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 24 24">
-      <circle cx="12" cy="12" r="4.5" />
-      <path d="M12 2.8v2.7M12 18.5v2.7M4.2 4.2l1.9 1.9M17.9 17.9l1.9 1.9M2.8 12h2.7M18.5 12h2.7M4.2 19.8l1.9-1.9M17.9 6.1l1.9-1.9" />
-    </svg>
-  );
-}
-
-function MoonIcon() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 24 24">
-      <path d="M15.5 3.8A8.8 8.8 0 1 0 20.2 15.5 8.2 8.2 0 1 1 15.5 3.8Z" />
-    </svg>
-  );
-}
 
 const tips = [
   'Start with the outcome you need, not the prompt you want to write.',
@@ -206,40 +190,10 @@ export default function Home() {
   }
 
   return (
-    <main className="site-shell" data-theme={theme} data-theme-phase={themePhase}>
+      <main className="site-shell" data-theme={theme} data-theme-phase={themePhase}>
       <div className="theme-wash" aria-hidden="true" />
       <div className="scroll-progress" aria-hidden="true" />
-      <nav className="topbar" aria-label="Main navigation">
-        <a className="brand" href="#top" aria-label="AI For All home">
-          <span className="aifa-mark" aria-hidden="true">
-            <span />
-          </span>
-          <span>AI For All</span>
-        </a>
-        <div className="nav-tools">
-          <div className="nav-links">
-            <a href="#learn">Learn</a>
-            <a href="#guides">Guides</a>
-            <a href="#community">Examples</a>
-            <a href="#articles">Articles</a>
-            <a href="#school-of-aifa">School</a>
-            <a href="#projects">Projects</a>
-            <a href="#agent">AIFA</a>
-            <a href="#contact">Contact</a>
-          </div>
-          <button
-            type="button"
-            className="theme-toggle"
-            aria-pressed={theme === "light"}
-            onClick={toggleTheme}
-          >
-            <span className="theme-toggle-icon" aria-hidden="true">
-              {theme === "dark" ? <SunIcon /> : <MoonIcon />}
-            </span>
-            <span>{theme === "dark" ? "Light mode" : "Dark mode"}</span>
-          </button>
-        </div>
-      </nav>
+      <SiteTopbar theme={theme} onToggleTheme={toggleTheme} />
 
       <section id="top" className="hero-section">
         <div className="hero-copy">

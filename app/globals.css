@@ -326,6 +326,11 @@ html[data-theme="light"] .project-copy span {
   color: var(--foreground);
 }
 
+.nav-links a.is-active {
+  background: var(--panel);
+  color: var(--foreground);
+}
+
 :where(a, button, [tabindex]):focus-visible {
   outline: 2px solid var(--blue);
   outline-offset: 4px;
