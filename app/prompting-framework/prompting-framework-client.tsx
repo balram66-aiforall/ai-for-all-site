@@ -7,7 +7,7 @@ type ThemeMode = "dark" | "light";
 type Lang = "en" | "es";
 type SectionId =
   | "hero"
-  | "metrics"
+  | "school"
   | "rewriter"
   | "builder"
   | "deepdive"
@@ -53,11 +53,17 @@ type LocalizedCopy = {
     body: string;
     note: string;
   };
-  metrics: {
+  school: {
     title: string;
-    users: string;
-    rewritten: string;
+    body: string;
     note: string;
+    classLabel: string;
+    classTitle: string;
+    classBody: string;
+    classStatus: string;
+    moreLabel: string;
+    moreTitle: string;
+    moreBody: string;
   };
   rewriter: {
     title: string;
@@ -105,7 +111,6 @@ type LocalizedCopy = {
     themeLight: string;
     themeDark: string;
     langEn: string;
-    langEs: string;
   };
   letters: Record<
     ElementKey,
@@ -118,12 +123,10 @@ type LocalizedCopy = {
 };
 
 const THEME_KEY = "croftc-theme";
-const LANG_KEY = "croftc-lang";
-const VISITOR_KEY = "croftc-visitor-id";
 
 const sectionIds: SectionId[] = [
   "hero",
-  "metrics",
+  "school",
   "rewriter",
   "builder",
   "deepdive",
@@ -547,17 +550,17 @@ const defaultBuilderValues: Record<Lang, PromptElements> = {
 
 const localizedCopy: Record<Lang, LocalizedCopy> = {
   en: {
-    nav: {
-      hero: "Top",
-      metrics: "Metrics",
-      rewriter: "Rewriter",
-      builder: "Builder",
-      deepdive: "Deep dive",
-      example: "Example",
+  nav: {
+    hero: "Top",
+    school: "School",
+    rewriter: "Rewriter",
+    builder: "Builder",
+    deepdive: "Deep dive",
+    example: "Example",
       quiz: "Quiz",
     },
     hero: {
-      kicker: "Prompting framework",
+      kicker: "The School of AIFA",
       title: "CROFTC",
       subtitle: "Prompt Framework",
       body:
@@ -565,11 +568,20 @@ const localizedCopy: Record<Lang, LocalizedCopy> = {
       note:
         "Use the live tools below to rewrite, build, compare, and test prompts without leaving the page.",
     },
-    metrics: {
-      title: "Live metrics",
-      users: "Total users",
-      rewritten: "Prompts rewritten",
-      note: "The user count starts with the current baseline and grows as new visitors open the framework.",
+    school: {
+      title: "The School of AIFA",
+      body:
+        "CROFTC is one class in the school: a practical framework for learning how to write prompts with more clarity and control.",
+      note: "More classes can be added later as the school grows.",
+      classLabel: "Current class",
+      classTitle: "CROFTC",
+      classBody:
+        "Learn Context, Role, Objective, Format, Tone, and Constraints through live examples, a builder, and a quiz.",
+      classStatus: "Open now",
+      moreLabel: "Next classes",
+      moreTitle: "More coming soon",
+      moreBody:
+        "Prompting lessons, role guides, workflow patterns, and other AIFA teaching modules can live here next.",
     },
     rewriter: {
       title: "AI prompt rewriter",
@@ -612,18 +624,17 @@ const localizedCopy: Record<Lang, LocalizedCopy> = {
       resultLabel: "You got",
     },
     teaser: {
-      eyebrow: "New section",
-      title: "Prompting framework",
+      eyebrow: "The School of AIFA",
+      title: "CROFTC is one class in the school.",
       body:
         "A compact learning page for people who want a better prompt system without the noise.",
-      badge: "Interactive + local",
-      action: "Open CROFTC",
+      badge: "Interactive class",
+      action: "Open class",
     },
     controls: {
       themeLight: "Light",
       themeDark: "Dark",
       langEn: "English",
-      langEs: "Español",
     },
     letters: {
       context: {
@@ -675,7 +686,7 @@ const localizedCopy: Record<Lang, LocalizedCopy> = {
       quiz: "Quiz",
     },
     hero: {
-      kicker: "Marco de prompts",
+      kicker: "The School of AIFA",
       title: "CROFTC",
       subtitle: "Prompt Framework",
       body:
@@ -683,11 +694,20 @@ const localizedCopy: Record<Lang, LocalizedCopy> = {
       note:
         "Usa las herramientas en vivo para reescribir, construir, comparar y probar prompts sin salir de la página.",
     },
-    metrics: {
-      title: "Métricas en vivo",
-      users: "Usuarios totales",
-      rewritten: "Prompts reescritos",
-      note: "El conteo de usuarios parte de la base actual y crece cuando nuevos visitantes abren el marco.",
+    school: {
+      title: "The School of AIFA",
+      body:
+        "CROFTC es una clase dentro de la escuela: un marco práctico para aprender a escribir prompts con más claridad y control.",
+      note: "Más clases podrán agregarse después a medida que crezca la escuela.",
+      classLabel: "Clase actual",
+      classTitle: "CROFTC",
+      classBody:
+        "Aprende Contexto, Rol, Objetivo, Formato, Tono y Restricciones con ejemplos en vivo, un constructor y un quiz.",
+      classStatus: "Abierto ahora",
+      moreLabel: "Próximas clases",
+      moreTitle: "Más pronto",
+      moreBody:
+        "Lecciones de prompting, guías por rol, patrones de workflows y otros módulos de enseñanza AIFA pueden vivir aquí después.",
     },
     rewriter: {
       title: "Reescritor de prompts",
@@ -730,18 +750,17 @@ const localizedCopy: Record<Lang, LocalizedCopy> = {
       resultLabel: "Obtuviste",
     },
     teaser: {
-      eyebrow: "Nueva sección",
-      title: "Marco de prompts",
+      eyebrow: "The School of AIFA",
+      title: "CROFTC es una clase dentro de la escuela.",
       body:
         "Una página compacta para aprender un sistema de prompts mejor sin ruido.",
-      badge: "Interactivo + local",
-      action: "Abrir CROFTC",
+      badge: "Clase interactiva",
+      action: "Abrir clase",
     },
     controls: {
       themeLight: "Claro",
       themeDark: "Oscuro",
       langEn: "English",
-      langEs: "Español",
     },
     letters: {
       context: {
@@ -924,7 +943,6 @@ function scoreTier(score: number, total: number, copy: LocalizedCopy) {
 export function PromptingFrameworkClient() {
   const [theme, setTheme] = useState<ThemeMode>("dark");
   const [lang, setLang] = useState<Lang>("en");
-  const [metrics, setMetrics] = useState({ totalUsers: 1172, promptsRewritten: 0 });
   const [activeSection, setActiveSection] = useState<SectionId>("hero");
   const [rewriteInput, setRewriteInput] = useState(rewriteSamples.en);
   const [rewriteResult, setRewriteResult] = useState<PromptElements | null>(null);
@@ -952,13 +970,12 @@ export function PromptingFrameworkClient() {
 
   useEffect(() => {
     const storedTheme = window.localStorage.getItem(THEME_KEY);
-    const storedLang = window.localStorage.getItem(LANG_KEY);
     const storedBuilder = window.localStorage.getItem("croftc-builder");
     const storedExample = window.localStorage.getItem("croftc-example");
 
     const frame = window.requestAnimationFrame(() => {
       setTheme(storedTheme === "light" ? "light" : "dark");
-      setLang(storedLang === "es" ? "es" : "en");
+      setLang("en");
 
       if (storedBuilder) {
         try {
@@ -982,61 +999,9 @@ export function PromptingFrameworkClient() {
   useEffect(() => {
     if (!bootedRef.current) return;
     window.localStorage.setItem(THEME_KEY, theme);
-    window.localStorage.setItem(LANG_KEY, lang);
     window.localStorage.setItem("croftc-builder", JSON.stringify(builder));
     window.localStorage.setItem("croftc-example", String(exampleIndex));
   }, [builder, exampleIndex, lang, theme]);
-
-  useEffect(() => {
-    const storedVisitor = window.localStorage.getItem(VISITOR_KEY) ?? crypto.randomUUID();
-    window.localStorage.setItem(VISITOR_KEY, storedVisitor);
-
-    let cancelled = false;
-
-    async function registerVisit() {
-      const response = await fetch("/api/croftc", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action: "visit", visitorId }),
-      });
-      const payload = (await response.json().catch(() => null)) as
-        | { totalUsers?: number; promptsRewritten?: number }
-        | null;
-      if (!cancelled && payload) {
-        setMetrics({
-          totalUsers: payload.totalUsers ?? 1172,
-          promptsRewritten: payload.promptsRewritten ?? 0,
-        });
-      }
-    }
-
-    void registerVisit();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  useEffect(() => {
-    let cancelled = false;
-
-    async function loadMetrics() {
-      const response = await fetch("/api/croftc");
-      const payload = (await response.json().catch(() => null)) as
-        | { totalUsers?: number; promptsRewritten?: number }
-        | null;
-      if (!cancelled && payload) {
-        setMetrics({
-          totalUsers: payload.totalUsers ?? 1172,
-          promptsRewritten: payload.promptsRewritten ?? 0,
-        });
-      }
-    }
-
-    void loadMetrics();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
 
   useEffect(() => {
     const sections = sectionIds
@@ -1083,11 +1048,6 @@ export function PromptingFrameworkClient() {
     setTheme((current) => (current === "dark" ? "light" : "dark"));
   }
 
-  function updateLanguage() {
-    setLang((current) => (current === "en" ? "es" : "en"));
-    setQuizSubmitted(false);
-  }
-
   function loadExample(index: number) {
     setExampleIndex(index);
     setBuilder(currentExamples[index].values);
@@ -1096,25 +1056,6 @@ export function PromptingFrameworkClient() {
   async function sendRewrite() {
     const rewritten = rewritePrompt(rewriteInput, lang);
     setRewriteResult(rewritten);
-    const response = await fetch("/api/croftc", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ action: "rewrite" }),
-    });
-    const payload = (await response.json().catch(() => null)) as
-      | { totalUsers?: number; promptsRewritten?: number }
-      | null;
-    if (payload) {
-      setMetrics({
-        totalUsers: payload.totalUsers ?? metrics.totalUsers,
-        promptsRewritten: payload.promptsRewritten ?? metrics.promptsRewritten + 1,
-      });
-    } else {
-      setMetrics((current) => ({
-        ...current,
-        promptsRewritten: current.promptsRewritten + 1,
-      }));
-    }
   }
 
   function scrollToSection(id: SectionId) {
@@ -1142,9 +1083,6 @@ export function PromptingFrameworkClient() {
           ))}
         </nav>
         <div className="croftc-controls">
-          <button type="button" className="croftc-pill" onClick={updateLanguage}>
-            {lang === "en" ? copy.controls.langEs : copy.controls.langEn}
-          </button>
           <button type="button" className="croftc-pill" onClick={updateTheme}>
             {theme === "dark" ? copy.controls.themeLight : copy.controls.themeDark}
           </button>
@@ -1190,28 +1128,31 @@ export function PromptingFrameworkClient() {
         </section>
 
         <section
-          id="metrics"
+          id="school"
           ref={(node) => {
-            sectionRefs.current.metrics = node;
+            sectionRefs.current.school = node;
           }}
-          className="croftc-section croftc-metrics"
+          className="croftc-section croftc-school"
           data-reveal
         >
           <div className="croftc-section-heading">
-            <p className="croftc-kicker">{copy.metrics.title}</p>
-            <h2>{lang === "en" ? "Shared counters that grow with real visitors." : "Contadores compartidos que crecen con visitantes reales."}</h2>
+            <p className="croftc-kicker">{copy.school.title}</p>
+            <h2>{copy.school.body}</h2>
           </div>
-          <div className="croftc-metric-grid">
-            <article className="croftc-metric-card">
-              <span>{copy.metrics.users}</span>
-              <strong>{metrics.totalUsers.toLocaleString()}</strong>
+          <div className="croftc-school-grid">
+            <article className="croftc-school-card">
+              <span>{copy.school.classLabel}</span>
+              <h3>{copy.school.classTitle}</h3>
+              <p>{copy.school.classBody}</p>
+              <strong>{copy.school.classStatus}</strong>
             </article>
-            <article className="croftc-metric-card">
-              <span>{copy.metrics.rewritten}</span>
-              <strong>{metrics.promptsRewritten.toLocaleString()}</strong>
+            <article className="croftc-school-card">
+              <span>{copy.school.moreLabel}</span>
+              <h3>{copy.school.moreTitle}</h3>
+              <p>{copy.school.moreBody}</p>
+              <strong>{copy.school.note}</strong>
             </article>
           </div>
-          <p className="croftc-supporting">{copy.metrics.note}</p>
         </section>
 
         <section
@@ -1226,7 +1167,7 @@ export function PromptingFrameworkClient() {
             <p className="croftc-kicker">{copy.rewriter.title}</p>
             <h2>{copy.rewriter.body}</h2>
           </div>
-          <div className="croftc-two-column">
+          <div className="croftc-rewriter-stack">
             <article className="croftc-panel">
               <label htmlFor="croftc-rewrite-input" className="croftc-label">
                 {copy.rewriter.title}
@@ -1470,7 +1411,7 @@ export function PromptingFrameworkClient() {
             <div className="croftc-teaser-actions">
               <span>{copy.teaser.badge}</span>
               <Link className="croftc-button primary" href="/">
-                AI For All
+                {copy.teaser.action}
               </Link>
             </div>
           </div>

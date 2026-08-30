@@ -2792,9 +2792,11 @@ h2 {
 }
 
 .croftc-brand {
-  display: grid;
-  gap: 4px;
+  align-items: baseline;
+  display: flex;
+  gap: 10px;
   line-height: 1;
+  white-space: nowrap;
 }
 
 .croftc-brand span {
@@ -2810,6 +2812,7 @@ h2 {
   font-size: 12px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .croftc-nav {
@@ -3058,10 +3061,52 @@ h2 {
   line-height: 1;
 }
 
-.croftc-two-column {
+.croftc-school-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.croftc-school-card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent), var(--croftc-surface-strong);
+  border: 1px solid var(--croftc-line);
+  border-radius: 18px;
+  display: grid;
+  gap: 10px;
+  min-height: 200px;
+  padding: 18px;
+}
+
+.croftc-school-card span {
+  color: var(--orange);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.croftc-school-card h3 {
+  font-size: 26px;
+  margin: 0;
+}
+
+.croftc-school-card p {
+  color: var(--croftc-muted);
+  line-height: 1.65;
+  margin: 0;
+}
+
+.croftc-school-card strong {
+  color: var(--croftc-accent);
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.croftc-rewriter-stack {
   display: grid;
   gap: 18px;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
 }
 
 .croftc-panel {
@@ -3415,7 +3460,8 @@ h2 {
   .framework-card,
   .croftc-topbar,
   .croftc-hero,
-  .croftc-two-column,
+  .croftc-school-grid,
+  .croftc-rewriter-stack,
   .croftc-builder-grid,
   .croftc-deep-grid,
   .croftc-quiz-grid,
@@ -3434,7 +3480,6 @@ h2 {
 
   .croftc-strip,
   .croftc-result-grid,
-  .croftc-metric-grid,
   .croftc-example-pair {
     grid-template-columns: 1fr;
   }

@@ -222,7 +222,7 @@ export default function Home() {
             <a href="#guides">Guides</a>
             <a href="#community">Examples</a>
             <a href="#articles">Articles</a>
-            <a href="#prompting-framework">CROFTC</a>
+            <a href="#school-of-aifa">School</a>
             <a href="#projects">Projects</a>
             <a href="#agent">AIFA</a>
             <a href="#contact">Contact</a>
@@ -451,18 +451,18 @@ export default function Home() {
         <ArticleCarousel />
       </section>
 
-      <section id="prompting-framework" className="content-section framework-section">
+      <section id="school-of-aifa" className="content-section framework-section">
         <div className="section-heading">
-          <p className="eyebrow">Prompting framework</p>
-          <h2>CROFTC turns rough prompts into prompts that people can actually use.</h2>
-          <span className="section-status">Live page</span>
+          <p className="eyebrow">The School of AIFA</p>
+          <h2>CROFTC is one class inside the School of AIFA.</h2>
+          <span className="section-status">Learning path</span>
         </div>
         <div className="framework-card">
           <div className="framework-copy">
             <p className="framework-intro">
               Context, Role, Objective, Format, Tone, and Constraints, wrapped
-              into an interactive learning page with metrics, a rewriter, a
-              builder, a quiz, and bilingual support.
+              into an interactive learning page with a rewriter, a builder, a
+              quiz, and practical examples.
             </p>
             <div className="framework-pills" aria-label="CROFTC letters">
               <span><strong>C</strong> Context</span>
@@ -476,15 +476,15 @@ export default function Home() {
               Open CROFTC
             </a>
             <p className="section-status-note">
-              This is the live learning page for anyone who wants a better
-              prompting system without the fluff.
+              This is one class in the school. More classes can be added later
+              as the school grows.
             </p>
           </div>
           <div className="framework-panel">
-            <span>interactive</span>
-            <strong>learn</strong>
-            <span>build</span>
-            <span>test</span>
+            <span>school</span>
+            <strong>aifa</strong>
+            <span>learn</span>
+            <span>ship</span>
           </div>
         </div>
       </section>
