@@ -6,9 +6,9 @@ type IncomingMessage = {
 };
 
 export async function POST(request: Request) {
-  const novaKey = process.env.NOVA_API_KEY;
+  const novaKey = process.env.NOVA_API_KEY ?? process.env.AMAZON_NOVA_API_KEY;
   const novaBaseUrl = process.env.NOVA_BASE_URL ?? "https://api.nova.amazon.com/v1";
-  const novaModel = process.env.NOVA_MODEL ?? "nvidia/nemotron-3-ultra-550b-a55b:free";
+  const novaModel = process.env.NOVA_MODEL ?? "nova-2-lite-v1";
   const openRouterKey = process.env.OPENROUTER_API_KEY;
   const openAiKey = process.env.OPENAI_API_KEY;
 
@@ -92,16 +92,31 @@ export async function POST(request: Request) {
       }),
     });
 
-    const data = (await response.json().catch(() => null)) as
+    const rawBody = await response.text().catch(() => "");
+    const data = (rawBody
+      ? (() => {
+          try {
+            return JSON.parse(rawBody) as {
+              error?: { message?: string; code?: string; type?: string };
+              choices?: Array<{ message?: { content?: string } }>;
+            };
+          } catch {
+            return null;
+          }
+        })()
+      : null) as
       | { error?: { message?: string }; choices?: Array<{ message?: { content?: string } }> }
       | null;
 
     if (!response.ok) {
+      const providerError =
+        data?.error?.message ||
+        (rawBody ? rawBody.slice(0, 240) : "") ||
+        `Upstream request failed with status ${response.status}.`;
+
       return NextResponse.json(
         {
-          error:
-            data?.error?.message ??
-            "AIFA could not answer right now. Check the API key or try again soon.",
+          error: providerError,
         },
         { status: response.status },
       );
