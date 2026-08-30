@@ -222,6 +222,7 @@ export default function Home() {
             <a href="#guides">Guides</a>
             <a href="#community">Examples</a>
             <a href="#articles">Articles</a>
+            <a href="#prompting-framework">CROFTC</a>
             <a href="#projects">Projects</a>
             <a href="#agent">AIFA</a>
             <a href="#contact">Contact</a>
@@ -448,6 +449,44 @@ export default function Home() {
           <h2>Breakdowns that help people use AI in real work.</h2>
         </div>
         <ArticleCarousel />
+      </section>
+
+      <section id="prompting-framework" className="content-section framework-section">
+        <div className="section-heading">
+          <p className="eyebrow">Prompting framework</p>
+          <h2>CROFTC turns rough prompts into prompts that people can actually use.</h2>
+          <span className="section-status">Live page</span>
+        </div>
+        <div className="framework-card">
+          <div className="framework-copy">
+            <p className="framework-intro">
+              Context, Role, Objective, Format, Tone, and Constraints, wrapped
+              into an interactive learning page with metrics, a rewriter, a
+              builder, a quiz, and bilingual support.
+            </p>
+            <div className="framework-pills" aria-label="CROFTC letters">
+              <span><strong>C</strong> Context</span>
+              <span><strong>R</strong> Role</span>
+              <span><strong>O</strong> Objective</span>
+              <span><strong>F</strong> Format</span>
+              <span><strong>T</strong> Tone</span>
+              <span><strong>C</strong> Constraints</span>
+            </div>
+            <a className="button primary" href="/prompting-framework">
+              Open CROFTC
+            </a>
+            <p className="section-status-note">
+              This is the live learning page for anyone who wants a better
+              prompting system without the fluff.
+            </p>
+          </div>
+          <div className="framework-panel">
+            <span>interactive</span>
+            <strong>learn</strong>
+            <span>build</span>
+            <span>test</span>
+          </div>
+        </div>
       </section>
 
       <section id="path" className="content-section learning-section">
