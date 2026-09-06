@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
-import { AifaAssistant } from './components/AifaAssistant';
+import { AifaAssistantLoader } from './components/AifaAssistantLoader';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -36,7 +36,7 @@ export default function RootLayout({
       </head>
       <body>
         {children}
-        <AifaAssistant />
+        <AifaAssistantLoader />
       </body>
     </html>
   );

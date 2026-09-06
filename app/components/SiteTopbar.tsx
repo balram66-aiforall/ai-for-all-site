@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+/* eslint-disable @next/next/no-html-link-for-pages -- Plain anchors keep the shared nav from loading router code on the homepage. */
 
 type ThemeMode = "dark" | "light";
 
@@ -42,30 +41,25 @@ function MoonIcon() {
 }
 
 export function SiteTopbar({ theme, onToggleTheme, activeItem }: SiteTopbarProps) {
-  const pathname = usePathname();
-  const isHome = pathname === "/";
-
-  const brandHref = isHome ? "#top" : "/#top";
-
   return (
     <nav className="topbar" aria-label="Main navigation">
-      <Link className="brand" href={brandHref} aria-label="AI For All home">
+      <a className="brand" href="/#top" aria-label="AI For All home">
         <span className="aifa-mark" aria-hidden="true">
           <span />
         </span>
         <span>AI For All</span>
-      </Link>
+      </a>
       <div className="nav-tools">
         <div className="nav-links">
           {navItems.map((item) => (
-            <Link
+            <a
               key={item.id}
               className={activeItem === item.id ? "is-active" : ""}
               aria-current={activeItem === item.id ? "page" : undefined}
-              href={isHome && item.href.startsWith("/#") ? item.href.slice(1) : item.href}
+              href={item.href}
             >
               {item.label}
-            </Link>
+            </a>
           ))}
         </div>
         <button

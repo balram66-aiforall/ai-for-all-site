@@ -15,8 +15,8 @@ const QUICK_PROMPTS = [
   "Help me build a site",
 ];
 
-export function AifaAssistant() {
-  const [open, setOpen] = useState(false);
+export function AifaAssistant({ initialOpen = false }: { initialOpen?: boolean }) {
+  const [open, setOpen] = useState(initialOpen);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -115,7 +115,11 @@ export function AifaAssistant() {
   return (
     <div className="aifa-assistant-shell">
       {open ? (
-        <section className="aifa-assistant-panel" aria-label="AIFA chat helper">
+        <section
+          className="aifa-assistant-panel"
+          role="dialog"
+          aria-label="AIFA chat helper"
+        >
           <header className="aifa-assistant-header">
             <div className="aifa-assistant-header-copy">
               <AifaMascot className="aifa-assistant-mascot" />

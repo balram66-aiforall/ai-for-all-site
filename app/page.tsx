@@ -1,17 +1,10 @@
-"use client";
-
 /* eslint-disable @next/next/no-img-element -- Vinext's next/image shim breaks hydration. */
-import { useEffect, useState, useSyncExternalStore } from "react";
 import { ArticleCarousel } from "./components/ArticleCarousel";
+import { AifaOpenButton } from "./components/AifaOpenButton";
 import { AifaMascot } from "./components/AifaMascot";
-import { SiteTopbar } from "./components/SiteTopbar";
+import { ThemeShell } from "./components/ThemeShell";
 import { communityExamples, roleGuides, simpleLearningCards } from "./site-content";
 import { ShelfEmbed } from "./components/ShelfEmbed";
-
-type ThemeMode = "dark" | "light";
-type ThemePhase = "idle" | "to-light" | "to-dark";
-
-const THEME_STORAGE_KEY = "aifa-theme";
 
 const tips = [
   'Start with the outcome you need, not the prompt you want to write.',
@@ -90,10 +83,6 @@ const repoItems = [
   ],
 ];
 
-function openAifaAssistant() {
-  window.dispatchEvent(new Event("aifa-assistant-open"));
-}
-
 const aiProjects = [
   {
     title: 'The Pinky Promise',
@@ -130,71 +119,9 @@ const aiProjects = [
   },
 ];
 
-function useThemeMode() {
-  return useSyncExternalStore(
-    (onStoreChange) => {
-      window.addEventListener("storage", onStoreChange);
-      window.addEventListener("aifa-theme-change", onStoreChange);
-
-      return () => {
-        window.removeEventListener("storage", onStoreChange);
-        window.removeEventListener("aifa-theme-change", onStoreChange);
-      };
-    },
-    () => (window.localStorage.getItem(THEME_STORAGE_KEY) === "dark" ? "dark" : "light"),
-    () => "light",
-  ) as ThemeMode;
-}
-
 export default function Home() {
-  const theme = useThemeMode();
-  const [themePhase, setThemePhase] = useState<ThemePhase>("idle");
-
-  useEffect(() => {
-    const root = document.documentElement;
-    root.dataset.theme = theme;
-    root.dataset.themePhase = themePhase;
-    window.localStorage.setItem(THEME_STORAGE_KEY, theme);
-    window.dispatchEvent(new Event("aifa-theme-change"));
-
-    const motionReduce = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
-    if (themePhase === "idle" || motionReduce) {
-      return;
-    }
-
-    const timeout = window.setTimeout(() => {
-      setThemePhase("idle");
-    }, 760);
-
-    return () => window.clearTimeout(timeout);
-  }, [theme, themePhase]);
-
-  function toggleTheme() {
-    const reducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    const nextTheme: ThemeMode = theme === "dark" ? "light" : "dark";
-
-    window.localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
-    window.dispatchEvent(new Event("aifa-theme-change"));
-
-    if (reducedMotion) {
-      setThemePhase("idle");
-      return;
-    }
-
-    setThemePhase(nextTheme === "light" ? "to-light" : "to-dark");
-  }
-
   return (
-      <main className="site-shell" data-theme={theme} data-theme-phase={themePhase}>
-      <div className="theme-wash" aria-hidden="true" />
-      <div className="scroll-progress" aria-hidden="true" />
-      <SiteTopbar theme={theme} onToggleTheme={toggleTheme} />
-
+    <ThemeShell>
       <section id="top" className="hero-section">
         <div className="hero-copy">
           <p className="eyebrow">AI For All</p>
@@ -217,9 +144,9 @@ export default function Home() {
             <a className="button secondary" href="#guides">
               Browse guide previews
             </a>
-            <button type="button" className="button secondary" onClick={openAifaAssistant}>
+            <AifaOpenButton className="button secondary">
               Ask AIFA
-            </button>
+            </AifaOpenButton>
           </div>
           <p className="hero-note">
             Guide pages are still being built, so this section is a preview for
@@ -534,9 +461,9 @@ export default function Home() {
                 think through a practical next step.
               </span>
               <div className="agent-actions">
-                <button type="button" className="button primary" onClick={openAifaAssistant}>
+                <AifaOpenButton className="button primary">
                   Open AIFA
-                </button>
+                </AifaOpenButton>
                 <span>Public beta</span>
               </div>
             </div>
@@ -669,6 +596,6 @@ export default function Home() {
           time.
         </p>
       </section>
-    </main>
+    </ThemeShell>
   );
 }

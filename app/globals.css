@@ -347,6 +347,26 @@ html[data-theme="light"] .project-copy span {
   padding: 72px 24px;
 }
 
+.content-section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 760px;
+}
+
+.complete-shelf-section {
+  contain-intrinsic-size: auto 860px;
+}
+
+.projects-section,
+.training-section {
+  contain-intrinsic-size: auto 980px;
+}
+
+.newsletter-section,
+.contact-section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 460px;
+}
+
 .hero-section {
   display: grid;
   gap: 44px;
