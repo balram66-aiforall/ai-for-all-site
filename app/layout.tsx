@@ -2,16 +2,19 @@ import type { Metadata } from 'next';
 import Script from 'next/script';
 import { AifaAssistantLoader } from './components/AifaAssistantLoader';
 import './globals.css';
+import './platform.css';
 
 export const metadata: Metadata = {
-  title: 'AI For All | Learn AI simply',
+  metadataBase: new URL('https://balramr.in'),
+  title: 'Balram | AI For All',
   description:
-    'AI For All is Balram’s public platform for simple AI learning, role guides, practical workflows, community examples, and site-building help.',
+    'Learn practical AI with Balram, an AI lead, educator, and builder. Explore role-based workflows, hands-on lessons, projects, and training through AI For All.',
   openGraph: {
-    title: 'AI For All | Learn AI simply',
+    title: 'Balram | AI For All',
     description:
       'AI For All is Balram’s public platform for simple AI learning, role guides, practical workflows, community examples, and site-building help.',
     type: 'website',
+    images: [{ url: '/assets/aifa-teammate-charcoal-hero.webp', width: 1600, height: 900, alt: 'AI For All: human judgment and AI execution' }],
   },
 };
 

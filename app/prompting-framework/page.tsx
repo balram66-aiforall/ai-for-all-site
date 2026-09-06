@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { PromptingFrameworkClient } from "./prompting-framework-client";
+import "./framework.css";
 
 export const metadata: Metadata = {
   title: "CROFTC | Prompt Framework",
   description:
-    "An interactive CROFTC prompt framework for Context, Role, Objective, Format, Tone, and Constraints with local rewriting, metrics, builder tools, and quizzes.",
+    "Learn Context, Role, Objective, Format, Tone, and Constraints with a local prompt organizer, a builder, worked examples, and a quiz at the School of AIFA.",
 };
 
 export default function PromptingFrameworkPage() {

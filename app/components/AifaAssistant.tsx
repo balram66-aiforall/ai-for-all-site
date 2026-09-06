@@ -28,6 +28,22 @@ export function AifaAssistant({ initialOpen = false }: { initialOpen?: boolean }
     },
   ]);
   const endRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const previousFocus = document.activeElement as HTMLElement | null;
+    panelRef.current?.querySelector<HTMLInputElement>("input")?.focus({ preventScroll: true });
+    function onKey(event: KeyboardEvent) {
+      if (event.key === "Escape") setOpen(false);
+    }
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      const target = previousFocus?.isConnected ? previousFocus : document.querySelector<HTMLElement>(".aifa-assistant-launcher");
+      target?.focus({ preventScroll: true });
+    };
+  }, [open]);
 
   useEffect(() => {
     function handleOpen() {
@@ -49,7 +65,8 @@ export function AifaAssistant({ initialOpen = false }: { initialOpen?: boolean }
       return;
     }
 
-    endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+    const log = endRef.current?.parentElement;
+    if (log) log.scrollTop = log.scrollHeight;
   }, [messages, open]);
 
   const recentMessages = useMemo(() => messages.slice(-10), [messages]);
@@ -68,6 +85,7 @@ export function AifaAssistant({ initialOpen = false }: { initialOpen?: boolean }
 
     try {
       const response = await fetch("/api/aifa", {
+        signal: AbortSignal.timeout(30000),
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -116,6 +134,7 @@ export function AifaAssistant({ initialOpen = false }: { initialOpen?: boolean }
     <div className="aifa-assistant-shell">
       {open ? (
         <section
+          ref={panelRef}
           className="aifa-assistant-panel"
           role="dialog"
           aria-label="AIFA chat helper"
@@ -159,6 +178,7 @@ export function AifaAssistant({ initialOpen = false }: { initialOpen?: boolean }
               <button
                 key={prompt}
                 type="button"
+                disabled={loading}
                 onClick={() => sendMessage(prompt)}
               >
                 {prompt}
@@ -179,15 +199,16 @@ export function AifaAssistant({ initialOpen = false }: { initialOpen?: boolean }
             <input
               id="aifa-assistant-input"
               type="text"
+              maxLength={6000}
               value={input}
               placeholder="Ask AIFA something simple..."
               onChange={(event) => setInput(event.target.value)}
             />
-            <button type="submit" disabled={loading}>
+            <button type="submit" disabled={loading || !input.trim()}>
               {loading ? "Thinking" : "Send"}
             </button>
           </form>
-          {error ? <p className="aifa-assistant-error">{error}</p> : null}
+          {error ? <p className="aifa-assistant-error" role="alert">{error}</p> : null}
         </section>
       ) : (
         <button

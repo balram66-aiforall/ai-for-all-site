@@ -1,17 +1,26 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getRoleGuide, roleGuides } from "../../site-content";
+import { ThemeShell } from "../../components/ThemeShell";
+import { GuidePractice } from "../../components/GuidePractice";
+import { guideWorkflows } from "../../guide-workflows";
+import type { Metadata } from "next";
 
 type GuidePageProps = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 export function generateStaticParams() {
   return roleGuides.map((guide) => ({ slug: guide.slug }));
 }
 
-export default function GuidePage({ params }: GuidePageProps) {
-  const { slug } = params;
+export async function generateMetadata({ params }: GuidePageProps): Promise<Metadata> {
+  const guide = getRoleGuide((await params).slug);
+  return { title: guide ? `${guide.title} | AI For All` : "Guide not found | AI For All", description: guide?.summary };
+}
+
+export default async function GuidePage({ params }: GuidePageProps) {
+  const { slug } = await params;
   const guide = getRoleGuide(slug);
 
   if (!guide) {
@@ -19,15 +28,12 @@ export default function GuidePage({ params }: GuidePageProps) {
   }
 
   return (
-    <main className="site-shell guide-shell" data-theme="light" data-theme-phase="idle">
+    <ThemeShell activeItem="guides">
       <section className="content-section guide-page-hero">
-        <p className="eyebrow">Guide</p>
+        <Link className="eyebrow" href="/guides">All role guides</Link>
         <h1>{guide.title}</h1>
         <p>{guide.summary}</p>
-        <p className="guide-status-banner">
-          This guide is a preview while the full role library is still taking
-          shape.
-        </p>
+        <p className="guide-status-banner">{guideWorkflows[slug].minutes} minutes to try / includes a prompt, worked example, and review checklist</p>
       </section>
 
       <section className="content-section guide-detail-grid">
@@ -45,15 +51,14 @@ export default function GuidePage({ params }: GuidePageProps) {
           </ul>
         </article>
 
-        <article className="guide-detail-panel">
-          <p className="eyebrow">Try these prompts</p>
-          <ul>
-            {guide.prompts.map((prompt) => (
-              <li key={prompt}>{prompt}</li>
-            ))}
-          </ul>
-        </article>
       </section>
+
+      <section className="content-section workflow-steps">
+        <p className="eyebrow">The walkthrough</p>
+        <h2>{guideWorkflows[slug].task}</h2>
+        {guideWorkflows[slug].steps.map((step, index) => <article key={step.title}><span className="eyebrow">0{index + 1}</span><div><h3>{step.title}</h3><p>{step.body}</p></div></article>)}
+      </section>
+      <GuidePractice workflow={guideWorkflows[slug]} />
 
       <section className="content-section guide-page-footer">
         <p className="eyebrow">Want a more personal walkthrough?</p>
@@ -67,6 +72,6 @@ export default function GuidePage({ params }: GuidePageProps) {
           </a>
         </div>
       </section>
-    </main>
+    </ThemeShell>
   );
 }

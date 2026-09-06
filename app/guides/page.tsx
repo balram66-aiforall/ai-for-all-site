@@ -1,9 +1,13 @@
 import Link from "next/link";
 import { roleGuides } from "../site-content";
+import { ThemeShell } from "../components/ThemeShell";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = { title: "AI workflows for your role | AI For All", description: "Practical AI walkthroughs for managers, operations, analysts, and client teams. Start with a prompt, learn from an example, and review the result." };
 
 export default function GuidesIndexPage() {
   return (
-    <main className="site-shell guide-index-shell" data-theme="light" data-theme-phase="idle">
+    <ThemeShell activeItem="guides">
       <section className="content-section guide-page-hero">
         <p className="eyebrow">Role guides</p>
         <h1>Simple AI guides for the work people already do.</h1>
@@ -13,8 +17,8 @@ export default function GuidesIndexPage() {
           next.
         </p>
         <p className="guide-status-banner">
-          These guides are published as previews while the full library is still
-          being built.
+          Each starting workflow includes step-by-step instructions, a reusable
+          prompt, a worked example, and a review checklist.
         </p>
       </section>
 
@@ -29,7 +33,7 @@ export default function GuidesIndexPage() {
                 <li key={outcome}>{outcome}</li>
               ))}
             </ul>
-            <Link href={`/guides/${guide.slug}`}>Preview guide</Link>
+            <Link href={`/guides/${guide.slug}`}>Try the workflow</Link>
           </article>
         ))}
       </section>
@@ -46,6 +50,6 @@ export default function GuidesIndexPage() {
           </a>
         </div>
       </section>
-    </main>
+    </ThemeShell>
   );
 }

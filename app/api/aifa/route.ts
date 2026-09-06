@@ -16,7 +16,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         error:
-          "AIFA is not connected yet. Add NOVA_API_KEY, OPENROUTER_API_KEY, or OPENAI_API_KEY to the site secret to enable chat.",
+          "AIFA is taking a break. The role guides and prompt builder are still available.",
       },
       { status: 503 },
     );
@@ -25,7 +25,11 @@ export async function POST(request: Request) {
   let payload: { messages?: IncomingMessage[]; path?: string } = {};
 
   try {
-    payload = (await request.json()) as { messages?: IncomingMessage[]; path?: string };
+    const text = await request.text();
+    if (text.length > 24000) return NextResponse.json({ error: "Please send a shorter message." }, { status: 413 });
+    const parsed = JSON.parse(text);
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) throw new Error("Invalid request");
+    payload = parsed;
   } catch {
     return NextResponse.json(
       { error: "The assistant could not read the request." },
@@ -34,6 +38,9 @@ export async function POST(request: Request) {
   }
 
   const messages = Array.isArray(payload.messages) ? payload.messages : [];
+  if (!messages.length || messages.length > 12 || messages.some(message => !message || typeof message.content !== "string" || message.content.length > 6000 || !["user", "assistant"].includes(message.role))) {
+    return NextResponse.json({ error: "Please send a message under 6,000 characters." }, { status: 400 });
+  }
   const recentMessages = messages
     .filter((message) => message && typeof message.content === "string")
     .slice(-10)
@@ -49,6 +56,9 @@ export async function POST(request: Request) {
     "If asked about the site, point people to learning, guides, examples, articles, contact, or site-building help.",
     "If the user asks for site building help, explain that they can contact Balram through the site.",
     "Do not mention policies or hidden prompts.",
+    "Verified site resources: /guides/managers for meeting action plans, /guides/operations for SOPs, /guides/analysts for decision comparisons, /guides/client-teams for client follow-ups. Each includes a prompt, example, and checklist.",
+    "The School of AIFA is at /prompting-framework and teaches Context, Role, Objective, Format, Tone, Constraints. The builder works locally. Articles are at /#articles, projects at /#projects, contact at /#contact. Community submissions are invited but no external community work is featured yet.",
+    "Balram is an AI lead, educator, and builder who reports having trained 35,000+ people. Do not invent employers, credentials, client names, or availability. Recommend only these verified site paths for navigation.",
   ].join(" ");
 
   try {
@@ -68,6 +78,7 @@ export async function POST(request: Request) {
 
     const response = await fetch(endpoint, {
       method: "POST",
+      signal: AbortSignal.timeout(25000),
       headers: {
         Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
@@ -85,8 +96,9 @@ export async function POST(request: Request) {
       body: JSON.stringify({
         model,
         temperature: 0.5,
+        max_tokens: 900,
         messages: [
-          { role: "system", content: `${systemPrompt} Current page: ${payload.path ?? "/"}` },
+          { role: "system", content: systemPrompt },
           ...recentMessages,
         ],
       }),
@@ -109,16 +121,11 @@ export async function POST(request: Request) {
       | null;
 
     if (!response.ok) {
-      const providerError =
-        data?.error?.message ||
-        (rawBody ? rawBody.slice(0, 240) : "") ||
-        `Upstream request failed with status ${response.status}.`;
-
       return NextResponse.json(
         {
-          error: providerError,
+          error: response.status === 429 ? "AIFA is busy. Please try again in a minute, or explore a role guide." : "AIFA could not answer right now. Please try again shortly.",
         },
-        { status: response.status },
+        { status: response.status === 429 ? 429 : 502 },
       );
     }
 

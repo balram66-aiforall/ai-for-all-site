@@ -1,5 +1,8 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
+
 /* eslint-disable @next/next/no-html-link-for-pages -- Plain anchors keep the shared nav from loading router code on the homepage. */
 
 type ThemeMode = "dark" | "light";
@@ -11,15 +14,12 @@ type SiteTopbarProps = {
 };
 
 const navItems = [
-  { id: "top", label: "Top", href: "/#top" },
   { id: "learn", label: "Learn", href: "/#learn" },
   { id: "guides", label: "Guides", href: "/#guides" },
-  { id: "examples", label: "Examples", href: "/#community" },
+  { id: "training", label: "Training", href: "/#training" },
   { id: "articles", label: "Articles", href: "/#articles" },
-  { id: "school", label: "School", href: "/#school-of-aifa" },
-  { id: "croftc", label: "CROFTC", href: "/prompting-framework" },
+  { id: "croftc", label: "School", href: "/prompting-framework" },
   { id: "projects", label: "Projects", href: "/#projects" },
-  { id: "aifa", label: "AIFA", href: "/#agent" },
   { id: "contact", label: "Contact", href: "/#contact" },
 ] as const;
 
@@ -41,8 +41,28 @@ function MoonIcon() {
 }
 
 export function SiteTopbar({ theme, onToggleTheme, activeItem }: SiteTopbarProps) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [section, setSection] = useState("");
+  useEffect(() => {
+    if (activeItem) return;
+    const observer = new IntersectionObserver(entries => {
+      const visible = entries.filter(entry => entry.isIntersecting);
+      if (visible.length) setSection(visible[0].target.id);
+    }, { rootMargin: "-15% 0px -60% 0px" });
+    navItems.forEach(item => {
+      const node = document.getElementById(item.id);
+      if (node) observer.observe(node);
+    });
+    return () => observer.disconnect();
+  }, [activeItem]);
+
   return (
-    <nav className="topbar" aria-label="Main navigation">
+    <nav className="topbar" aria-label="Main navigation" onKeyDown={event => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+        document.getElementById("site-menu-toggle")?.focus();
+      }
+    }}>
       <a className="brand" href="/#top" aria-label="AI For All home">
         <span className="aifa-mark" aria-hidden="true">
           <span />
@@ -50,13 +70,15 @@ export function SiteTopbar({ theme, onToggleTheme, activeItem }: SiteTopbarProps
         <span>AI For All</span>
       </a>
       <div className="nav-tools">
-        <div className="nav-links">
+        <button id="site-menu-toggle" className="menu-toggle" type="button" aria-label={menuOpen ? "Close navigation" : "Open navigation"} aria-expanded={menuOpen} aria-controls="site-navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X size={20} /> : <Menu size={20} />}</button>
+        <div id="site-navigation" className={`nav-links${menuOpen ? " is-open" : ""}`}>
           {navItems.map((item) => (
             <a
               key={item.id}
-              className={activeItem === item.id ? "is-active" : ""}
-              aria-current={activeItem === item.id ? "page" : undefined}
+              className={(activeItem ?? section) === item.id ? "is-active" : ""}
+              aria-current={(activeItem ?? section) === item.id ? activeItem ? "page" : "location" : undefined}
               href={item.href}
+              onClick={() => setMenuOpen(false)}
             >
               {item.label}
             </a>
@@ -66,6 +88,8 @@ export function SiteTopbar({ theme, onToggleTheme, activeItem }: SiteTopbarProps
           type="button"
           className="theme-toggle"
           aria-pressed={theme === "light"}
+          aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+          title={theme === "dark" ? "Light mode" : "Dark mode"}
           onClick={onToggleTheme}
         >
           <span className="theme-toggle-icon" aria-hidden="true">

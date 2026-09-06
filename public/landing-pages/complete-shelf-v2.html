@@ -6072,8 +6072,15 @@
       }
     }
 
+    let parentVisible = true;
+    function onParentVisibility(event) {
+      if (event.source !== window.parent || event.origin !== location.origin || event.data?.type !== "aifa-shelf-visibility") return;
+      parentVisible = event.data.visible === true;
+      onVisibilityChange();
+    }
+
     function onVisibilityChange() {
-      suspended = document.hidden;
+      suspended = document.hidden || !parentVisible;
       audio.handleVisibility(suspended);
       if (!suspended) {
         lastTime = performance.now();
@@ -6160,6 +6167,7 @@
       window.removeEventListener("keydown", onKeyDown);
       window.removeEventListener("blur", onWindowBlur);
       document.removeEventListener("visibilitychange", onVisibilityChange);
+      window.removeEventListener("message", onParentVisibility);
       reducedMotionQuery.removeEventListener("change", onReducedMotionChange);
       experience.removeEventListener("pointerdown", onFirstAudioPointer, true);
       window.removeEventListener("keydown", onFirstAudioKeydown, true);
@@ -6283,6 +6291,8 @@
       window.addEventListener("keydown", onKeyDown);
       window.addEventListener("blur", onWindowBlur);
       document.addEventListener("visibilitychange", onVisibilityChange);
+      window.addEventListener("message", onParentVisibility);
+      if (window.parent !== window) window.parent.postMessage({ type: "aifa-shelf-ready" }, location.origin);
       reducedMotionQuery.addEventListener("change", onReducedMotionChange);
       experience.addEventListener("pointerdown", onFirstAudioPointer, true);
       window.addEventListener("keydown", onFirstAudioKeydown, true);

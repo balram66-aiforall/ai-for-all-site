@@ -45,7 +45,7 @@ export function AifaAssistantLoader() {
   }
 
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<div className="aifa-assistant-shell"><p className="aifa-assistant-launcher" role="status">Opening AIFA...</p></div>}>
       <LazyAifaAssistant initialOpen={openOnLoad} />
     </Suspense>
   );

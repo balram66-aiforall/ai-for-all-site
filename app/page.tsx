@@ -3,28 +3,16 @@ import { ArticleCarousel } from "./components/ArticleCarousel";
 import { AifaOpenButton } from "./components/AifaOpenButton";
 import { AifaMascot } from "./components/AifaMascot";
 import { ThemeShell } from "./components/ThemeShell";
-import { communityExamples, roleGuides, simpleLearningCards } from "./site-content";
+import { simpleLearningCards } from "./site-content";
 import { ShelfEmbed } from "./components/ShelfEmbed";
+import { RoleWorkbench } from "./components/RoleWorkbench";
+import { TeammateLoop } from "./components/TeammateLoop";
 
 const tips = [
   'Start with the outcome you need, not the prompt you want to write.',
   'Show AI examples of good work. It learns taste faster than adjectives.',
   'Ask for options first, then have it pressure-test the safest answer.',
   'Keep a swipe file of prompts, bad outputs, and the fixes that worked.',
-];
-
-const learningPaths = [
-  ['Start', 'Understand what AI does well, where it fails, and how to ask for useful help.'],
-  ['Think', 'Use AI to compare options, organize context, and make better decisions faster.'],
-  ['Build', 'Turn prompts into workflows, reusable systems, assistants, and working outputs.'],
-  ['Ship', 'Publish articles, visuals, and learning loops that make your thinking visible.'],
-];
-
-const teammateLoops = [
-  ['01', 'Frame', 'Turn messy intent into a sharp brief.'],
-  ['02', 'Draft', 'Generate options, structures, and first passes.'],
-  ['03', 'Judge', 'Compare output against taste, context, and truth.'],
-  ['04', 'Ship', 'Package the work for LinkedIn, teams, or clients.'],
 ];
 
 const trainingLanes = [
@@ -60,29 +48,6 @@ const trainingSignals = [
   'Role-specific learning',
 ];
 
-const repoItems = [
-  [
-    'Agents',
-    'Reusable AI teammates for research, writing, planning, review, and delivery.',
-    'Open soon',
-  ],
-  [
-    'Skills',
-    'Skill.md patterns that teach AI how I think, decide, and ship useful work.',
-    'Building',
-  ],
-  [
-    'Templates',
-    'Briefs, prompt systems, checklists, and operating rhythms people can reuse.',
-    'Coming',
-  ],
-  [
-    'Experiments',
-    'Small public tests with AI workflows, visual systems, and learning loops.',
-    'View later',
-  ],
-];
-
 const aiProjects = [
   {
     title: 'The Pinky Promise',
@@ -90,7 +55,8 @@ const aiProjects = [
     summary:
       'A tiny promise-making experience for turning intent into something people can feel, remember, and come back to.',
     href: 'https://pinky-promises.lovable.app/#',
-    image: '/assets/projects/pinky-promise.jpg',
+    image: '/assets/projects/pinky-promise-1000.webp',
+    smallImage: '/assets/projects/pinky-promise-640.webp',
     width: 1440,
     height: 2560,
     action: 'Open project',
@@ -101,7 +67,8 @@ const aiProjects = [
     summary:
       'An intelligent, friendly hydration companion with personalized goals, AI-powered health insights, smart reminders, and Google Drive cloud sync.',
     href: 'https://github.com/balram66-aiforall/Gulpy',
-    image: '/assets/projects/gulpy.jpg',
+    image: '/assets/projects/gulpy-1000.webp',
+    smallImage: '/assets/projects/gulpy-640.webp',
     width: 1122,
     height: 1402,
     action: 'View GitHub',
@@ -112,7 +79,8 @@ const aiProjects = [
     summary:
       'A conversation companion inspired by John Keats and Negative Capability, built to move people beyond autopilot small talk into curiosity and wonder.',
     href: 'https://github.com/balram66-aiforall/Keats',
-    image: '/assets/projects/keats.jpg',
+    image: '/assets/projects/keats-1000.webp',
+    smallImage: '/assets/projects/keats-640.webp',
     width: 1122,
     height: 1402,
     action: 'View GitHub',
@@ -124,7 +92,7 @@ export default function Home() {
     <ThemeShell>
       <section id="top" className="hero-section">
         <div className="hero-copy">
-          <p className="eyebrow">AI For All</p>
+          <p className="eyebrow">Balram / AI lead, educator, builder</p>
           <h1 className="identity-headline" aria-label="Balram becomes bAIram">
             <span className="name-morph" aria-hidden="true">
               <span className="name-base">Balram</span>
@@ -134,40 +102,39 @@ export default function Home() {
             </span>
           </h1>
           <p className="hero-lede">
-            I make AI accessible. I break down useful AI for real work. I test
-            the ideas first so others do not have to.
+            I make AI accessible. Learn it simply. Put it to work.
+            Build something that matters.
           </p>
           <div className="hero-actions" aria-label="Primary actions">
             <a className="button primary" href="#learn">
               Learn AI simply
             </a>
             <a className="button secondary" href="#guides">
-              Browse guide previews
+              Find your workflow
             </a>
             <AifaOpenButton className="button secondary">
               Ask AIFA
             </AifaOpenButton>
           </div>
           <p className="hero-note">
-            Guide pages are still being built, so this section is a preview for
-            now.
+            35,000+ people trained. Practical lessons from teaching and building with AI.
           </p>
         </div>
 
         <div className="hero-board" aria-label="AI teammate sketch board">
           <div className="board-header">
-            <span>tested loop</span>
-            <span className="live-dot">live</span>
+            <span>The teammate loop</span>
+            <span className="live-dot">Human + AI</span>
           </div>
           <div className="sketch-scene">
             <picture>
               <source
-                media="(max-width: 920px)"
-                srcSet="/assets/aifa-teammate-charcoal-hero-mobile.png"
+                media="(max-width: 640px)"
+                srcSet="/assets/aifa-teammate-charcoal-hero-mobile.webp"
               />
               <img
                 className="hero-sketch-image"
-                src="/assets/aifa-teammate-charcoal-hero.jpg"
+                src="/assets/aifa-teammate-charcoal-hero.webp"
                 width="1680"
                 height="945"
                 alt="Charcoal sketch of a human guide pointing at a planning board while AI For All sorts drafts into a shipped output."
@@ -176,15 +143,7 @@ export default function Home() {
               />
             </picture>
           </div>
-          <div className="board-grid">
-            {teammateLoops.map(([number, title, text]) => (
-              <article key={number} className="loop-card">
-                <span>{number}</span>
-                <h2>{title}</h2>
-                <p>{text}</p>
-              </article>
-            ))}
-          </div>
+          <TeammateLoop />
         </div>
       </section>
 
@@ -207,6 +166,7 @@ export default function Home() {
               <span>{String(index + 1).padStart(2, "0")}</span>
               <h3>{card.title}</h3>
               <p>{card.summary}</p>
+              <a className="learning-action" href={["/prompting-framework#deepdive", "/prompting-framework#builder", "/guides"][index]}>{["Learn the fundamentals", "Build a better prompt", "Find a role guide"][index]}</a>
             </article>
           ))}
         </div>
@@ -215,28 +175,9 @@ export default function Home() {
       <section id="guides" className="content-section guide-hub-section">
         <div className="section-heading">
           <p className="eyebrow">Role guides</p>
-          <h2>Practical AI guides for the way corporate teams already work.</h2>
-          <span className="section-status">Preview / coming soon</span>
+          <h2>Your work. A more useful way to do it.</h2>
         </div>
-        <div className="guide-grid">
-          {roleGuides.map((guide) => (
-            <article className="guide-card" key={guide.slug}>
-              <span>guide</span>
-              <h3>{guide.title}</h3>
-              <p>{guide.summary}</p>
-              <ul>
-                {guide.outcomes.map((outcome) => (
-                  <li key={outcome}>{outcome}</li>
-                ))}
-              </ul>
-              <a href={`/guides/${guide.slug}`}>Preview guide</a>
-            </article>
-          ))}
-        </div>
-        <p className="section-status-note">
-          These role guides are live as previews while the fuller library gets
-          built.
-        </p>
+        <RoleWorkbench />
       </section>
 
       <section id="training" className="content-section training-section">
@@ -257,11 +198,11 @@ export default function Home() {
           <figure className="training-visual">
             <picture>
               <source
-                media="(max-width: 920px)"
-                srcSet="/assets/aifa-training-charcoal-mobile.png"
+                media="(max-width: 640px)"
+                srcSet="/assets/aifa-training-charcoal-mobile.webp"
               />
               <img
-                src="/assets/aifa-training-charcoal-premium.jpg"
+                src="/assets/aifa-training-charcoal-premium.webp"
                 width="1672"
                 height="941"
                 alt="Premium charcoal sketch of Balram teaching an AI training class with AI For All organizing context, examples, and output."
@@ -288,24 +229,16 @@ export default function Home() {
             ))}
           </div>
         </div>
+        <div className="training-actions"><a className="button primary" href="#contact">Plan a training session</a><a className="learning-action" href="https://in.linkedin.com/in/balramr66">Follow my teaching and work</a></div>
       </section>
 
       <section id="community" className="content-section community-section">
         <div className="section-heading">
           <p className="eyebrow">Examples from others</p>
-          <h2>Curated work from the community, with a path to submit more later.</h2>
-          <span className="section-status">Curated now</span>
+          <h2>Good work deserves company.</h2>
+          <span className="section-status">Inviting first submissions</span>
         </div>
-        <div className="community-grid">
-          {communityExamples.map((example) => (
-            <article className="community-card" key={example.title}>
-              <span>{example.tag}</span>
-              <h3>{example.title}</h3>
-              <p>{example.summary}</p>
-              <a href={example.href}>{example.byline}</a>
-            </article>
-          ))}
-        </div>
+        <div className="community-invitation"><p>Built a useful AI workflow, a small product, or a lesson others can learn from? Share the problem, what you made, and a link. Selected work will appear here with its creator credited.</p><a className="button secondary" href="https://wa.me/qr/3EZXUASKEW5RM1">Share your work with Balram</a></div>
       </section>
 
       <section
@@ -315,10 +248,10 @@ export default function Home() {
       >
         <div className="shelf-copy">
           <p className="eyebrow">Working shelf</p>
-          <h2>A shelf of the best tools, ideas, and patterns I have tested.</h2>
+          <h2>Seven tools. One working shelf.</h2>
           <p>
-            This is where the useful things land after I have tried them in
-            real work. If it stays here, it earned its place.
+            Explore an interactive bookshelf of tools for design, writing, and
+            building. A little space for the craft behind the work.
           </p>
         </div>
         <ShelfEmbed />
@@ -335,7 +268,7 @@ export default function Home() {
       <section id="school-of-aifa" className="content-section framework-section">
         <div className="section-heading">
           <p className="eyebrow">The School of AIFA</p>
-          <h2>CROFTC is one class inside the School of AIFA.</h2>
+          <h2>Better prompts start with clearer thinking.</h2>
           <span className="section-status">Learning path</span>
         </div>
         <div className="framework-card">
@@ -357,8 +290,7 @@ export default function Home() {
               Open CROFTC
             </a>
             <p className="section-status-note">
-              This is one class in the school. More classes can be added later
-              as the school grows.
+              Start with a rough prompt. Leave with a brief you can actually use.
             </p>
           </div>
           <div className="framework-panel">
@@ -370,27 +302,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="path" className="content-section learning-section">
-        <div className="section-heading">
-          <p className="eyebrow">Learning path</p>
-          <h2>A simple path from curious to capable.</h2>
-        </div>
-        <div className="learning-grid">
-          {learningPaths.map(([title, text], index) => (
-            <article className="learning-card" key={title}>
-              <span>{String(index + 1).padStart(2, '0')}</span>
-              <h3>{title}</h3>
-              <p>{text}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
       <section id="projects" className="content-section projects-section">
         <div className="section-heading">
           <p className="eyebrow">AI projects</p>
           <h2>Small products where AI becomes something people actually use.</h2>
-          <span className="section-status">Live projects</span>
+          <span className="section-status">Try the app / explore the code</span>
         </div>
         <div className="project-grid">
           {aiProjects.map((project) => (
@@ -402,6 +318,8 @@ export default function Home() {
                 <figure>
                   <img
                     src={project.image}
+                    srcSet={`${project.smallImage} 640w, ${project.image} 1000w`}
+                    sizes="(max-width: 640px) calc(100vw - 36px), (max-width: 920px) 40vw, 360px"
                     width={project.width}
                     height={project.height}
                     alt={`${project.title} project artwork`}
@@ -429,18 +347,13 @@ export default function Home() {
 
       <section id="repos" className="content-section repo-section">
         <div className="section-heading">
-          <p className="eyebrow">Agents and skills repo</p>
-          <h2>Reusable pieces from the way I think and build with AI.</h2>
-          <span className="section-status">In progress</span>
+          <p className="eyebrow">The resource bench</p>
+          <h2>Take a useful starting point with you.</h2>
         </div>
-        <div className="repo-grid">
-          {repoItems.map(([title, text, status]) => (
-            <article className="repo-card" key={title}>
-              <span>{status}</span>
-              <h3>{title}</h3>
-              <p>{text}</p>
-            </article>
-          ))}
+        <div className="resource-links">
+          <article><p className="eyebrow">Prompt templates</p><h3>A clearer brief</h3><p>Build a prompt around context, role, objective, format, tone, and constraints.</p><a href="/prompting-framework#builder">Open the prompt builder</a></article>
+          <article><p className="eyebrow">Agents and skills</p><h3>Tools need direction</h3><p>Understand how MCP connects tools and how skill.md guides their use before designing your own assistant.</p><a href="https://www.linkedin.com/pulse/mcp-vs-skillmd-whats-difference-why-you-need-both-balram-r-42l0c">Read the practical breakdown</a></article>
+          <article><p className="eyebrow">Open source</p><h3>Look under the hood</h3><p>Explore the code behind Gulpy and Keats, plus the projects I share as I build.</p><a href="https://github.com/balram66-aiforall">Explore my repositories</a></article>
         </div>
       </section>
 
@@ -508,9 +421,10 @@ export default function Home() {
           <p className="eyebrow">Who is Balram?</p>
           <h2>The human behind AI For All.</h2>
           <p>
-            I make AI understandable, practical, and worth using. This site is
-            the home for simple learning, role guides, real examples, workflows,
-            and the lessons I keep learning from building with AI in public.
+            I am Balram, an AI lead, educator, and builder. I help people turn
+            curiosity into confidence through practical training, clear explanations,
+            and hands-on projects. AI For All brings those lessons together so
+            you can find a useful starting point for your own work.
           </p>
         </div>
         <div className="proof-list" aria-label="Balram proof points">
@@ -518,38 +432,6 @@ export default function Home() {
           <span>Role-based guides</span>
           <span>Community examples</span>
           <span>Human judgment first</span>
-        </div>
-      </section>
-
-      <section id="lab" className="content-section lab-section">
-        <div className="lab-panel">
-          <p className="eyebrow">The lab</p>
-          <h2>What I keep collecting while I test and learn.</h2>
-          <div className="lab-tags">
-            <span>prompt systems</span>
-            <span>AI teaching assets</span>
-            <span>newsletter links</span>
-            <span>article banners</span>
-            <span>client-ready workflows</span>
-            <span>usable templates</span>
-          </div>
-          <div className="collection-map" aria-label="Portfolio collection map">
-            <span>articles</span>
-            <span>tips</span>
-            <span>workflows</span>
-            <span>experiments</span>
-          </div>
-        </div>
-        <div className="note-panel">
-          <p>Next drop</p>
-          <h3>The AI teammate brief</h3>
-          <p>
-            A simple pattern for turning a task into a repeatable collaboration
-            between human taste and AI execution.
-          </p>
-          <a href="https://www.linkedin.com/newsletters/ai-for-all-weekly-newsletter-7401258096209088512/">
-            Follow on LinkedIn
-          </a>
         </div>
       </section>
 
