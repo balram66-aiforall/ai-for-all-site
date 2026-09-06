@@ -1,10 +1,8 @@
 "use client";
 
-import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
-import { SiteTopbar } from "../components/SiteTopbar";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { ThemeShell } from "../components/ThemeShell";
 
-type ThemeMode = "dark" | "light";
 type Lang = "en" | "es";
 type SectionId =
   | "hero"
@@ -123,7 +121,6 @@ type LocalizedCopy = {
   >;
 };
 
-const THEME_KEY = "croftc-theme";
 
 const letterMeta = [
   { key: "context", letter: "C", emoji: "🌍", color: "#f06060" },
@@ -932,8 +929,7 @@ function scoreTier(score: number, total: number, copy: LocalizedCopy) {
 }
 
 export function PromptingFrameworkClient() {
-  const [theme, setTheme] = useState<ThemeMode>("dark");
-  const [lang, setLang] = useState<Lang>("en");
+  const lang: Lang = "en";
   const [rewriteInput, setRewriteInput] = useState(rewriteSamples.en);
   const [rewriteResult, setRewriteResult] = useState<PromptElements | null>(null);
   const [builder, setBuilder] = useState<PromptElements>(defaultBuilderValues.en);
@@ -958,13 +954,10 @@ export function PromptingFrameworkClient() {
   const quizTier = scoreTier(quizScore, currentQuizzes.length, copy);
 
   useEffect(() => {
-    const storedTheme = window.localStorage.getItem(THEME_KEY);
     const storedBuilder = window.localStorage.getItem("croftc-builder");
     const storedExample = window.localStorage.getItem("croftc-example");
 
     const frame = window.requestAnimationFrame(() => {
-      setTheme(storedTheme === "light" ? "light" : "dark");
-      setLang("en");
 
       if (storedBuilder) {
         try {
@@ -987,10 +980,9 @@ export function PromptingFrameworkClient() {
 
   useEffect(() => {
     if (!bootedRef.current) return;
-    window.localStorage.setItem(THEME_KEY, theme);
     window.localStorage.setItem("croftc-builder", JSON.stringify(builder));
     window.localStorage.setItem("croftc-example", String(exampleIndex));
-  }, [builder, exampleIndex, lang, theme]);
+  }, [builder, exampleIndex]);
 
   useEffect(() => {
     const revealNodes = document.querySelectorAll<HTMLElement>("[data-reveal]");
@@ -1012,10 +1004,6 @@ export function PromptingFrameworkClient() {
     };
   }, []);
 
-  function updateTheme() {
-    setTheme((current) => (current === "dark" ? "light" : "dark"));
-  }
-
   function loadExample(index: number) {
     setExampleIndex(index);
     setBuilder(currentExamples[index].values);
@@ -1027,10 +1015,8 @@ export function PromptingFrameworkClient() {
   }
 
   return (
-    <div className="croftc-shell" data-theme={theme} data-lang={lang}>
-      <SiteTopbar theme={theme} onToggleTheme={updateTheme} activeItem="croftc" />
-
-      <main className="croftc-main">
+    <ThemeShell activeItem="croftc">
+      <div className="croftc-main">
         <section
           id="hero"
           className="croftc-section croftc-hero"
@@ -1327,13 +1313,14 @@ export function PromptingFrameworkClient() {
             </div>
             <div className="croftc-teaser-actions">
               <span>{copy.teaser.badge}</span>
-              <Link className="croftc-button primary" href="/">
+              {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+              <a className="croftc-button primary" href="/">
                 {copy.teaser.action}
-              </Link>
+              </a>
             </div>
           </div>
         </section>
-      </main>
-    </div>
+      </div>
+    </ThemeShell>
   );
 }

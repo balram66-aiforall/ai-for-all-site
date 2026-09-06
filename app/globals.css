@@ -2752,163 +2752,21 @@ h2 {
   letter-spacing: 0.08em;
 }
 
-.croftc-shell {
-  --croftc-background: #08090d;
-  --croftc-foreground: #f4f7fb;
-  --croftc-muted: rgba(244, 247, 251, 0.75);
-  --croftc-line: rgba(244, 247, 251, 0.12);
-  --croftc-line-strong: rgba(244, 247, 251, 0.22);
-  --croftc-surface: #111318;
-  --croftc-surface-strong: #171a22;
-  --croftc-panel: rgba(255, 255, 255, 0.04);
-  --croftc-topbar: rgba(8, 9, 13, 0.72);
-  --croftc-accent: #4ecdc4;
-  --croftc-blue: #45b7d1;
-  --croftc-red: #f06060;
-  --croftc-green: #6ecf8a;
-  --croftc-yellow: #e8c547;
-  --croftc-purple: #c89bdb;
-  background:
-    radial-gradient(circle at top, rgba(78, 205, 196, 0.08), transparent 34%),
-    radial-gradient(circle at 80% 0%, rgba(69, 183, 209, 0.07), transparent 28%),
-    var(--croftc-background);
-  color: var(--croftc-foreground);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  min-height: 100vh;
-  overflow: clip;
-}
-
-.croftc-shell[data-theme="light"] {
-  --croftc-background: #faf7f1;
-  --croftc-foreground: #161412;
-  --croftc-muted: rgba(22, 20, 18, 0.74);
-  --croftc-line: rgba(22, 20, 18, 0.14);
-  --croftc-line-strong: rgba(22, 20, 18, 0.22);
-  --croftc-surface: #fffdf8;
-  --croftc-surface-strong: #f4ede1;
-  --croftc-panel: rgba(255, 255, 255, 0.78);
-  --croftc-topbar: rgba(250, 247, 241, 0.82);
-  background:
-    radial-gradient(circle at top, rgba(78, 205, 196, 0.07), transparent 34%),
-    radial-gradient(circle at 80% 0%, rgba(69, 183, 209, 0.05), transparent 28%),
-    var(--croftc-background);
-}
-
-.croftc-shell *,
-.croftc-shell *::before,
-.croftc-shell *::after {
-  box-sizing: border-box;
-}
-
-.croftc-topbar {
-  align-items: center;
-  backdrop-filter: blur(18px);
-  background: var(--croftc-topbar);
-  border-bottom: 1px solid var(--croftc-line);
-  display: grid;
-  gap: 14px;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  margin: 0 auto;
-  max-width: 1180px;
-  padding: 16px 20px;
-  position: sticky;
-  top: 0;
-  z-index: 25;
-}
-
-.croftc-brand {
-  align-items: baseline;
-  display: flex;
-  gap: 10px;
-  line-height: 1;
-  white-space: nowrap;
-}
-
-.croftc-brand span {
-  color: var(--croftc-foreground);
-  font-size: 18px;
-  font-weight: 900;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.croftc-brand small {
-  color: var(--croftc-muted);
-  font-size: 12px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.croftc-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  justify-content: center;
-}
-
-.croftc-nav button,
-.croftc-pill {
-  align-items: center;
-  background: var(--croftc-panel);
-  border: 1px solid var(--croftc-line);
-  border-radius: 999px;
-  color: var(--croftc-muted);
-  cursor: pointer;
-  display: inline-flex;
-  font-size: 13px;
-  font-weight: 700;
-  justify-content: center;
-  line-height: 1;
-  min-height: 40px;
-  padding: 10px 14px;
-  text-decoration: none;
-  transition:
-    border-color 180ms ease,
-    color 180ms ease,
-    background-color 180ms ease,
-    transform 180ms ease;
-}
-
-.croftc-nav button:hover,
-.croftc-pill:hover {
-  border-color: var(--croftc-line-strong);
-  color: var(--croftc-foreground);
-  transform: translateY(-1px);
-}
-
-.croftc-nav button.is-active {
-  background: var(--croftc-surface-strong);
-  border-color: var(--croftc-accent);
-  color: var(--croftc-foreground);
-}
-
-.croftc-controls {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  justify-content: flex-end;
-}
-
-.croftc-pill.ghost {
-  background: transparent;
-}
-
 .croftc-main {
   display: grid;
-  gap: 22px;
+  gap: 0;
   margin: 0 auto;
   max-width: 1180px;
-  padding: 20px 20px 92px;
+  padding: 32px 24px 92px;
+  min-width: 0;
 }
 
 .croftc-section {
-  background: var(--croftc-surface);
-  border: 1px solid var(--croftc-line);
-  border-radius: 18px;
+  border-bottom: 1px solid var(--line);
   display: grid;
   gap: 20px;
-  padding: 24px;
+  padding: 56px 0;
+  min-width: 0;
   position: relative;
   scroll-margin-top: 92px;
 }
@@ -2943,22 +2801,23 @@ h2 {
   font-family: var(--font-sketch);
   font-size: 14px;
   font-weight: 800;
-  letter-spacing: 0.16em;
+  letter-spacing: 0;
   margin: 0;
   text-transform: uppercase;
 }
 
 .croftc-hero h1 {
-  font-size: clamp(62px, 10vw, 122px);
+  font-size: 92px;
+  font-family: var(--font-sketch);
   line-height: 0.88;
   margin: 0;
 }
 
 .croftc-subtitle {
-  color: var(--croftc-accent);
+  color: var(--orange);
   font-size: 20px;
   font-weight: 800;
-  letter-spacing: 0.04em;
+  letter-spacing: 0;
   margin: 0;
   text-transform: uppercase;
 }
@@ -2972,7 +2831,7 @@ h2 {
 .croftc-quiz-card p,
 .croftc-preview pre,
 .croftc-combined pre {
-  color: var(--croftc-muted);
+  color: var(--text-soft);
   line-height: 1.65;
   margin: 0;
 }
@@ -3000,12 +2859,12 @@ h2 {
 .croftc-example-shell,
 .croftc-preview,
 .croftc-result-card {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent), var(--croftc-surface-strong);
-  border: 1px solid var(--croftc-line);
+  background: var(--panel);
+  border: 1px solid var(--line);
 }
 
 .croftc-letter {
-  border-radius: 16px;
+  border-radius: 4px;
   display: grid;
   gap: 8px;
   min-height: 152px;
@@ -3037,7 +2896,7 @@ h2 {
 }
 
 .croftc-letter p {
-  color: var(--croftc-muted);
+  color: var(--text-soft);
   font-size: 14px;
   line-height: 1.5;
   margin: 0;
@@ -3050,7 +2909,8 @@ h2 {
 }
 
 .croftc-section-heading h2 {
-  font-size: clamp(30px, 4.6vw, 58px);
+  font-size: 40px;
+  line-height: 1.15;
   margin: 0;
 }
 
@@ -3061,7 +2921,7 @@ h2 {
 }
 
 .croftc-metric-card {
-  border-radius: 16px;
+  border-radius: 4px;
   display: grid;
   gap: 8px;
   min-height: 146px;
@@ -3074,14 +2934,14 @@ h2 {
 .croftc-deep-meta,
 .croftc-example-block span,
 .croftc-quiz-score span {
-  color: var(--croftc-muted);
+  color: var(--text-soft);
   font-size: 13px;
-  letter-spacing: 0.1em;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
 .croftc-metric-card strong {
-  color: var(--croftc-foreground);
+  color: var(--foreground);
   font-size: clamp(36px, 5vw, 62px);
   line-height: 1;
 }
@@ -3093,9 +2953,9 @@ h2 {
 }
 
 .croftc-school-card {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent), var(--croftc-surface-strong);
-  border: 1px solid var(--croftc-line);
-  border-radius: 18px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 4px;
   display: grid;
   gap: 10px;
   min-height: 200px;
@@ -3106,7 +2966,7 @@ h2 {
   color: var(--orange);
   font-size: 13px;
   font-weight: 800;
-  letter-spacing: 0.1em;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
@@ -3116,15 +2976,15 @@ h2 {
 }
 
 .croftc-school-card p {
-  color: var(--croftc-muted);
+  color: var(--text-soft);
   line-height: 1.65;
   margin: 0;
 }
 
 .croftc-school-card strong {
-  color: var(--croftc-accent);
+  color: var(--orange);
   font-size: 13px;
-  letter-spacing: 0.12em;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
@@ -3135,7 +2995,7 @@ h2 {
 }
 
 .croftc-panel {
-  border-radius: 18px;
+  border-radius: 4px;
   display: grid;
   gap: 14px;
   padding: 18px;
@@ -3147,10 +3007,10 @@ h2 {
 
 .croftc-panel textarea,
 .croftc-field textarea {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--croftc-line);
-  border-radius: 14px;
-  color: var(--croftc-foreground);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--foreground);
   font: inherit;
   line-height: 1.55;
   min-height: 128px;
@@ -3161,12 +3021,12 @@ h2 {
 
 .croftc-panel textarea::placeholder,
 .croftc-field textarea::placeholder {
-  color: var(--croftc-muted);
+  color: var(--text-soft);
 }
 
 .croftc-panel textarea:focus,
 .croftc-field textarea:focus {
-  border-color: var(--croftc-accent);
+  border-color: var(--orange);
   outline: none;
 }
 
@@ -3179,9 +3039,9 @@ h2 {
 .croftc-button,
 .croftc-chip {
   align-items: center;
-  background: var(--croftc-panel);
-  border: 1px solid var(--croftc-line);
-  color: var(--croftc-foreground);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  color: var(--foreground);
   cursor: pointer;
   display: inline-flex;
   font-size: 14px;
@@ -3198,14 +3058,14 @@ h2 {
 
 .croftc-button:hover,
 .croftc-chip:hover {
-  border-color: var(--croftc-line-strong);
+  border-color: var(--line-strong);
   transform: translateY(-2px);
 }
 
 .croftc-button.primary,
 .croftc-chip.primary {
-  background: var(--croftc-foreground);
-  color: var(--croftc-background);
+  background: var(--foreground);
+  color: var(--background);
 }
 
 .croftc-button.secondary {
@@ -3224,7 +3084,7 @@ h2 {
 }
 
 .croftc-result-card {
-  border-radius: 14px;
+  border-radius: 4px;
   display: grid;
   gap: 8px;
   min-height: 128px;
@@ -3237,8 +3097,8 @@ h2 {
 
 .croftc-combined {
   background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--croftc-line);
-  border-radius: 16px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
   display: grid;
   gap: 8px;
   padding: 16px;
@@ -3247,7 +3107,7 @@ h2 {
 .croftc-combined span {
   color: var(--orange);
   font-size: 12px;
-  letter-spacing: 0.12em;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
@@ -3272,8 +3132,9 @@ h2 {
 }
 
 .croftc-field {
-  border: 1px solid var(--accent);
-  border-radius: 16px;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--accent);
+  border-radius: 4px;
   display: grid;
   gap: 10px;
   min-height: 210px;
@@ -3284,19 +3145,19 @@ h2 {
   color: var(--accent);
   font-size: 13px;
   font-weight: 800;
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
 .croftc-preview {
-  border-radius: 18px;
+  border-radius: 4px;
   display: grid;
   gap: 10px;
   padding: 18px;
 }
 
 .croftc-preview pre {
-  color: var(--croftc-foreground);
+  color: var(--foreground);
   font-size: 15px;
 }
 
@@ -3307,7 +3168,7 @@ h2 {
 }
 
 .croftc-deep-card {
-  border-radius: 18px;
+  border-radius: 4px;
   display: grid;
   gap: 14px;
   padding: 18px;
@@ -3336,8 +3197,8 @@ h2 {
 
 .croftc-example-pair > div {
   background: rgba(255, 255, 255, 0.025);
-  border: 1px solid var(--croftc-line);
-  border-radius: 14px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
   display: grid;
   gap: 8px;
   padding: 14px;
@@ -3349,7 +3210,7 @@ h2 {
 }
 
 .croftc-example-shell {
-  border-radius: 18px;
+  border-radius: 4px;
   padding: 18px;
 }
 
@@ -3360,8 +3221,8 @@ h2 {
 }
 
 .croftc-example-block {
-  border: 1px solid var(--croftc-line);
-  border-radius: 16px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
   display: grid;
   gap: 8px;
   min-height: 164px;
@@ -3370,12 +3231,12 @@ h2 {
 
 .croftc-example-block span {
   font-size: 13px;
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
 .croftc-example-block p {
-  color: var(--croftc-muted);
+  color: var(--text-soft);
   line-height: 1.6;
 }
 
@@ -3386,7 +3247,7 @@ h2 {
 }
 
 .croftc-quiz-card {
-  border-radius: 18px;
+  border-radius: 4px;
   display: grid;
   gap: 14px;
   padding: 18px;
@@ -3399,8 +3260,8 @@ h2 {
 
 .croftc-quiz-options button {
   background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--croftc-line);
-  color: var(--croftc-foreground);
+  border: 1px solid var(--line);
+  color: var(--foreground);
   cursor: pointer;
   padding: 12px 14px;
   text-align: left;
@@ -3411,7 +3272,7 @@ h2 {
 }
 
 .croftc-quiz-options button:hover {
-  border-color: var(--croftc-line-strong);
+  border-color: var(--line-strong);
   transform: translateY(-1px);
 }
 
@@ -3425,7 +3286,7 @@ h2 {
 }
 
 .croftc-quiz-card p.is-wrong {
-  color: var(--red);
+  color: var(--foreground);
 }
 
 .croftc-quiz-footer {
@@ -3447,9 +3308,9 @@ h2 {
 
 .croftc-teaser-shell {
   align-items: center;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent), var(--croftc-surface-strong);
-  border: 1px solid var(--croftc-line);
-  border-radius: 18px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 4px;
   display: grid;
   gap: 18px;
   grid-template-columns: minmax(0, 1.15fr) minmax(220px, 0.85fr);
@@ -3461,7 +3322,7 @@ h2 {
 }
 
 .croftc-teaser-shell p {
-  color: var(--croftc-muted);
+  color: var(--text-soft);
   line-height: 1.65;
   margin: 0;
 }
@@ -3474,16 +3335,65 @@ h2 {
 }
 
 .croftc-teaser-actions span {
-  color: var(--croftc-accent);
+  color: var(--orange);
   font-size: 12px;
   font-weight: 800;
-  letter-spacing: 0.16em;
+  letter-spacing: 0;
   text-transform: uppercase;
+}
+
+.croftc-main :is(button, a, textarea):focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 4px;
+}
+
+.croftc-main :is(.croftc-label, .croftc-school-card > span, .croftc-combined > span) {
+  font-family: var(--font-sketch);
+}
+
+.croftc-main :is(.croftc-result-card > span, .croftc-field > span, .croftc-deep-meta, .croftc-example-block > span, .croftc-example-pair span) {
+  color: var(--foreground);
+  border-left: 3px solid var(--accent);
+  padding-left: 8px;
+}
+
+.croftc-main :is(.croftc-panel, .croftc-preview, .croftc-result, .croftc-field) {
+  min-width: 0;
+}
+
+.croftc-example-shell,
+.croftc-teaser-shell {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+.croftc-example-pair > div {
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  padding: 12px 0;
+}
+
+@media (max-width: 600px) {
+  .croftc-main { padding: 16px 20px 64px; }
+  .croftc-section { padding: 36px 0; }
+  .croftc-hero h1 { font-size: 60px; }
+  .croftc-section-heading h2 { font-size: 30px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .croftc-section[data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .croftc-main * { transition: none; }
 }
 
 @media (max-width: 980px) {
   .framework-card,
-  .croftc-topbar,
   .croftc-hero,
   .croftc-school-grid,
   .croftc-rewriter-stack,
@@ -3495,13 +3405,7 @@ h2 {
     grid-template-columns: 1fr;
   }
 
-  .croftc-nav {
-    justify-content: flex-start;
-  }
 
-  .croftc-controls {
-    justify-content: flex-start;
-  }
 
   .croftc-strip,
   .croftc-result-grid,

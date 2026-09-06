@@ -27,7 +27,7 @@ function useThemeMode() {
   ) as ThemeMode;
 }
 
-export function ThemeShell({ children }: { children: ReactNode }) {
+export function ThemeShell({ children, activeItem }: { children: ReactNode; activeItem?: string }) {
   const theme = useThemeMode();
   const [themePhase, setThemePhase] = useState<ThemePhase>("idle");
 
@@ -35,8 +35,6 @@ export function ThemeShell({ children }: { children: ReactNode }) {
     const root = document.documentElement;
     root.dataset.theme = theme;
     root.dataset.themePhase = themePhase;
-    window.localStorage.setItem(THEME_STORAGE_KEY, theme);
-    window.dispatchEvent(new Event("aifa-theme-change"));
 
     const motionReduce = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
@@ -78,7 +76,7 @@ export function ThemeShell({ children }: { children: ReactNode }) {
     >
       <div className="theme-wash" aria-hidden="true" />
       <div className="scroll-progress" aria-hidden="true" />
-      <SiteTopbar theme={theme} onToggleTheme={toggleTheme} />
+      <SiteTopbar theme={theme} onToggleTheme={toggleTheme} activeItem={activeItem} />
       {children}
     </main>
   );
