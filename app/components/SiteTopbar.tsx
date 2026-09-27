@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import { motion } from "framer-motion";
 
 /* eslint-disable @next/next/no-html-link-for-pages -- Plain anchors keep the shared nav from loading router code on the homepage. */
 
@@ -57,47 +58,66 @@ export function SiteTopbar({ theme, onToggleTheme, activeItem }: SiteTopbarProps
   }, [activeItem]);
 
   return (
-    <nav className="topbar" aria-label="Main navigation" onKeyDown={event => {
-      if (event.key === "Escape") {
-        setMenuOpen(false);
-        document.getElementById("site-menu-toggle")?.focus();
-      }
-    }}>
-      <a className="brand" href="/#top" aria-label="AI For All home">
+    <motion.nav
+      className="topbar"
+      aria-label="Main navigation"
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      onKeyDown={event => {
+        if (event.key === "Escape") {
+          setMenuOpen(false);
+          document.getElementById("site-menu-toggle")?.focus();
+        }
+      }}
+    >
+      <motion.a
+        className="brand"
+        href="/#top"
+        aria-label="AI For All home"
+        whileHover={{ scale: 1.1, rotate: 2 }}
+        whileTap={{ scale: 0.95 }}
+        transition={{ type: "spring", stiffness: 300 }}
+      >
         <span className="aifa-mark" aria-hidden="true">
           <span />
         </span>
         <span>AI For All</span>
-      </a>
+      </motion.a>
       <div className="nav-tools">
         <button id="site-menu-toggle" className="menu-toggle" type="button" aria-label={menuOpen ? "Close navigation" : "Open navigation"} aria-expanded={menuOpen} aria-controls="site-navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X size={20} /> : <Menu size={20} />}</button>
         <div id="site-navigation" className={`nav-links${menuOpen ? " is-open" : ""}`}>
-          {navItems.map((item) => (
-            <a
+          {navItems.map((item, index) => (
+            <motion.a
               key={item.id}
               className={(activeItem ?? section) === item.id ? "is-active" : ""}
               aria-current={(activeItem ?? section) === item.id ? activeItem ? "page" : "location" : undefined}
               href={item.href}
               onClick={() => setMenuOpen(false)}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 * index, type: "spring", stiffness: 100 }}
             >
               {item.label}
-            </a>
+            </motion.a>
           ))}
         </div>
-        <button
+        <motion.button
           type="button"
           className="theme-toggle"
           aria-pressed={theme === "light"}
           aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
           title={theme === "dark" ? "Light mode" : "Dark mode"}
           onClick={onToggleTheme}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
         >
           <span className="theme-toggle-icon" aria-hidden="true">
             {theme === "dark" ? <SunIcon /> : <MoonIcon />}
           </span>
           <span>{theme === "dark" ? "Light mode" : "Dark mode"}</span>
-        </button>
+        </motion.button>
       </div>
-    </nav>
+    </motion.nav>
   );
 }
