@@ -1,4 +1,7 @@
+"use client";
+
 /* eslint-disable @next/next/no-img-element -- Vinext's next/image shim breaks hydration. */
+import { motion } from "framer-motion";
 import { ArticleCarousel } from "./components/ArticleCarousel";
 import { AifaOpenButton } from "./components/AifaOpenButton";
 import { AifaMascot } from "./components/AifaMascot";
@@ -93,14 +96,20 @@ export default function Home() {
       <section id="top" className="hero-section">
         <div className="hero-copy">
           <p className="eyebrow">Balram / AI lead, educator, builder</p>
-          <h1 className="identity-headline" aria-label="Balram becomes bAIram">
+          <motion.h1
+            className="identity-headline"
+            aria-label="Balram becomes bAIram"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
             <span className="name-morph" aria-hidden="true">
               <span className="name-base">Balram</span>
               <span className="name-final">
                 b<span>AI</span>ram
               </span>
             </span>
-          </h1>
+          </motion.h1>
           <p className="hero-lede">
             I make AI accessible. Learn it simply. Put it to work.
             Build something that matters.
@@ -162,12 +171,19 @@ export default function Home() {
         </div>
         <div className="learning-grid">
           {simpleLearningCards.map((card, index) => (
-            <article className="learning-card" key={card.title}>
+            <motion.article
+              className="learning-card"
+              key={card.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true, margin: "-50px" }}
+            >
               <span>{String(index + 1).padStart(2, "0")}</span>
               <h3>{card.title}</h3>
               <p>{card.summary}</p>
               <a className="learning-action" href={["/prompting-framework#deepdive", "/prompting-framework#builder", "/guides"][index]}>{["Learn the fundamentals", "Build a better prompt", "Find a role guide"][index]}</a>
-            </article>
+            </motion.article>
           ))}
         </div>
       </section>
@@ -213,12 +229,19 @@ export default function Home() {
           </figure>
         </div>
         <div className="training-grid">
-          {trainingLanes.map(([title, text, status]) => (
-            <article className="training-card" key={title}>
+          {trainingLanes.map(([title, text, status], index) => (
+            <motion.article
+              className="training-card"
+              key={title}
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+              viewport={{ once: true }}
+            >
               <span>{status}</span>
               <h3>{title}</h3>
               <p>{text}</p>
-            </article>
+            </motion.article>
           ))}
         </div>
         <div className="training-proof">
@@ -310,9 +333,14 @@ export default function Home() {
         </div>
         <div className="project-grid">
           {aiProjects.map((project) => (
-            <article
+            <motion.article
               className={project.image ? 'project-card' : 'project-card text-led'}
               key={project.title}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
             >
               {project.image ? (
                 <figure>
@@ -340,7 +368,7 @@ export default function Home() {
                 <span>{project.summary}</span>
                 <a href={project.href}>{project.action}</a>
               </div>
-            </article>
+            </motion.article>
           ))}
         </div>
       </section>
