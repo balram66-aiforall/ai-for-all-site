@@ -2,6 +2,7 @@
 
 /* eslint-disable @next/next/no-img-element -- Vinext's next/image shim breaks hydration. */
 import { motion } from "framer-motion";
+import { AgentCursor } from "./components/AgentCursor";
 import { ArticleCarousel } from "./components/ArticleCarousel";
 import { AifaOpenButton } from "./components/AifaOpenButton";
 import { AifaMascot } from "./components/AifaMascot";
@@ -93,15 +94,45 @@ const aiProjects = [
 export default function Home() {
   return (
     <ThemeShell>
-      <section id="top" className="hero-section">
+      <section id="top" className="hero-section" style={{ position: 'relative', overflow: 'hidden' }}>
+        <AgentCursor
+          name="Agent Copy"
+          color="var(--orange)"
+          initial={{ x: -100, y: 50, opacity: 0 }}
+          animate={{
+            x: ["-10vw", "10vw", "40vw", "80vw", "120vw"],
+            y: [50, 150, 200, 200, -200],
+            opacity: [0, 1, 1, 1, 0]
+          }}
+          transition={{ duration: 4, times: [0, 0.2, 0.5, 0.8, 1], ease: "easeInOut", delay: 0.5 }}
+        />
+        <AgentCursor
+          name="Agent Design"
+          color="var(--blue)"
+          initial={{ x: "120vw", y: 300, opacity: 0 }}
+          animate={{
+            x: ["120vw", "60vw", "20vw", "-10vw"],
+            y: [300, 300, 400, 600],
+            opacity: [0, 1, 1, 0]
+          }}
+          transition={{ duration: 3.5, times: [0, 0.3, 0.7, 1], ease: "easeInOut", delay: 2 }}
+        />
         <div className="hero-copy">
-          <p className="eyebrow">Balram / AI lead, educator, builder</p>
+          <motion.p
+            className="eyebrow"
+            initial={{ opacity: 0, width: 0 }}
+            animate={{ opacity: 1, width: "auto" }}
+            transition={{ duration: 0.5, delay: 1 }}
+            style={{ overflow: 'hidden', whiteSpace: 'nowrap' }}
+          >
+            Balram / AI lead, educator, builder
+          </motion.p>
           <motion.h1
             className="identity-headline"
             aria-label="Balram becomes bAIram"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            initial={{ opacity: 0, filter: "blur(10px)" }}
+            animate={{ opacity: 1, filter: "blur(0px)" }}
+            transition={{ duration: 0.8, delay: 1.5 }}
           >
             <span className="name-morph" aria-hidden="true">
               <span className="name-base">Balram</span>
@@ -110,11 +141,22 @@ export default function Home() {
               </span>
             </span>
           </motion.h1>
-          <p className="hero-lede">
+          <motion.p
+            className="hero-lede"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 2 }}
+          >
             I make AI accessible. Learn it simply. Put it to work.
             Build something that matters.
-          </p>
-          <div className="hero-actions" aria-label="Primary actions">
+          </motion.p>
+          <motion.div
+            className="hero-actions"
+            aria-label="Primary actions"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 3, type: "spring" }}
+          >
             <a className="button primary" href="#learn">
               Learn AI simply
             </a>
@@ -124,7 +166,7 @@ export default function Home() {
             <AifaOpenButton className="button secondary">
               Ask AIFA
             </AifaOpenButton>
-          </div>
+          </motion.div>
           <p className="hero-note">
             35,000+ people trained. Practical lessons from teaching and building with AI.
           </p>
