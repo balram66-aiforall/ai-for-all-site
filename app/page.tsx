@@ -117,6 +117,17 @@ export default function Home() {
           }}
           transition={{ duration: 3.5, times: [0, 0.3, 0.7, 1], ease: "easeInOut", delay: 2 }}
         />
+        <AgentCursor
+          name="Agent QA"
+          color="var(--green)"
+          initial={{ x: "50vw", y: -100, opacity: 0 }}
+          animate={{
+            x: ["50vw", "40vw", "60vw", "50vw", "120vw"],
+            y: [-100, 150, 250, 400, 800],
+            opacity: [0, 1, 1, 1, 0]
+          }}
+          transition={{ duration: 4, times: [0, 0.2, 0.5, 0.8, 1], ease: "easeInOut", delay: 3.5 }}
+        />
         <div className="hero-copy">
           <motion.p
             className="eyebrow"
