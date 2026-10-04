@@ -341,13 +341,25 @@ export default function Home() {
         <ArticleCarousel />
       </section>
 
-      <section id="school-of-aifa" className="content-section framework-section">
+      <section id="school-of-aifa" className="content-section framework-section" style={{ position: 'relative' }}>
+        <AgentCursor
+          name="Agent Engineer"
+          color="var(--violet)"
+          initial={{ x: "-20vw", y: 100, opacity: 0 }}
+          whileInView={{
+            x: ["-20vw", "10vw", "40vw", "80vw", "120vw"],
+            y: [100, 100, 200, 300, 300],
+            opacity: [0, 1, 1, 1, 0]
+          }}
+          transition={{ duration: 3, times: [0, 0.2, 0.5, 0.8, 1], ease: "easeInOut" }}
+          viewport={{ once: true, margin: "-100px" }}
+        />
         <div className="section-heading">
           <p className="eyebrow">The School of AIFA</p>
           <h2>Better prompts start with clearer thinking.</h2>
           <span className="section-status">Learning path</span>
         </div>
-        <div className="framework-card">
+        <motion.div className="framework-card" initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: 1, duration: 0.5 }} viewport={{ once: true, margin: "-100px" }}>
           <div className="framework-copy">
             <p className="framework-intro">
               Context, Role, Objective, Format, Tone, and Constraints, wrapped
@@ -375,7 +387,7 @@ export default function Home() {
             <span>learn</span>
             <span>ship</span>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       <section id="projects" className="content-section projects-section">
@@ -497,8 +509,20 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="about" className="content-section about-section">
-        <div className="about-copy">
+      <section id="about" className="content-section about-section" style={{ position: 'relative' }}>
+        <AgentCursor
+          name="Agent Storyteller"
+          color="var(--orange)"
+          initial={{ x: "100vw", y: 50, opacity: 0 }}
+          whileInView={{
+            x: ["100vw", "70vw", "30vw", "-20vw"],
+            y: [50, 100, 100, 200],
+            opacity: [0, 1, 1, 0]
+          }}
+          transition={{ duration: 3, times: [0, 0.3, 0.7, 1], ease: "easeInOut" }}
+          viewport={{ once: true, margin: "-100px" }}
+        />
+        <motion.div className="about-copy" initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: 0.8, duration: 0.5 }} viewport={{ once: true, margin: "-100px" }}>
           <p className="eyebrow">Who is Balram?</p>
           <h2>The human behind AI For All.</h2>
           <p>
@@ -507,13 +531,13 @@ export default function Home() {
             and hands-on projects. AI For All brings those lessons together so
             you can find a useful starting point for your own work.
           </p>
-        </div>
-        <div className="proof-list" aria-label="Balram proof points">
+        </motion.div>
+        <motion.div className="proof-list" aria-label="Balram proof points" initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: 1.2, duration: 0.5 }} viewport={{ once: true, margin: "-100px" }}>
           <span>AI learning leader</span>
           <span>Role-based guides</span>
           <span>Community examples</span>
           <span>Human judgment first</span>
-        </div>
+        </motion.div>
       </section>
 
       <section id="contact" className="content-section contact-section">
