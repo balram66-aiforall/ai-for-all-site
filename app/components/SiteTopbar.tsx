@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 /* eslint-disable @next/next/no-html-link-for-pages -- Plain anchors keep the shared nav from loading router code on the homepage. */
 
@@ -44,6 +44,7 @@ function MoonIcon() {
 export function SiteTopbar({ theme, onToggleTheme, activeItem }: SiteTopbarProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [section, setSection] = useState("");
+  const reduceMotion = useReducedMotion();
   useEffect(() => {
     if (activeItem) return;
     const observer = new IntersectionObserver(entries => {
@@ -61,9 +62,9 @@ export function SiteTopbar({ theme, onToggleTheme, activeItem }: SiteTopbarProps
     <motion.nav
       className="topbar"
       aria-label="Main navigation"
-      initial={{ y: -100, opacity: 0 }}
+      initial={reduceMotion ? false : { y: -42, opacity: 0, scale: 0.985 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
+      transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
       onKeyDown={event => {
         if (event.key === "Escape") {
           setMenuOpen(false);
@@ -75,8 +76,8 @@ export function SiteTopbar({ theme, onToggleTheme, activeItem }: SiteTopbarProps
         className="brand"
         href="/#top"
         aria-label="AI For All home"
-        whileHover={{ scale: 1.1, rotate: 2 }}
-        whileTap={{ scale: 0.95 }}
+        whileHover={reduceMotion ? undefined : { scale: 1.06, rotate: 1.5 }}
+        whileTap={reduceMotion ? undefined : { scale: 0.97 }}
         transition={{ type: "spring", stiffness: 300 }}
       >
         <span className="aifa-mark" aria-hidden="true">
@@ -94,9 +95,9 @@ export function SiteTopbar({ theme, onToggleTheme, activeItem }: SiteTopbarProps
               aria-current={(activeItem ?? section) === item.id ? activeItem ? "page" : "location" : undefined}
               href={item.href}
               onClick={() => setMenuOpen(false)}
-              initial={{ opacity: 0, y: -20 }}
+              initial={reduceMotion ? false : { opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 * index, type: "spring", stiffness: 100 }}
+              transition={reduceMotion ? { duration: 0 } : { delay: 0.08 * index, duration: 0.42, ease: "easeOut" }}
             >
               {item.label}
             </motion.a>
@@ -109,8 +110,8 @@ export function SiteTopbar({ theme, onToggleTheme, activeItem }: SiteTopbarProps
           aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
           title={theme === "dark" ? "Light mode" : "Dark mode"}
           onClick={onToggleTheme}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
+          whileHover={reduceMotion ? undefined : { scale: 1.06 }}
+          whileTap={reduceMotion ? undefined : { scale: 0.97 }}
         >
           <span className="theme-toggle-icon" aria-hidden="true">
             {theme === "dark" ? <SunIcon /> : <MoonIcon />}
