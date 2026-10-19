@@ -4,6 +4,7 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react';
 import { LoadingOpening } from '../loading/opening';
 import { SoundToggle } from '../sound/sound-toggle';
+import { MARKS } from '../bairam/mark/marks';
 
 // The bio: #who on the cave pages (its own stop after the masthead), the live home page's #about otherwise.
 const aboutHref = (base: string) => (base === '' ? '#who' : `${base}#about`);
@@ -28,6 +29,21 @@ const phoneQuery = '(max-width: 760px)';
 // Look-around follow time (seconds): about how long the view takes to catch most of the way up to the pointer.
 const LOOK_LAG = .22;
 const reduceQuery = '(prefers-reduced-motion: reduce)';
+/* Look-around step 2 (Balram, Oct 19: "Go with L3 + R1"): a wider painting, so turning shows the rooms beside the desk.
+   Left = the cave mouth (Workbench run 63772d14, L3 with its second desk removed), right = the suit vault (run 852c51fc).
+   Today's still sits untouched in the middle; the seams are blended inside rock at its two edges. Desktop pointers only,
+   fetched after first paint, never on phones, data saver or reduced motion. Sizes match the still's 1600/2400 widths. */
+const WIDE = { left: 2542 / 4398, width: 9008 / 4398, sizes: [3277, 4916] };
+// The light pool where the cave-mouth searchlight ends (wide painting pixels), for our bAI Wing.
+const POOL = { x: 1057, y: 447, size: 210, squash: .45 };
+const wing = MARKS.find(m => m.id === 'wing')!;
+const wideFile = (width: number, type: 'avif' | 'webp') => `/assets/masthead/wide-${width}.${type}`;
+// AVIF where it decodes, WebP otherwise; the larger file only when the scene needs well over 2400 device pixels.
+function loadWide(): Promise<string> {
+  const width = innerWidth * 1.08 * devicePixelRatio > 2600 ? WIDE.sizes[1] : WIDE.sizes[0];
+  const load = (src: string) => new Promise<string>((done, fail) => { const i = new Image(); i.onload = () => i.decode().then(() => done(src), () => done(src)); i.onerror = fail; i.src = src; });
+  return load(wideFile(width, 'avif')).catch(() => load(wideFile(width, 'webp')));
+}
 // The scene spans 108vw; only screens that need well over 2560 device pixels get the 4K file.
 function pickClip(): Clip {
   if (matchMedia(phoneQuery).matches) return clips.phone;
@@ -44,6 +60,7 @@ function Scene({ hold, waking, paused, onMotion }: { hold: boolean; waking: bool
   const [videoFailed, setVideoFailed] = useState(false);
   const [shown, setShown] = useState(false);
   const [visible, setVisible] = useState(true);
+  const [wide, setWide] = useState<string | null>(null);
   const image = useRef<HTMLImageElement>(null);
   const video = useRef<HTMLVideoElement>(null);
   const box = useRef<HTMLDivElement>(null);
@@ -59,6 +76,18 @@ function Scene({ hold, waking, paused, onMotion }: { hold: boolean; waking: bool
     if (document.readyState === 'complete') start(); else addEventListener('load', start, { once: true });
     return () => { clearTimeout(timer); removeEventListener('load', start); };
   }, [hold, clip, failed, videoFailed]);
+
+  // The wide painting only matters where the look-around runs (fine pointer, motion allowed, not a phone layout).
+  useEffect(() => {
+    if (hold || failed || wide) return;
+    let timer = 0, live = true;
+    const start = () => { timer = window.setTimeout(() => {
+      if (!matchMedia('(hover: hover) and (pointer: fine)').matches || matchMedia(phoneQuery).matches || !motionAllowed()) return;
+      loadWide().then(src => { if (live) setWide(src); }, () => {});
+    }, 900); };
+    if (document.readyState === 'complete') start(); else addEventListener('load', start, { once: true });
+    return () => { live = false; clearTimeout(timer); removeEventListener('load', start); };
+  }, [hold, failed, wide]);
 
   // Reduced motion switched on mid-visit drops the video; crossing the phone breakpoint swaps to the matching crop.
   useEffect(() => {
@@ -106,6 +135,9 @@ function Scene({ hold, waking, paused, onMotion }: { hold: boolean; waking: bool
       const k = 1 - Math.exp(-dt / LOOK_LAG);
       x += (tx - x) * k; y += (ty - y) * k;
       node.style.setProperty('--bm-look-x', x.toFixed(4)); node.style.setProperty('--bm-look-y', y.toFixed(4));
+      // The turn into the side rooms grows faster toward the edges, so small moves near the middle stay a gentle drift.
+      const turn = Math.abs(x) ** 1.6;
+      node.style.setProperty('--bm-turn-l', (x < 0 ? turn : 0).toFixed(4)); node.style.setProperty('--bm-turn-r', (x > 0 ? turn : 0).toFixed(4));
       if (Math.abs(tx - x) + Math.abs(ty - y) > .0005) frame = requestAnimationFrame(step); else { frame = 0; last = 0; }
     };
     const aim = (nx: number, ny: number) => { tx = nx; ty = ny; if (!frame) frame = requestAnimationFrame(step); };
@@ -115,7 +147,7 @@ function Scene({ hold, waking, paused, onMotion }: { hold: boolean; waking: bool
     document.addEventListener('mouseout', onOut);
     return () => {
       removeEventListener('pointermove', onMove); document.removeEventListener('mouseout', onOut); cancelAnimationFrame(frame);
-      delete node.dataset.look; node.style.removeProperty('--bm-look-x'); node.style.removeProperty('--bm-look-y');
+      delete node.dataset.look; for (const v of ['--bm-look-x', '--bm-look-y', '--bm-turn-l', '--bm-turn-r']) node.style.removeProperty(v);
     };
   }, [failed, paused]);
 
@@ -125,8 +157,17 @@ function Scene({ hold, waking, paused, onMotion }: { hold: boolean; waking: bool
   if (failed) return null;
   const stopVideo = () => { setVideoFailed(true); setClip(null); setShown(false); };
   return <div className="bm-scene" ref={box} data-motion={available ? (paused ? 'paused' : 'playing') : 'still'}>
-    <div className="bm-scene-inner" ref={inner}>
-    <picture>
+    <div className="bm-scene-inner" ref={inner} data-wide={wide ? 'ready' : undefined}>
+    {wide && <div className="bm-wide" style={{ backgroundImage: `url(${wide})`, left: `${-WIDE.left * 100}%`, width: `${WIDE.width * 100}%` }} aria-hidden="true">
+      <svg viewBox="0 0 9008 1886" preserveAspectRatio="none" focusable="false">
+        {/* A touch of softness so the mark sits in the painted haze instead of on top of it. */}
+        <filter id="bm-wide-soft"><feGaussianBlur stdDeviation="1.6" /></filter>
+        <g className="bm-wide-mark" filter="url(#bm-wide-soft)" transform={`translate(${POOL.x} ${POOL.y}) scale(1 ${POOL.squash})`}>
+          <svg x={-POOL.size / 2} y={-POOL.size / 2} width={POOL.size} height={POOL.size} viewBox="0 0 100 100" overflow="visible">{wing.shapes}</svg>
+        </g>
+      </svg>
+    </div>}
+    <picture className="bm-still">
       <source media={phoneQuery} type="image/avif" srcSet="/assets/masthead/suit-phone.avif" />
       <source media={phoneQuery} type="image/webp" srcSet="/assets/masthead/suit-phone.webp" />
       <source type="image/avif" srcSet="/assets/masthead/suit-desk-1600.avif 1600w, /assets/masthead/suit-desk-2400.avif 2400w" sizes="108vw" />

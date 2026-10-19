@@ -165,6 +165,33 @@ body:has(.bm-page) > .aifa-assistant-shell { display: none; }
 .bm-scene-inner[data-look] { --bm-push-from: 1.08; --bm-push-to: 1.13; transform-origin: 50% 46%; scale: 1.08; will-change: transform;
   translate: calc(var(--bm-look-x, 0) * -3.6vw) calc(var(--bm-look-y, 0) * -1.4vh); rotate: y calc(var(--bm-look-x, 0) * -1.5deg); }
 .bm-scene-inner picture { position: absolute; inset: 0; }
+/* Look-around step 2: the wide painting (cave mouth left, suit vault right). The scene box carries the top and bottom
+   fade, and a mask clips whatever lies outside its box, so on desktop the box widens by the two side rooms while the
+   frame-sized inner layer stays exactly where it was: every overlay placed in % of the frame keeps its spot. */
+@property --bm-reach-l { syntax: '<length>'; inherits: true; initial-value: 0px; }
+@property --bm-reach-r { syntax: '<length>'; inherits: true; initial-value: 0px; }
+.bm-hero { --bm-wl: calc(var(--bm-scene-w) * .578); --bm-wr: calc(var(--bm-scene-w) * .4702); }
+.bm-scene { left: calc(50% - 50vw - var(--bm-wl)); width: calc(var(--bm-scene-w) + var(--bm-wl) + var(--bm-wr));
+  perspective-origin: calc(var(--bm-wl) + var(--bm-scene-w) / 2) 50%; }
+.bm-scene-inner { inset: 0 var(--bm-wr) 0 var(--bm-wl); }
+/* Pointer toward an edge turns into that room (--bm-turn-* grow faster near the edges, set by masthead.tsx). The reach
+   only opens once the wide painting has loaded, easing in, so nothing past today's frame shows before it exists. */
+.bm-scene-inner[data-look] { transition: --bm-reach-l 1.4s ease, --bm-reach-r 1.4s ease;
+  translate: calc(var(--bm-look-x, 0) * -3.6vw + var(--bm-turn-l, 0) * var(--bm-reach-l) - var(--bm-turn-r, 0) * var(--bm-reach-r)) calc(var(--bm-look-y, 0) * -1.4vh);
+  rotate: y calc(var(--bm-look-x, 0) * -1.5deg + (var(--bm-turn-l, 0) - var(--bm-turn-r, 0)) * 2.5deg); }
+.bm-scene-inner[data-look][data-wide] { --bm-reach-l: 64vw; --bm-reach-r: 57vw; }
+.bm-wide { position: absolute; top: 0; height: 100%; background: center / 100% 100% no-repeat; pointer-events: none; }
+.bm-wide svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+/* Our bAI Wing in the searchlight's pool: the dark cut-out a projected signal makes in its light. */
+.bm-wide-mark { fill: #17130d; opacity: .6; }
+/* Today's still and its loop fade out over the blended band at each edge, so the seams stay in the rock. */
+.bm-scene-inner[data-wide] .bm-still, .bm-scene-inner[data-wide] .bm-scene-video {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 3.2%, #000 95.5%, transparent); mask-image: linear-gradient(90deg, transparent, #000 3.2%, #000 95.5%, transparent); }
+@media (max-width: 760px) {
+  .bm-hero { --bm-wl: 0px; --bm-wr: 0px; }
+  .bm-wide { display: none; }
+  .bm-scene-inner[data-wide] .bm-still, .bm-scene-inner[data-wide] .bm-scene-video { -webkit-mask-image: none; mask-image: none; }
+}
 /* Screen wall and desk edge, in percent of the 21:9 frame (phone crop remapped below). */
 .bm-wake-screens { position: absolute; left: 12.3%; top: 18.8%; width: 48.5%; height: 54.4%; opacity: 0; pointer-events: none;
   /* Multiply, not a black fill: bright screens drop to dim glass while the already-dark cave around them barely changes. */
