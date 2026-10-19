@@ -1,0 +1,239 @@
+/* Reading face: Hanken Grotesk (chosen 2026-10-17). Cinzel stays for the name only. Five size steps. */
+@font-face { font-family: 'Bairam Text'; src: url('/fonts/loading/hanken-grotesk-latin-var.woff2') format('woff2'); font-weight: 400 500; font-style: normal; font-display: swap; }
+body:has(.bm-page) { background: #080a0c; transition: none; }
+body:has(.bm-page) > .aifa-assistant-shell { display: none; }
+.bm-page {
+  --bm-gold: #e6b94f;
+  --bm-ink: #d9dedf;
+  --bm-muted: #a8afb3;
+  --bm-line: #303333;
+  min-height: 100svh;
+  color: var(--bm-ink);
+  color-scheme: dark;
+  background: radial-gradient(ellipse at 77% 42%, #25231a66, transparent 42%), #080a0c;
+  --step-small: 14px;
+  --step-body: 17px;
+  --step-lead: clamp(19px, 1.1rem + .35vw, 22px);
+  --step-head: clamp(30px, 1.2rem + 1.9vw, 46px);
+  font: 400 var(--step-body)/1.45 'Bairam Text', sans-serif;
+  letter-spacing: -.005em;
+  isolation: isolate;
+  overflow-x: clip;
+}
+.bm-page * { box-sizing: border-box; }
+.bm-page :where(h1,h2,p) { margin: 0; max-width: none; }
+.bm-page a { color: inherit; text-decoration: none; }
+.bm-page :where(a,button,summary):focus-visible { outline: 2px solid var(--bm-gold); outline-offset: 5px; }
+.bm-page button { font: inherit; cursor: pointer; }
+.bm-page [hidden] { display: none !important; }
+.bm-page :where(a,button,summary) { -webkit-tap-highlight-color: #e6b94f33; }
+.bm-page svg { display: block; }
+.bm-skip { position: fixed; top: 8px; left: 20px; transform: translateY(-160%); padding: 12px 20px; background: var(--bm-gold); color: #080a0c !important; z-index: 20; }
+.bm-skip:focus { transform: none; }
+.bm-header { position: relative; z-index: 5; display: flex; align-items: center; justify-content: space-between; gap: 24px; max-width: 1680px; margin: 0 auto; padding: 28px clamp(24px,5vw,88px); border-bottom: 1px solid var(--bm-line); }
+.bm-brand { font: 700 28px/1 'Bairam Display', serif; letter-spacing: .06em; min-height: 44px; display: inline-flex; align-items: center; }
+.bm-brand span,.bm-title span { color: var(--bm-gold); }
+/* Cinzel draws lowercase as small capitals; enlarging the gold AI makes bAIram read in mixed case, film-title style. */
+.bm-brand span,.bm-title span { font-size: 1.16em; line-height: 0; }
+.bm-desktop-nav { display: flex; align-items: center; gap: 32px; font-size: var(--step-body); font-weight: 500; }
+.bm-desktop-nav a { min-height: 44px; display: flex; align-items: center; position: relative; color: var(--bm-muted); }
+.bm-desktop-nav a[aria-current] { color: var(--bm-ink); }
+.bm-desktop-nav a[aria-current]::after { content: ''; position: absolute; height: 2px; bottom: 0; left: 0; width: 20px; background: var(--bm-gold); }
+.bm-page a:hover { color: var(--bm-gold); }
+.bm-connect { display: inline-flex; align-items: center; gap: 18px; min-height: 44px; font-size: var(--step-body); font-weight: 500; }
+.bm-connect svg { width: 18px; height: 18px; color: var(--bm-gold); }
+.bm-mobile-menu { display: none; }
+.bm-main { max-width: 1680px; margin: 0 auto; padding: 0 clamp(24px,5vw,88px); }
+/* Centred title card: the name is the masthead's focal point. */
+.bm-hero { display: flex; align-items: center; justify-content: center; min-height: max(610px,calc(100svh - 211px)); padding: 58px 0 64px; position: relative; text-align: center; }
+.bm-hero::before { content: ''; position: absolute; left: 50%; top: 46%; width: min(1100px,96%); height: 62%; transform: translate(-50%,-50%); border-radius: 50%; background: radial-gradient(closest-side, #b48a3a1f, transparent); pointer-events: none; z-index: 0; }
+/* Cave scene: full-bleed under the centred name. The copy sits over the dark cave ceiling; the screens and desk show below it.
+   Height reserved below the copy = the image's lit part (about 68% of its height). Top fades to black, bottom fades into the footer line. */
+.bm-hero { --bm-scene-w: 108vw; --bm-scene-h: calc(var(--bm-scene-w) * 1886 / 4398); padding-bottom: calc(var(--bm-scene-h) * .72); }
+/* A soft dark halo keeps the copy readable where the lit alcove and mist rise behind it. */
+.bm-introduction, .bm-secondary { text-shadow: 0 0 14px #080a0c, 0 0 28px #080a0cb3; }
+/* The secondary link sits lowest, over the brightest screens; a slightly brighter ink holds 4.5:1 on every loop frame. */
+.bm-page .bm-secondary { color: #eef1f1; }
+.bm-scene { position: absolute; z-index: 0; bottom: 0; left: calc(50% - 50vw); width: var(--bm-scene-w); height: var(--bm-scene-h); pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000a 22%, #000 42%, #000 86%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000a 22%, #000 42%, #000 86%, transparent); }
+.bm-scene picture, .bm-scene img { display: block; width: 100%; height: 100%; }
+.bm-scene img { object-fit: cover; }
+/* The loop starts on the still's exact frame, so a slow fade hides the hand-off. */
+.bm-scene-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .9s ease; }
+.bm-scene-video[data-shown="true"] { opacity: 1; }
+.bm-copy { z-index: 1; width: 100%; max-width: 1180px; container-type: inline-size; display: flex; flex-direction: column; align-items: center; }
+.bm-role { color: var(--bm-muted); font-size: var(--step-small); font-weight: 500; line-height: 1.7; letter-spacing: .01em; display: flex; align-items: center; justify-content: center; gap: 18px; white-space: nowrap; }
+.bm-role::before,.bm-role::after { content: ''; width: clamp(28px,6vw,72px); height: 1px; background: linear-gradient(90deg, transparent, #8a7340); }
+.bm-role::after { transform: scaleX(-1); }
+.bm-role span { color: #645e4c; padding: 0 10px; }
+.bm-title { font: 700 clamp(64px,15cqi,200px)/1.05 'Bairam Display', serif; letter-spacing: .05em; margin: 26px 0 0 .05em !important; white-space: nowrap; text-shadow: 0 2px #57616b,0 5px #171c22,0 18px 40px #0008; }
+.bm-title span { text-shadow: 0 2px #846520,0 5px #30230e,0 18px 40px #0008; }
+.bm-title:focus { outline: none; }
+.bm-introduction { margin-top: 30px; display: flex; flex-direction: column; align-items: center; }
+.bm-introduction::before { content: ''; width: 64px; height: 1px; background: var(--bm-gold); margin-bottom: 30px; opacity: .8; }
+.bm-introduction h2 { font: 500 var(--step-head)/1.05 'Bairam Text', sans-serif; letter-spacing: -.035em; }
+.bm-introduction p { color: var(--bm-muted); font-size: var(--step-lead); line-height: 1.45; margin-top: 16px; }
+.bm-actions { display: flex; flex-wrap: wrap; gap: 16px 26px; align-items: center; justify-content: center; margin-top: 34px; }
+.bm-actions a { display: inline-flex; min-height: 52px; align-items: center; justify-content: center; gap: 22px; font-size: var(--step-body); font-weight: 500; }
+.bm-actions svg { width: 19px; height: 19px; flex: 0 0 auto; }
+.bm-primary { background: var(--bm-gold); color: #101216 !important; padding: 13px 20px; border: 1px solid var(--bm-gold); box-shadow: 3px 3px 0 #705928; }
+.bm-primary:hover { background: #f5cd6b; }
+.bm-secondary { border-bottom: 1px solid #57584f; padding: 12px 0; }
+.bm-secondary svg { color: var(--bm-gold); }
+.bm-bottom { min-height: 105px; display: flex; align-items: center; gap: 28px; border-top: 1px solid var(--bm-line); padding: 22px 0 max(22px,env(safe-area-inset-bottom)); }
+.bm-initiative { display: inline-flex; align-items: center; min-height: 44px; gap: 20px; font-size: var(--step-body); font-weight: 500; }
+.bm-initiative > span { color: var(--bm-gold); }
+.bm-socials { display: flex; gap: 24px; margin-left: auto; }
+.bm-socials a { display: flex; align-items: center; min-height: 44px; gap: 8px; color: var(--bm-muted); font-size: var(--step-small); letter-spacing: .01em; }
+.bm-socials svg { width: 14px; height: 14px; }
+.bm-controls { display: flex; gap: 12px; }
+.bm-replay, .bm-scene-toggle { display: flex; align-items: center; justify-content: center; gap: 8px; background: none; color: var(--bm-muted); padding: 10px 12px; border: 1px solid var(--bm-line); min-height: 44px; font-size: var(--step-small) !important; letter-spacing: .01em; }
+.bm-replay:hover, .bm-scene-toggle:hover { border-color: #827047; color: var(--bm-gold); }
+.bm-replay svg, .bm-scene-toggle svg { width: 16px; height: 16px; }
+.bm-opening-dialog { border: 0; padding: 0; margin: 0; max-width: none; max-height: none; width: 100%; height: 100svh; background: #080a0c; color: var(--bm-ink); overflow: auto; }
+.bm-opening-dialog::backdrop { background: #080a0c; }
+.bm-opening-dialog .bairam-opening { width: 100%; }
+/* On the masthead the loader's Skip/Replay use the same reading face, so a visit shows one text font. /prototype/loading keeps Manrope. */
+.bm-opening-dialog .bairam-opening-controls button { font-family: 'Bairam Text', sans-serif; }
+/* Hand-off: during the bats' flight the opening's dark veil fades, so they fly out over the cave as it wakes. */
+@property --bm-veil { syntax: '<number>'; inherits: true; initial-value: 1; }
+.bm-opening-dialog { background: rgb(8 10 12 / var(--bm-veil)); }
+.bm-opening-dialog .bairam-opening { background: radial-gradient(ellipse at 50% 46%, rgb(36 35 28 / var(--bm-veil)) 0%, rgb(18 20 22 / var(--bm-veil)) 38%, rgb(8 10 12 / var(--bm-veil)) 76%); background-color: rgb(8 10 12 / var(--bm-veil)); }
+.bm-opening-dialog .bairam-opening::before, .bm-opening-dialog .bairam-opening::after { opacity: var(--bm-veil); }
+.bm-opening-dialog[data-handoff] { animation: bm-handoff 1s ease-in-out .15s forwards; }
+.bm-opening-dialog[data-handoff]::backdrop { background: transparent; }
+.bm-preveil { position: fixed; inset: 0; z-index: 100; background: #080a0c; }
+.bm-preveil[hidden], .bm-page[data-enhanced="true"] ~ .bm-preveil { display: none; }
+@keyframes bm-handoff { to { --bm-veil: 0; } }
+@media (max-width: 1050px) {
+  .bm-desktop-nav { gap: 22px; }
+  .bm-hero { min-height: 600px; }
+  .bm-role span { padding: 0 5px; }
+  .bm-actions { gap: 16px; }
+}
+@media (max-width: 760px) {
+  .bm-header { padding: 18px 24px; }
+  .bm-brand { font-size: 24px; }
+  .bm-desktop-nav,.bm-connect { display: none; }
+  .bm-mobile-menu { display: block; }
+  .bm-mobile-menu summary { list-style: none; display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 8px 0 8px 12px; cursor: pointer; }
+  .bm-mobile-menu summary::-webkit-details-marker { display: none; }
+  .bm-mobile-menu summary svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.5; }
+  .bm-mobile-menu[open] summary { color: var(--bm-gold); }
+  .bm-mobile-menu nav { position: absolute; left: 16px; right: 16px; top: calc(100% - 1px); display: grid; background: #121619; border: 1px solid #45463d; padding: 12px; box-shadow: 0 20px 40px #000a; }
+  .bm-mobile-menu nav a { padding: 12px 16px; min-height: 48px; display: flex; align-items: center; justify-content: space-between; }
+  .bm-mobile-menu nav a[aria-current] { color: var(--bm-gold); }
+  .bm-mobile-menu nav svg { width: 18px; height: 18px; }
+  .bm-main { padding: 0 24px; }
+  .bm-hero { min-height: auto; padding: 56px 0 44px; --bm-scene-w: 100vw; --bm-scene-h: calc(100vw * 930 / 900); padding-bottom: calc(var(--bm-scene-h) * .7); }
+  .bm-role { font-size: 13px; gap: 12px; }
+  .bm-role::before,.bm-role::after { display: none; }
+  .bm-role span { padding: 0; }
+  .bm-title { font-size: clamp(64px,19cqi,120px); margin-top: 22px !important; }
+  .bm-introduction { margin-top: 30px; }
+  .bm-introduction h2 { font-size: clamp(30px, 8vw, 38px); }
+  .bm-introduction p { font-size: var(--step-body); }
+  .bm-actions { margin-top: 28px; }
+  .bm-actions a { font-size: 16px; }
+  .bm-bottom { flex-wrap: wrap; gap: 12px 18px; padding-top: 16px; }
+  .bm-initiative { font-size: 16px; }
+  .bm-socials { gap: 16px; }
+  .bm-socials a { font-size: 14px; }
+  .bm-controls { width: 100%; }
+  .bm-replay, .bm-scene-toggle { flex: 1 1 0; }
+}
+@media (max-width: 370px) {
+  .bm-header { padding: 16px 20px; }
+  .bm-main { padding: 0 20px; }
+  .bm-role { gap: 8px; font-size: 13px; }
+  .bm-actions { gap: 14px; }
+  .bm-socials { margin-left: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .bm-page * { scroll-behavior: auto; } }
+@media (prefers-reduced-motion: reduce) { .bm-scene-video { display: none; } }
+
+/* ---- Cave wake-up (steps 2 + 3). Pure CSS so it never waits on hydration; the page restarts it after an opening.
+   Rest state of every rule below is the normal masthead, so reduced motion and finished animations look identical. */
+.bm-scene-inner { position: absolute; inset: 0; transform-origin: 38% 46%; scale: 1.02; }
+/* Look around (mouse and trackpad only; masthead.tsx sets data-look and the -1..1 pointer values each frame, already
+   smoothed, so no CSS transition). The scene is 108vw anchored at the left, so scaling 1.08 from its centre leaves about
+   4vw spare on each side; the pan uses 3.6vw of it, and the slight turn brings the side you look at nearer, which only
+   ever widens that side. Height edges sit in the scene's top and bottom fades. */
+.bm-scene { perspective: 2400px; }
+/* The scroll push (bm-push) owns scale where scroll timelines run, so it starts from the same 1.08 here. */
+.bm-scene-inner[data-look] { --bm-push-from: 1.08; --bm-push-to: 1.13; transform-origin: 50% 46%; scale: 1.08; will-change: transform;
+  translate: calc(var(--bm-look-x, 0) * -3.6vw) calc(var(--bm-look-y, 0) * -1.4vh); rotate: y calc(var(--bm-look-x, 0) * -1.5deg); }
+.bm-scene-inner picture { position: absolute; inset: 0; }
+/* Screen wall and desk edge, in percent of the 21:9 frame (phone crop remapped below). */
+.bm-wake-screens { position: absolute; left: 12.3%; top: 18.8%; width: 48.5%; height: 54.4%; opacity: 0; pointer-events: none;
+  /* Multiply, not a black fill: bright screens drop to dim glass while the already-dark cave around them barely changes. */
+  background: radial-gradient(closest-side, #3a3a3a 72%, #fff); mix-blend-mode: multiply;
+  -webkit-mask-image: linear-gradient(90deg, transparent 44%, #000 56%); mask-image: linear-gradient(90deg, transparent 44%, #000 56%);
+  -webkit-mask-size: 300% 100%; mask-size: 300% 100%; -webkit-mask-position: 100% 0; mask-position: 100% 0; }
+.bm-wake-desk { position: absolute; left: 35.2%; top: 63.9%; width: 19.4%; height: 18px; translate: 0 -50%; overflow: hidden; pointer-events: none; mix-blend-mode: screen; }
+.bm-wake-desk::before { content: ''; position: absolute; top: 0; bottom: 0; left: -22%; width: 22%; opacity: 0;
+  background: radial-gradient(ellipse 50% 50% at 50% 50%, #fffbea 0, #ffe2a0 18%, #ffc763b0 34%, #ffb3402e 62%, transparent 100%); }
+.bm-title span { position: relative; }
+.bm-title span::after { content: 'AI'; position: absolute; left: 0; top: 0; line-height: normal; color: transparent; text-shadow: none; opacity: 0; pointer-events: none;
+  background: linear-gradient(100deg, transparent 38%, #fff6dc 50%, transparent 62%) 100% 0 / 300% 100% no-repeat; -webkit-background-clip: text; background-clip: text; }
+.bm-role::after { transform: none; background: linear-gradient(270deg, transparent, #8a7340); }
+.bm-role::before { transform-origin: right center; }
+.bm-role::after { transform-origin: left center; }
+/* AI FOR ALL on the three desk screens, in percent of each painting (desktop 2400 x 1029, phone 900 x 930), measured
+   on the art. The third screen is half behind the figure's head and shoulder, so ALL sits in its visible right part.
+   Type scales with the scene height, so it stays on its screen at every width. */
+.bm-monitors { position: absolute; inset: 0; pointer-events: none; }
+.bm-monitor { position: absolute; display: grid; place-items: center; padding-left: .08em; color: #f6f1e6; letter-spacing: .08em;
+  font: 700 calc(var(--bm-scene-h) * var(--bm-mon, .024))/1 'Bairam Display', serif; white-space: nowrap;
+  text-shadow: 0 0 .18em #fff3d6aa, 0 0 .6em #ffd57a59; background: radial-gradient(closest-side, #0a0c0f8c, #0a0c0f00); }
+.bm-monitor[data-monitor="1"] { left: 37.33%; top: 55.39%; width: 3.33%; height: 5.83%; --bm-mon: .026; color: #f2c75c; text-shadow: 0 0 .18em #ffd56fb3, 0 0 .6em #e6b94f73; }
+.bm-monitor[data-monitor="2"] { left: 40.73%; top: 55.49%; width: 3.73%; height: 5.54%; --bm-mon: .023; }
+.bm-monitor[data-monitor="3"] { left: 46.17%; top: 55.78%; width: 2.29%; height: 2.92%; --bm-mon: .0165; }
+@media (max-width: 760px) {
+  .bm-monitor[data-monitor="1"] { left: 47.78%; top: 55.32%; width: 7.89%; height: 6.08%; --bm-mon: .028; }
+  .bm-monitor[data-monitor="2"] { left: 55.83%; top: 55.32%; width: 9.06%; height: 6.08%; --bm-mon: .025; }
+  .bm-monitor[data-monitor="3"] { left: 69%; top: 55.59%; width: 5.11%; height: 3.01%; --bm-mon: .019; }
+}
+@media (max-width: 760px) {
+  .bm-wake-screens { left: -12.7%; width: 116.9%; }
+  .bm-wake-desk { left: 42.5%; width: 46.8%; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .bm-scene { animation: bm-wake-scene 1.4s cubic-bezier(.2,.6,.2,1) backwards; }
+  /* The header and its small wordmark arrive with the copy, so the opening's name never shares the screen with it. */
+  .bm-header { animation: bm-wake-header .7s ease-out calc(var(--bm-text-lag, 0s) + .1s) backwards; }
+  .bm-wake-screens { animation: bm-wake-screens 1.1s cubic-bezier(.45,0,.3,1) .5s backwards; }
+  .bm-wake-desk::before { animation: bm-wake-glint 1.1s cubic-bezier(.45,0,.25,1) 1.3s backwards; }
+  /* The three words power on one after another as the screen wall wakes: a quick flicker, then steady. */
+  .bm-monitor { animation: bm-wake-monitors .7s linear calc(1.2s + var(--bm-mon-i, 0) * .16s) backwards; }
+  .bm-monitor[data-monitor="2"] { --bm-mon-i: 1; }
+  .bm-monitor[data-monitor="3"] { --bm-mon-i: 2; }
+  .bm-role { animation: bm-wake-fade .7s ease-out calc(var(--bm-text-lag, 0s) + .1s) backwards; }
+  .bm-role::before, .bm-role::after { animation: bm-wake-draw .8s cubic-bezier(.2,.7,.2,1) calc(var(--bm-text-lag, 0s) + .4s) backwards; }
+  .bm-title { animation: bm-wake-rise 1s cubic-bezier(.2,.7,.2,1) calc(var(--bm-text-lag, 0s) + .2s) backwards; }
+  .bm-title span::after { animation: bm-wake-sweep .9s ease-in-out calc(var(--bm-text-lag, 0s) + 1.45s) backwards; }
+  .bm-introduction::before { animation: bm-wake-draw .6s cubic-bezier(.2,.7,.2,1) calc(var(--bm-text-lag, 0s) + .7s) backwards; }
+  .bm-introduction h2 { animation: bm-wake-fade .7s ease-out calc(var(--bm-text-lag, 0s) + .8s) backwards; }
+  .bm-introduction p { animation: bm-wake-fade .7s ease-out calc(var(--bm-text-lag, 0s) + .95s) backwards; }
+  .bm-actions { animation: bm-wake-fade .7s ease-out calc(var(--bm-text-lag, 0s) + 1.1s) backwards; }
+  /* Scroll pushes gently toward the desk where the browser supports scroll-linked animation. */
+  @supports (animation-timeline: scroll()) {
+    .bm-scene-inner { animation: bm-push linear both; animation-timeline: scroll(root); animation-range: 0 70vh; }
+  }
+}
+/* Replay: drop every wake animation for one frame so they restart from the top. */
+.bm-page[data-wake-reset] .bm-header, .bm-page[data-wake-reset] .bm-main *, .bm-page[data-wake-reset] .bm-main *::before, .bm-page[data-wake-reset] .bm-main *::after { animation: none !important; }
+/* A soft dark pool under the actions keeps both links readable over the brightest loop frames. */
+.bm-actions { position: relative; }
+.bm-actions::before { content: ''; position: absolute; inset: -18px -56px; z-index: -1; pointer-events: none; background: radial-gradient(closest-side, #080a0cc7, #080a0c66 62%, transparent); }
+@keyframes bm-wake-scene { from { opacity: 0; filter: brightness(.3); translate: 0 22px; } to { opacity: 1; filter: none; translate: 0 0; } }
+@keyframes bm-wake-screens { 0% { opacity: 1; -webkit-mask-position: 100% 0; mask-position: 100% 0; } 85% { opacity: 1; -webkit-mask-position: 0 0; mask-position: 0 0; } 100% { opacity: 0; -webkit-mask-position: 0 0; mask-position: 0 0; } }
+@keyframes bm-wake-monitors { 0% { opacity: 0; } 25% { opacity: .85; } 38% { opacity: .1; } 60% { opacity: 1; } 72% { opacity: .55; } 100% { opacity: 1; } }
+@keyframes bm-wake-glint { 0% { opacity: 0; translate: 0 0; } 15%, 80% { opacity: 1; } 100% { opacity: 0; translate: 555% 0; } }
+@keyframes bm-wake-header { from { opacity: 0; } }
+@keyframes bm-wake-fade { from { opacity: 0; translate: 0 10px; } to { opacity: 1; translate: 0 0; } }
+@keyframes bm-wake-rise { from { opacity: 0; translate: 0 18px; filter: blur(6px); } to { opacity: 1; translate: 0 0; filter: none; } }
+@keyframes bm-wake-draw { from { scale: 0 1; } to { scale: 1 1; } }
+@keyframes bm-wake-sweep { 0% { opacity: 0; background-position: 100% 0; } 20%, 80% { opacity: 1; } 100% { opacity: 0; background-position: 0 0; } }
+@keyframes bm-push { from { scale: var(--bm-push-from, 1.02); } to { scale: var(--bm-push-to, 1.07); } }
