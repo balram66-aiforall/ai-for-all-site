@@ -1,0 +1,39 @@
+import ts from 'typescript';
+import {readFile,writeFile} from 'node:fs/promises';
+import vm from 'node:vm';
+import assert from 'node:assert/strict';
+const source=await readFile(new URL('../app/prototype/loading/motion.ts',import.meta.url),'utf8');
+const code=ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
+const results=[];
+function check(name,fn){try{fn();results.push({name,pass:true});console.log('PASS',name)}catch(e){results.push({name,pass:false,error:e.message});console.log('FAIL',name,e.message)}}
+function setup(reduced=false){
+ const frames=new Map(),events=new Map(),winEvents=new Map();let id=0;
+ const node=()=>({style:{},setAttribute(k,v){this[k]=v},getBoundingClientRect:()=>({left:0,top:0,width:1440,height:900})});
+ const stage=node(),word=node(),slots=Array.from({length:6},(_,i)=>({...node(),getBoundingClientRect:()=>({left:560+i*50,top:400,width:50,height:100})}));
+ const from=Array.from({length:3},node),to=Array.from({length:3},node);
+ const bat=()=>({...node(),wings:[node(),node()],querySelector(s){return this.wings[s.includes('left')?0:1]}});const bats=Array.from({length:22},bat),flyby=Array.from({length:12},bat);
+ const doc={hidden:false,addEventListener:(k,v)=>events.set(k,v),removeEventListener:k=>events.delete(k)};
+ const context={exports:{},document:doc,window:{addEventListener:(k,v)=>winEvents.set(k,v),removeEventListener:k=>winEvents.delete(k)},requestAnimationFrame:fn=>{frames.set(++id,fn);return id},cancelAnimationFrame:id=>frames.delete(id)};
+ vm.runInNewContext(code,context);const phases=[];
+ const controller=context.exports.createOpening({stage,word,slots,from,to,bats,flyby},{reduced,onPhase:p=>phases.push(p)});
+ const step=time=>{const pending=[...frames.values()];frames.clear();pending.forEach(fn=>fn(time))};
+ return {controller,step,frames,phases,word,from,to,bats,flyby,events,winEvents,doc,api:context.exports};
+}
+check('exact sequence and completion leaves no RAF',()=>{const s=setup();s.controller.start();for(const t of [0,300,900,1400,1720,2500,4260])s.step(t);assert.deepEqual(s.phases,['balram','flyby','transforming','bairam','flight','complete']);assert.equal(s.frames.size,0);assert.equal(s.word.style.opacity,'0')});
+check('B, a, l change by shadow cut, never showing old and new letter together; uppercase I is complete before flight',()=>{const s=setup();s.controller.start();s.step(0);for(let t=1250;t<=1760;t+=10){s.step(t);s.from.forEach((a,i)=>assert(!(Number(a.style.opacity)>0&&Number(s.to[i].style.opacity)>0),`letter ${i} doubled at ${t}ms`))}s.step(1800);assert(s.to.every(x=>x.style.opacity==='1'))});
+check('22 bats start at their own letter coordinates with finite bounded poses',()=>{const {api}=setup();for(let i=0;i<22;i++){const b=api.BATS[i],p=api.batPose(i,b.delay,{x:123,y:456},1440,900);assert.equal(p.x,123);assert.equal(p.y,456);assert.equal(p.opacity,0);for(let t=0;t<=3500;t+=17){const pose=api.batPose(i,t,{x:123,y:456},320,568);assert(Object.values(pose).every(Number.isFinite));assert(pose.opacity>=0&&pose.opacity<=1);assert(pose.scale>0)}}});
+check('all bats leave before completion',()=>{const {api}=setup();assert(api.BATS.every(b=>b.delay+b.duration<=api.TIMING.end))});
+check('Balram reads on its own before any bat arrives',()=>{const s=setup();s.controller.start();s.step(0);s.step(950);assert(s.from.every(a=>a.style.opacity==='1'));assert(s.bats.every(b=>b.style.opacity==='0'));const word={x:200,y:300,width:1040,height:300};assert(s.api.FLYBY.every((_,i)=>s.api.flybyPose(i,950,word,1440).x<word.x),'a bat reached the name too early')});
+check('the letters change only while the fly-by flock is crossing the name',()=>{const s=setup();const word={x:200,y:300,width:1040,height:300},{api}=s;const cell=word.width/6;for(let t=api.TIMING.morph;t<=api.TIMING.morphEnd;t+=20)for(let l=0;l<3;l++){const mix=api.letterMix(t,l);if(mix<.2||mix>.8)continue;const c=word.x+cell*(l+.5);const over=api.FLYBY.map((_,i)=>[api.FLYBY[i],api.flybyPose(i,t,word,1440)]).filter(([b,p])=>b.near&&p.opacity>.5&&Math.abs(p.x-c)<cell/2+20*p.scale);assert(over.length>=1,`letter ${l} changes with no near bat over it at ${t}ms`)}});
+check('the fly-by flock has gone before the fly-away starts, and bAIram holds clean in between',()=>{const {api}=setup();assert(api.FLYBY.every(b=>b.delay+b.duration<=api.TIMING.flight));assert(api.TIMING.flight-api.TIMING.morphEnd>=600);const s=setup();s.controller.start();s.step(0);s.step(2300);assert(s.flyby.every(b=>b.style.opacity==='0'));assert(s.bats.every(b=>b.style.opacity==='0'));assert(s.to.every(x=>x.style.opacity==='1'));assert.equal(s.word.style.opacity,'1')});
+check('fly-by bats flap, mix depths and travel left to right',()=>{const s=setup();s.controller.start();s.step(0);s.step(1500);const live=s.flyby.filter(b=>Number(b.style.opacity)>0);assert(live.length>=6);const w=s.flyby[0].wings[0].transform;s.step(1540);assert.notEqual(s.flyby[0].wings[0].transform,w);const {api}=s,word={x:200,y:300,width:1040,height:300};assert(api.FLYBY.some(b=>b.near)&&api.FLYBY.some(b=>!b.near));for(let i=0;i<12;i++){const a=api.flybyPose(i,api.FLYBY[i].delay+200,word,1440),b=api.flybyPose(i,api.FLYBY[i].delay+800,word,1440);assert(b.x>a.x);for(let t=0;t<=4300;t+=17)assert(Object.values(api.flybyPose(i,t,word,390)).every(Number.isFinite))}});
+check('flight includes wing flapping and different depths',()=>{const s=setup();s.controller.start();s.step(0);s.step(3200);assert(s.bats.some(b=>Number(b.style.opacity)>0));const wing=s.bats[0].wings[0].transform;s.step(3250);assert.notEqual(s.bats[0].wings[0].transform,wing);assert(s.api.BATS.some(b=>b.near)&&s.api.BATS.some(b=>!b.near))});
+check('rapid replay owns exactly one RAF',()=>{const s=setup();for(let i=0;i<50;i++){s.controller.start();assert.equal(s.frames.size,1);s.step(i*20)}s.controller.skip();assert.equal(s.frames.size,0)});
+check('skip is idempotent and clears every bat',()=>{const s=setup();s.controller.start();s.step(0);s.step(1500);s.controller.skip();s.controller.skip();assert.equal(s.phases.filter(p=>p==='complete').length,1);assert(s.bats.every(b=>b.style.opacity==='0')&&s.flyby.every(b=>b.style.opacity==='0'));assert.equal(s.frames.size,0)});
+check('reduced motion crossfades without flight or endless loop',()=>{const s=setup(true);s.controller.start();for(const t of [0,600,900,1380,1700])s.step(t);assert.deepEqual(s.phases,['balram','transforming','bairam','complete']);assert(s.bats.every(b=>b.style.opacity==='0')&&s.flyby.every(b=>!b.style.opacity||b.style.opacity==='0'));assert.equal(s.word.style.opacity,'1');assert.equal(s.frames.size,0)});
+check('dynamic reduced motion immediately cancels flight',()=>{const s=setup();s.controller.start();s.step(0);s.step(1500);s.controller.setReducedMotion(true);assert.equal(s.frames.size,0);assert(s.bats.every(b=>b.style.opacity==='0')&&s.flyby.every(b=>b.style.opacity==='0'));assert.equal(s.word.style.opacity,'1')});
+check('hidden tab finishes without background work or surprise replay',()=>{const s=setup();s.controller.start();s.doc.hidden=true;s.events.get('visibilitychange')();assert.equal(s.frames.size,0);s.doc.hidden=false;s.events.get('visibilitychange')();assert.equal(s.frames.size,0)});
+check('resize remeasures without an extra loop',()=>{const s=setup();s.controller.start();s.winEvents.get('resize')();assert.equal(s.frames.size,1)});
+check('unmount removes listeners, frames, and refuses restart',()=>{const s=setup();s.controller.start();s.controller.destroy();s.controller.start();s.controller.skip();assert.equal(s.frames.size,0);assert.equal(s.events.size,0);assert.equal(s.winEvents.size,0)});
+await writeFile(new URL((process.env.UNIT_OUT||'../../frontier-aimplify/work/builder/2026-10-11-bairam-loading/evidence/unit.json'),import.meta.url),JSON.stringify(results,null,2)+'\n');
+if(results.some(r=>!r.pass))process.exitCode=1;

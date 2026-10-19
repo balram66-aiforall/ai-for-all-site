@@ -1,0 +1,167 @@
+/* ---- Cave map (/prototype/bairam-map). Builds on journey.css; only what the shared world changes. ---- */
+
+/* The world: fixed behind every chamber. Hidden until the engine has measured it (no JS: a plain dark page). */
+.bmap-world { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; background: #07090b;
+  opacity: 0; transition: opacity .22s ease; contain: strict; }
+/* --bmap-open (set by the engine): 0 while the masthead is on screen, so its own scene stays clean (no painted cave
+   showing through it); the world fades in only once the masthead has gone, under the bats. */
+.bmap-world[data-ready] { opacity: var(--bmap-open, 1); }
+/* Its own GPU layer: a zoom rescales the painted cave instead of repainting all 3168 px of it every frame. */
+.bmap-camera { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform; }
+/* The painting, with its edges fading into the surrounding dark (the colour of its own edge rock), so a shot that
+   reaches past the painting never shows a border. */
+.bmap-art { position: absolute; left: 0; top: 0; }
+.bmap-art-img, .bmap-art-hi { display: block; width: 100%; height: 100%; user-select: none; }
+/* The sharp painting sits exactly over the first one (same size, pixel-aligned), so the swap is invisible except for detail. */
+.bmap-art-hi { position: absolute; left: 0; top: 0; }
+.bmap-art-hi[hidden] { display: none; }
+.bmap-art::after { content: ""; position: absolute; inset: 0; box-shadow: inset 0 0 110px 50px #07090b; pointer-events: none; }
+.bmap-svg { display: block; position: absolute; left: 0; top: 0; overflow: visible; z-index: 1; }
+/* Our marks, added in code: gold and flat on the turntable, a soft projection at the end of the searchlight. */
+.bmap-mark { fill: #e6b94f; }
+.bmap-mark-deck { opacity: .82; }
+.bmap-mark-sky { fill: #f6e2a6; opacity: .62; }
+/* Room labels: the engine sets --bmap-label, non-zero only while no chamber copy is on screen (no overlaps).
+   Without the engine they stay hidden. A dark rim keeps them readable over the painting. On a phone the whole-map
+   shot is too small to read them, so they wait for the camera to come in. */
+.bmap-label { opacity: var(--bmap-label, 0); fill: #e4e7e9; stroke: #07090bf2; stroke-width: 14px; paint-order: stroke; stroke-linejoin: round; }
+.bmap-label-n { fill: #f2cc6b; }
+.bmap-world[data-layout="phone"][data-shot="reveal"] .bmap-label { opacity: 0; }
+.bmap-world[data-reveal-labels="off"][data-shot="reveal"] .bmap-label { opacity: 0; }
+.bmap > .bj-stage, .bmap > .bj-stage > [data-chamber] { position: relative; z-index: 1; }
+/* The masthead stage sits before the journey in <main>; lift it over the fixed world too. */
+main:has(.bmap) > .bj-stage { position: relative; z-index: 1; }
+
+/* Flights get more scroll than Phase 1's passages, and the next chamber no longer rises over the pinned one:
+   the passage is real scroll distance (copy fades, the camera flies, then the next copy rises in).
+   So with the engine running the page is longer than without it; that is the flight. */
+main:has(.bmap)[data-motion] .bmap .bj-stage { margin-top: 0; }
+main:has(.bmap)[data-motion="3d"] { --bj-pass: 110svh; }
+main:has(.bmap)[data-motion="calm"] { --bj-pass: 40svh; }
+@media (max-width: 760px) { main:has(.bmap)[data-motion="3d"] { --bj-pass: 85svh; } }
+
+/* Chambers become glass over the world: a scrim keeps the copy readable, the room shows on the right.
+   The vault and the proving wall keep their own art for now (their painted plates replace it later). */
+.bmap .bj-stone { background: linear-gradient(90deg, #080a0cf2 0%, #080a0cdb 46%, #080a0c8c 72%, #080a0c33 100%); }
+.bmap .bj-stone::before, .bmap .bj-stone::after { display: none; }
+.bmap .bj-pending { display: none; }
+@media (max-width: 760px) { .bmap .bj-stone { background: #080a0ce0; } }
+/* Tablets and small laptops: the copy runs further across (to ~85%), past where the scrim fades, so it holds longer. */
+@media (min-width: 761px) and (max-width: 1199px) { .bmap .bj-stone { background: linear-gradient(90deg, #080a0cf2 0%, #080a0ce0 58%, #080a0cc2 84%, #080a0c66 100%); } }
+/* The masthead keeps its own scene; without the engine every chamber keeps a solid ground. */
+.bm-journey-main:not([data-motion]) .bmap .bj-stone { background: #080a0c; }
+
+/* The reveal: the whole painted map, with a legend of the chapters below it. */
+.bmap-reveal { min-height: 100svh; display: flex; align-items: flex-end; justify-content: center; padding: 0 24px clamp(40px, 8vh, 88px); }
+.bmap-legend { list-style: none; margin: 0; padding: 12px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 18px;
+  background: #080a0cc7; border: 1px solid #23272b; }
+.bmap-legend a { display: inline-flex; gap: 8px; min-height: 40px; align-items: center; color: var(--bm-ink); font-size: var(--step-small); }
+.bmap-legend a:hover { color: var(--bm-gold); }
+.bm-journey-main:not([data-motion]) .bmap-reveal { min-height: 0; padding: 48px 24px; }
+
+/* The cable's travelling light carries the mark. */
+.bmap-pulse { color: var(--bm-gold); }
+.bmap-pulse .bk-mark { position: absolute; left: -6.5px; top: 49px; color: var(--bm-gold); filter: drop-shadow(0 0 6px #e6b94f99); }
+.bmap .bj-cable-pulse.bmap-pulse::after { top: 10px; bottom: 10px; }
+
+/* The cover flock: nine dark bats with a faint gold rim, crossing low-left to high-right in about 1.7 s, the biggest last. */
+.bmap-flock { position: fixed; inset: 0; z-index: 25; pointer-events: none; overflow: hidden; display: none; }
+.bmap-flock[data-run] { display: block; }
+/* Near bats are big (up to about a third of the screen), so for a moment they genuinely fill the frame over the cut. */
+.bmap-bat { position: absolute; left: 0; top: 0; width: calc(clamp(90px, 9vw, 150px) + var(--i) * clamp(14px, 2.4vw, 40px)); height: auto; fill: #040506;
+  filter: drop-shadow(0 0 1.5px #e6b94f59); opacity: 0; will-change: transform, opacity; }
+.bmap-flock[data-run] .bmap-bat { animation: bmap-cross calc(1500ms + var(--i) * 40ms) cubic-bezier(.45, .05, .55, .95) calc(var(--i) * 70ms) both; }
+.bmap-flock[data-run] .bmap-bat:nth-child(odd) { --lane: -1; }
+.bmap-bat { --lane: 1; }
+.bmap-flock[data-run] .bmap-wing { transform-origin: 0 0; animation: bmap-flap 180ms ease-in-out calc(var(--i) * 23ms) infinite alternate; }
+@keyframes bmap-cross {
+  0% { opacity: 0; transform: translate3d(-12vw, calc(78vh + var(--i) * 2.2vh), 0) scale(.7) rotate(-8deg); }
+  12% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { opacity: 0; transform: translate3d(108vw, calc(8vh + var(--i) * 3.4vh * var(--lane) + 14vh), 0) scale(1.15) rotate(-14deg); }
+}
+@keyframes bmap-flap { from { transform: scaleY(1); } to { transform: scaleY(.35); } }
+@media (prefers-reduced-motion: reduce) { .bmap-world { transition-duration: .18s; } .bmap-flock { display: none !important; } }
+
+/* ---- Step 4: depth and small loops (depth.ts). Transform and opacity only; all of it off under reduced motion. ---- */
+/* On the painting: in its pixels, inside the camera, under the room labels. */
+.bmap-fx { position: absolute; left: 0; top: 0; width: 0; height: 0; pointer-events: none; }
+.bmap-fx > i, .bmap-fx > div, .bmap-fall > i { position: absolute; display: block; }
+/* The waterfall: two layers of streaks fall through the painted sheet at different speeds; mist breathes at its foot. */
+.bmap-fall { overflow: hidden; -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 10%, #000 84%, transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0, #000 10%, #000 84%, transparent 100%); }
+.bmap-fall-sheet { left: 0; top: 0; width: 100%; background-repeat: repeat-y; background-size: 100% 260px; will-change: transform;
+  animation: bmap-fall var(--bmap-fall-t) linear infinite; }
+.bmap-fall-sheet + .bmap-fall-sheet { opacity: .75; }
+@keyframes bmap-fall { from { transform: translate3d(0, -260px, 0); } to { transform: translate3d(0, 0, 0); } }
+.bmap-mist { background: radial-gradient(closest-side, #dfe9f5a6, #dfe9f533 55%, #dfe9f500); border-radius: 50%; will-change: transform, opacity;
+  animation: bmap-mist 5.5s ease-in-out infinite alternate; }
+@keyframes bmap-mist { from { transform: scale(.94, .9); opacity: .55; } to { transform: scale(1.1, 1.06); opacity: 1; } }
+/* The screens: a soft glow over each cluster, mostly steady, with the odd quick flicker. */
+.bmap-glow { border-radius: 50%; background: radial-gradient(closest-side, #ffd79a66, #ffd79a26 60%, #ffd79a00); opacity: .4; will-change: opacity;
+  animation: bmap-flicker 6s linear infinite; }
+.bmap-glow[data-cool] { background: radial-gradient(closest-side, #bfe2ff66, #bfe2ff26 60%, #bfe2ff00); }
+@keyframes bmap-flicker { 0%, 100% { opacity: .35; } 38% { opacity: .62; } 39% { opacity: .18; } 40.5% { opacity: .7; } 42% { opacity: .42; } 71% { opacity: .3; } 72% { opacity: .55; } 73% { opacity: .32; } }
+/* The cable: a point of gold light runs each traced run (keyframes generated from the trace in world.tsx). */
+.bmap-spark { left: -15px; top: -15px; width: 30px; height: 30px; border-radius: 50%; opacity: 0;
+  background: radial-gradient(closest-side, #fff6d8, #f6cf6e 38%, #e6b94f40 66%, #e6b94f00); will-change: transform, opacity;
+  animation-timing-function: linear; animation-iteration-count: infinite; animation-fill-mode: both; }
+
+/* In front of the painting: the engine sets each layer's transform (its own depth) and opacity (gone in the wide shots). */
+.bmap-near, .bmap-dust { position: absolute; left: 0; top: 0; width: 0; height: 0; transform-origin: 0 0; will-change: transform, opacity; opacity: 0; }
+.bmap-dust > svg { position: absolute; display: block; overflow: visible; }
+.bmap-rock { position: absolute; display: block; background: center / 100% 100% no-repeat; }
+.bmap-dust-cloud { will-change: transform; animation: bmap-drift 12s ease-in-out infinite alternate; }
+.bmap-dust-cloud:nth-child(even) { animation-direction: alternate-reverse; }
+@keyframes bmap-drift { from { transform: translate3d(-10px, 8px, 0); } to { transform: translate3d(12px, -16px, 0); } }
+
+/* Loops rest when nothing shows them: before the engine is ready, under the masthead, and when the scene is paused
+   (the masthead's Pause scene also stills the cave). Under reduced motion none of it exists. */
+.bmap-world:not([data-ready]) :is(.bmap-fx, .bmap-near, .bmap-dust) { display: none; }
+.bmap-world[data-shot="masthead"] .bmap-loop, main:has(.bm-scene[data-motion="paused"]) .bmap-loop { animation-play-state: paused; }
+main[data-motion="calm"] :is(.bmap-fx, .bmap-near, .bmap-dust) { display: none; }
+@media (prefers-reduced-motion: reduce) { :is(.bmap-fx, .bmap-near, .bmap-dust) { display: none !important; } }
+
+/* ---- Type for the cave map (Oct 18, Balram: "every section should be readable well"). Scoped to this page, so Phase 1
+   and the standalone masthead, vault and wall pages keep theirs. Sizes only; no words change. The wordmark is untouched.
+   Floor: nothing under 15px; contrast checked against the real background by tests/readability-checks.mjs. ---- */
+.bm-page:has(.bmap), .bmap .bv-page, .bmap .pw-page {
+  --step-small: 16px; --step-body: 19px; --step-lead: clamp(21px, 1.2rem + .4vw, 25px); --step-head: clamp(34px, 1.3rem + 2.1vw, 54px);
+}
+@media (max-width: 760px) { .bm-page:has(.bmap), .bmap .bv-page, .bmap .pw-page { --step-small: 15px; --step-body: 18px; } }
+/* Masthead: the role line, and the phone sizes it fixes in px. */
+.bm-page:has(.bmap) .bm-role { font-size: var(--step-small); }
+@media (max-width: 760px) {
+  .bm-page:has(.bmap) .bm-introduction h2 { font-size: clamp(32px, 9vw, 42px); }
+  .bm-page:has(.bmap) .bm-introduction p { font-size: var(--step-body); }
+  .bm-page:has(.bmap) .bm-actions a, .bm-page:has(.bmap) .bm-initiative { font-size: 17px; }
+  .bm-page:has(.bmap) .bm-socials a, .bm-page:has(.bmap) .bm-replay, .bm-page:has(.bmap) .bm-scene-toggle { font-size: 15px !important; }
+}
+/* Fixed small text inside the chambers. */
+.bmap .bj-workbench .example-paper pre { font-size: 16px; }
+.bmap .pw-issuer { font-size: 16px; }
+.bmap .pw-id { font-size: 15px; }
+.bmap .pw-id span, .bmap .bv-suited { font-size: 15px; letter-spacing: .05em; }
+.bmap .bv-plaque { font-size: 16px; color: #cfd4d6; text-shadow: 0 1px 3px #000c; }
+/* Labels sitting on the painting get a solid ground: the status chips, and the chapter list on the right. */
+.bmap .bj-status { background: #0a0c0ff0; color: #c3c8cb; }
+/* Muted captions that sit over the lit painting (the mission room's stat) go up a shade. */
+.bmap .bj-stat span { color: #c9ced1; }
+.bmap .bj-chapters a { font-size: 15px; color: #b9bfc2; }
+.bmap .bj-chapters-n { padding: 2px 6px; background: #080a0cd9; box-shadow: 0 0 10px 4px #080a0cb3; }
+/* Phones: there is no gutter for the list, so it covered the end of every line. The chapter label at the top of each
+   section, the gold progress line on the left and the map's legend already say where you are and link every chapter. */
+@media (max-width: 760px) { .bmap .bj-chapters { display: none !important; } }
+/* Wider screens: the list sits in the right margin, so the copy keeps a lane clear for it. Above ~1440px the centred
+   column's own margin already does this; below it, the right padding grows to keep the numbers off the copy. */
+@media (min-width: 761px) { .bmap .bj-room { padding-right: max(clamp(24px, 5vw, 88px), calc(108px - max(0px, (100vw - 1240px) / 2))); } }
+/* The quiet button is see-through by design; over the waterfall it lost contrast, so it gets the same dark ground as the chips. */
+.bmap .bj-button-quiet { background: #0b0d10e6; }
+.bmap .bj-button-quiet:hover { background: #1a170fe6; }
+
+/* The bAIram signal on the cave map: the painting's own searchlight is the signal here, so the page's drawn beam and
+   mark stay off (two bats in one sky otherwise), and the section loses the empty sky band above it. */
+.bmap .bj-signal-sky { display: none; }
+.bmap .bj-signal { padding-top: 0; }
+/* The topics sit over the bright waterfall at the mouth: a dark panel keeps them readable. */
+.bmap .bj-signal-topics { padding: 24px 28px 8px; background: linear-gradient(160deg, #0a0c0fd9, #0a0c0fbf); box-shadow: 0 0 0 1px #ffffff0f; }

@@ -1,0 +1,17 @@
+/* The Sound button. In the masthead it matches the scene toggle and Replay (same box as masthead.css); on the
+   loading screen it sits beside Skip, on the right, so Replay keeps the left. Pressed = on: icon and label turn gold. */
+.bm-sound-toggle { display: flex; align-items: center; justify-content: center; gap: 8px; background: none; color: var(--bm-muted); padding: 10px 12px;
+  border: 1px solid var(--bm-line); min-height: 44px; font-size: var(--step-small) !important; letter-spacing: .01em; }
+.bm-sound-toggle:hover { border-color: #827047; color: var(--bm-gold); }
+.bm-sound-toggle svg { width: 16px; height: 16px; }
+/* Phones: three buttons need ~408px and the row has 320-382px, so Sound takes its own full-width row below
+   Pause and Replay, which keep their original one-line row. */
+@media (max-width: 760px) { .bm-page:has(.bmap) .bm-controls { flex-wrap: wrap; } .bm-sound-toggle { order: 3; flex: 1 0 100%; } }
+.bm-page:has(.bmap) .bm-sound-toggle { font-size: 15px !important; }
+.bairam-opening-sound { margin-left: auto; margin-right: 12px; }
+.bm-sound-toggle[aria-pressed="true"], .bairam-opening-controls .bairam-opening-sound[aria-pressed="true"] { color: var(--bm-gold, #e6b94f); }
+.bm-sound-toggle[aria-pressed="true"] { border-color: #827047; }
+/* On, but waiting for the first click/tap/key: gold like "on", with a gentle glow pulse inviting the click. */
+@keyframes bairam-sound-invite { 0%, 100% { box-shadow: 0 0 0 0 rgba(230, 185, 79, 0); } 50% { box-shadow: 0 0 0 4px rgba(230, 185, 79, .24); } }
+[data-sound-toggle="waiting"] { animation: bairam-sound-invite 2.4s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { [data-sound-toggle="waiting"] { animation: none; } }

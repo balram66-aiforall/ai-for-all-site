@@ -1,0 +1,109 @@
+@font-face {
+  font-family: 'Bairam Opening';
+  src: url('/fonts/loading/manrope-500.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Bairam Display';
+  src: url('/fonts/loading/cinzel-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+body:has(.bairam-opening) { background: #080a0c; transition: none; }
+body:has(.bairam-opening) > .aifa-assistant-shell { display: none; }
+.bairam-opening {
+  position: relative;
+  isolation: isolate;
+  container-type: inline-size;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100svh;
+  min-height: 240px;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 46%, #24231c 0%, #121416 38%, #080a0c 76%);
+  background-color: #080a0c;
+  color: #d9dedf;
+  color-scheme: dark;
+  font-family: 'Bairam Opening', sans-serif;
+  font-weight: 500;
+}
+.bairam-opening * { box-sizing: border-box; }
+/* Static armour-like facets; no image wallpaper, flashing or moving background. */
+.bairam-opening::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(132deg, transparent 24.95%, #c5d0d507 25%, transparent 25.12%), linear-gradient(228deg, transparent 24.95%, #c5d0d507 25%, transparent 25.12%);
+}
+.bairam-opening::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 16vmin #030405b3;
+}
+.bairam-opening-word {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+  max-width: none;
+  font: 700 min(16.2vw, 18.3rem)/1.15 'Bairam Display', serif;
+  /* Cinzel: lowercase renders as small capitals, so bAIram reads like a film title. ~72% of the stage; no inherited site-heading cap. */
+  font-size: min(16.2cqw, 18.3rem);
+  text-shadow: 0 2px 0 #57616b, 0 5px 0 #171c22, 0 14px 32px #0009;
+  line-height: 1.15;
+  font-kerning: normal;
+  user-select: none;
+}
+.bairam-opening-letters { display: flex; align-items: baseline; }
+.bairam-opening-slot { display: inline-grid; position: relative; text-align: center; }
+.bairam-opening-slot { align-items: baseline; }
+.bairam-opening-slot > span { grid-area: 1 / 1; align-self: baseline; }
+/* Slot widths from measured Cinzel 700 advances (B .674/b .604, a .644/A .717, l .549/I .387, r .658, a .644, m .863) plus title tracking; gold A and I are drawn 1.16x so bAIram reads in mixed case. */
+.bairam-opening-slot-0 { width: .73em; }
+.bairam-opening-slot-1 { width: .86em; }
+.bairam-opening-slot-2 { width: .55em; }
+.bairam-opening-slot-3 { width: .71em; }
+.bairam-opening-slot-4 { width: .69em; }
+.bairam-opening-slot-5 { width: .91em; }
+.bairam-opening [data-to] { opacity: 0; }
+.bairam-opening-gold { font-size: 1.16em; color: #e6b94f; text-shadow: 0 2px 0 #846520, 0 5px 0 #30230e, 0 14px 32px #0009; }
+.bairam-opening-flock { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.bairam-opening-bat { position: absolute; left: 0; top: 0; width: 56px; height: 32px; opacity: 0; fill: #858e95; stroke: #bec6cc; stroke-width: .4; overflow: visible; }
+.bairam-opening-bat-body { fill: #9ca6ad; }
+/* Near fly-by bats are close to the lens and backlit: dark silhouettes with a thin steel rim, so they hide the letters as they change. */
+.bairam-opening-pass-near { fill: #0c0e10; stroke: #6a737a; stroke-width: .5; }
+.bairam-opening-pass-near .bairam-opening-bat-body { fill: #101316; }
+.bairam-opening-controls { position: absolute; inset: auto 0 0; z-index: 3; display: flex; align-items: center; justify-content: space-between; padding: 24px max(24px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left)); }
+.bairam-opening-controls button {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  background: transparent;
+  color: #aeb0b0;
+  font: 500 14px/1.4 'Bairam Opening', sans-serif;
+  cursor: pointer;
+  transition: color 180ms ease-out, border-color 180ms ease-out;
+}
+.bairam-opening-controls button:hover { color: #f0ede5; border-color: #555650; }
+.bairam-opening-controls button:focus-visible { outline: 2px solid #e6b94f; outline-offset: 4px; color: #f0ede5; }
+.bairam-opening-controls svg { width: 17px; height: 17px; }
+.bairam-opening-controls [hidden] { display: none; }
+.bairam-opening[data-ready='false'] .bairam-opening-controls { visibility: hidden; }
+@media (prefers-reduced-motion: reduce) {
+  .bairam-opening-flock { display: none; }
+  .bairam-opening-controls button { transition: none; }
+}
+@media (max-width: 600px) {
+  .bairam-opening-controls { padding-left: 14px; padding-right: 14px; padding-bottom: max(16px, env(safe-area-inset-bottom)); }
+}

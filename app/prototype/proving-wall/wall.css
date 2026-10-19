@@ -1,0 +1,122 @@
+@font-face { font-family: 'Bairam Text'; src: url('/fonts/loading/hanken-grotesk-latin-var.woff2') format('woff2'); font-weight: 400 500; font-style: normal; font-display: swap; }
+body:has(.pw-page) { background: #080a0c; transition: none; }
+body:has(.pw-page) > .aifa-assistant-shell { display: none; }
+.pw-page { --pw-gold: #e6b94f; --pw-ink: #d9dedf; --pw-muted: #a8afb3; --step-small: 14px; --step-body: 17px;
+  --step-lead: clamp(19px, 1.1rem + .35vw, 22px); --step-head: clamp(30px, 1.2rem + 1.9vw, 46px);
+  min-height: 100svh; display: grid; grid-template-columns: minmax(0, 1fr); align-content: center;
+  background: #080a0c; color: var(--pw-ink); color-scheme: dark; font: 400 var(--step-body)/1.45 'Bairam Text', sans-serif; overflow-x: clip; }
+.pw-page * { box-sizing: border-box; }
+.pw-page :where(p, h2, h3, ol) { margin: 0; }
+.pw-keep { white-space: nowrap; }
+
+/* ---- The wall: cave rock pillars and stalactites cut from the vault art, a dark stone face between them. ---- */
+.pw-wall { position: relative; isolation: isolate; overflow: hidden;
+  padding: clamp(120px, 11vw, 176px) clamp(24px, 13vw, 250px) clamp(88px, 9vw, 140px);
+  background: radial-gradient(ellipse 58% 64% at 50% 58%, #171a1e 0%, #0e1013 58%, #080a0c 100%); }
+.pw-wall::after { content: ''; position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  background: linear-gradient(#080a0c, transparent 12%, transparent 84%, #080a0c); }
+.pw-art { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.pw-rock, .pw-ceiling { position: absolute; }
+.pw-rock { top: 0; bottom: 0; width: clamp(120px, 15vw, 300px); }
+.pw-rock img, .pw-ceiling img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.pw-rock-left { left: 0; mask-image: linear-gradient(90deg, #000 30%, transparent 82%); }
+.pw-rock-right { right: 0; mask-image: linear-gradient(270deg, #000 30%, transparent 82%); }
+.pw-rock-left img { object-position: left center; }
+.pw-rock-right img { object-position: right center; }
+.pw-ceiling { top: 0; left: 0; right: 0; height: clamp(64px, 9vw, 150px); mask-image: linear-gradient(#000 25%, transparent 78%), linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-composite: intersect; }
+.pw-ceiling img { object-position: center top; }
+
+/* ---- Heading, in the same reading face and scale as the vault. ---- */
+.pw-head { position: relative; z-index: 5; max-width: 760px; margin: 0 auto clamp(40px, 5vw, 72px); text-align: center; }
+.pw-eyebrow { display: inline-flex; align-items: center; gap: 14px; color: var(--pw-muted); font-size: var(--step-small); font-weight: 500; letter-spacing: .01em; }
+.pw-num { color: var(--pw-gold); }
+.pw-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--pw-gold); opacity: .8; }
+.pw-head h2 { margin-top: 14px; font: 500 var(--step-head)/1.05 'Bairam Text', sans-serif; letter-spacing: -.035em; color: #eef1f1; text-wrap: balance; }
+.pw-lede { margin-top: 14px !important; color: var(--pw-muted); font-size: var(--step-lead); line-height: 1.45; }
+
+/* ---- Plates: brushed metal bolted to the rock, one lamp each. Real text, so every credential stays exact. ---- */
+.pw-plates { position: relative; z-index: 4; display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(28px, 3vw, 48px) clamp(20px, 2.4vw, 40px);
+  max-width: 1180px; margin-inline: auto; padding: 0; list-style: none; }
+.pw-item { position: relative; display: flex; flex-direction: column; width: clamp(250px, 22vw, 300px); padding-top: 58px; }
+.pw-wall[data-count="1"] .pw-item { width: clamp(280px, 26vw, 340px); }
+.pw-lamp { position: absolute; top: 0; left: 50%; translate: -50% 0; width: 68px; height: 12px; border-radius: 2px 2px 34px 34px / 2px 2px 12px 12px;
+  background: linear-gradient(#3a3f45, #16181b); box-shadow: 0 1px 0 #ffffff14 inset, 0 4px 10px #000a; }
+/* The bulb glow under the housing, and the cone of light it throws onto the plate. */
+.pw-lamp::before { content: ''; position: absolute; left: 50%; top: 8px; width: 46px; height: 12px; translate: -50% 0; border-radius: 50%;
+  background: radial-gradient(closest-side, #fff6e2, #ffd9918c 55%, transparent); opacity: .45; transition: opacity .3s ease; }
+.pw-lamp::after { content: ''; position: absolute; left: 50%; top: 12px; width: 300px; height: 210px; translate: -50% 0; pointer-events: none;
+  clip-path: polygon(44% 0, 56% 0, 100% 100%, 0 100%); filter: blur(6px); mix-blend-mode: screen;
+  background: linear-gradient(#ffe6b866, #ffd89614 55%, transparent 85%); opacity: .08; transition: opacity .4s ease; }
+.pw-plate { position: relative; isolation: isolate; flex: 1; min-height: 236px; padding: 30px 28px 22px; border: 1px solid #4b5158; border-radius: 3px; overflow: hidden;
+  box-shadow: inset 0 1px 0 #ffffff1f, inset 0 -1px 0 #0009, 0 20px 44px -14px #000d, 0 2px 0 #090a0c; transition: box-shadow .4s ease, border-color .4s ease; }
+/* The metal (and only the metal) takes the light: text stays crisp and an issuer's badge is never darkened or recoloured. */
+.pw-plate::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(circle, #a2a8ae 0 2px, #4a4f55 2.6px, #15171a 3.6px, transparent 4.2px) 9px 9px / 10px 10px no-repeat,
+    radial-gradient(circle, #a2a8ae 0 2px, #4a4f55 2.6px, #15171a 3.6px, transparent 4.2px) calc(100% - 9px) 9px / 10px 10px no-repeat,
+    radial-gradient(circle, #a2a8ae 0 2px, #4a4f55 2.6px, #15171a 3.6px, transparent 4.2px) 9px calc(100% - 9px) / 10px 10px no-repeat,
+    radial-gradient(circle, #a2a8ae 0 2px, #4a4f55 2.6px, #15171a 3.6px, transparent 4.2px) calc(100% - 9px) calc(100% - 9px) / 10px 10px no-repeat,
+    repeating-linear-gradient(90deg, #ffffff06 0 1px, transparent 1px 3px),
+    linear-gradient(165deg, #383d43, #272b30 45%, #1d2024);
+  filter: brightness(.94); transition: filter .4s ease; }
+.pw-sheen { position: absolute; inset: 0; pointer-events: none; }
+.pw-sheen::before { content: ''; position: absolute; top: -20%; bottom: -20%; width: 38%; left: 0; translate: -130% 0; rotate: 12deg; opacity: 0;
+  background: linear-gradient(90deg, transparent, #fff4dc1f 45%, #fff4dc33 50%, #fff4dc1f 55%, transparent); }
+.pw-sample { position: absolute; top: 22px; right: 26px; padding: 2px 8px; border: 1px dashed #e6b94fa6; color: var(--pw-gold);
+  font-size: 12px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; }
+.pw-top { position: relative; z-index: 1; display: flex; align-items: center; gap: 16px; }
+.pw-sample ~ .pw-top { padding-right: 64px; }
+/* Issuer badge: shown exactly as supplied, on its own, never filtered. */
+.pw-badge { flex: none; display: block; width: 76px; height: 76px; }
+.pw-badge img { display: block; width: 100%; height: 100%; }
+/* The certificate, mounted like a print: one 4:3 frame on every plate so names line up; shown whole, never filtered. */
+.pw-photo { position: relative; z-index: 1; display: block; margin-top: 18px; aspect-ratio: 4 / 3; background: #0c0e10;
+  border: 1px solid #ffffff1a; box-shadow: 0 6px 16px -6px #000c; }
+.pw-photo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.pw-kind { margin-top: 4px !important; color: #bac0c5; font-size: var(--step-small); }
+.pw-year { color: var(--pw-gold); font-size: var(--step-small); font-weight: 500; letter-spacing: .12em; font-variant-numeric: tabular-nums; }
+/* Engraved: light inlay with a dark upper edge, so the text reads as cut into the metal. */
+.pw-name { margin-top: 14px !important; color: #ece6d8; font: 500 21px/1.2 'Bairam Text', sans-serif; letter-spacing: -.012em; text-wrap: balance;
+  text-shadow: 0 -1px 0 #000b, 0 1px 0 #ffffff12; }
+.pw-issuer { margin-top: 6px !important; color: #bac0c5; font-size: 15px; text-shadow: 0 -1px 0 #0009; }
+.pw-done { margin-top: 12px !important; color: #bac0c5; font-size: var(--step-small); }
+.pw-id { margin-top: 12px !important; color: #b3b9be; font-size: 13px; font-variant-numeric: tabular-nums; letter-spacing: .02em; }
+.pw-id span { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; margin-right: 4px; }
+.pw-verify, .pw-pending { display: flex; align-items: center; min-height: 44px; margin-top: 16px !important; padding-top: 4px; border-top: 1px solid #ffffff17; font-size: var(--step-small); }
+.pw-verify { gap: 6px; color: var(--pw-gold); font-weight: 500; text-decoration: none; }
+.pw-verify:hover { text-decoration: underline; text-underline-offset: 4px; }
+.pw-verify:focus-visible { outline: 2px solid var(--pw-gold); outline-offset: 3px; }
+.pw-pending { color: #b3b9be; }
+
+/* Lit: the hovered, keyboard-focused or (on phones) centred plate. The others dim so the eye goes to one. */
+.pw-item[data-on] .pw-lamp::before { opacity: 1; }
+.pw-item[data-on] .pw-lamp::after { opacity: .3; }
+.pw-item[data-on] .pw-plate { border-color: #8a7444;
+  box-shadow: inset 0 1px 0 #ffffff2e, inset 0 -1px 0 #0009, 0 0 0 1px #e6b94f26, 0 24px 60px -18px #e6b94f40, 0 2px 0 #090a0c; }
+.pw-item[data-on] .pw-plate::before { filter: brightness(1.08); }
+.pw-plates[data-active] .pw-item:not([data-on]) .pw-plate::before { filter: brightness(.86); }
+.pw-plates[data-active] .pw-item:not([data-on]) .pw-lamp::before { opacity: .3; }
+
+/* ---- Motion (only when allowed) ---- */
+@media (prefers-reduced-motion: no-preference) {
+  /* Before the wall is reached its lamps are off; on arrival they flicker on, one after another. */
+  .pw-level[data-enhanced="true"] .pw-wall:not([data-awake="true"]) .pw-lamp::before { opacity: 0; }
+  .pw-level[data-enhanced="true"] .pw-wall:not([data-awake="true"]) .pw-plate::before { filter: brightness(.66); }
+  /* The stagger stops after the first six (two rows): lower plates are still off screen when the wall wakes. */
+  .pw-wall[data-awake="true"] .pw-lamp::before { animation: pw-flicker .9s steps(1, end) calc(min(var(--i), 5) * .15s) backwards; }
+  .pw-wall[data-awake="true"] .pw-plate::before { animation: pw-wake .8s ease-out calc(min(var(--i), 5) * .15s + .4s) backwards; }
+  .pw-item[data-on] .pw-sheen::before { animation: pw-sheen 1.1s cubic-bezier(.3,.1,.3,1) .05s; }
+}
+@keyframes pw-flicker { 0% { opacity: 0; } 12% { opacity: .9; } 20% { opacity: .1; } 34% { opacity: .75; } 42% { opacity: .2; } 60%, 100% { opacity: .45; } }
+@keyframes pw-wake { from { filter: brightness(.66); } }
+@keyframes pw-sheen { 0% { translate: -130% 0; opacity: 0; } 15% { opacity: 1; } 85% { opacity: .8; } 100% { translate: 360% 0; opacity: 0; } }
+
+/* ---- Phones: plates stack; rock pillars shrink to a frame so the text keeps the width. ---- */
+@media (max-width: 760px) {
+  .pw-wall { padding: 96px 20px 80px; }
+  .pw-rock { width: 56px; opacity: .7; }
+  .pw-ceiling { height: 64px; }
+  .pw-plates { flex-direction: column; align-items: center; gap: 36px; }
+  .pw-item, .pw-wall[data-count="1"] .pw-item { width: min(100%, 340px); }
+  .pw-plate { min-height: 0; }
+}

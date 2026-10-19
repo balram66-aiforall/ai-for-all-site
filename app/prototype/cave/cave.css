@@ -1,0 +1,174 @@
+@font-face{font-family:Cave Display;src:url('/fonts/gotham/barlow-condensed-700.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:Cave Body;src:url('/fonts/gotham/manrope-400.woff2') format('woff2');font-weight:400;font-display:swap}
+body:has(.cave){background:#090d10;transition:none}
+body:has(.cave)>.aifa-assistant-shell{display:none}
+.cave{--c-ink:#f0ede2;--c-muted:#acb7bb;--c-amber:#dfbc79;--c-rule:#303a40;--c-bg:#090d10;color-scheme:dark;color:var(--c-ink);background:var(--c-bg);font:400 15px/1.7 'Cave Body',sans-serif;overflow:clip}
+.cave *,.cave *::before,.cave *::after{box-sizing:border-box}
+.cave :where(h1,h2,h3,p,figure){margin:0}
+.cave a{color:inherit;text-decoration:none}
+.cave button{font:inherit;color:inherit;cursor:pointer}
+.cave button:disabled{cursor:default;opacity:.52}
+.cave a:focus-visible,.cave button:focus-visible{outline:2px solid var(--c-amber);outline-offset:5px}
+.cave a:hover{color:var(--c-amber)}
+.cave [hidden]{display:none!important}
+.cave svg{flex-shrink:0}
+.cave section[id],.cave main[id],.cave article[id],.cave footer[id]{scroll-margin-top:32px}
+.cave ::selection{color:#090d10;background:var(--c-amber)}
+.cave-skip{position:absolute;left:20px;top:-100px;z-index:100;background:var(--c-amber);color:#090d10!important;padding:12px 18px}
+.cave-skip:focus{top:15px}
+.cave-stage{height:max(790px,100svh);position:relative;isolation:isolate;background:#0b1218}
+.cave-environment{position:absolute;inset:0;z-index:-1;overflow:hidden;background:radial-gradient(ellipse at 50% 35%,#263642,#090e13 75%)}
+.cave-still,.cave-still img,.cave-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.cave-still img{object-fit:cover;object-position:center}
+.cave-still[data-failed=true]{visibility:hidden}
+.cave-vignette{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(3,7,10,.65),transparent 22%,transparent 53%,rgba(3,7,10,.48) 70%,#090d10 100%)}
+.cave-header{position:absolute;top:0;left:0;width:100%;padding:28px 4.5%;display:flex;align-items:center;justify-content:space-between;gap:24px;z-index:5}
+.cave-brand{display:flex;align-items:center;gap:13px;font-size:11px;letter-spacing:.2em;line-height:1.5}
+.cave-brand small{display:block;font-size:8px;letter-spacing:.17em;color:var(--c-muted);margin-top:4px}
+.cave-monogram{font:700 36px/.9 'Cave Display',sans-serif;letter-spacing:-.035em;border-right:1px solid #7a857e;padding-right:14px}
+.cave-monogram>span{color:var(--c-amber)}
+.cave-nav{display:flex;gap:30px;align-items:center}
+.cave-nav a{display:inline-flex;align-items:center;gap:5px;min-height:44px;font-size:12px}
+.cave-scene-caption{position:absolute;left:4.5%;top:115px;display:flex;gap:12px;align-items:center;font-size:9px;letter-spacing:.19em;color:#c5cdd0;text-shadow:0 1px 8px #020507}
+.cave-line{height:1px;width:28px;background:var(--c-amber)}
+.cave-caption-separator{color:var(--c-amber)}
+.cave-controls{position:absolute;right:4.5%;top:112px;display:flex;gap:8px;z-index:5}
+.cave-controls button{display:flex;align-items:center;gap:8px;min-height:36px;padding:5px 10px;background:rgba(7,13,17,.8);border:1px solid #485359;font-size:10px;color:#e4e5df}
+.cave-controls button:hover:enabled{border-color:var(--c-amber)}
+.cave-bottom{position:absolute;inset:auto 4.5% 84px;display:flex;justify-content:space-between;align-items:flex-end;gap:32px;pointer-events:none}
+.cave-identity{pointer-events:auto;text-shadow:0 2px 28px #04090c}
+.cave-eyebrow{font-size:10px;letter-spacing:.18em;line-height:1.65;text-transform:uppercase;color:var(--c-amber)}
+.cave-identity h1{font:700 clamp(88px,9.5vw,150px)/.95 'Cave Display','Arial Narrow',sans-serif;letter-spacing:-.028em;margin:6px 0 14px}
+.cave-identity h1>span>span:first-child{color:var(--c-amber)}
+.cave-dot{color:#73848c}
+.cave-introduction{font-size:clamp(17px,1.5vw,22px);line-height:1.6}
+.cave-introduction>span{font-size:12px;color:#c4cdd0}
+.cave-mobile-break{display:none}
+.cave-explore{pointer-events:auto;display:flex;align-items:center;gap:20px;border-bottom:1px solid #697472;padding:14px 0;letter-spacing:.18em;font-size:10px;min-height:44px}
+.cave-explore svg{color:var(--c-amber)}
+.cave-scene-footer{position:absolute;bottom:0;left:4.5%;right:4.5%;height:50px;border-top:1px solid #334046;display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:8px;letter-spacing:.17em;color:#a7b4ba}
+.cave-content{max-width:1220px;margin:auto;padding:100px 44px 0}
+.cave-section-head{display:grid;grid-template-columns:1fr 1.4fr;gap:16px 60px;margin-bottom:46px;align-items:start}
+.cave-section-head>.cave-eyebrow{grid-column:1/-1}
+.cave h2{font:700 clamp(36px,4.6vw,64px)/1.05 'Cave Display',sans-serif;letter-spacing:-.01em}
+.cave-section-head>p:last-child{max-width:510px;color:var(--c-muted);font-size:14px}
+.cave-project{display:grid;grid-template-columns:40px 1fr 1.1fr;align-items:center;gap:34px;padding:40px 0;border-top:1px solid var(--c-rule)}
+.cave-index{font:700 24px/1 'Cave Display',sans-serif;color:#9dadb5;align-self:start}
+.cave-project-art{height:310px;display:block;overflow:hidden;background:#151b21;border:1px solid #465057;padding:15px}
+.cave-project-art img{display:block;width:100%;height:100%;object-fit:contain;transition:transform .4s cubic-bezier(.16,1,.3,1)}
+.cave-project-art:hover img{transform:scale(1.025)}
+.cave-project-copy{max-width:460px}
+.cave h3{font:700 36px/1.12 'Cave Display',sans-serif}
+.cave-project-copy h3{font-size:clamp(32px,4vw,52px);margin:12px 0 20px}
+.cave-project-copy>p:not(.cave-eyebrow){font-size:14px;color:#bcc6cb}
+.cave-text-link{display:inline-flex;gap:16px;align-items:center;margin-top:24px;min-height:44px;font-size:12px;border-bottom:1px solid #67716e}
+.cave-agents,.cave-about,.cave-library{padding:90px 0;border-top:1px solid var(--c-rule)}
+.cave-agent-roles{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+.cave-agent-roles>div{border-top:1px solid #657071;padding-top:20px}
+.cave-agent-roles h3{margin:10px 0}
+.cave-agent-roles p{color:var(--c-muted);font-size:13px}
+.cave-about{display:grid;grid-template-columns:1fr 1.4fr;gap:60px}
+.cave-about h2{margin-top:18px}
+.cave-about>div:last-child>p{font-size:17px;color:#cbd2d3;line-height:1.9}
+.cave-article-list>a{display:flex;align-items:center;gap:30px;padding:26px 0;border-top:1px solid var(--c-rule)}
+.cave-article-list>a>span{font-size:10px;color:var(--c-amber)}
+.cave-article-list>a>svg{margin-left:auto}
+.cave-article-list h3{font-size:26px}
+.cave-article-list p{font-size:12px;color:var(--c-muted);margin-top:8px;max-width:740px}
+.cave-resource-links{display:flex;gap:30px;flex-wrap:wrap;margin-top:32px}
+.cave-resource-links a,.cave-contact>div a{display:inline-flex;align-items:center;gap:10px;min-height:44px;font-size:12px}
+.cave-contact{padding:75px 0 28px;border-top:1px solid var(--c-rule)}
+.cave-contact-title{display:flex;gap:24px;align-items:center;font:700 clamp(30px,4.4vw,55px)/1.1 'Cave Display',sans-serif;margin:24px 0}
+.cave-contact-title svg{width:30px;height:30px}
+.cave-contact>div{display:flex;gap:30px;flex-wrap:wrap}
+.cave-disclosure{margin-top:60px!important;color:var(--c-muted);font-size:10px;border-top:1px solid var(--c-rule);padding-top:20px}
+@media(min-width:1900px){.cave-stage{max-height:1200px}.cave-bottom{bottom:100px}}
+@media(max-width:1000px){.cave-nav{gap:20px}.cave-content{padding:75px 30px 0}.cave-section-head{gap:16px 34px}.cave-project{gap:20px;grid-template-columns:25px 1fr 1.1fr}.cave-project-art{height:270px}.cave-about{gap:34px}}
+@media(max-width:700px){
+.cave-stage{height:max(910px,100svh)}
+.cave-header{padding:22px 22px 0;display:block}
+.cave-brand{font-size:10px}.cave-brand small{font-size:7px}.cave-monogram{font-size:30px}
+.cave-nav{margin-top:22px;border-top:1px solid #4b565933;justify-content:space-between;gap:12px}.cave-nav a{font-size:11px}
+.cave-scene-caption{left:22px;top:150px;font-size:8px;gap:8px}.cave-line{width:16px}
+.cave-controls{top:194px;right:22px;gap:6px}.cave-controls button{min-height:38px;font-size:9px;padding:5px 8px;gap:5px}
+.cave-bottom{left:22px;right:22px;bottom:72px;display:block}
+.cave-identity h1{font-size:94px;line-height:1;margin:7px 0 12px}.cave-identity .cave-eyebrow{font-size:8px;letter-spacing:.15em}
+.cave-introduction{font-size:18px}.cave-introduction>span{font-size:11px}.cave-mobile-break{display:block}
+.cave-explore{width:fit-content;margin-top:20px;font-size:9px;padding:10px 0;gap:30px}
+.cave-scene-footer{left:22px;right:22px;gap:8px;font-size:7px;letter-spacing:.1em;height:46px}
+.cave-scene-footer>span:nth-child(2){display:none}
+.cave-vignette{background:linear-gradient(180deg,#04080bd9,transparent 27%,transparent 43%,#04090bb3 61%,#090d10 100%)}
+.cave-content{padding:60px 22px 0}.cave-section-head{grid-template-columns:1fr;gap:14px;margin-bottom:30px}
+.cave-section-head>.cave-eyebrow{grid-column:1}.cave-section-head>p:last-child{font-size:13px}.cave h2{font-size:40px}
+.cave-project{grid-template-columns:24px 1fr;gap:20px 12px;padding:28px 0}.cave-project-art{height:300px;padding:15px}.cave-project-copy{grid-column:2}.cave-project-copy h3{font-size:36px;margin:10px 0 15px}.cave-project-copy>p:not(.cave-eyebrow){font-size:13px}
+.cave-agents,.cave-about,.cave-library{padding:55px 0}.cave-agent-roles{grid-template-columns:1fr;gap:24px}.cave-agent-roles>div{padding:16px 0}.cave-agent-roles h3{font-size:30px}
+.cave-about{grid-template-columns:1fr;gap:24px}.cave-about>div:last-child>p{font-size:15px}
+.cave-article-list>a{gap:15px;padding:22px 0}.cave-article-list h3{font-size:24px}.cave-article-list p{font-size:12px}
+.cave-resource-links{gap:8px;flex-direction:column}.cave-contact{padding-top:50px}.cave-contact-title{font-size:34px}.cave-contact>div{gap:20px}.cave-disclosure{margin-top:36px!important}
+}
+@media(max-width:360px){.cave-header{padding-inline:17px}.cave-scene-caption{left:17px}.cave-bottom{left:17px;right:17px}.cave-scene-footer{left:17px;right:17px}.cave-controls{right:17px}.cave-identity h1{font-size:84px}.cave-content{padding-inline:17px}.cave-project-art{height:260px}.cave-nav a{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.cave *{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+@media(forced-colors:active){.cave-controls button,.cave-room-switch button{border:1px solid ButtonText}.cave-environment{opacity:.25}}
+/* The approved Artifactory plate remains the hero, with no project cards over it. */
+.cave-canvas{visibility:hidden}
+.cave-canvas canvas{display:block;width:100%;height:100%}
+.cave[data-renderer=layered] .cave-canvas{visibility:visible}
+.cave[data-renderer=layered] .cave-still{visibility:hidden}
+.cave-vignette{background:linear-gradient(180deg,#060b10c9,transparent 24%,transparent 51%,#090d1059 68%,#090d10 100%),linear-gradient(90deg,#080e1333,transparent 38%)}
+.cave-controls button{min-height:44px;padding:7px 12px}
+.cave-stage{height:max(800px,100svh)}
+.cave-bottom{bottom:80px}
+.cave-identity h1{font-size:clamp(88px,8vw,130px);margin:6px 0 10px}
+.cave-dock{display:flex;flex-direction:column;align-items:flex-end;gap:21px;pointer-events:auto}
+.cave-room-switch{display:flex;background:#0b1219e8;border:1px solid #5c696f;padding:5px;gap:3px}
+.cave-room-switch button{border:1px solid transparent;background:none;min-height:46px;display:flex;align-items:center;gap:13px;padding:9px 16px;font-size:11px}
+.cave-room-switch button>span{color:#b3bfc3;font-size:9px}
+.cave-room-switch button[aria-pressed=true]{background:#263139;border-color:#6b777b;color:#f4dfb0}
+.cave-room-switch button:hover{background:#263139}
+.cave-explore{font-size:9px;gap:38px}
+.cave-suit-panel{position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,#0a1015f7 0%,#0a1015ed 37%,#0a1015b8 100%)}
+.cave-suit-art{position:absolute;top:130px;bottom:150px;right:12%;width:38%;display:grid;place-items:center;overflow:hidden}
+.cave-suit-art img{position:absolute;inset:0;min-height:0;min-width:0;display:block;width:100%;height:100%;object-fit:contain;mask-image:linear-gradient(180deg,transparent,#000 7%,#000 95%,transparent);filter:brightness(.83)}
+.cave-suit-art[data-failed=true] img{display:none}
+.cave-suit-art>p{font-size:13px;color:var(--c-muted)}
+.cave-suit-label{position:absolute;left:6%;top:42%;max-width:440px}
+.cave-suit-label h2{font-size:clamp(46px,5vw,76px);margin:14px 0 22px}
+.cave-suit-label>p:not(.cave-eyebrow){font-size:13px;color:#b6c3c9}
+.cave-suit-label button{display:flex;gap:12px;align-items:center;margin-top:30px;padding:12px 0;border:0;border-bottom:1px solid #76817f;background:none;font-size:12px;min-height:44px}
+.cave-suit-label button:hover{color:var(--c-amber)}
+.cave-bottom,.cave-scene-footer,.cave-scene-caption{z-index:2}
+.cave[data-view=suit] .cave-identity{visibility:hidden;pointer-events:none}
+.cave[data-view=suit] .cave-environment{filter:brightness(.55)}
+.cave-noscript-suit{padding:40px;max-width:640px;margin:auto}
+.cave-noscript-suit img{width:100%;height:auto;margin-top:24px}
+@media(min-width:1600px){.cave-suit-art{right:17%;width:32%}}
+@media(max-width:1000px) and (min-width:701px){.cave-identity h1{font-size:90px}.cave-introduction>span{font-size:10px}.cave-room-switch button{gap:7px;padding:8px 10px}.cave-dock{gap:15px}.cave-suit-label{max-width:320px}.cave-suit-art{right:4%;width:46%}}
+@media(max-width:700px){
+ .cave-stage{height:max(910px,100svh)}
+ .cave-still img{top:14%;height:60%;object-fit:cover;object-position:center;width:100%}
+ .cave-vignette{background:linear-gradient(180deg,#090d10 0%,#090d1099 19%,transparent 30%,transparent 45%,#090d1033 52%,#090d10 66%)}
+ .cave-controls{top:187px;right:22px}
+ .cave-controls button{font-size:9px;min-height:44px;padding:7px 9px}
+ .cave-bottom{bottom:69px;display:block}
+ .cave-identity h1{font-size:90px;line-height:1;margin:5px 0 8px}
+ .cave-introduction{font-size:17px;line-height:1.5}
+ .cave-introduction>span{font-size:11px}
+ .cave-dock{align-items:stretch;gap:8px;margin-top:22px}
+ .cave-room-switch{width:100%;justify-content:space-between}
+ .cave-room-switch button{flex:1;justify-content:center;gap:10px;min-height:44px;padding:8px 10px}
+ .cave-explore{margin-top:2px;align-self:flex-end;gap:22px;padding:8px 0;min-height:40px}
+ .cave-suit-art{top:185px;right:10%;width:80%;bottom:300px}
+ .cave-suit-label{left:22px;right:22px;top:auto;bottom:218px;max-width:none}
+ .cave-suit-label h2{font-size:40px;margin:7px 0 10px}
+ .cave-suit-label>p:not(.cave-eyebrow){font-size:11px}
+ .cave-suit-label button{position:absolute;right:0;bottom:0;font-size:0;border:1px solid #5c696f;padding:12px}
+ .cave-suit-label button svg{width:18px;height:18px}
+ .cave-noscript-suit{padding:30px 22px}
+}
+@media(max-width:360px){.cave-controls{right:17px}.cave-room-switch button{padding:8px 6px;font-size:10px;gap:8px}.cave-identity h1{font-size:82px}.cave-suit-label{left:17px;right:17px}.cave-scene-caption{font-size:7px}}
+
+.cave-sr-status{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.cave-art-failure{position:absolute;top:35%;left:12%;right:12%;text-align:center;color:#c5d0d5;font-size:13px}
+
+@keyframes cave-bay-reveal{from{opacity:0;transform:translate3d(12px,0,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+@media(prefers-reduced-motion:no-preference){.cave[data-motion=on] .cave-suit-panel:not([hidden]) .cave-suit-art,.cave[data-motion=on] .cave-suit-panel:not([hidden]) .cave-suit-label{animation:cave-bay-reveal .4s cubic-bezier(.16,1,.3,1) both}}

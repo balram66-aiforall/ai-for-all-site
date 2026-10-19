@@ -1,0 +1,123 @@
+@font-face { font-family: 'Bairam Text'; src: url('/fonts/loading/hanken-grotesk-latin-var.woff2') format('woff2'); font-weight: 400 500; font-style: normal; font-display: swap; }
+body:has(.bv-page) { background: #080a0c; transition: none; }
+body:has(.bv-page) > .aifa-assistant-shell { display: none; }
+.bv-page { --bv-gold: #e6b94f; --bv-ink: #d9dedf; --bv-muted: #a8afb3; --step-small: 14px; --step-body: 17px;
+  --step-lead: clamp(19px, 1.1rem + .35vw, 22px); --step-head: clamp(30px, 1.2rem + 1.9vw, 46px);
+  min-height: 100svh; display: grid; grid-template-columns: minmax(0, 1fr); align-content: center; padding-block: 64px;
+  background: #080a0c; color: var(--bv-ink); color-scheme: dark; font: 400 var(--step-body)/1.45 'Bairam Text', sans-serif; overflow-x: clip; }
+.bv-page p { margin: 0; }
+.bv-page * { box-sizing: border-box; }
+.bv-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* ---- Stage: the art plus light layers, all positioned in percent of the 21:9 frame. ---- */
+.bv-vault { position: relative; }
+
+/* ---- Heading: the level's name, in the masthead's reading face. It tucks into the art's dark top fade. ---- */
+.bv-head { position: relative; z-index: 5; max-width: 760px; margin: 0 auto -2.4vw; padding-inline: 24px; text-align: center; }
+.bv-eyebrow { display: inline-flex; align-items: center; gap: 14px; color: var(--bv-muted); font-size: var(--step-small); font-weight: 500; letter-spacing: .01em; }
+.bv-num { color: var(--bv-gold); }
+.bv-eyebrow::after { content: ''; width: 28px; height: 1px; background: var(--bv-gold); opacity: .8; order: -1; }
+.bv-head h2 { margin: 14px 0 0; font: 500 var(--step-head)/1.05 'Bairam Text', sans-serif; letter-spacing: -.035em; color: #eef1f1; text-wrap: balance; }
+.bv-lede { margin-top: 14px !important; color: var(--bv-muted); font-size: var(--step-lead); line-height: 1.45; text-wrap: pretty; }
+
+/* ---- Caption: the lit suit's callsign, bAI-tech and line. All items share one grid cell so the height is fixed. ---- */
+.bv-caption { display: grid; justify-items: center; max-width: 640px; margin: 4px auto 0; padding-inline: 24px; text-align: center; }
+.bv-caption > * { grid-area: 1 / 1; opacity: 0; visibility: hidden; transition: opacity .3s ease, visibility 0s .3s; }
+.bv-caption > [data-on] { opacity: 1; visibility: visible; transition: opacity .35s ease .05s, visibility 0s; }
+.bv-hint { align-self: center; color: var(--bv-muted); font-size: var(--step-body); }
+.bv-hint-phone { display: none; }
+.bv-tag { color: var(--bv-muted); font-size: var(--step-small); font-weight: 500; letter-spacing: .01em; }
+.bv-term span { color: var(--bv-gold); }
+.bv-keep, .bv-term { white-space: nowrap; }
+.bv-dot { color: color-mix(in srgb, var(--glow) 60%, var(--bv-muted)); padding-inline: 4px; }
+.bv-callsign { margin-top: 6px !important; color: #f3ead6; font: 500 var(--step-lead)/1.2 'Bairam Text', sans-serif; letter-spacing: -.02em; }
+.bv-line { margin-top: 8px !important; color: var(--bv-ink); font-size: var(--step-body); line-height: 1.5; text-wrap: pretty; }
+.bv-stage { position: relative; width: 100%; aspect-ratio: 2400 / 1018; isolation: isolate; }
+.bv-art, .bv-art img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.bv-art img { object-fit: cover; }
+/* The art fades into the page at the top and bottom so the level joins the cave above and below it. */
+.bv-stage::after { content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 3;
+  background: linear-gradient(#080a0c, transparent 9%, transparent 88%, #080a0c); }
+
+.bv-fx { --top: 16.5%; --h: 64.9%; --w: 14.2%; --disc-y: 19.5%; --logo-y: 41.4%; position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+.bv-fx > span { position: absolute; display: block; }
+.bv-shade, .bv-boost, .bv-sweep { left: calc(var(--x) - var(--w) / 2); width: var(--w); top: var(--top); height: var(--h); }
+/* Standby: each bay sits a little dark until it is woken. */
+.bv-shade { background: #05070a; opacity: .34; transition: opacity .45s ease; }
+.bv-fx > .bv-lit { inset: 0; opacity: 0; transition: opacity .35s ease; background: var(--bv-src, none) 0 0 / 100% 100% no-repeat;
+  clip-path: inset(var(--top) calc(100% - var(--x) - var(--w) / 2) calc(100% - var(--top) - var(--h)) calc(var(--x) - var(--w) / 2));
+  filter: brightness(1.42) contrast(1.14) saturate(1.18); }
+.bv-boost { opacity: 0; mix-blend-mode: overlay; transition: opacity .35s ease;
+  background: radial-gradient(ellipse 62% 58% at 50% 40%, #fff1d6 0%, #ffdb9e66 42%, transparent 78%); }
+.bv-cone { left: calc(var(--x) - var(--w) * .42); width: calc(var(--w) * .84); top: var(--disc-y); height: calc(var(--top) + var(--h) - var(--disc-y) - 2%);
+  clip-path: polygon(42% 0, 58% 0, 88% 100%, 12% 100%); mix-blend-mode: screen; opacity: 0; transition: opacity .4s ease; filter: blur(5px);
+  background: linear-gradient(#ffe8bd99, #ffd8961f 45%, transparent 78%); }
+.bv-disc { left: calc(var(--x) - 3.2%); width: 6.4%; top: calc(var(--disc-y) - 2.6%); height: 5.2%; mix-blend-mode: screen; opacity: .38; transition: opacity .3s ease;
+  background: radial-gradient(ellipse 50% 50%, #fff6e2 0%, #ffe2a8b3 30%, #ffcf7a33 62%, transparent 100%); }
+.bv-logo { left: calc(var(--lx) - 2.6%); width: 5.2%; aspect-ratio: 1; top: var(--logo-y); translate: 0 -50%; mix-blend-mode: screen; opacity: 0; transition: opacity .35s ease;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--glow) 70%, white) 0%, color-mix(in srgb, var(--glow) 80%, transparent) 22%, color-mix(in srgb, var(--glow) 28%, transparent) 55%, transparent 100%); }
+.bv-sweep { overflow: hidden; mix-blend-mode: screen; }
+.bv-sweep::before { content: ''; position: absolute; left: 0; right: 0; height: 16%; top: -20%; opacity: 0;
+  background: linear-gradient(transparent, color-mix(in srgb, var(--glow) 30%, #fff1d6 70%) 50%, transparent); }
+
+/* Powered up: the hovered, focused or selected bay. Every other bay dims so the eye goes to one suit. */
+.bv-stage[data-active] .bv-shade { opacity: .58; }
+.bv-fx[data-on] .bv-shade { opacity: 0; }
+.bv-fx[data-on] .bv-lit { opacity: 1; }
+.bv-fx[data-on] .bv-boost { opacity: .32; }
+.bv-fx[data-on] .bv-cone { opacity: .14; }
+.bv-fx[data-on] .bv-disc { opacity: 1; }
+.bv-fx[data-on] .bv-logo { opacity: 1; }
+
+/* ---- Bays: real buttons over each case, with the tool's name on a plaque under the glass. ---- */
+.bv-bay { position: absolute; z-index: 4; left: calc(var(--x) - 7.1%); width: 14.2%; top: 16.5%; height: 75%; padding: 0; margin: 0;
+  border: 0; background: none; color: inherit; font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.bv-bay:focus { outline: none; }
+.bv-bay:focus-visible::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 86.5%; outline: 2px solid #e6b94f; outline-offset: -3px; }
+.bv-plaque { position: absolute; left: 50%; bottom: 0; translate: -50% 0; white-space: nowrap; padding-bottom: 8px;
+  font: 500 clamp(12px, .55rem + .45vw, 17px)/1.2 'Bairam Text', sans-serif; letter-spacing: .02em; color: #a8afb3; transition: color .3s ease; }
+/* Keyboard focus lights a bay like hover does; a tap or click only suits it up. */
+.bv-suited { display: none; margin-bottom: 4px; color: var(--bv-gold); font-size: 12px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; }
+.bv-bay[aria-pressed="true"] .bv-suited { display: block; }
+.bv-plaque::after { content: ''; position: absolute; left: 50%; bottom: 0; width: 26px; height: 2px; translate: -50% 0; background: #e6b94f; scale: 0 1; transition: scale .35s cubic-bezier(.2,.7,.2,1); }
+.bv-stage[data-active="0"] .bv-bay[data-index="0"] .bv-plaque, .bv-stage[data-active="1"] .bv-bay[data-index="1"] .bv-plaque,
+.bv-stage[data-active="2"] .bv-bay[data-index="2"] .bv-plaque, .bv-stage[data-active="3"] .bv-bay[data-index="3"] .bv-plaque,
+.bv-stage[data-active="4"] .bv-bay[data-index="4"] .bv-plaque { color: #f3ead6; }
+.bv-stage[data-active="0"] .bv-bay[data-index="0"] .bv-plaque::after, .bv-stage[data-active="1"] .bv-bay[data-index="1"] .bv-plaque::after,
+.bv-stage[data-active="2"] .bv-bay[data-index="2"] .bv-plaque::after, .bv-stage[data-active="3"] .bv-bay[data-index="3"] .bv-plaque::after,
+.bv-stage[data-active="4"] .bv-bay[data-index="4"] .bv-plaque::after { scale: 1 1; }
+
+/* ---- Motion (only when allowed) ---- */
+@media (prefers-reduced-motion: no-preference) {
+  /* Before the vault is reached the bays are dark; on arrival their lights flicker on, left to right. */
+  .bv-vault[data-enhanced="true"] .bv-stage:not([data-awake="true"]) .bv-shade { opacity: .78; }
+  .bv-vault[data-enhanced="true"] .bv-stage:not([data-awake="true"]) .bv-disc { opacity: 0; }
+  .bv-stage[data-awake="true"] .bv-disc { animation: bv-flicker .9s steps(1, end) calc(var(--i) * .2s) backwards; }
+  .bv-stage[data-awake="true"] .bv-shade { animation: bv-wake .7s ease-out calc(var(--i) * .2s + .45s) backwards; }
+  .bv-fx[data-on] .bv-sweep::before { animation: bv-sweep 1.15s cubic-bezier(.3,.1,.3,1) .05s; }
+  .bv-fx[data-on] .bv-logo { animation: bv-pulse 2.6s ease-in-out .4s infinite; }
+  /* The caption rises a few pixels as it changes; with reduced motion it simply swaps. */
+  .bv-bay[aria-pressed="true"] .bv-suited { animation: bv-suit .4s cubic-bezier(.2,.7,.2,1); }
+  .bv-caption > * { translate: 0 6px; transition: opacity .3s ease, translate .3s ease, visibility 0s .3s; }
+  .bv-caption > [data-on] { translate: 0 0; transition: opacity .35s ease .05s, translate .45s cubic-bezier(.2,.7,.2,1) .05s, visibility 0s; }
+}
+@media (prefers-reduced-motion: reduce) { .bv-caption > *, .bv-caption > [data-on] { transition: none; } }
+@keyframes bv-flicker { 0% { opacity: 0; } 12% { opacity: .9; } 20% { opacity: .1; } 34% { opacity: .75; } 42% { opacity: .2; } 60%, 100% { opacity: .38; } }
+@keyframes bv-wake { from { opacity: .78; } }
+@keyframes bv-sweep { 0% { top: -20%; opacity: 0; } 15% { opacity: 1; } 85% { opacity: .8; } 100% { top: 104%; opacity: 0; } }
+@keyframes bv-suit { from { opacity: 0; translate: 0 4px; } }
+@keyframes bv-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .62; } }
+
+/* ---- Phones: the vault is wider than the screen, so swipe from suit to suit; the centred one lights up. ---- */
+@media (max-width: 760px) {
+  .bv-scroller { overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .bv-scroller::-webkit-scrollbar { display: none; }
+  .bv-stage { width: 378vw; }
+  .bv-bay { scroll-snap-align: center; }
+  .bv-plaque { font-size: 15px; }
+  .bv-page { padding-block: 40px; }
+  .bv-head { margin-bottom: 0; padding-inline: 20px; }
+  .bv-caption { padding-inline: 20px; }
+  .bv-hint-wide { display: none; }
+  .bv-hint-phone { display: inline; }
+}
