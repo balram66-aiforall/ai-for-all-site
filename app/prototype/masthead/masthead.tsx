@@ -5,6 +5,7 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNo
 import { LoadingOpening } from '../loading/opening';
 import { SoundToggle } from '../sound/sound-toggle';
 import { MARKS } from '../bairam/mark/marks';
+import { titles } from '../bairam/content';
 
 // The bio: #who on the cave pages (its own stop after the masthead), the live home page's #about otherwise.
 const aboutHref = (base: string) => (base === '' ? '#who' : `${base}#about`);
@@ -308,6 +309,8 @@ export function Masthead({ base = '/', children, sound = false }: { base?: strin
         <Scene hold={!enhanced || playing} waking={waking} paused={scenePaused} onMotion={setMotion} />
         <div className="bm-copy">
           <p className="bm-role">Balram R. <span aria-hidden="true">/</span> AI Marketing Lead, Amazon</p>
+          {/* Two parts that each stay whole, so a narrow screen breaks the line before "and". */}
+          <p className="bm-cred"><span className="bm-cred-part">{titles.aws}</span> <span className="bm-cred-part"><span className="bm-cred-and">and</span> {titles.champion}</span></p>
           <h1 ref={heading} tabIndex={-1} className="bm-title" aria-label="bAIram"><Wordmark /></h1>
           <div className="bm-introduction"><h2>I make AI accessible.</h2><p>Learn it simply. Put it to work. Build something that matters.</p></div>
           <div className="bm-actions" aria-label="Primary actions"><a className="bm-primary" href={`${base}#learn`}>Learn AI simply <Arrow /></a><a className="bm-secondary" href="/guides">Find your workflow <Arrow /></a></div>

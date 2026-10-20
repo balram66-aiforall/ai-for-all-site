@@ -82,6 +82,11 @@ export const startHere = [
 /* APPROVED Oct 19 (Balram: "Approved, replace the old chips"): the who-I-am block in the cave mouth. Generic on purpose: no
    internal program, team, tool or channel names. Replaces the live chips 'AI learning leader', 'Role-based guides',
    'Community examples', 'Human judgment first'. */
+/* APPROVED Oct 20 (Balram: "below the name please mention - Certified AWS trained technical Partner and Agentic AI
+   Champion", then "Drop \"Certified\"": his AWS plates are Trained Partner badges, not AWS Certification exams).
+   His words and capitals exactly. Shown under the masthead's name line and as plaques in Who is Balram?. */
+export const titles = { aws: 'AWS trained technical Partner', champion: 'Agentic AI Champion' } as const;
+
 export const about = {
   lead: "I'm Balram, AI Marketing Lead at Amazon. Every role can work better with AI, and I help people find out how: I teach it in plain language, build with it every day, and match the right AI to the job. More than 50,000 people have learned AI through my sessions, and AI For All is where I share what works.",
   suit: 'Every AI and every workflow is an AI-suit: one for research, one for writing, one for building, one for clearing the busywork. I suit up for the mission in front of me, and I show you how to wear yours.',
