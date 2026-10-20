@@ -67,6 +67,11 @@ body:has(.bm-page) > .aifa-assistant-shell { display: none; }
 .bm-role::before,.bm-role::after { content: ''; width: clamp(28px,6vw,72px); height: 1px; background: linear-gradient(90deg, transparent, #8a7340); }
 .bm-role::after { transform: scaleX(-1); }
 .bm-role span { color: #645e4c; padding: 0 10px; }
+/* The titles under the name line (Balram, Oct 20): the same quiet reading face; "and" in the dim gold of the "/". */
+.bm-cred { color: var(--bm-muted); font-size: var(--step-small); font-weight: 500; line-height: 1.5; letter-spacing: .01em; margin-top: 2px !important;
+  display: flex; flex-wrap: wrap; justify-content: center; column-gap: .3em; text-align: center; }
+.bm-cred-part { white-space: nowrap; }
+.bm-cred-and { color: #a88e55; }
 .bm-title { font: 700 clamp(64px,15cqi,200px)/1.05 'Bairam Display', serif; letter-spacing: .05em; margin: 26px 0 0 .05em !important; white-space: nowrap; text-shadow: 0 2px #57616b,0 5px #171c22,0 18px 40px #0008; }
 .bm-title span { text-shadow: 0 2px #846520,0 5px #30230e,0 18px 40px #0008; }
 .bm-title:focus { outline: none; }
@@ -128,6 +133,7 @@ body:has(.bm-page) > .aifa-assistant-shell { display: none; }
   .bm-main { padding: 0 24px; }
   .bm-hero { min-height: auto; padding: 56px 0 44px; --bm-scene-w: 100vw; --bm-scene-h: calc(100vw * 930 / 900); padding-bottom: calc(var(--bm-scene-h) * .7); }
   .bm-role { font-size: 13px; gap: 12px; }
+  .bm-cred { font-size: 13px; }
   .bm-role::before,.bm-role::after { display: none; }
   .bm-role span { padding: 0; }
   .bm-title { font-size: clamp(64px,19cqi,120px); margin-top: 22px !important; }
@@ -237,6 +243,7 @@ body:has(.bm-page) > .aifa-assistant-shell { display: none; }
   .bm-monitor[data-monitor="2"] { --bm-mon-i: 1; }
   .bm-monitor[data-monitor="3"] { --bm-mon-i: 2; }
   .bm-role { animation: bm-wake-fade .7s ease-out calc(var(--bm-text-lag, 0s) + .1s) backwards; }
+  .bm-cred { animation: bm-wake-fade .7s ease-out calc(var(--bm-text-lag, 0s) + .25s) backwards; }
   .bm-role::before, .bm-role::after { animation: bm-wake-draw .8s cubic-bezier(.2,.7,.2,1) calc(var(--bm-text-lag, 0s) + .4s) backwards; }
   .bm-title { animation: bm-wake-rise 1s cubic-bezier(.2,.7,.2,1) calc(var(--bm-text-lag, 0s) + .2s) backwards; }
   .bm-title span::after { animation: bm-wake-sweep .9s ease-in-out calc(var(--bm-text-lag, 0s) + 1.45s) backwards; }

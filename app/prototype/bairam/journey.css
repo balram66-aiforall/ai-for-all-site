@@ -202,6 +202,12 @@ html:has(.bm-journey-main[data-motion="3d"]) { scroll-behavior: smooth; }
 .bj-do { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(14px, 1.6vw, 20px); margin-top: 16px !important; }
 .bj-do li { padding: clamp(18px, 1.8vw, 24px); border: 1px solid #2c3034; background: #0f1215cc; color: var(--bm-muted); line-height: 1.55; }
 .bj-do strong { color: var(--bm-ink); font-weight: 500; }
+/* Who is Balram? titles: two gold-edged plaques above the bio. */
+.bj-titles { display: flex; flex-wrap: wrap; gap: 10px; margin: -8px 0 24px !important; }
+.bj-titles li { display: flex; align-items: center; gap: 10px; padding: 9px 16px; border: 1px solid #6b5a33; background: #0d0f11; color: #eef1f1; font-size: var(--step-small); font-weight: 500; }
+.bj-titles li::before { content: ''; width: 6px; height: 6px; rotate: 45deg; background: var(--bm-gold); flex: none; }
+.bj-titles a { color: inherit; text-decoration: underline; text-decoration-color: #6b5a33; text-underline-offset: 4px; }
+.bj-titles a:hover { color: var(--bm-gold); text-decoration-color: currentColor; }
 .bj-proof { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px !important; }
 .bj-proof li { padding: 8px 14px; border: 1px solid #3a3e42; color: var(--bm-ink); font-size: var(--step-small); }
 .bj-invite { display: flex; align-items: center; justify-content: space-between; gap: 24px 48px; }

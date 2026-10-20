@@ -130,7 +130,7 @@ main[data-motion="calm"] :is(.bmap-fx, .bmap-near, .bmap-dust) { display: none; 
 }
 @media (max-width: 760px) { .bm-page:has(.bmap), .bmap .bv-page, .bmap .pw-page { --step-small: 15px; --step-body: 18px; } }
 /* Masthead: the role line, and the phone sizes it fixes in px. */
-.bm-page:has(.bmap) .bm-role { font-size: var(--step-small); }
+.bm-page:has(.bmap) .bm-role, .bm-page:has(.bmap) .bm-cred { font-size: var(--step-small); }
 @media (max-width: 760px) {
   .bm-page:has(.bmap) .bm-introduction h2 { font-size: clamp(32px, 9vw, 42px); }
   .bm-page:has(.bmap) .bm-introduction p { font-size: var(--step-body); }

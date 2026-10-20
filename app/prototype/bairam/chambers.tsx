@@ -2,7 +2,7 @@
 import type { ReactNode } from 'react';
 import { ArticleCarousel } from '../../components/ArticleCarousel';
 import { simpleLearningCards } from '../../site-content';
-import { about, aiProjects, chapters, learningLinks, signal, startHere, tips, trainingLanes, trainingSignals } from './content';
+import { about, titles, aiProjects, chapters, learningLinks, signal, startHere, tips, trainingLanes, trainingSignals } from './content';
 import { SignalSky } from './signal';
 
 /* Who is Balram? and chambers 01, 04, 05 and 06. Every visible line is Balram's live home-page copy or text he approved (content.ts); only the chapter names are new.
@@ -133,6 +133,11 @@ export function WhoIsBalram() {
   return <div className="bj-chamber bj-stone" data-chamber="who" data-tone="desk">
     <div className="bj-room">
       <Block id="bj-about" kicker="Who is Balram?" title="The human behind AI For All.">
+        {/* His two titles (Oct 20). The AWS one points at the proving wall, where the verified AWS badges hang. */}
+        <ul className="bj-titles" aria-label="Titles">
+          <li><a href="#proving-wall">{titles.aws}<span className="bj-sr"> (see the proving wall)</span></a></li>
+          <li>{titles.champion}</li>
+        </ul>
         <p className="bj-lead">{about.lead}</p>
         <p className="bj-lead bj-suit">{keep(about.suit)}</p>
         <h3 className="bj-sub">What I do</h3>
