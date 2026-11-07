@@ -315,7 +315,7 @@ const localizedCopy: Record<Lang, LocalizedCopy> = {
         hero: {
             kicker: "The School of AIFA",
             title: "CROFTC",
-            subtitle: "Prompt Framework",
+            subtitle: "Prompt Engineering Framework",
             body: "A simple system for writing better AI prompts with Context, Role, Objective, Format, Tone, and Constraints.",
             note: "Use the live tools below to rewrite, build, compare, and test prompts without leaving the page.",
         },
@@ -631,7 +631,7 @@ export function PromptingFrameworkClient() {
         <section id="hero" className="croftc-section croftc-hero" data-reveal>
           <div className="croftc-hero-copy">
             <p className="croftc-kicker">{copy.hero.kicker}</p>
-            <h1>{copy.hero.title}</h1>
+            <h1 aria-label="CROFTC Prompt Engineering Framework">{copy.hero.title}</h1>
             <p className="croftc-subtitle">{copy.hero.subtitle}</p>
             <p className="croftc-body">{copy.hero.body}</p>
             <p className="croftc-note">{copy.hero.note}</p>

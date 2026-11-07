@@ -1,7 +1,9 @@
 /* eslint-disable @next/next/no-img-element -- Vinext's next/image shim breaks hydration. */
 import type { ReactNode } from 'react';
+import Link from 'next/link';
 import { ArticleCarousel } from '../../components/ArticleCarousel';
 import { simpleLearningCards } from '../../site-content';
+import { pillarGuides } from '../../pillar-guides';
 import { about, titles, aiProjects, chapters, learningLinks, signal, startHere, tips, trainingLanes, trainingSignals } from './content';
 import { SignalSky } from './signal';
 
@@ -54,9 +56,9 @@ export function LearningDeck() {
           <span className="bj-card-num">{String(index + 1).padStart(2, '0')}</span>
           <h3>{card.title}</h3>
           <p>{card.summary}</p>
-          {learningLinks[index][0]
-            ? <a className="bj-link" href={learningLinks[index][0]} target="_blank" rel="noopener noreferrer">{learningLinks[index][1]} <Arrow /><span className="bj-sr"> (opens in a new tab)</span></a>
-            : <p className="bj-soon">{learningLinks[index][1]} <span>Coming soon</span></p>}
+          {learningLinks[index][0].startsWith('/')
+            ? <a className="bj-link" href={learningLinks[index][0]}>{learningLinks[index][1]} <Arrow /></a>
+            : <a className="bj-link" href={learningLinks[index][0]} target="_blank" rel="noopener noreferrer">{learningLinks[index][1]} <Arrow /><span className="bj-sr"> (opens in a new tab)</span></a>}
         </article>)}
       </div>
       <ul className="bj-start" aria-label="Where to start">
@@ -68,7 +70,16 @@ export function LearningDeck() {
         </li>)}
       </ul>
     </Block>
-    <Block id="guides" kicker="Role guides" title="Your work. A more useful way to do it." status="Coming soon">{null}</Block>
+    <Block id="guides" kicker="Practical AI guides" title="Your work. A more useful way to do it.">
+      <p className="bj-lead">Hands-on playbooks for Amazon AI tools, Kiro agentic workflows, Amazon Quick automation, and role-based prompting.</p>
+      <div className="bj-cards bj-cards-3">
+        {pillarGuides.map((guide) => <article className="bj-card" key={guide.slug}>
+          <h3><a className="bj-link" href={`/guides/${guide.slug}`}>{guide.name} <Arrow /></a></h3>
+          <p>{guide.description}</p>
+        </article>)}
+      </div>
+      <div className="bj-actions"><Link className="bj-link" href="/guides">Browse all AI guides <Arrow /></Link></div>
+    </Block>
     <Block id="articles" kicker="Articles and notes" title="Breakdowns that help people use AI in real work.">
       <div className="bj-carousel"><ArticleCarousel /></div>
     </Block>

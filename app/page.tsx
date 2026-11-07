@@ -1,29 +1,21 @@
-import type { Metadata } from "next";
 import CaveMapJourney from "./prototype/bairam-map/page";
+import { JsonLd, pageMetadata, personId, siteUrl } from "./seo";
 
-export const metadata: Metadata = {
-  title: "bAIram | Balram R. | AI For All",
-  description:
-    "Learn practical AI with Balram R., an AI lead, educator, and builder. Explore AI training, learning resources, projects, and workflows through AI For All.",
-  alternates: { canonical: "/" },
-  robots: { index: true, follow: true },
-  openGraph: {
-    title: "bAIram | Balram R. | AI For All",
-    description:
-      "I make AI accessible. Learn it simply. Put it to work. Build something that matters.",
-    url: "/",
-    type: "website",
-    images: [
-      {
-        url: "/assets/masthead/suit-desk-2400.webp",
-        width: 2400,
-        height: 1029,
-        alt: "bAIram's cave workstation for AI For All",
-      },
-    ],
-  },
-};
+export const metadata = pageMetadata(
+  "Balram R. (bAIram) | Amazon AI, Kiro Workflows & Practical Prompt Engineering",
+  "Practical AI guides, Kiro spec-driven workflows, Amazon Quick automation, and the CROFTC prompt engineering framework by Balram R. Making AI accessible for all.",
+  "/",
+);
 
 export default function Home() {
-  return <CaveMapJourney />;
+  return <>
+    <JsonLd data={{
+      "@context": "https://schema.org",
+      "@graph": [
+        { "@type": "Person", "@id": personId, name: "Balram R.", alternateName: "bAIram", url: siteUrl, sameAs: ["https://in.linkedin.com/in/balramr66", "https://github.com/balram66-aiforall"] },
+        { "@type": "WebSite", "@id": `${siteUrl}/#website`, name: "AI For All", url: siteUrl, publisher: { "@id": personId }, inLanguage: "en-IN" },
+      ],
+    }} />
+    <CaveMapJourney />
+  </>;
 }

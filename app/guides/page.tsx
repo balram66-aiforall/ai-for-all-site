@@ -1,28 +1,43 @@
 import Link from "next/link";
 import { roleGuides } from "../site-content";
 import { ThemeShell } from "../components/ThemeShell";
-import type { Metadata } from "next";
+import { pillarGuides } from "../pillar-guides";
+import { pageMetadata } from "../seo";
 
-export const metadata: Metadata = { title: "AI workflows for your role | AI For All", description: "Practical AI walkthroughs for managers, operations, analysts, and client teams. Start with a prompt, learn from an example, and review the result." };
+export const metadata = pageMetadata(
+  "Practical AI Guides: Kiro, Amazon Quick and Role Workflows | AI For All",
+  "Explore practical guides to Kiro, Amazon Quick, MCP, and AI workflows for managers, operations, analysts, and client teams.",
+  "/guides",
+);
 
 export default function GuidesIndexPage() {
   return (
     <ThemeShell activeItem="guides">
       <section className="content-section guide-page-hero">
-        <p className="eyebrow">Role guides</p>
+        <p className="eyebrow">Tool and role guides</p>
         <h1>Simple AI guides for the work people already do.</h1>
         <p>
-          Start here if you want AI explained clearly and mapped to a real role.
+          Start with a tool you want to learn or a task you already do.
           Each guide shows what to automate, what to keep human, and what to try
           next.
         </p>
         <p className="guide-status-banner">
-          Each starting workflow includes step-by-step instructions, a reusable
-          prompt, a worked example, and a review checklist.
+          Find walkthroughs, copyable examples, and checks you can use before sharing the result.
         </p>
       </section>
 
-      <section className="content-section guide-index-grid">
+      <section className="content-section guide-index-grid" aria-label="Tool guides">
+        {pillarGuides.map((guide) => (
+          <article className="guide-card" key={guide.slug}>
+            <span>tool guide</span>
+            <h2>{guide.name}</h2>
+            <p>{guide.description}</p>
+            <Link href={`/guides/${guide.slug}`}>Read the guide</Link>
+          </article>
+        ))}
+      </section>
+
+      <section className="content-section guide-index-grid" aria-label="Role guides">
         {roleGuides.map((guide) => (
           <article className="guide-card" key={guide.slug}>
             <span>guide</span>

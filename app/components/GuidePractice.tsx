@@ -1,25 +1,17 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import type { GuideWorkflow } from "../guide-workflows";
+import { CopyableExample } from "./CopyableExample";
 
 export function GuidePractice({ workflow }: { workflow: GuideWorkflow }) {
-  const [copied, setCopied] = useState("");
   const [checked, setChecked] = useState<string[]>([]);
-  async function copyPrompt() {
-    try {
-      await navigator.clipboard.writeText(workflow.prompt);
-      setCopied("Prompt copied. Replace the placeholder with your approved notes.");
-    } catch {
-      setCopied("Copy is unavailable in this browser. You can select the prompt below.");
-    }
-  }
   return (
     <>
       <section className="content-section practice-section" id="practice">
-        <div className="practice-heading"><p className="eyebrow">Your starting prompt</p><button className="button secondary" type="button" onClick={copyPrompt}>Copy prompt</button></div>
-        <pre className="prompt-document">{workflow.prompt}</pre>
-        <p role="status">{copied}</p>
+        <CopyableExample label="Your starting prompt" text={workflow.prompt} success="Prompt copied. Replace the placeholder with your approved notes." />
+        <p>Adapt this example with the <Link className="learning-action" href="/prompting-framework">CROFTC prompt engineering framework</Link>.</p>
         <details className="worked-example">
           <summary>See a worked example</summary>
           <p className="eyebrow">Sample input</p><p>{workflow.input}</p>

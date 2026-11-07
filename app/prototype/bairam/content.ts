@@ -62,12 +62,11 @@ export const aiProjects = [
   },
 ];
 
-/* Oct 19 (Balram): Understand lands on AWS Skill Builder's fundamentals course, prompting uses his CROFTC page, and role
-   guides are "not ready - mention as coming soon" (empty href = coming soon, no link). */
+/* Keep the original course and prompting destinations alongside the site's guide library. */
 export const learningLinks = [
   ['https://skillbuilder.aws/learn/16ASDUHF86/fundamentals-of-machine-learning-and-artificial-intelligence/M7JZCTA94N', 'Learn the fundamentals'],
   ['https://html-harbor-ai.lovable.app/p/croftc', 'Build a better prompt'],
-  ['', 'Find a role guide'],
+  ['/guides', 'Find a role guide'],
 ] as const;
 
 
