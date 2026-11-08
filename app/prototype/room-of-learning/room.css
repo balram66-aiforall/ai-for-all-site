@@ -1,0 +1,76 @@
+/* ---- The bAI room of learning (/bai-room-of-learning). Tokens come from .bm-page (masthead.css); cards and links reuse the
+   cave's .bj-card and .bj-link (journey.css). ---- */
+.bl-main { max-width: 1680px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 88px) clamp(88px, 10vw, 140px); }
+.bl-main:focus { outline: none; }
+.bl-head { padding: clamp(64px, 9vw, 128px) 0 clamp(40px, 5vw, 64px); }
+.bl-head::before { content: ''; display: block; width: 64px; height: 1px; background: var(--bm-gold); margin-bottom: 30px; opacity: .8; }
+.bl-title { font: 500 clamp(42px, 1.3rem + 3.6vw, 80px)/1.02 'Bairam Text', sans-serif; letter-spacing: -.04em; color: #eef1f1; text-wrap: balance; }
+.bl-title span { color: var(--bm-gold); }
+.bl-intro { max-width: 46ch; margin-top: 22px !important; color: var(--bm-muted); font-size: var(--step-lead); line-height: 1.5; text-wrap: pretty; }
+
+.bl-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr)); gap: clamp(16px, 2vw, 24px); margin: 0; padding: 0; list-style: none; }
+.bl-card h2 { margin: 0; font: 500 clamp(24px, 1rem + .9vw, 32px)/1.15 'Bairam Text', sans-serif; letter-spacing: -.02em; color: #eef1f1; }
+.bl-card .bl-by { margin-top: -6px; color: var(--bm-gold); font-size: var(--step-small); font-weight: 500; letter-spacing: .01em; }
+.bl-links { display: flex; flex-wrap: wrap; gap: 4px 28px; margin-top: auto; padding-top: 6px; }
+.bl-links .bj-link { margin-top: 0; }
+
+/* The classroom in the cave (Nov 8): candlelit rows of desks before a board of gold stars, behind the heading and fading
+   into the cave floor under the cards. The page is its own stacking context, so the scene sits over the page colour and
+   under everything else. It drifts very slowly, and holds still for reduced motion. */
+.bl-page { position: relative; isolation: isolate; }
+.bl-scene { position: absolute; top: 0; left: 0; right: 0; height: clamp(640px, 96svh, 980px); z-index: -1; overflow: hidden; pointer-events: none; }
+.bl-scene img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 64% 42%; opacity: .78;
+  transform-origin: 70% 38%; animation: bl-drift 48s ease-in-out infinite alternate; }
+.bl-scene::after { content: ''; position: absolute; inset: 0;
+  background: linear-gradient(90deg, #080a0c 0%, #080a0ce6 20%, #080a0c8c 44%, #080a0c1a 70%, #080a0c33 100%),
+    linear-gradient(180deg, #080a0ca6 0%, #080a0c00 22%, #080a0c00 52%, #080a0cb3 78%, #080a0c 100%); }
+@keyframes bl-drift { from { transform: scale(1); } to { transform: scale(1.06) translate(-1%, .6%); } }
+
+.bl-head { padding: clamp(96px, 13vw, 210px) 0 clamp(56px, 7vw, 120px); }
+.bl-title { text-shadow: 0 2px 30px #080a0c; }
+.bl-intro { color: #c3c8ca; text-shadow: 0 1px 16px #080a0c; }
+.bl-read { color: var(--bm-gold); }
+
+/* A card with art spans the room: words on one side, its picture on the other. */
+.bl-card-words { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
+.bl-card-art { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); align-items: center;
+  gap: clamp(28px, 4vw, 72px); padding: clamp(28px, 3.4vw, 52px); border-color: #3a382f;
+  background: linear-gradient(160deg, #15171be6, #0b0d10f2); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  box-shadow: inset 0 1px 0 #e6b94f40, 0 40px 90px -40px #000, 0 0 0 1px #00000066; transition: border-color .3s ease, box-shadow .3s ease; }
+.bl-card-art:hover, .bl-card-art:focus-within { border-color: #6b5a2c; box-shadow: inset 0 1px 0 #e6b94f73, 0 40px 90px -36px #000, 0 0 60px -20px #e6b94f40; }
+.bl-card-art h2 { font-size: clamp(28px, 1rem + 1.6vw, 44px); }
+.bl-card-art .bl-links { margin-top: 10px; padding-top: 0; align-items: center; }
+/* Read it here is the way in, so it is the gold one. */
+.bl-card .bl-read { padding: 0 22px; border: 0; border-radius: 999px; background: var(--bm-gold); color: #14120b; transition: background-color .2s ease; }
+.bl-card .bl-read svg { color: #14120b; }
+.bl-card .bl-read:hover { background: #f1cd73; }
+.bl-card .bl-read:focus-visible { outline: 2px solid var(--bm-gold); outline-offset: 3px; }
+
+.bl-card-pic { position: relative; align-self: stretch; display: grid; place-items: center; min-height: 260px; border-radius: 4px;
+  background: radial-gradient(ellipse at 50% 50%, #e6b94f14, transparent 70%); }
+.bl-sky { display: block; width: 100%; height: auto; overflow: visible; }
+.bl-sky-threads line { stroke: #e6b94f; stroke-width: 1; opacity: .16; transition: opacity .4s ease; }
+.bl-card-art:hover .bl-sky-threads line, .bl-card-art:focus-within .bl-sky-threads line { opacity: .3; }
+.bl-sky-points circle { fill: #f1f3f3; opacity: .9; }
+.bl-sky-points [data-shelf="course"] { fill: #e6b94f; }
+.bl-sky-points [data-shelf="handbooks"] { fill: #8fc1d4; }
+.bl-sky-points [data-shelf="second-brain"] { fill: #e39a72; }
+.bl-sky-points [data-shelf="resources"] { fill: #a9cf9b; }
+.bl-sky-points .is-twinkle { animation: bl-twinkle 6s ease-in-out infinite; }
+@keyframes bl-twinkle { 0%, 100% { opacity: .9; } 50% { opacity: .25; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .bl-scene img, .bl-sky-points .is-twinkle { animation: none; }
+}
+
+@media (max-width: 960px) {
+  .bl-card-art { grid-template-columns: 1fr; }
+  .bl-card-pic { order: -1; min-height: 0; }
+}
+@media (max-width: 760px) {
+  .bl-scene { height: 620px; }
+  .bl-scene img { object-position: 50% 30%; opacity: .7; }
+  .bl-scene::after { background: linear-gradient(180deg, #080a0cb3 0%, #080a0c33 18%, #080a0c59 48%, #080a0ce6 82%, #080a0c 100%); }
+  .bl-main { padding: 0 24px 88px; }
+  .bl-head { padding: 64px 0 40px; }
+}

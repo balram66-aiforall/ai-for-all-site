@@ -94,6 +94,8 @@ html:has(.bm-journey-main[data-motion="3d"]) { scroll-behavior: smooth; }
 .bj-start { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(16px, 2vw, 24px); margin-top: clamp(16px, 2vw, 24px) !important; }
 .bj-start-label { display: inline-flex; align-items: center; gap: 10px; color: var(--bm-gold) !important; font-size: var(--step-small); font-weight: 500; }
 .bj-room .bj-start-mark { width: 22px; height: 22px; color: var(--bm-gold); }
+/* The way into the bAI room of learning (its own page), under the Start-here cards. */
+.bj-room-way { margin-top: clamp(20px, 2.4vw, 32px) !important; }
 .bj-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
 /* Role guides (shared RoleWorkbench), restyled for the cave. */
