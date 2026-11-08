@@ -6,18 +6,8 @@ import { LoadingOpening } from '../loading/opening';
 import { SoundToggle } from '../sound/sound-toggle';
 import { MARKS } from '../bairam/mark/marks';
 import { titles } from '../bairam/content';
+import { aboutHref, Arrow, Header, useMobileMenu, Wordmark } from './site-header';
 
-// The bio: #who on the cave pages (its own stop after the masthead), the live home page's #about otherwise.
-const aboutHref = (base: string) => (base === '' ? '#who' : `${base}#about`);
-// base '/' points at the live home page's sections; the cave journey passes '' so the same links land on its own chambers.
-const navLinks = (base: string) => [
-  { label: 'Home', href: '#masthead', current: true },
-  { label: 'Learn', href: `${base}#learn` },
-  { label: 'Work', href: `${base}#projects` },
-  { label: 'About', href: aboutHref(base) },
-];
-function Wordmark() { return <>b<span>AI</span>ram</>; }
-function Arrow() { return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" /></svg>; }
 /* AI-generated cave workstation (Workbench suit edit 2b27d3c9, looped with Seedance 2.0 run cb4cb463).
    The still is the loop's first frame, so the video can fade in over it without a jump. Phones get a crop centred on the desk. */
 type Clip = { file: string; av1: string; avc: string };
@@ -194,9 +184,6 @@ function Scene({ hold, waking, paused, onMotion }: { hold: boolean; waking: bool
 const pauseKey = 'bairam:scene-paused';
 function PauseIcon() { return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M8 5v14M16 5v14" /></svg>; }
 function PlayIcon() { return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M7 4.5v15l12-7.5z" /></svg>; }
-function Navigation({ base, close }: { base: string; close?: () => void }) {
-  return <>{navLinks(base).map(link => <a key={link.label} href={link.href} aria-current={link.current ? 'page' : undefined} onClick={close}>{link.label}</a>)}</>;
-}
 // On its own the masthead is the page's <main>; in the cave journey it becomes the first chamber inside one shared <main>.
 function Landing({ journey, children }: { journey?: ReactNode; children: ReactNode }) {
   if (!journey) return <main className="bm-main" id="masthead">{children}</main>;
@@ -205,8 +192,8 @@ function Landing({ journey, children }: { journey?: ReactNode; children: ReactNo
 /* children: the cave journey's chambers. They join the masthead's <main>, so the page keeps one main landmark. */
 /* sound: the cave map's Sound button in the controls and in the loading screen (other routes stay silent). */
 export function Masthead({ base = '/', children, sound = false }: { base?: string; children?: ReactNode; sound?: boolean }) {
-  const menu = useRef<HTMLDetailsElement>(null);
-  const menuToggle = useRef<HTMLElement>(null);
+  const mobileMenu = useMobileMenu();
+  const { closeMenu } = mobileMenu;
   const replay = useRef<HTMLButtonElement>(null);
   const heading = useRef<HTMLHeadingElement>(null);
   const dialog = useRef<HTMLDialogElement>(null);
@@ -244,7 +231,6 @@ export function Masthead({ base = '/', children, sound = false }: { base?: strin
     setScenePaused(next);
     try { localStorage.setItem(pauseKey, next ? '1' : '0'); } catch { /* storage blocked: choice lasts this visit */ }
   };
-  const closeMenu = () => { if (menu.current) menu.current.open = false; };
   const finish = useCallback(() => {
     dialog.current?.close();
     setPlaying(false);
@@ -256,18 +242,6 @@ export function Masthead({ base = '/', children, sound = false }: { base?: strin
   }, [wake]);
 
   useEffect(() => {
-    const root = menu.current!;
-    const mobile = matchMedia('(max-width: 760px)');
-    const onResize = () => { if (!mobile.matches) root.open = false; };
-    const onOutside = (event: PointerEvent) => { if (event.target instanceof Node && !root.contains(event.target)) root.open = false; };
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && root.open) { root.open = false; menuToggle.current?.focus(); }
-    };
-    const onBlur = (event: FocusEvent) => { if (event.relatedTarget instanceof Node && !root.contains(event.relatedTarget)) root.open = false; };
-    root.addEventListener('focusout', onBlur);
-    document.addEventListener('pointerdown', onOutside);
-    document.addEventListener('keydown', onKey);
-    mobile.addEventListener('change', onResize);
     // Progressively enhance after hydration; the masthead never depends on JS to be readable.
     const ready = requestAnimationFrame(() => {
       setEnhanced(true);
@@ -276,13 +250,7 @@ export function Masthead({ base = '/', children, sound = false }: { base?: strin
       // The loading screen opens every fresh visit; ?intro=0 or a deep link (#section) goes straight to the masthead.
       if (new URLSearchParams(location.search).get('intro') !== '0' && !location.hash && !document.hidden) setPlaying(true);
     });
-    return () => {
-      cancelAnimationFrame(ready);
-      root.removeEventListener('focusout', onBlur);
-      document.removeEventListener('pointerdown', onOutside);
-      document.removeEventListener('keydown', onKey);
-      mobile.removeEventListener('change', onResize);
-    };
+    return () => cancelAnimationFrame(ready);
   }, [wake]);
 
   // Layout effect: the dialog is open before the pre-veil goes, so no frame shows the bare masthead.
@@ -295,15 +263,7 @@ export function Masthead({ base = '/', children, sound = false }: { base?: strin
 
   return <div ref={page} className="bm-page" data-opening={playing ? 'playing' : 'complete'} data-enhanced={enhanced} data-wake={waking ? 'running' : 'done'}>
     <a className="bm-skip" href="#masthead">Skip to introduction</a>
-    <header className="bm-header">
-      <a className="bm-brand" href="#masthead" aria-label="bAIram home"><Wordmark /></a>
-      <nav className="bm-desktop-nav" aria-label="Main navigation"><Navigation base={base} /></nav>
-      <a className="bm-connect" href="https://in.linkedin.com/in/balramr66">Contact me <Arrow /></a>
-      <details ref={menu} className="bm-mobile-menu">
-        <summary ref={menuToggle} aria-label="Navigation menu"><span>Menu</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16M4 16h16" /></svg></summary>
-        <nav aria-label="Mobile navigation"><Navigation base={base} close={closeMenu}/><a href="https://in.linkedin.com/in/balramr66" onClick={closeMenu}>Contact me <Arrow /></a></nav>
-      </details>
-    </header>
+    <Header base={base} page="home" menu={mobileMenu} />
     <Landing journey={children}>
       <div className="bm-hero">
         <Scene hold={!enhanced || playing} waking={waking} paused={scenePaused} onMotion={setMotion} />

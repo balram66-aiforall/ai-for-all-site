@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { ArticleCarousel } from '../../components/ArticleCarousel';
 import { simpleLearningCards } from '../../site-content';
 import { pillarGuides } from '../../pillar-guides';
-import { about, titles, aiProjects, chapters, learningLinks, signal, startHere, tips, trainingLanes, trainingSignals } from './content';
+import { about, titles, aiProjects, chapters, learningLinks, roomOfLearning, signal, startHere, tips, trainingLanes, trainingSignals } from './content';
 import { SignalSky } from './signal';
 
 /* Who is Balram? and chambers 01, 04, 05 and 06. Every visible line is Balram's live home-page copy or text he approved (content.ts); only the chapter names are new.
@@ -69,6 +69,8 @@ export function LearningDeck() {
           <a className="bj-link" href={item.href} target="_blank" rel="noopener noreferrer">{item.action} <Arrow /><span className="bj-sr"> (opens in a new tab)</span></a>
         </li>)}
       </ul>
+      {/* The way into the bAI room of learning, its own page (same tab: it is part of this site). */}
+      <p className="bj-room-way"><a className="bj-link" href={roomOfLearning.path}>{roomOfLearning.enter} <Arrow /></a></p>
     </Block>
     <Block id="guides" kicker="Practical AI guides" title="Your work. A more useful way to do it.">
       <p className="bj-lead">Hands-on playbooks for Amazon AI tools, Kiro agentic workflows, Amazon Quick automation, and role-based prompting.</p>

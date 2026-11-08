@@ -78,6 +78,29 @@ export const startHere = [
   { kind: 'course', label: 'The courses', title: 'Anthropic Courses', by: 'Anthropic', action: 'Open the courses', href: 'https://anthropic.skilljar.com/' },
 ] as const;
 
+/* APPROVED Nov 7 (Balram: "room should be a separate page", "can we say be ai room of learning?", intro "Go with intro A",
+   menu entry "add one", the Karpathy and Anthropic cards stay on the home page). Its own page at path; menu = the top-menu
+   label; enter = the link under the learning deck's Start-here cards. Each card is a third-party resource in its own words:
+   title, author and summary are the source's own (Second Brain OS: the GitHub repo's name, owner and description).
+   Nov 7 (Balram: "build everything of the content"): Second Brain OS is synced in whole (scripts/sync-second-brain-os.mjs);
+   read = the link into that copy, same tab; links = the originals, in a new tab. */
+export const roomOfLearning = {
+  path: '/bai-room-of-learning',
+  name: 'bAI room of learning',
+  menu: 'Room of learning',
+  intro: "The courses, guides and projects I'd point you to next, once the basics click.",
+  enter: 'Enter the bAI room of learning',
+  cards: [
+    // art: the card's picture (no words), here the wing's own map as a constellation.
+    { title: 'Second Brain OS', by: 'undefined-ui on GitHub', art: 'constellation',
+      summary: 'Guides and resources for AI engineers: an agents course, five handbooks, a hands-on second-brain project and a vetted reading list.',
+      read: { label: 'Read it here', href: '/bai-room-of-learning/second-brain-os' },
+      links: [
+        { label: 'Open on GitHub', href: 'https://github.com/undefined-ui/second-brain-os' },
+      ] },
+  ],
+} as const;
+
 /* APPROVED Oct 19 (Balram: "Approved, replace the old chips"): the who-I-am block in the cave mouth. Generic on purpose: no
    internal program, team, tool or channel names. Replaces the live chips 'AI learning leader', 'Role-based guides',
    'Community examples', 'Human judgment first'. */
