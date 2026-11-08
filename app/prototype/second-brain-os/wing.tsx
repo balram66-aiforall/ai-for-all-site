@@ -9,9 +9,7 @@ import { WING, library, totals, type Group } from './library';
 import { LiveMap } from './live-map';
 import { mapData } from './map-data';
 import { LearningPath } from './learning-path';
-import { learningPath, titleOf } from './path';
-
-const pathTitles = Object.fromEntries(learningPath.flatMap(st => st.pages).map(u => [u, titleOf(u)]));
+import { learningPath, pathInfo } from './path';
 
 const tablets = (group: Group) => group.sections.length === 1
   ? group.sections[0].pages.slice(1).map(url => { const p = library.pages[url]; return { key: url, title: p.title, summary: p.summary, url, pages: 0 }; })
@@ -58,7 +56,7 @@ export function Wing() {
         </div>
       </header>
 
-      <LearningPath stages={learningPath} titles={pathTitles} />
+      <LearningPath stages={learningPath} info={pathInfo} />
 
       {library.groups.map((group, gi) => <section className="sb-shelf" id={group.id} key={group.id} aria-labelledby={`${group.id}-title`}>
         <header className="sb-shelf-head">
