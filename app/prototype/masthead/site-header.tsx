@@ -8,10 +8,11 @@ import { roomOfLearning } from '../bairam/content';
 // Back to the cave home page from another page: the hash skips the loading opening (it plays on a fresh visit, not a return).
 const HOME = '/#masthead';
 /* page: which page the header sits on. 'home' = a page with the masthead (its Home link is this page's own #masthead);
-   'learning' = the bAI room of learning, a page of its own that links back into the cave home page. */
-export type SitePage = 'home' | 'learning';
-// The bio: #who on the cave pages (its own stop after the masthead) and from the room of learning, the old live home page's #about otherwise.
-export const aboutHref = (base: string, page: SitePage = 'home') => (base === '' ? '#who' : page === 'learning' ? '/#who' : `${base}#about`);
+   'learning' = the bAI room of learning, a page of its own that links back into the cave home page;
+   'work' = a page for one of his builds (Loop at /loop), so the menu marks Work, the workshop it belongs to, as where you are. */
+export type SitePage = 'home' | 'learning' | 'work';
+// The bio: #who on the cave pages (its own stop after the masthead) and from a page of its own, the old live home page's #about otherwise.
+export const aboutHref = (base: string, page: SitePage = 'home') => (base === '' ? '#who' : page !== 'home' ? '/#who' : `${base}#about`);
 // base '/' points at the home page's sections; the cave journey passes '' so the same links land on its own chambers.
 // within: a page inside the room of learning (its wing and reading pages), so the menu marks the room as where you are, not this page.
 type Current = 'page' | 'true' | undefined;
@@ -19,7 +20,7 @@ const navLinks = (base: string, page: SitePage, within = false): { label: string
   { label: 'Home', href: page === 'home' ? '#masthead' : HOME, current: page === 'home' ? 'page' : undefined },
   { label: 'Learn', href: `${base}#learn` },
   { label: roomOfLearning.menu, href: roomOfLearning.path, current: page === 'learning' ? (within ? 'true' : 'page') : undefined },
-  { label: 'Work', href: `${base}#projects` },
+  { label: 'Work', href: `${base}#projects`, current: page === 'work' ? 'true' : undefined },
   { label: 'About', href: aboutHref(base, page) },
 ];
 export function Wordmark() { return <>b<span>AI</span>ram</>; }
@@ -68,7 +69,7 @@ export function Header({ base, page, within, menu: { menu, menuToggle, closeMenu
     </details>
   </header>;
 }
-// The top bar on a page without the masthead (the room of learning); skipTo = the id of that page's <main>.
+// The top bar on a page without the masthead (the room of learning, Loop); skipTo = the id of that page's <main>.
 export function SiteHeader({ page, skipTo, within }: { page: Exclude<SitePage, 'home'>; skipTo: string; within?: boolean }) {
   const menu = useMobileMenu();
   return <><a className="bm-skip" href={`#${skipTo}`}>Skip to content</a><Header base="/" page={page} within={within} menu={menu} /></>;

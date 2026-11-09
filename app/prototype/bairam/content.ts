@@ -24,7 +24,33 @@ export const trainingSignals = [
   'Role-specific learning',
 ];
 
+/* APPROVED Nov 9 (Balram: "this is another site that i have - <Loop>. I want to embedd this into bAIram", then "Go ahead, workshop
+   card plus /loop"). Loop is his build, shown whole inside bAIram at path, in a frame, with a way out to the original. Every word
+   is Loop's own (name and tagline from its <title>, description from its share description), except open: the way out to the
+   original, worded as in the plan he approved. */
+export const loop = {
+  path: '/loop',
+  name: 'Loop',
+  tagline: 'The Interview Prep Cheat Sheet',
+  description: 'A source-backed guide to Amazon interviews: the hiring process per role, frequency-ranked coding problems, system design prompts, the 16 Leadership Principles, and first-hand candidate experiences.',
+  href: 'https://loop-amazon-interview-prep.raam333.chatgpt.site/',
+  open: 'Open Loop in a new tab',
+} as const;
+
 export const aiProjects = [
+  /* Added Nov 9 (see loop above), first in the workshop. Type = Loop's tagline; art = Loop's home page at 561x701 (2x), like
+     HTML Harbor's. Open project stays on the site: it opens Loop inside bAIram. */
+  {
+    title: loop.name,
+    type: 'interview prep cheat sheet',
+    summary: loop.description,
+    href: loop.path,
+    image: '/assets/projects/loop-1000.webp',
+    smallImage: '/assets/projects/loop-640.webp',
+    width: 1122,
+    height: 1402,
+    action: 'Open project',
+  },
   /* Added Oct 19 (Balram: "https://html-harbor-ai.lovable.app/ - add this to my builds. remove pinky promise"). Type and
      summary are the app's own words (its badge and hero line). */
   {
