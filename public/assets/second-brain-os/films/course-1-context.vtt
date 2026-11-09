@@ -1,0 +1,52 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:03.610
+A bigger context window looks like free capacity.
+
+00:00:03.710 --> 00:00:04.748
+It is not.
+
+00:00:04.848 --> 00:00:06.870
+So what does the model really see?
+
+00:00:08.070 --> 00:00:11.937
+In Lost in the Middle, the answer's position changed the score.
+
+00:00:11.987 --> 00:00:17.965
+First document, seventy-five point eight percent. Middle, fifty-three point eight.
+
+00:00:18.015 --> 00:00:23.940
+End, sixty-three point two. With no documents at all, fifty-six point one.
+
+00:00:24.040 --> 00:00:27.718
+Buried in the middle, the model did worse than with nothing.
+
+00:00:28.268 --> 00:00:30.814
+Caching pays for stillness.
+
+00:00:30.864 --> 00:00:34.896
+Cache reads cost a tenth of the base rate, ten times cheaper.
+
+00:00:34.946 --> 00:00:39.578
+But a timestamp in the system prompt guarantees a miss on every call.
+
+00:00:40.128 --> 00:00:46.164
+Every piece of context belongs in exactly one of four places. The system prompt,
+
+00:00:46.214 --> 00:00:49.470
+the tools, the disk, and the tail.
+
+00:00:50.020 --> 00:00:53.399
+The session is the workbench for one conversation.
+
+00:00:53.449 --> 00:00:57.181
+Memory is the filing cabinet that persists across them.
+
+00:00:57.231 --> 00:01:00.322
+Extracted facts, not raw dialogue.
+
+00:01:00.872 --> 00:01:04.550
+And in practice, a subagent is a context firewall.
+
+00:01:05.100 --> 00:01:11.226
+That's module one, context. Start with page one: How models read context.

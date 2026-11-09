@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:04.762
+Most software does not need a model to write. It needs a decision.
+
+00:00:04.862 --> 00:00:08.372
+Classify, route, score, gate.
+
+00:00:09.572 --> 00:00:15.656
+Jev does not generate text. It answers typed questions, with three primitives.
+
+00:00:15.706 --> 00:00:20.181
+Choice picks one option. Score places it on a scale.
+
+00:00:20.231 --> 00:00:23.234
+Noul is a yes or no, as a probability.
+
+00:00:23.784 --> 00:00:28.854
+The author's advice: treat the mechanism as real, and the magnitudes as marketing.
+
+00:00:29.404 --> 00:00:35.699
+Jev fits bounded answers. Classification, routing, guardrails.
+
+00:00:35.749 --> 00:00:41.170
+An LLM still wins on text, open-ended reasoning, and explanations.
+
+00:00:41.720 --> 00:00:47.822
+In an agent stack, Jev answers, we check the confidence, then act, or escalate.
+
+00:00:48.372 --> 00:00:53.801
+Jev is waitlisted, so we build the shape first, with an ordinary LLM.
+
+00:00:53.851 --> 00:00:59.659
+The endpoint returns a value and a confidence. The router acts only when confident.
+
+00:00:59.709 --> 00:01:01.722
+The swap is a one-file change.
+
+00:01:02.272 --> 00:01:07.822
+That's the Jev engineering handbook. Start with page one: System One Models.

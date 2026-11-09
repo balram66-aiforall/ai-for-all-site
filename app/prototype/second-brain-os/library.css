@@ -366,3 +366,14 @@
   .sb-path-now { max-width: none; }
   .sb-stages { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* Section films (film.tsx): a 16:9 player under the credit, a quiet caption line, the transcript folded beneath. */
+.sb-film { margin: 0 0 clamp(28px, 3vw, 44px); }
+.sb-film video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border: 1px solid var(--sb-edge); background: #0c0e11; box-shadow: 0 24px 48px -28px #000; }
+.sb-film figcaption { display: grid; gap: 10px; margin-top: 12px; color: var(--bm-muted); font-size: var(--step-small); line-height: 1.5; }
+.sb-film-meta { margin: 0; }
+.sb-film-text summary { width: fit-content; cursor: pointer; color: var(--bm-gold); }
+.sb-film-text summary:focus-visible { outline: 2px solid var(--bm-gold); outline-offset: 3px; }
+.sb-film-text p { max-width: 68ch; margin: 12px 0 0; padding: 14px 18px; border-left: 2px solid var(--sb-edge); color: var(--bm-ink); font-size: var(--step-body, 17px); line-height: 1.65; }
+.sb-filmsec { max-width: 1080px; margin: 0 auto; padding: clamp(56px, 6vw, 96px) var(--sb-pad) 0; }
+.sb-filmsec .sb-film { margin: 0; }

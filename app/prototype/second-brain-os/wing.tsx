@@ -7,6 +7,7 @@ import { roomOfLearning } from '../bairam/content';
 import { Arrow, Credit, Trail } from './parts';
 import { WING, library, totals, type Group } from './library';
 import { LiveMap } from './live-map';
+import { Film } from './film';
 import { mapData } from './map-data';
 import { LearningPath } from './learning-path';
 import { learningPath, pathInfo } from './path';
@@ -55,6 +56,10 @@ export function Wing() {
           <LiveMap data={mapData} />
         </div>
       </header>
+
+      <section className="sb-filmsec" aria-label="The wing in a minute">
+        <Film id="wing-intro" title={card.title} />
+      </section>
 
       <LearningPath stages={learningPath} info={pathInfo} />
 

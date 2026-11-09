@@ -4,6 +4,7 @@
 import { SiteHeader } from '../masthead/site-header';
 import { Connected } from './connected';
 import { CopyCode } from './copy-code';
+import { Film } from './film';
 import { TrailMarks } from './trail-marks';
 import { Back, Credit, Forward, Trail } from './parts';
 import { WING, library, neighbours, placeOf, sourceAt, type Page } from './library';
@@ -60,6 +61,7 @@ export function Reader({ page }: { page: Page }) {
             <Trail steps={steps} />
             <h1>{page.title}</h1>
             <Credit github={sourceAt(page.github)} />
+            {place && place.section.url === page.url && <Film id={place.section.id} title={place.section.title} />}
           </header>
           <div className="sb-prose" dangerouslySetInnerHTML={{ __html: page.html }} />
           <CopyCode />

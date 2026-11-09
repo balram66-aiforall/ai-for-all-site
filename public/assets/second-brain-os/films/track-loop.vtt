@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:03.082
+The hard part is not making the agent go.
+
+00:00:03.182 --> 00:00:06.212
+It will report success it has not earned.
+
+00:00:06.312 --> 00:00:07.854
+It is making it stop.
+
+00:00:09.054 --> 00:00:14.854
+Prompt engineering optimised a single message. Loop engineering optimises the cycle,
+
+00:00:14.904 --> 00:00:17.100
+spending judgement once, up front.
+
+00:00:17.650 --> 00:00:21.076
+Every serious loop carries several independent brakes, any one of which ends the run.
+
+00:00:21.126 --> 00:00:29.224
+A goal test, budgets, a ratchet that must beat the best, and spin detection.
+
+00:00:29.774 --> 00:00:33.467
+Who judges? The loop checks, it never asks.
+
+00:00:33.517 --> 00:00:36.476
+A checker the maker can edit is not a checker.
+
+00:00:37.026 --> 00:00:44.448
+Between attempts, we throw the transcript away. Try, verify, distil, restart cold.
+
+00:00:44.998 --> 00:00:52.318
+Overnight, nobody is watching. So: its own branch, never pushed. A ratchet.
+
+00:00:52.368 --> 00:00:57.196
+A hard reset on regression. A morning report, with the brake that fired.
+
+00:00:57.746 --> 00:01:03.416
+That's the loop engineering handbook. Start with page one: What Loop Engineering Is.

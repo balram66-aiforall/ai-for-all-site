@@ -1,0 +1,43 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:03.178
+Everything before this was construction.
+
+00:00:03.278 --> 00:00:04.844
+Now we ask the vault.
+
+00:00:04.944 --> 00:00:11.046
+An answer that blends our notes with the model's knowledge is worse than no answer.
+
+00:00:12.246 --> 00:00:17.976
+Every claim comes from a page, and names the page. Start from the index.
+
+00:00:18.026 --> 00:00:22.044
+Label outside knowledge. And empty is a valid answer.
+
+00:00:22.594 --> 00:00:29.829
+Questions a vault answers best. What do we know about X? What connects X and Y?
+
+00:00:29.879 --> 00:00:33.688
+What have we changed our mind about? And what contradicts this?
+
+00:00:34.238 --> 00:00:39.809
+Search is mostly grep. Ripgrep or Dataview finds the candidates.
+
+00:00:39.859 --> 00:00:43.628
+The graph expands them. The agent reads and answers.
+
+00:00:44.178 --> 00:00:49.984
+Vectors pay past a few thousand pages, with wording our pages do not use,
+
+00:00:50.034 --> 00:00:54.336
+and an uncurated corpus. Most vaults never hit all three.
+
+00:00:54.886 --> 00:01:00.169
+Reading more is not reading better. Pasting everything buries the middle.
+
+00:01:00.219 --> 00:01:03.004
+Index first, then three to eight pages.
+
+00:01:03.554 --> 00:01:08.864
+That's chapter seven, retrieval. Start with page one: Asking the vault.

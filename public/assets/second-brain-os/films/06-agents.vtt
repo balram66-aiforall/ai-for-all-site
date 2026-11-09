@@ -1,0 +1,46 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:04.690
+Everything up to here, we could do by hand, slowly.
+
+00:00:04.790 --> 00:00:08.141
+An agent with write access, running while we sleep, is exactly as useful
+
+00:00:08.191 --> 00:00:11.948
+and exactly as dangerous.
+
+00:00:13.148 --> 00:00:20.066
+So the rule is: keys, not prompts. Telling an agent not to do something is a preference, not a boundary.
+
+00:00:20.616 --> 00:00:23.430
+Then six roles, four of them read-only.
+
+00:00:23.530 --> 00:00:30.937
+The ingestor. The linker. The reviewer. The researcher. The graph analyst.
+
+00:00:30.987 --> 00:00:31.936
+And the curator.
+
+00:00:32.486 --> 00:00:42.188
+Ingest, daily. Link, weekly. Lint, weekly. Review, weekly. Metrics, monthly.
+
+00:00:42.288 --> 00:00:46.014
+Each run leaves a log entry, a commit, and a report.
+
+00:00:46.564 --> 00:00:49.256
+Subagents get their own context.
+
+00:00:49.306 --> 00:00:53.684
+Fan out for research, independent sources, and verification.
+
+00:00:53.734 --> 00:00:55.738
+Related sources go in sequence.
+
+00:00:56.288 --> 00:01:02.221
+Skills teach repeatable behaviour. Commands are shortcuts that point at a skill.
+
+00:01:02.271 --> 00:01:04.214
+The behaviour belongs in the skill.
+
+00:01:04.764 --> 00:01:09.882
+That's chapter six, agents. Start with page one: Guardrails.

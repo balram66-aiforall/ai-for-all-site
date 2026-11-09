@@ -1,0 +1,49 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:02.962
+How do we know an AI product got better?
+
+00:00:03.062 --> 00:00:07.724
+Tweak the prompt, paste in the three examples you remember, nod, ship.
+
+00:00:07.824 --> 00:00:10.086
+Vibes, or measurement?
+
+00:00:11.286 --> 00:00:14.052
+Evals are the tests of AI products.
+
+00:00:14.152 --> 00:00:19.510
+The loop: error analysis, taxonomy, metrics, iterate.
+
+00:00:20.060 --> 00:00:23.529
+A one to five scale mostly measures the grader's mood,
+
+00:00:23.579 --> 00:00:29.609
+and two annotators give a three and a four. Pass or fail forces us to define the bar,
+
+00:00:29.659 --> 00:00:31.802
+and disagreements surface at once.
+
+00:00:32.352 --> 00:00:36.078
+An uncalibrated judge is a random number generator with confidence.
+
+00:00:36.178 --> 00:00:41.493
+It favours the first answer, longer answers, its own family's outputs,
+
+00:00:41.543 --> 00:00:43.504
+and effort over results.
+
+00:00:44.054 --> 00:00:45.355
+And for agents,
+
+00:00:45.405 --> 00:00:50.252
+evaluating the final answer alone is like reviewing a chess game by the last move.
+
+00:00:50.802 --> 00:00:54.353
+So where do we start? Read thirty traces.
+
+00:00:54.403 --> 00:01:00.240
+Name the failures, and encode the top three. Put the suite in C I, and re-run weekly.
+
+00:01:00.790 --> 00:01:06.004
+That's the eval engineering handbook. Start with page one: Why Evals.

@@ -1,0 +1,43 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:03.130
+Same model. Different harness.
+
+00:00:03.230 --> 00:00:06.788
+Wildly different agent. So what is the harness?
+
+00:00:07.988 --> 00:00:12.770
+A harness is everything around the model that turns text prediction into work done.
+
+00:00:12.870 --> 00:00:18.012
+The loop. The tools. The prompts. The permissions.
+
+00:00:18.562 --> 00:00:23.140
+At the core sits a while-loop. Send the conversation to the model.
+
+00:00:23.190 --> 00:00:27.184
+Run the tool calls. Append the results, and go round again.
+
+00:00:27.734 --> 00:00:31.016
+A prompt instruction merely lowers the odds.
+
+00:00:31.066 --> 00:00:34.364
+A hook blocks a dangerous command every single time.
+
+00:00:34.914 --> 00:00:39.528
+Context engineering asks what the model sees at this moment, and why.
+
+00:00:39.628 --> 00:00:47.560
+Always in: the system prompt and Claude dot M D. On demand: files and search results.
+
+00:00:47.610 --> 00:00:49.714
+Never: whole codebases.
+
+00:00:50.264 --> 00:00:56.400
+On tools, a tool is three prompts wearing a schema: the name, the description,
+
+00:00:56.450 --> 00:00:58.382
+and the shape of what comes back.
+
+00:00:58.932 --> 00:01:04.314
+That's the agent harnesses handbook. Start with page one: What a Harness Is.

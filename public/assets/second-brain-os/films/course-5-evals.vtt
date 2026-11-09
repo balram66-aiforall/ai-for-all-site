@@ -1,0 +1,49 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:02.050
+Does our agent work?
+
+00:00:02.150 --> 00:00:04.580
+We want to know before our users tell us.
+
+00:00:04.680 --> 00:00:08.814
+Two kinds of checks. The outcome, or the behaviour?
+
+00:00:10.014 --> 00:00:13.945
+End-to-end checks ask: did the final answer come out right?
+
+00:00:13.995 --> 00:00:16.044
+The score moves, but not why.
+
+00:00:16.144 --> 00:00:19.988
+Behavioural checks ask whether one specific thing happened.
+
+00:00:20.038 --> 00:00:22.438
+Narrow, binary, and cheap.
+
+00:00:22.988 --> 00:00:27.578
+Behavioural checks run on the trace. The trajectory is the truth.
+
+00:00:28.128 --> 00:00:32.639
+End-to-end grading needs a judge, and no instrument ships calibrated.
+
+00:00:32.689 --> 00:00:38.070
+First, agreement with hand labels. Second, repeat-run variance.
+
+00:00:38.620 --> 00:00:43.009
+A golden set must include bad examples, not just good ones.
+
+00:00:43.059 --> 00:00:46.094
+Sample real runs on a schedule, grade them,
+
+00:00:46.144 --> 00:00:48.754
+and promote anything that fails into the set.
+
+00:00:49.304 --> 00:00:56.614
+The practice is five steps. Mine twenty real failures. Write one check per case.
+
+00:00:56.664 --> 00:01:02.462
+Run them on traces. Calibrate one narrow judge. Then hand-grade weekly.
+
+00:01:03.012 --> 00:01:08.610
+That's module five, evals. Start with page one: Two kinds of checks.
