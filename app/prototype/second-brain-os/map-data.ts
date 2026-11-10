@@ -5,7 +5,10 @@ import { WING, credit, library, placeOf } from './library';
 
 export type Shelf = 'course' | 'handbooks' | 'second-brain' | 'resources' | 'start';
 export type MapNode = { url: string; title: string; summary: string; shelf: Shelf; place: string; r: number; index: boolean };
-export type MapLayout = { w: number; h: number; points: [number, number][]; boxes: Record<string, [number, number, number, number]> };
+// The brain each layout is drawn as (scripts/second-brain-os-map.mjs): outline parts, the main sulci, the folds, the cerebellum's ridges.
+export type Brain = { shells: { part: 'cerebrum' | 'hemisphere' | 'cerebellum' | 'stem'; d: string }[]; sulci: string; folds: string; folia: string };
+export type MapLayout = { w: number; h: number; points: [number, number][]; boxes: Record<string, [number, number, number, number]>;
+  labels: Record<string, [number, number, 'start' | 'middle' | 'end']>; brain: Brain };
 export type MapData = { nodes: MapNode[]; edges: [number, number][]; wide: MapLayout; tall: MapLayout; shelves: { id: Shelf; title: string }[] };
 
 const raw = layout as unknown as { nodes: { url: string; shelf: Shelf; r: number; index: boolean }[]; edges: [number, number][]; wide: MapLayout; tall: MapLayout };

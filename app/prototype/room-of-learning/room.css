@@ -48,6 +48,8 @@
 .bl-card-pic { position: relative; align-self: stretch; display: grid; place-items: center; min-height: 260px; border-radius: 4px;
   background: radial-gradient(ellipse at 50% 50%, #e6b94f14, transparent 70%); }
 .bl-sky { display: block; width: 100%; height: auto; overflow: visible; }
+.bl-sky-brain path { fill: #e6b94f05; stroke: #e6b94f; stroke-opacity: .28; stroke-width: 1.2px; vector-effect: non-scaling-stroke; }
+.bl-sky-brain .bl-sky-sulci { fill: none; stroke-opacity: .2; }
 .bl-sky-threads line { stroke: #e6b94f; stroke-width: 1; opacity: .16; transition: opacity .4s ease; }
 .bl-card-art:hover .bl-sky-threads line, .bl-card-art:focus-within .bl-sky-threads line { opacity: .3; }
 .bl-sky-points circle { fill: #f1f3f3; opacity: .9; }
