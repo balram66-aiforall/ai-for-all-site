@@ -1,7 +1,7 @@
 /* The bAI room of learning: its own page (Balram, Nov 7), in the cave's styling, linked from the top menu and the learning deck.
    Nov 8 (Balram: "make the room background like a classroom in the cave"): a classroom carved into the cave stands behind the
    heading, its board a constellation; a card with art spans the room and shows its resource's own picture.
-   Every card is someone else's resource, credited to its author and described in its own words (content.ts). Server-rendered,
+   Every card is someone else's resource, linked to its original and described in its own words (content.ts). Server-rendered,
    so it reads without JavaScript; only the shared top bar is a client component. */
 import { roomOfLearning } from '../bairam/content';
 import { SiteHeader } from '../masthead/site-header';
@@ -40,7 +40,6 @@ export function RoomOfLearning() {
         {roomOfLearning.cards.map(card => <li className={`bj-card bl-card${card.art ? ' bl-card-art' : ''}`} key={card.title}>
           <div className="bl-card-words">
             <h2>{card.title}</h2>
-            <p className="bl-by">{card.by}</p>
             <p>{card.summary}</p>
             <div className="bl-links">
               <a className="bj-link bl-read" href={card.read.href}>{card.read.label} <Arrow /></a>

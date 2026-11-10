@@ -6,11 +6,11 @@ export type TocItem = { id: string; text: string; depth: number };
 export type Page = { source: string; slug: string[]; url: string; github: string; title: string; summary: string; html: string; toc: TocItem[]; words: number };
 export type Section = { id: string; title: string; summary: string; url: string; pages: string[] };
 export type Group = { id: string; title: string; summary: string; sections: Section[] };
-type Library = { source: { repo: string; site: string; author: string; license: string; commit: string; date: string | null; synced: string }; groups: Group[]; order: string[]; pages: Record<string, Page> };
+type Library = { source: { repo: string; site: string; license: string; commit: string; date: string | null; synced: string }; groups: Group[]; order: string[]; pages: Record<string, Page> };
 
 export const library = data as Library;
 export const WING = '/bai-room-of-learning/second-brain-os';
-export const credit = { title: 'Second Brain OS', by: library.source.author, license: `${library.source.license} license`, licenseUrl: `${WING}/license` };
+export const credit = { title: 'Second Brain OS', license: `${library.source.license} license`, licenseUrl: `${WING}/license` };
 
 // View source: the file at the synced commit, so it shows exactly the text on this page (the canonical stays the living file).
 export const sourceAt = (github: string) => github.replace('/blob/main/', `/blob/${library.source.commit}/`);

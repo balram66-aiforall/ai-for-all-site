@@ -10,7 +10,6 @@
 
 .bl-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr)); gap: clamp(16px, 2vw, 24px); margin: 0; padding: 0; list-style: none; }
 .bl-card h2 { margin: 0; font: 500 clamp(24px, 1rem + .9vw, 32px)/1.15 'Bairam Text', sans-serif; letter-spacing: -.02em; color: #eef1f1; }
-.bl-card .bl-by { margin-top: -6px; color: var(--bm-gold); font-size: var(--step-small); font-weight: 500; letter-spacing: .01em; }
 .bl-links { display: flex; flex-wrap: wrap; gap: 4px 28px; margin-top: auto; padding-top: 6px; }
 .bl-links .bj-link { margin-top: 0; }
 

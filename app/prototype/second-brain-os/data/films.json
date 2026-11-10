@@ -1,140 +1,140 @@
 {
  "01-concepts": {
   "seconds": 71.44,
-  "bytes": 5325729,
-  "v": "dc710cea8b",
+  "bytes": 5306660,
+  "v": "56a7b16a94",
   "transcript": "Why did every note system fail? One job gets dropped after two weeks. Capture, connect, or answer? A second brain does three jobs. Capture. Connect, the one humans stop doing. Answer, with sources we can open. Unconnected notes are a folder. We save, and almost never go back. Four hundred unread items is a debt we avoid looking at. The fix is removing the step we keep failing at. The AI maintains the wiki, and we read it. Three operations: ingest, lint, query. RAG does the work at query time, every time. A wiki does it once, at ingest. So understanding accumulates. Week one feels like a folder. By weeks two to four, first connections. By month three, it beats rereading. By month six, it knows things we do not remember learning. That's chapter one, concepts. Start with page one: What a second brain actually is."
  },
  "02-setup": {
   "seconds": 64.96,
-  "bytes": 5003719,
-  "v": "aeec8816f6",
+  "bytes": 4822375,
+  "v": "67e81011ff",
   "transcript": "From zero to a vault our agent maintains, in one evening. Nine steps, about twenty minutes of typing. Obsidian is the storage half, plain text on our own machine. Claude Code reads and writes. Links are notes pointing at notes. Claude Code can use the filesystem, or M C P. The filesystem needs no setup. M C P needs a plugin. Start on the filesystem. Next, Claude dot M D. We do not type it, we get interviewed. One question at a time. Then scope. The full vault plans. A single project ships. For live data, the rule that matters most: keys, not prompts. Last, git. Commit before a big ingest, run the agent, commit after. Sync is not backup. That's chapter two, setup. Start with page one: Obsidian and your first vault."
  },
  "03-ingestion": {
   "seconds": 69.55,
-  "bytes": 5406751,
-  "v": "096f54ceba",
+  "bytes": 5203123,
+  "v": "245ecb324d",
   "transcript": "What decides whether the vault survives? Every step between seeing something and saving it is a step where we stop. And what we feed the vault sets its ceiling. Clip what we would want to find again in a year: primary sources, engineering posts, papers and documentation. Skip news that goes stale, listicles, and anything saved out of guilt. Video fades fast, so we pull the transcript. Keep timestamps. Clean it first. And split long talks by topic. Chat history gets sorted into three piles. Worth ingesting. Worth keeping as an archive. And delete. Four digests cover one launch. Do not treat repetition across newsletters as confirmation. For a big backfill, process oldest first, ten sources per batch. After each batch: update the index, append to the log, commit, report. That's chapter three, ingestion. Start with page one: Web articles."
  },
  "04-structuring": {
   "seconds": 72.41,
-  "bytes": 5541717,
-  "v": "8b554faa79",
+  "bytes": 5430607,
+  "v": "7373450eec",
   "transcript": "Two vaults can hold the same thousand sources. One is a research partner. One is an unsearchable pile. The difference is entirely in the rules. A page holds one idea. One covering four topics drags three irrelevant ones into context. One idea is linked precisely, and updated without collateral damage. Every page declares one of four types. Sources, entities, concepts, which compound, and synthesis, only when it says something no single source did. Links are the entire value of the structure. Link the first mention of any concept or entity, on every page. When a new source disagrees, the page records both. Each with its source and date, and what would settle it. Last, two files that are not knowledge. The index, a catalog. The log, one line per operation. Both update in the same run. That's chapter four, structuring. Start with page one: One page, one idea."
  },
  "05-graphs": {
   "seconds": 72.0,
-  "bytes": 5429829,
-  "v": "b3f1a12d8e",
+  "bytes": 5377535,
+  "v": "8fa6b4f821",
   "transcript": "Most guides open the graph view, say it looks like a brain, and move on. But the graph is not decoration. Pages are nodes, wikilinks are edges. Four terms are enough: degree, path length, clustering, components. Two related ideas eight hops apart will never be connected in an answer. The global graph is a hairball. The local graph does the work: open a page, set depth to two. A plain link says two pages are related, not how. Five typed links: supports, contradicts, extends, part of, and applies. Type only about one in five. Embeddings are good at recall. A graph is good at multi-hop questions. Our questions are relational. Four numbers, checked monthly. Orphan rate, under five percent. Average degree, three to eight. Component count. Stale pages. That's chapter five, graphs. Start with page one: Graph basics for a knowledge base."
  },
  "06-agents": {
   "seconds": 72.33,
-  "bytes": 5491898,
-  "v": "b71927bb81",
+  "bytes": 5404777,
+  "v": "ca0878e8a1",
   "transcript": "Everything up to here, we could do by hand, slowly. An agent with write access, running while we sleep, is exactly as useful and exactly as dangerous. So the rule is: keys, not prompts. Telling an agent not to do something is a preference, not a boundary. Then six roles, four of them read-only. The ingestor. The linker. The reviewer. The researcher. The graph analyst. And the curator. Ingest, daily. Link, weekly. Lint, weekly. Review, weekly. Metrics, monthly. Each run leaves a log entry, a commit, and a report. Subagents get their own context. Fan out for research, independent sources, and verification. Related sources go in sequence. Skills teach repeatable behaviour. Commands are shortcuts that point at a skill. The behaviour belongs in the skill. That's chapter six, agents. Start with page one: Guardrails."
  },
  "07-retrieval": {
   "seconds": 71.31,
-  "bytes": 5688352,
-  "v": "a4b6a4dc3c",
+  "bytes": 5330110,
+  "v": "6ddace967b",
   "transcript": "Everything before this was construction. Now we ask the vault. An answer that blends our notes with the model's knowledge is worse than no answer. Every claim comes from a page, and names the page. Start from the index. Label outside knowledge. And empty is a valid answer. Questions a vault answers best. What do we know about X? What connects X and Y? What have we changed our mind about? And what contradicts this? Search is mostly grep. Ripgrep or Dataview finds the candidates. The graph expands them. The agent reads and answers. Vectors pay past a few thousand pages, with wording our pages do not use, and an uncurated corpus. Most vaults never hit all three. Reading more is not reading better. Pasting everything buries the middle. Index first, then three to eight pages. That's chapter seven, retrieval. Start with page one: Asking the vault."
  },
  "08-outputs": {
   "seconds": 70.89,
-  "bytes": 5576372,
-  "v": "deb739c802",
+  "bytes": 5285690,
+  "v": "739fb52e28",
   "transcript": "The vault earns its keep when things come out of it. A knowledge base that only answers questions is a reference book. Articles, reports, decisions, understanding. Writing starts from concept pages, not a prompt. Outline from what we read. Cite our sources. Keep our voice. Close the loop. A report starts with what the vault covers. The question. What we found. Where sources disagree. What we could not establish. What would change it. Publishing should be opt-in. Under opt-out, one forgotten flag publishes something private. With publish true, nothing without it leaves. Never export the whole vault to a format we cannot regenerate. The markdown is the artifact. Last, learning. Ask questions from our pages. Answer without looking. Find what we never digested. Explain it back. That's chapter eight, outputs. Start with page one: Writing from the vault."
  },
  "09-maintenance": {
   "seconds": 65.05,
-  "bytes": 5153555,
-  "v": "85cfc75d03",
+  "bytes": 4852621,
+  "v": "2ddfdf8a1a",
   "transcript": "What keeps a vault alive? Month one is easy because it is new. The vault that still works in year two is automated, cheap, and produces something we read. Structural rot is silent. Nothing errors. A lint checks broken links, orphans, stubs, and schema violations. Review keeps us in the loop. Weekly, ten minutes. Monthly, look at the structure. Quarterly, ask what we have changed our minds about. Git makes an agent safe to run unattended. One commit per run. Every change is a diff we can read, and revert in one command. Sync is not backup. Sync faithfully copies the damage to every device. Backup is a copy that does not follow. On privacy, decide at capture. Redaction after ingest does not work. That's chapter nine, maintenance. Start with page one: Linting the vault."
  },
  "10-troubleshooting": {
   "seconds": 69.0,
-  "bytes": 5342929,
-  "v": "8b28cc90ea",
+  "bytes": 5127639,
+  "v": "744b16c662",
   "transcript": "Something broke in our vault? Every one of these is common. Stalls, garbage, orphans, too big. A stalled vault is almost always capture. Summaries of summaries come from a contract that says summarise. Hand written pages get marked human. Ingest reads index dot M D first. Neither is a reason to start over with a different tool. Bad pages? Check the source. Then Claude dot M D. Add one good example, not another rule. Then roll back. Do not patch the bad pages by hand. Typos and renames get fixed, safe to automate. Genuine gaps go into index dot M D, never an empty page. Too big? It is retrieval economy, not disk. Summary layers. Splitting, by domain. Archiving cold material. Or rebuild the index. That's chapter ten, troubleshooting. Start with page one: The failures everyone hits."
  },
  "course-0-map": {
   "seconds": 72.55,
-  "bytes": 5489642,
-  "v": "4319ad1d38",
+  "bytes": 5396142,
+  "v": "e05834b364",
   "transcript": "What makes something an agent? It comes down to one question. Who decides what happens next? The human, your code, or the model? An agent is an app that plans and acts toward a goal. The model is its brain. Tools are its hands. Orchestration, its nervous system. Deployment, its body. And it runs one loop: think, act, observe. Around the model sit five layers, each answering one question. Context: what it sees. The loop: who decides. The gate: who sorts. The harness: what it can reach. Evals: how you know. And a failure in one layer wears the mask of another. So, agent or workflow? Ask one thing. Can you write down the steps? If you can, write them. Agents use about four times the tokens of a chat. Multi-agent systems, about fifteen. That's module zero, the map. Start with page one: What an agent is."
  },
  "course-1-context": {
   "seconds": 73.68,
-  "bytes": 5383434,
-  "v": "a8d5a99592",
+  "bytes": 5530627,
+  "v": "776f040028",
   "transcript": "A bigger context window looks like free capacity. It is not. So what does the model really see? In Lost in the Middle, the answer's position changed the score. First document, seventy-five point eight percent. Middle, fifty-three point eight. End, sixty-three point two. With no documents at all, fifty-six point one. Buried in the middle, the model did worse than with nothing. Caching pays for stillness. Cache reads cost a tenth of the base rate, ten times cheaper. But a timestamp in the system prompt guarantees a miss on every call. Every piece of context belongs in exactly one of four places. The system prompt, the tools, the disk, and the tail. The session is the workbench for one conversation. Memory is the filing cabinet that persists across them. Extracted facts, not raw dialogue. And in practice, a subagent is a context firewall. That's module one, context. Start with page one: How models read context."
  },
  "course-2-loop": {
   "seconds": 65.49,
-  "bytes": 4981138,
-  "v": "8474ed88e1",
+  "bytes": 4882909,
+  "v": "dca8c112aa",
   "transcript": "Who decides the next step? That one question separates a workflow from a loop. In a workflow, we chose it. In a loop, the model does. A loop runs think, act, observe, decide, on repeat. In a workflow, the steps are written in advance, and the same input takes the same path. In a loop, the model chooses at run time, so two runs can differ. Every loop that survives production has four parts. A goal with a testable done. A checker outside the model. A stop rule. And a budget in turns and dollars. Why outside? Because self-review is not a checker. In practice, filter first. Loop briefly. Then fall back to a fixed path. Atlan's filter stopped roughly eighty-six percent of alerts before a single token was spent. That's module two, loop. Start with page one: Loops versus workflows."
  },
  "course-3-gate": {
   "seconds": 70.21,
-  "bytes": 5309368,
-  "v": "fa59d2bb35",
+  "bytes": 5232319,
+  "v": "7f3da303e5",
   "transcript": "Who should sort the envelopes? Most pipelines send every job to the same frontier model. An agent writes, and it decides. A gate asks one narrow question per item. When it is confident, cheap code handles it. When it is unsure, the main model does. Four tools, in rising order of cost. Rules. A classic classifier. A small L L M. And a System One model. Every answer carries a confidence score. The gate is allowed to be ignorant, it is not allowed to guess. In early tests on roughly eighteen and a half thousand emails, a method from two thousand three scored ninety-eight point four percent. Jev scored ninety-eight point three. Before any vendor, label two hundred real examples. Train a basic classifier. Measure it. Then wire it in. Nothing enters the pipeline until it beats that baseline. That's module three, the gate. Start with page one: Cheap Decisions."
  },
  "course-4-harness": {
   "seconds": 67.63,
-  "bytes": 5223643,
-  "v": "57c1190df8",
+  "bytes": 5028107,
+  "v": "7e8d86dc57",
   "transcript": "Hire the most brilliant engineer alive. Put them in a bad office, and we get bad work. So where does an agent's quality come from? The hire, or the office? An agent is a model plus a harness. The model is the hire. The harness is the office. LangChain froze the model and tuned only the harness. The score went from fifty-two point eight, to sixty-six point five. So we build the harness from the outside in. Containment. Guides. Sensors. Permissions. Each ring must hold when every ring inside it fails. Anthropic reports Claude Code users approve ninety-three percent of permission prompts. Three prompts a day get read. Thirty get clicked. In practice, we work the rings in order: walls, guides, sensors, permissions, then one well-chosen hook. That's module four, the harness. Start with page one: The Office."
  },
  "course-5-evals": {
   "seconds": 71.06,
-  "bytes": 5180090,
-  "v": "618d3874e4",
+  "bytes": 5285374,
+  "v": "6217c0a3e4",
   "transcript": "Does our agent work? We want to know before our users tell us. Two kinds of checks. The outcome, or the behaviour? End-to-end checks ask: did the final answer come out right? The score moves, but not why. Behavioural checks ask whether one specific thing happened. Narrow, binary, and cheap. Behavioural checks run on the trace. The trajectory is the truth. End-to-end grading needs a judge, and no instrument ships calibrated. First, agreement with hand labels. Second, repeat-run variance. A golden set must include bad examples, not just good ones. Sample real runs on a schedule, grade them, and promote anything that fails into the set. The practice is five steps. Mine twenty real failures. Write one check per case. Run them on traces. Calibrate one narrow judge. Then hand-grade weekly. That's module five, evals. Start with page one: Two kinds of checks."
  },
  "course-6-production": {
   "seconds": 71.02,
-  "bytes": 5407907,
-  "v": "0a361e632a",
+  "bytes": 5265367,
+  "v": "3c8255c3dd",
   "transcript": "Building an agent is easy. Trusting it is hard. Roughly eighty percent of the effort goes into infrastructure, security, and validation. Put one gateway in front of every model call. Masking. Caching. Retries and failover. Token accounting. Then trace every run. Token counts per call. The tool call sequence. And who triggered it. The dangerous input is not what the user types. It is what comes back. Change rides one rail: evals gate the merge, canary rollout, watch the traces, roll back instantly. Day one, one cheap move per layer. Context: keep the stable part byte stable. Loop: a turn limit and a dollar limit. Gate: label two hundred examples. Harness: a user that cannot delete anything. Evals: write the last five failures down. That's module six, production. Start with page one: From Prototype to Production."
  },
  "track-evals": {
   "seconds": 68.45,
-  "bytes": 5251908,
-  "v": "25d7aad1a5",
+  "bytes": 5104692,
+  "v": "c37a45c6fa",
   "transcript": "How do we know an AI product got better? Tweak the prompt, paste in the three examples you remember, nod, ship. Vibes, or measurement? Evals are the tests of AI products. The loop: error analysis, taxonomy, metrics, iterate. A one to five scale mostly measures the grader's mood, and two annotators give a three and a four. Pass or fail forces us to define the bar, and disagreements surface at once. An uncalibrated judge is a random number generator with confidence. It favours the first answer, longer answers, its own family's outputs, and effort over results. And for agents, evaluating the final answer alone is like reviewing a chess game by the last move. So where do we start? Read thirty traces. Name the failures, and encode the top three. Put the suite in C I, and re-run weekly. That's the eval engineering handbook. Start with page one: Why Evals."
  },
  "track-graph": {
   "seconds": 69.6,
-  "bytes": 5148186,
-  "v": "56092c2af4",
+  "bytes": 5171373,
+  "v": "9fa9dfdb20",
   "transcript": "An agent's memory problem is not storage. Facts arrive connected, and get stored flat. So what if we kept the connections? Vector search finds passages that sound like this. It fails on multi-hop questions. A knowledge graph keeps entities as nodes, and relationships as typed edges. GraphRAG makes the index a graph. An L L M extracts entities. Triples merge into a graph. A clustering step finds communities. And each one gets a summary. Where the graph lives runs from plain text upward. Wikilinks first. Then NetworkX in files. Then an embedded database. A real server last. Then an evening build. Extract the typed edges. Query what connects two pages. And put it in the agent's loop. Because a stale graph is worse than no graph, so it gets a weekly health check. That's the knowledge graphs handbook. Start with page one: Why Knowledge Graphs."
  },
  "track-harness": {
   "seconds": 66.76,
-  "bytes": 5007036,
-  "v": "f840a8e0ef",
+  "bytes": 4955655,
+  "v": "eff548d6a2",
   "transcript": "Same model. Different harness. Wildly different agent. So what is the harness? A harness is everything around the model that turns text prediction into work done. The loop. The tools. The prompts. The permissions. At the core sits a while-loop. Send the conversation to the model. Run the tool calls. Append the results, and go round again. A prompt instruction merely lowers the odds. A hook blocks a dangerous command every single time. Context engineering asks what the model sees at this moment, and why. Always in: the system prompt and Claude dot M D. On demand: files and search results. Never: whole codebases. On tools, a tool is three prompts wearing a schema: the name, the description, and the shape of what comes back. That's the agent harnesses handbook. Start with page one: What a Harness Is."
  },
  "track-jev": {
   "seconds": 70.27,
-  "bytes": 5180544,
-  "v": "64590fe193",
+  "bytes": 5236930,
+  "v": "6eebe89e35",
   "transcript": "Most software does not need a model to write. It needs a decision. Classify, route, score, gate. Jev does not generate text. It answers typed questions, with three primitives. Choice picks one option. Score places it on a scale. Noul is a yes or no, as a probability. The author's advice: treat the mechanism as real, and the magnitudes as marketing. Jev fits bounded answers. Classification, routing, guardrails. An LLM still wins on text, open-ended reasoning, and explanations. In an agent stack, Jev answers, we check the confidence, then act, or escalate. Jev is waitlisted, so we build the shape first, with an ordinary LLM. The endpoint returns a value and a confidence. The router acts only when confident. The swap is a one-file change. That's the Jev engineering handbook. Start with page one: System One Models."
  },
  "track-loop": {
   "seconds": 65.87,
-  "bytes": 5112436,
-  "v": "63f37d7b22",
+  "bytes": 4922412,
+  "v": "c2435f1618",
   "transcript": "The hard part is not making the agent go. It will report success it has not earned. It is making it stop. Prompt engineering optimised a single message. Loop engineering optimises the cycle, spending judgement once, up front. Every serious loop carries several independent brakes, any one of which ends the run. A goal test, budgets, a ratchet that must beat the best, and spin detection. Who judges? The loop checks, it never asks. A checker the maker can edit is not a checker. Between attempts, we throw the transcript away. Try, verify, distil, restart cold. Overnight, nobody is watching. So: its own branch, never pushed. A ratchet. A hard reset on regression. A morning report, with the brake that fired. That's the loop engineering handbook. Start with page one: What Loop Engineering Is."
  },
  "wing-intro": {
   "seconds": 62.43,
-  "bytes": 4916462,
-  "v": "4a36e0ca92",
+  "bytes": 4670820,
+  "v": "53b93afccf",
   "transcript": "AI engineering moves fast, and the useful parts are scattered. Across whitepapers, engineering blogs and repos. Second Brain OS collects them into one path we can follow. A course on building agents: seven modules, from a single prompt to a production agent. Five handbooks that go deep on one layer each. A hands-on project: a second brain, a knowledge base an agent builds and maintains in plain markdown. And the links worth our time, each one checked at the source. Theory with sources, a build in every module, and a reading list where every entry has a reason to be here. New to building agents? Start with What an agent is, then the course in order. One layer of your agent hurting? Open its handbook. Want a project to practise on? Build the second brain. That's Second Brain OS. Start with page one: What an agent is."
  }
 }

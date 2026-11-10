@@ -107,7 +107,8 @@ export const startHere = [
 /* APPROVED Nov 7 (Balram: "room should be a separate page", "can we say be ai room of learning?", intro "Go with intro A",
    menu entry "add one", the Karpathy and Anthropic cards stay on the home page). Its own page at path; menu = the top-menu
    label; enter = the link under the learning deck's Start-here cards. Each card is a third-party resource in its own words:
-   title, author and summary are the source's own (Second Brain OS: the GitHub repo's name, owner and description).
+   title and summary are the source's own (Second Brain OS: the GitHub repo's name and description). No author line:
+   Balram, Nov 10, "remove this line please - undefined-ui on GitHub and any reference to it"; the GitHub link stays.
    Nov 7 (Balram: "build everything of the content"): Second Brain OS is synced in whole (scripts/sync-second-brain-os.mjs);
    read = the link into that copy, same tab; links = the originals, in a new tab. */
 export const roomOfLearning = {
@@ -118,7 +119,7 @@ export const roomOfLearning = {
   enter: 'Enter the bAI room of learning',
   cards: [
     // art: the card's picture (no words), here the wing's own map as a constellation.
-    { title: 'Second Brain OS', by: 'undefined-ui on GitHub', art: 'constellation',
+    { title: 'Second Brain OS', art: 'constellation',
       summary: 'Guides and resources for AI engineers: an agents course, five handbooks, a hands-on second-brain project and a vetted reading list.',
       read: { label: 'Read it here', href: '/bai-room-of-learning/second-brain-os' },
       links: [

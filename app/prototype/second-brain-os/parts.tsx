@@ -20,10 +20,11 @@ export function Trail({ steps, atWing }: { steps: { label: string; href: string 
   </nav>;
 }
 
-// Every page says whose work it is: From Second Brain OS by undefined-ui · MIT license (· View source on GitHub).
+// Every page says whose work it is: From Second Brain OS · MIT license (· View source on GitHub). No author name
+// (Balram, Nov 10); the link to the original repo and the license stay.
 export function Credit({ github }: { github?: string }) {
   return <p className="sb-credit">
-    <span>From <a href={library.source.repo} target="_blank" rel="noopener noreferrer">{credit.title}<span className="sb-sr"> (opens in a new tab)</span></a> by {credit.by}</span>
+    <span>From <a href={library.source.repo} target="_blank" rel="noopener noreferrer">{credit.title}<span className="sb-sr"> (opens in a new tab)</span></a></span>
     <span aria-hidden="true">·</span>
     <a href={credit.licenseUrl}>{credit.license}</a>
     {github && <><span aria-hidden="true">·</span><a href={github} target="_blank" rel="noopener noreferrer">View source on GitHub<span className="sb-sr"> (opens in a new tab)</span></a></>}
