@@ -1,4 +1,4 @@
-// Sync Second Brain OS (github.com/undefined-ui/second-brain-os, MIT) into the bAI room of learning.
+// Sync Second Brain OS (its GitHub repo, MIT) into the bAI room of learning. No author name is stored or shown (Balram, Nov 10).
 // Downloads the repo at one pinned commit, converts its reading content (docs/ and resources/ markdown, the README, the
 // license) to sanitised HTML, recolours its figures for the dark cave, and writes:
 //   app/prototype/second-brain-os/data/library.json   every page, the reading order and the shelves
@@ -254,7 +254,7 @@ if (unknownFigs.length) throw new Error(`Figures referenced but not found: ${unk
 // ---- 8. Write ----
 const date = execFileSync('curl', ['-sf', `https://api.github.com/repos/${REPO}/commits/${commit}`]).toString().match(/"date":\s*"([^"]+)"/)?.[1] ?? null;
 const library = {
-  source: { repo: `https://github.com/${REPO}`, site: 'https://secondbrainos.dev/', author: 'undefined-ui', license: 'MIT', commit, date, synced: new Date().toISOString().slice(0, 10) },
+  source: { repo: `https://github.com/${REPO}`, site: 'https://secondbrainos.dev/', license: 'MIT', commit, date, synced: new Date().toISOString().slice(0, 10) },
   groups, order,
   pages: Object.fromEntries([...pages.values()].map(p => { const { ids: _ids, ...page } = p; void _ids; return [page.url, page]; })),
 };
