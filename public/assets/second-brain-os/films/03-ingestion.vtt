@@ -1,0 +1,43 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:03.226
+What decides whether the vault survives?
+
+00:00:03.326 --> 00:00:07.988
+Every step between seeing something and saving it is a step where we stop.
+
+00:00:08.088 --> 00:00:11.070
+And what we feed the vault sets its ceiling.
+
+00:00:12.270 --> 00:00:18.314
+Clip what we would want to find again in a year: primary sources, engineering posts,
+
+00:00:18.364 --> 00:00:20.148
+papers and documentation.
+
+00:00:20.248 --> 00:00:25.654
+Skip news that goes stale, listicles, and anything saved out of guilt.
+
+00:00:26.204 --> 00:00:32.744
+Video fades fast, so we pull the transcript. Keep timestamps. Clean it first.
+
+00:00:32.794 --> 00:00:34.850
+And split long talks by topic.
+
+00:00:35.400 --> 00:00:40.310
+Chat history gets sorted into three piles. Worth ingesting.
+
+00:00:40.360 --> 00:00:43.374
+Worth keeping as an archive. And delete.
+
+00:00:43.924 --> 00:00:49.570
+Four digests cover one launch. Do not treat repetition across newsletters as confirmation.
+
+00:00:50.120 --> 00:00:55.138
+For a big backfill, process oldest first, ten sources per batch.
+
+00:00:55.188 --> 00:01:01.190
+After each batch: update the index, append to the log, commit, report.
+
+00:01:01.740 --> 00:01:07.098
+That's chapter three, ingestion. Start with page one: Web articles.

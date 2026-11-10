@@ -1,0 +1,46 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:05.266
+Most guides open the graph view, say it looks like a brain, and move on.
+
+00:00:05.366 --> 00:00:07.484
+But the graph is not decoration.
+
+00:00:08.684 --> 00:00:12.098
+Pages are nodes, wikilinks are edges.
+
+00:00:12.198 --> 00:00:17.820
+Four terms are enough: degree, path length, clustering, components.
+
+00:00:18.370 --> 00:00:22.504
+Two related ideas eight hops apart will never be connected in an answer.
+
+00:00:23.054 --> 00:00:28.877
+The global graph is a hairball. The local graph does the work: open a page,
+
+00:00:28.927 --> 00:00:30.404
+set depth to two.
+
+00:00:30.954 --> 00:00:36.180
+A plain link says two pages are related, not how. Five typed links:
+
+00:00:36.230 --> 00:00:41.784
+supports, contradicts, extends, part of, and applies.
+
+00:00:41.884 --> 00:00:44.122
+Type only about one in five.
+
+00:00:44.672 --> 00:00:49.813
+Embeddings are good at recall. A graph is good at multi-hop questions.
+
+00:00:49.863 --> 00:00:51.590
+Our questions are relational.
+
+00:00:52.140 --> 00:00:57.269
+Four numbers, checked monthly. Orphan rate, under five percent.
+
+00:00:57.319 --> 00:01:02.610
+Average degree, three to eight. Component count. Stale pages.
+
+00:01:03.160 --> 00:01:09.550
+That's chapter five, graphs. Start with page one: Graph basics for a knowledge base.

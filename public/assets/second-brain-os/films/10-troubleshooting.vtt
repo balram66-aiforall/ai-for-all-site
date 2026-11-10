@@ -1,0 +1,46 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:02.578
+Something broke in our vault?
+
+00:00:02.678 --> 00:00:04.292
+Every one of these is common.
+
+00:00:04.392 --> 00:00:08.430
+Stalls, garbage, orphans, too big.
+
+00:00:09.630 --> 00:00:12.821
+A stalled vault is almost always capture.
+
+00:00:12.871 --> 00:00:16.785
+Summaries of summaries come from a contract that says summarise.
+
+00:00:16.835 --> 00:00:22.812
+Hand written pages get marked human. Ingest reads index dot M D first.
+
+00:00:23.362 --> 00:00:26.248
+Neither is a reason to start over with a different tool.
+
+00:00:26.798 --> 00:00:32.370
+Bad pages? Check the source. Then Claude dot M D.
+
+00:00:32.420 --> 00:00:36.620
+Add one good example, not another rule. Then roll back.
+
+00:00:36.720 --> 00:00:39.150
+Do not patch the bad pages by hand.
+
+00:00:39.700 --> 00:00:43.424
+Typos and renames get fixed, safe to automate.
+
+00:00:43.474 --> 00:00:47.794
+Genuine gaps go into index dot M D, never an empty page.
+
+00:00:48.344 --> 00:00:55.859
+Too big? It is retrieval economy, not disk. Summary layers. Splitting, by domain.
+
+00:00:55.909 --> 00:00:59.798
+Archiving cold material. Or rebuild the index.
+
+00:01:00.348 --> 00:01:06.546
+That's chapter ten, troubleshooting. Start with page one: The failures everyone hits.

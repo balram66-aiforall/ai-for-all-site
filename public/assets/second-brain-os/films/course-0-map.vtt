@@ -1,0 +1,46 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:02.506
+What makes something an agent?
+
+00:00:02.606 --> 00:00:04.484
+It comes down to one question.
+
+00:00:04.584 --> 00:00:09.822
+Who decides what happens next? The human, your code, or the model?
+
+00:00:11.022 --> 00:00:14.460
+An agent is an app that plans and acts toward a goal.
+
+00:00:14.560 --> 00:00:21.990
+The model is its brain. Tools are its hands. Orchestration, its nervous system.
+
+00:00:22.040 --> 00:00:23.854
+Deployment, its body.
+
+00:00:24.404 --> 00:00:28.514
+And it runs one loop: think, act, observe.
+
+00:00:29.064 --> 00:00:32.910
+Around the model sit five layers, each answering one question.
+
+00:00:33.010 --> 00:00:40.257
+Context: what it sees. The loop: who decides. The gate: who sorts.
+
+00:00:40.307 --> 00:00:45.040
+The harness: what it can reach. Evals: how you know.
+
+00:00:45.590 --> 00:00:49.220
+And a failure in one layer wears the mask of another.
+
+00:00:49.770 --> 00:00:55.344
+So, agent or workflow? Ask one thing. Can you write down the steps?
+
+00:00:55.444 --> 00:00:57.178
+If you can, write them.
+
+00:00:57.728 --> 00:01:03.854
+Agents use about four times the tokens of a chat. Multi-agent systems, about fifteen.
+
+00:01:04.404 --> 00:01:10.098
+That's module zero, the map. Start with page one: What an agent is.

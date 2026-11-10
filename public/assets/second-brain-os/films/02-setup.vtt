@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:04.450
+From zero to a vault our agent maintains, in one evening.
+
+00:00:04.550 --> 00:00:07.388
+Nine steps, about twenty minutes of typing.
+
+00:00:08.588 --> 00:00:13.328
+Obsidian is the storage half, plain text on our own machine.
+
+00:00:13.378 --> 00:00:18.122
+Claude Code reads and writes. Links are notes pointing at notes.
+
+00:00:18.672 --> 00:00:25.073
+Claude Code can use the filesystem, or M C P. The filesystem needs no setup.
+
+00:00:25.123 --> 00:00:26.958
+M C P needs a plugin.
+
+00:00:27.058 --> 00:00:28.648
+Start on the filesystem.
+
+00:00:29.198 --> 00:00:36.140
+Next, Claude dot M D. We do not type it, we get interviewed. One question at a time.
+
+00:00:36.690 --> 00:00:41.976
+Then scope. The full vault plans. A single project ships.
+
+00:00:42.526 --> 00:00:47.140
+For live data, the rule that matters most: keys, not prompts.
+
+00:00:47.690 --> 00:00:54.342
+Last, git. Commit before a big ingest, run the agent, commit after.
+
+00:00:54.392 --> 00:00:55.928
+Sync is not backup.
+
+00:00:56.478 --> 00:01:02.508
+That's chapter two, setup. Start with page one: Obsidian and your first vault.

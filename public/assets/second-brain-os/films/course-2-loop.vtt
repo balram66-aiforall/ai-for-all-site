@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:02.050
+Who decides the next step?
+
+00:00:02.150 --> 00:00:05.324
+That one question separates a workflow from a loop.
+
+00:00:05.424 --> 00:00:09.918
+In a workflow, we chose it. In a loop, the model does.
+
+00:00:11.118 --> 00:00:16.572
+A loop runs think, act, observe, decide, on repeat.
+
+00:00:17.122 --> 00:00:20.358
+In a workflow, the steps are written in advance,
+
+00:00:20.408 --> 00:00:26.315
+and the same input takes the same path. In a loop, the model chooses at run time,
+
+00:00:26.365 --> 00:00:27.784
+so two runs can differ.
+
+00:00:28.334 --> 00:00:34.186
+Every loop that survives production has four parts. A goal with a testable done.
+
+00:00:34.236 --> 00:00:40.100
+A checker outside the model. A stop rule. And a budget in turns and dollars.
+
+00:00:40.650 --> 00:00:44.424
+Why outside? Because self-review is not a checker.
+
+00:00:44.974 --> 00:00:51.172
+In practice, filter first. Loop briefly. Then fall back to a fixed path.
+
+00:00:51.272 --> 00:00:56.702
+Atlan's filter stopped roughly eighty-six percent of alerts before a single token was spent.
+
+00:00:57.252 --> 00:01:03.042
+That's module two, loop. Start with page one: Loops versus workflows.

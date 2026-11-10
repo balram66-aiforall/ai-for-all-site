@@ -1,0 +1,43 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:03.562
+An agent's memory problem is not storage.
+
+00:00:03.662 --> 00:00:06.452
+Facts arrive connected, and get stored flat.
+
+00:00:06.552 --> 00:00:08.550
+So what if we kept the connections?
+
+00:00:09.750 --> 00:00:15.324
+Vector search finds passages that sound like this. It fails on multi-hop questions.
+
+00:00:15.424 --> 00:00:20.854
+A knowledge graph keeps entities as nodes, and relationships as typed edges.
+
+00:00:21.404 --> 00:00:27.683
+GraphRAG makes the index a graph. An L L M extracts entities.
+
+00:00:27.733 --> 00:00:33.130
+Triples merge into a graph. A clustering step finds communities.
+
+00:00:33.180 --> 00:00:34.634
+And each one gets a summary.
+
+00:00:35.184 --> 00:00:40.386
+Where the graph lives runs from plain text upward. Wikilinks first.
+
+00:00:40.436 --> 00:00:46.974
+Then NetworkX in files. Then an embedded database. A real server last.
+
+00:00:47.524 --> 00:00:54.487
+Then an evening build. Extract the typed edges. Query what connects two pages.
+
+00:00:54.537 --> 00:00:56.218
+And put it in the agent's loop.
+
+00:00:56.768 --> 00:01:01.550
+Because a stale graph is worse than no graph, so it gets a weekly health check.
+
+00:01:02.100 --> 00:01:07.146
+That's the knowledge graphs handbook. Start with page one: Why Knowledge Graphs.

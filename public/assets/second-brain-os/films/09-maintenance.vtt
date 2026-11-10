@@ -1,0 +1,43 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:02.554
+What keeps a vault alive?
+
+00:00:02.654 --> 00:00:04.916
+Month one is easy because it is new.
+
+00:00:05.016 --> 00:00:08.848
+The vault that still works in year two is automated, cheap,
+
+00:00:08.898 --> 00:00:10.806
+and produces something we read.
+
+00:00:12.006 --> 00:00:18.970
+Structural rot is silent. Nothing errors. A lint checks broken links, orphans, stubs,
+
+00:00:19.020 --> 00:00:21.684
+and schema violations.
+
+00:00:22.234 --> 00:00:28.898
+Review keeps us in the loop. Weekly, ten minutes. Monthly, look at the structure.
+
+00:00:28.948 --> 00:00:32.008
+Quarterly, ask what we have changed our minds about.
+
+00:00:32.558 --> 00:00:37.566
+Git makes an agent safe to run unattended. One commit per run.
+
+00:00:37.616 --> 00:00:41.732
+Every change is a diff we can read, and revert in one command.
+
+00:00:42.282 --> 00:00:47.882
+Sync is not backup. Sync faithfully copies the damage to every device.
+
+00:00:47.932 --> 00:00:50.448
+Backup is a copy that does not follow.
+
+00:00:50.998 --> 00:00:56.572
+On privacy, decide at capture. Redaction after ingest does not work.
+
+00:00:57.122 --> 00:01:02.600
+That's chapter nine, maintenance. Start with page one: Linting the vault.

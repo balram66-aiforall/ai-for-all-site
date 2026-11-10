@@ -1,0 +1,43 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:04.378
+Building an agent is easy. Trusting it is hard.
+
+00:00:04.478 --> 00:00:09.764
+Roughly eighty percent of the effort goes into infrastructure, security, and validation.
+
+00:00:10.964 --> 00:00:18.762
+Put one gateway in front of every model call. Masking. Caching. Retries and failover.
+
+00:00:18.812 --> 00:00:19.898
+Token accounting.
+
+00:00:20.448 --> 00:00:26.526
+Then trace every run. Token counts per call. The tool call sequence.
+
+00:00:26.576 --> 00:00:27.630
+And who triggered it.
+
+00:00:28.180 --> 00:00:33.106
+The dangerous input is not what the user types. It is what comes back.
+
+00:00:33.656 --> 00:00:40.232
+Change rides one rail: evals gate the merge, canary rollout, watch the traces,
+
+00:00:40.282 --> 00:00:41.678
+roll back instantly.
+
+00:00:42.228 --> 00:00:49.015
+Day one, one cheap move per layer. Context: keep the stable part byte stable.
+
+00:00:49.065 --> 00:00:55.395
+Loop: a turn limit and a dollar limit. Gate: label two hundred examples.
+
+00:00:55.445 --> 00:00:58.881
+Harness: a user that cannot delete anything.
+
+00:00:58.931 --> 00:01:02.082
+Evals: write the last five failures down.
+
+00:01:02.632 --> 00:01:08.566
+That's module six, production. Start with page one: From Prototype to Production.

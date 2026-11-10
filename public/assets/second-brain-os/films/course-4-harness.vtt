@@ -1,0 +1,43 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:03.034
+Hire the most brilliant engineer alive.
+
+00:00:03.134 --> 00:00:05.948
+Put them in a bad office, and we get bad work.
+
+00:00:06.048 --> 00:00:10.734
+So where does an agent's quality come from? The hire, or the office?
+
+00:00:11.934 --> 00:00:18.588
+An agent is a model plus a harness. The model is the hire. The harness is the office.
+
+00:00:19.138 --> 00:00:23.263
+LangChain froze the model and tuned only the harness.
+
+00:00:23.313 --> 00:00:27.640
+The score went from fifty-two point eight, to sixty-six point five.
+
+00:00:28.190 --> 00:00:35.354
+So we build the harness from the outside in. Containment. Guides. Sensors.
+
+00:00:35.404 --> 00:00:36.236
+Permissions.
+
+00:00:36.336 --> 00:00:39.918
+Each ring must hold when every ring inside it fails.
+
+00:00:40.468 --> 00:00:46.013
+Anthropic reports Claude Code users approve ninety-three percent of permission prompts.
+
+00:00:46.063 --> 00:00:49.666
+Three prompts a day get read. Thirty get clicked.
+
+00:00:50.216 --> 00:00:57.183
+In practice, we work the rings in order: walls, guides, sensors, permissions,
+
+00:00:57.233 --> 00:00:59.606
+then one well-chosen hook.
+
+00:01:00.156 --> 00:01:05.178
+That's module four, the harness. Start with page one: The Office.
