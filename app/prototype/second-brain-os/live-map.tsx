@@ -4,7 +4,8 @@
    Hover (or focus, or tap) a point for its title and summary; click to read. A shelf button glides the view to that shelf.
    Pages this visitor has read to the end stay lit (trail.ts; kept in this browser only). Light runs along the threads,
    from the point under the pointer when there is one; it runs only while the map is on screen, and never for reduced motion.
-   Two layouts ship (wide for desktops, tall for phones); CSS shows one, and only that one redraws as you explore. Without
+   The map is drawn as a brain (Balram, Nov 10), each shelf in one part of it: seen from the side on desktops, from above on
+   phones. Two layouts ship (wide for desktops, tall for phones); CSS shows one, and only that one redraws as you explore. Without
    JavaScript every point is still a link, and the shelves below the map link every section too. */
 import { memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type KeyboardEvent, type MouseEvent, type PointerEvent } from 'react';
 import { flushSync } from 'react-dom';
@@ -39,14 +40,32 @@ type Hub = { svg: (m: Mode, el: SVGSVGElement | null) => void; sparks: (m: Mode,
 type LayerProps = { mode: Mode; L: MapLayout; nodes: MapNode[]; edges: [number, number][]; shelves: MapData['shelves']; hot: number | null; hotNear: Set<number>;
   shelf: string; cursor: number; read: Set<string>; hub: Hub };
 
+// The brain under the map: decorative line art, drawn once per layout (it never changes as you explore).
+const Brain = memo(function Brain({ mode, brain }: { mode: Mode; brain: MapLayout['brain'] }) {
+  const lobes = brain.shells.filter(s => s.part === 'cerebrum' || s.part === 'hemisphere'), cb = brain.shells.find(s => s.part === 'cerebellum');
+  return <g className="sb-map-brain" aria-hidden="true">
+    <defs>
+      <clipPath id={`sb-brain-${mode}`}>{lobes.map((s, k) => <path key={k} d={s.d} />)}</clipPath>
+      {cb && <clipPath id={`sb-brain-cb-${mode}`}><path d={cb.d} /></clipPath>}
+      <radialGradient id={`sb-brain-glow-${mode}`} cx="45%" cy="40%" r="65%"><stop offset="0" stopColor="#e6b94f" stopOpacity=".1" /><stop offset=".7" stopColor="#e6b94f" stopOpacity=".03" /><stop offset="1" stopColor="#e6b94f" stopOpacity="0" /></radialGradient>
+    </defs>
+    {brain.shells.filter(s => s.part === 'stem' || s.part === 'cerebellum').map((s, k) => <path key={k} className="sb-map-shell" data-part={s.part} d={s.d} />)}
+    {cb && <path className="sb-map-fold" d={brain.folia} clipPath={`url(#sb-brain-cb-${mode})`} />}
+    {lobes.map((s, k) => <path key={k} className="sb-map-aura" d={s.d} />)}
+    {lobes.map((s, k) => <path key={k} className="sb-map-shell" data-part={s.part} d={s.d} fill={`url(#sb-brain-glow-${mode})`} />)}
+    <g clipPath={`url(#sb-brain-${mode})`}><path className="sb-map-fold" d={brain.folds} /><path className="sb-map-sulcus" d={brain.sulci} /></g>
+  </g>;
+});
+
 const Layer = memo(function Layer({ mode, L, nodes, edges, shelves, hot, hotNear, shelf, cursor, read, hub }: LayerProps) {
   const inShelf = (i: number) => shelf === 'all' || nodes[i].shelf === shelf;
   return <svg ref={el => hub.svg(mode, el)} className={`sb-map-svg sb-map-${mode}`} viewBox={`0 0 ${L.w} ${L.h}`} role="group"
     aria-label={`Map of all ${nodes.length} pages and the links between them`} aria-describedby="sb-map-hint"
     onPointerDown={e => hub.api().setPointer(e.pointerType)} onPointerMove={e => hub.api().onMove(e, mode)} onPointerLeave={e => hub.api().onLeave(e)}
     onClick={e => hub.api().onClick(e, mode)} onKeyDown={e => hub.api().onKey(e, mode)}>
+    <Brain mode={mode} brain={L.brain} />
     <g className="sb-map-names" aria-hidden="true">
-      {shelves.map(s => { const b = L.boxes[s.id], end = s.id === 'resources'; return b && <text key={s.id} data-shelf={s.id} x={end ? b[2] - 4 : b[0] + 4} y={b[1] - 8} textAnchor={end ? 'end' : undefined}>{s.title}</text>; })}
+      {shelves.map(s => { const at = L.labels[s.id]; return at && <text key={s.id} data-shelf={s.id} x={at[0]} y={at[1]} textAnchor={at[2]}>{s.title}</text>; })}
     </g>
     <g className="sb-map-threads" aria-hidden="true">
       {edges.map(([a, b], k) => <line key={k} x1={L.points[a][0]} y1={L.points[a][1]} x2={L.points[b][0]} y2={L.points[b][1]}
