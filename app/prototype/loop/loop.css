@@ -1,0 +1,41 @@
+/* ---- Loop inside bAIram (/loop). Tokens come from .bm-page (masthead.css); the links reuse the cave's .bj-link (journey.css).
+   Every rule is scoped to .lp- (the build bundles all pages' CSS together). ---- */
+.lp-page { display: flex; flex-direction: column;
+  background: radial-gradient(ellipse at 50% 120%, #e6b94f1f, transparent 55%), radial-gradient(ellipse at 77% 0%, #25231a66, transparent 42%), #080a0c; }
+/* In a flex column an auto-margined block shrinks to its content: the shared top bar keeps its full width, as on every page. */
+.lp-page > .bm-header { width: 100%; }
+.lp-main { flex: 1; display: flex; flex-direction: column; width: 100%; max-width: 1680px; margin: 0 auto;
+  padding: 0 clamp(16px, 3vw, 56px) clamp(16px, 2.4vw, 36px); }
+.lp-main:focus { outline: none; }
+
+/* The slim bar: Loop's name and tagline on the left, the way out on the right. */
+.lp-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 24px; padding: clamp(16px, 2vw, 24px) 0 clamp(14px, 1.6vw, 20px); }
+.lp-title { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 16px; font: 500 clamp(26px, 1rem + 1.2vw, 36px)/1.1 'Bairam Text', sans-serif;
+  letter-spacing: -.03em; color: #eef1f1; }
+.lp-tagline { color: var(--bm-gold); font-size: var(--step-small); font-weight: 500; letter-spacing: .08em; text-transform: uppercase; }
+.lp-bar .lp-open { margin-top: 0; }
+
+/* The screen: fills the rest of the window, never shorter than a usable page. A thin gold edge, as on the cave's monitors. */
+.lp-screen { position: relative; flex: 1 0 clamp(460px, 60svh, 720px); border: 1px solid #3a382f; border-radius: 10px; overflow: hidden;
+  background: #0c0e11; box-shadow: inset 0 1px 0 #e6b94f40, 0 40px 90px -40px #000, 0 0 0 1px #00000066; }
+.lp-frame { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; background: transparent; }
+/* While Loop loads, a slow gold sweep along the top edge says something is coming; it holds still for reduced motion. */
+.lp-screen[data-state="loading"]::before { content: ''; position: absolute; z-index: 1; top: 0; left: 0; height: 2px; width: 30%;
+  background: linear-gradient(90deg, transparent, var(--bm-gold), transparent); animation: lp-sweep 1.6s ease-in-out infinite; pointer-events: none; }
+@keyframes lp-sweep { from { transform: translateX(-100%); } to { transform: translateX(340%); } }
+/* Loop is slow to arrive: the way out as a pill at the foot of the screen, over Loop rather than instead of it. */
+.lp-slow { position: absolute; z-index: 2; left: 50%; bottom: clamp(16px, 3vw, 32px); transform: translateX(-50%); }
+.lp-slow:empty { display: none; }
+.lp-slow .lp-open { box-shadow: 0 12px 40px -8px #000; white-space: nowrap; }
+.lp-slow .lp-open { margin-top: 0; padding: 0 24px; border: 0; border-radius: 999px; background: var(--bm-gold); color: #14120b; }
+.lp-slow .lp-open svg { color: #14120b; }
+.lp-slow .lp-open:hover { background: #f1cd73; color: #14120b; }
+
+@media (prefers-reduced-motion: reduce) {
+  .lp-screen[data-state="loading"]::before { animation: none; width: 100%; opacity: .5; }
+}
+@media (max-width: 760px) {
+  .lp-main { padding: 0 12px 12px; }
+  .lp-bar { padding: 14px 4px 12px; }
+  .lp-screen { flex-basis: 520px; border-radius: 8px; }
+}
