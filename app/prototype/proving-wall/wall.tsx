@@ -112,9 +112,9 @@ export function ProvingWall() {
                 {c.kind && <p className="pw-kind">{c.kind}</p>}
               </div>
             </div>
-            {c.photo && <picture className="pw-photo">
+            {c.photo && <picture className="pw-photo" data-of={c.photo.of}>
               <source type="image/avif" srcSet={`${c.photo.src}.avif`} />
-              <img src={`${c.photo.src}.webp`} width={c.photo.width} height={c.photo.height} alt={`Certificate: ${c.name}`} loading="lazy" decoding="async" />
+              <img src={`${c.photo.src}.webp`} width={c.photo.width} height={c.photo.height} alt={`${c.photo.of === 'badge' ? 'Badge' : 'Certificate'}: ${c.name}`} loading="lazy" decoding="async" />
             </picture>}
             <h3 id={`pw-n${i}`} className="pw-name">{keepHyphenated(c.name)}</h3>
             <p className="pw-issuer">{c.issuer}</p>

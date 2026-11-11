@@ -3,7 +3,8 @@
    says "Completion certificate", never "Certified".
    `sample: true` marks a placeholder: it renders with a visible "Sample" tag, and tests/release-guard.mjs
    fails while any sample remains, so a dummy credential can never ship.
-   `url` = the public verification page, only when one exists (Credly: /badges/<id>/public_url, never the /go/ or /earner/ link). Badges are the issuer's file, shown unaltered. */
+   `url` = the public verification page, only when one exists (Credly: /badges/<id>/public_url, never the /go/ or /earner/ link). Badges are the issuer's file, shown unaltered.
+   "Certified" appears only where it is the credential's own name (Gemini Certified Faculty). */
 export type Cert = {
   name: string;
   issuer: string;
@@ -20,11 +21,68 @@ export type Cert = {
   badge?: { src: string; alt: string };
   /** The certificate itself, from the issuer's own file: resized only, and trimmed only outside the certificate's
    *  border (print headers, page margins). Built by frontier-aimplify/work/builder/2026-10-19-proving-wall-photos/source/make_photos.py. */
-  photo?: { src: string; width: number; height: number };
+  photo?: { src: string; width: number; height: number; /** 'badge' when the credential has no certificate and the photo is its badge. */ of?: 'badge' };
   sample?: boolean;
 };
 
 export const certs: Cert[] = [
+  // Nov 11 2026, Balram: "Add all 12", from his Google for Education Accredible wallet (edu.google.accredible.com/profile/
+  // balramr142937/wallet) and his AWS Skill Builder profile (skillsprofile.skillbuilder.aws/user/balramr). Each checked that
+  // day on the issuer's own record: Accredible's credential API (verified, not revoked, not expired, recipient Balram R /
+  // "balram R") and Credly's Open Badges assertion (issuer 'Amazon Web Services Training and Certification', issuedOn as
+  // below; the public page names Balram R.). Names are the credential's own; on Credly the " - Training Badge" suffix
+  // becomes the kind. A kind only where the credential prints one: the Google badges print their tier. Where there is no
+  // certificate, the plate shows the badge in the photo slot (of: 'badge'). Images: frontier-aimplify/work/builder/
+  // 2026-11-11-proving-wall-nov-certs/source/make_assets.py.
+  // Accredible: issued 2026-11-09, valid through 2029-11-09. Photo = Accredible's render of his certificate.
+  { name: 'Gemini Certified Faculty', issuer: 'Google for Education', year: '2026', date: 'November 9, 2026',
+    url: 'https://edu.google.accredible.com/8b4d5d3a-0a6f-4f88-b4d7-aed83acc61c6', verifiedBy: 'Accredible',
+    photo: { src: '/assets/proving-wall/certs/google-gemini-certified-faculty', width: 560, height: 433 } },
+  // Accredible (OpenAI Academy's own wallet, oaiacademy.credential.net): issued 2026-11-09, expires 2027-05-09. Badge only.
+  { name: 'AI Leadership', issuer: 'OpenAI Academy', year: '2026', date: 'November 9, 2026',
+    url: 'https://oaiacademy.credential.net/66ceab2e-a8f6-46e8-a60a-0c16329f74a5', verifiedBy: 'Accredible',
+    photo: { src: '/assets/proving-wall/certs/openai-ai-leadership', width: 560, height: 560, of: 'badge' } },
+  // Credly: 'AWS Partner: Generative AI Technical - Training Badge', issuedOn 2026-11-03.
+  { name: 'AWS Partner: Generative AI Technical', issuer: 'Amazon Web Services Training and Certification', year: '2026',
+    kind: 'Training Badge', date: 'November 3, 2026',
+    url: 'https://www.credly.com/badges/9589e7bb-876a-44d9-830f-afaa0dbe5586/public_url', verifiedBy: 'Credly',
+    photo: { src: '/assets/proving-wall/certs/aws-generative-ai-technical', width: 560, height: 560, of: 'badge' } },
+  // Accredible: issued 2026-11-01. The certificate prints "certificate of attendance for completing 3 hours" and his name
+  // as "balram R" (shown as printed). Photo = Accredible's render of his certificate.
+  { name: 'Google AI Educator Series for India in English', issuer: 'Google for Education', year: '2026',
+    kind: 'Certificate of attendance', date: 'November 1, 2026',
+    url: 'https://edu.google.accredible.com/8754d75a-2a49-4fa7-95ab-abcae839fca4', verifiedBy: 'Accredible',
+    photo: { src: '/assets/proving-wall/certs/google-ai-educator-series-india', width: 560, height: 433 } },
+  // The series' module badges, Accredible, issued 2026-11-01 (four) and 2026-10-31 (two). Kind = the tier printed on each.
+  { name: 'Set up Your Digital Workspace', issuer: 'Google for Education', year: '2026', kind: 'Foundational', date: 'November 1, 2026',
+    url: 'https://edu.google.accredible.com/3a3a96a9-7696-48e1-805c-bd31a3391436', verifiedBy: 'Accredible',
+    photo: { src: '/assets/proving-wall/certs/google-set-up-your-digital-workspace', width: 560, height: 560, of: 'badge' } },
+  { name: 'Get to Know Gemini for Education', issuer: 'Google for Education', year: '2026', kind: 'Foundational', date: 'November 1, 2026',
+    url: 'https://edu.google.accredible.com/31a877c8-47ad-421a-8b64-1652f9590c05', verifiedBy: 'Accredible',
+    photo: { src: '/assets/proving-wall/certs/google-get-to-know-gemini-for-education', width: 560, height: 517, of: 'badge' } },
+  { name: 'Create Lesson Plans and Supporting Materials Using Gemini', issuer: 'Google for Education', year: '2026', kind: 'Pedagogical', date: 'November 1, 2026',
+    url: 'https://edu.google.accredible.com/3c1cb1ad-ef46-47ed-9b94-f84f3c566ee6', verifiedBy: 'Accredible',
+    photo: { src: '/assets/proving-wall/certs/google-create-lesson-plans-using-gemini', width: 560, height: 560, of: 'badge' } },
+  { name: 'Build Your Portfolios Through Vibe Coding in Gemini Canvas', issuer: 'Google for Education', year: '2026', kind: 'Administrative', date: 'November 1, 2026',
+    url: 'https://edu.google.accredible.com/4c65dda8-5344-4574-8978-4f3761fa531c', verifiedBy: 'Accredible',
+    photo: { src: '/assets/proving-wall/certs/google-vibe-coding-in-gemini-canvas', width: 560, height: 560, of: 'badge' } },
+  { name: 'Basics of AI', issuer: 'Google for Education', year: '2026', kind: 'Foundational', date: 'October 31, 2026',
+    url: 'https://edu.google.accredible.com/4f796580-12b2-4682-bb49-31998297c148', verifiedBy: 'Accredible',
+    photo: { src: '/assets/proving-wall/certs/google-basics-of-ai', width: 560, height: 560, of: 'badge' } },
+  { name: 'Your AI-Powered Private Research and Thinking Partner: Gemini Notebook', issuer: 'Google for Education', year: '2026', kind: 'Foundational', date: 'October 31, 2026',
+    url: 'https://edu.google.accredible.com/6dfdddb1-1f9b-4e55-a666-acfe63cc54b0', verifiedBy: 'Accredible',
+    photo: { src: '/assets/proving-wall/certs/google-gemini-notebook', width: 560, height: 517, of: 'badge' } },
+  // Credly: 'AWS Knowledge: AI Driven Development Lifecycle Foundations – Training Badge', issuedOn 2026-10-26 (10:56Z).
+  { name: 'AWS Knowledge: AI Driven Development Lifecycle Foundations', issuer: 'Amazon Web Services Training and Certification', year: '2026',
+    kind: 'Training Badge', date: 'October 26, 2026',
+    url: 'https://www.credly.com/badges/524ce136-b4f8-4ae6-9793-b81182a6a610/public_url', verifiedBy: 'Credly',
+    photo: { src: '/assets/proving-wall/certs/aws-ai-driven-development-lifecycle', width: 560, height: 560, of: 'badge' } },
+  // Credly: 'AWS Partner: Kiro Learning Plan Assessment - Training Badge', issuedOn 2026-10-26 (07:06Z). The badge art reads
+  // "Kiro Technical"; the plate uses the credential's name.
+  { name: 'AWS Partner: Kiro Learning Plan Assessment', issuer: 'Amazon Web Services Training and Certification', year: '2026',
+    kind: 'Training Badge', date: 'October 26, 2026',
+    url: 'https://www.credly.com/badges/cf77125d-bacb-479e-9e18-1b5547155ec7/public_url', verifiedBy: 'Credly',
+    photo: { src: '/assets/proving-wall/certs/aws-kiro-learning-plan-assessment', width: 560, height: 560, of: 'badge' } },
   {
     // Source: Balram's AWS Training & Certification completion certificate PDF and badge PNG, shared Oct 17 2026.
     name: 'AWS Partner: Amazon Quick Technical Foundations',
@@ -39,7 +97,7 @@ export const certs: Cert[] = [
     badge: { src: '/assets/proving-wall/badges/aws-amazon-quick-technical-trained', alt: 'AWS Amazon Quick Technical Trained Partner badge' },
     photo: { src: '/assets/proving-wall/certs/aws-amazon-quick-technical-foundations', width: 560, height: 433 },
   },
-  // Plates 2 to 13: Balram's LinkedIn Licenses & certifications list, newest first, read Oct 19 2026 (approved: "go with ur
+  // The Oct 19 plates (then 2 to 13): Balram's LinkedIn Licenses & certifications list, newest first, read Oct 19 2026 (approved: "go with ur
   // recommendtion"). Name: the certificate's own wording where its image is legible, otherwise LinkedIn's exactly. Issuer:
   // exactly as LinkedIn lists it. A type (kind) only where the credential states one. Verify only where the page was checked.
   // Left out: Foundations of Digital Marketing and E-commerce (Google, Jan 2024), the one non-AI entry; and (Balram, Oct 19:
