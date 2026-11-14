@@ -1,7 +1,8 @@
 /* The bAI room of learning: its own page (Balram, Nov 7), in the cave's styling, linked from the top menu and the learning deck.
    Nov 8 (Balram: "make the room background like a classroom in the cave"): a classroom carved into the cave stands behind the
    heading, its board a constellation; a card with art spans the room and shows its resource's own picture.
-   Every card is someone else's resource, linked to its original and described in its own words (content.ts). Server-rendered,
+   Every card but one is someone else's resource, linked to its original and described in its own words (content.ts);
+   the prompt library (Nov 13) is his own wing, in his own words. Server-rendered,
    so it reads without JavaScript; only the shared top bar is a client component. */
 import { roomOfLearning } from '../bairam/content';
 import { SiteHeader } from '../masthead/site-header';
@@ -27,6 +28,15 @@ function Classroom() {
   </div>;
 }
 
+// The prompt library's own picture on its card: the grand hall of lit shelves in the cave (Nov 14). Decorative.
+const HALL = '/assets/prompt-library/grand-hall';
+function Hall() {
+  return <picture>
+    <source type="image/avif" srcSet={`${HALL}-960.avif 960w, ${HALL}-1600.avif 1600w`} sizes="(max-width: 960px) 100vw, 50vw" />
+    <img src={`${HALL}-960.webp`} srcSet={`${HALL}-960.webp 960w, ${HALL}-1600.webp 1600w`} sizes="(max-width: 960px) 100vw, 50vw" alt="" width={960} height={549} decoding="async" />
+  </picture>;
+}
+
 export function RoomOfLearning() {
   return <div className="bm-page bl-page">
     <Classroom />
@@ -47,6 +57,7 @@ export function RoomOfLearning() {
             </div>
           </div>
           {card.art === 'constellation' && <div className="bl-card-pic"><Constellation /></div>}
+          {card.art === 'hall' && <div className="bl-card-pic bl-card-hall"><Hall /></div>}
         </li>)}
       </ul>
     </main>

@@ -125,6 +125,12 @@ export const roomOfLearning = {
       links: [
         { label: 'Open on GitHub', href: 'https://github.com/undefined-ui/second-brain-os' },
       ] },
+    // APPROVED Nov 13 (Balram: "Approved, build it, but it should be a separate page"). His own wing, so no outside links.
+    // art 'hall': the wing's own picture, the grand hall in the cave (Nov 14: "Go with A, grand hall").
+    { title: 'The prompt library', art: 'hall',
+      summary: '36 ready-to-use prompts for everyday work, from meeting follow-ups to debugging. Copy, fill the brackets, send.',
+      read: { label: 'Read it here', href: '/bai-room-of-learning/prompt-library' },
+      links: [] },
   ],
 } as const;
 

@@ -1,0 +1,92 @@
+/* ---- The prompt library (/bai-room-of-learning/prompt-library). Tokens from .bm-page (masthead.css). Every selector starts
+   .pl-, so nothing here reaches another page (the build bundles all CSS into one file). ---- */
+.pl-page { position: relative; --pl-pad: clamp(24px, 5vw, 88px); --pl-wide: max(var(--pl-pad), calc((100% - 1504px) / 2)); --pl-edge: #2c3034; }
+.pl-page :where(h1, h2, h3, p, dl, dd, ol) { margin: 0; }
+.pl-page main:focus { outline: none; }
+.pl-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* The hero: the grand hall in the cave, its lit shelves on the right, shaded to black under the words on the left. */
+.pl-hero { position: relative; isolation: isolate; display: grid; align-items: end; min-height: min(80svh, 820px); padding: clamp(80px, 10vw, 150px) var(--pl-wide) clamp(48px, 6vw, 84px); overflow: hidden; border-bottom: 1px solid var(--bm-line); }
+.pl-hero-art { position: absolute; inset: 0; z-index: -1; }
+.pl-hero-art img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 70% 46%; filter: brightness(.9) saturate(.95); }
+.pl-hero::after { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(90deg, #080a0c 0%, #080a0cf2 24%, #080a0ca6 48%, #080a0c33 72%, #080a0c00 100%), linear-gradient(0deg, #080a0c 0%, #080a0c00 34%), linear-gradient(180deg, #080a0cb3 0%, #080a0c00 20%); }
+.pl-hero-copy { max-width: 680px; }
+.pl-eyebrow::before { content: ''; display: block; width: 64px; height: 1px; margin-bottom: 22px; background: var(--bm-gold); opacity: .8; }
+.pl-eyebrow a { display: inline-flex; align-items: center; min-height: 32px; color: var(--bm-muted); font-size: var(--step-small); font-weight: 500; letter-spacing: .02em; }
+.pl-eyebrow a:hover { color: #eef1f1; }
+.pl-eyebrow .pl-ai { color: var(--bm-gold); }
+.pl-hero h1 { margin-top: 14px; font: 700 clamp(44px, 1.6rem + 4.4vw, 104px)/.98 'Bairam Display', serif; letter-spacing: .03em; color: #f1f3f3; text-wrap: balance; text-shadow: 0 2px 30px #000a; }
+.pl-lede { margin-top: 24px !important; max-width: 50ch; color: #c3c9cc; font-size: var(--step-lead); line-height: 1.5; text-wrap: pretty; text-shadow: 0 1px 16px #080a0c; }
+.pl-stats { display: flex; flex-wrap: wrap; gap: 18px clamp(28px, 4vw, 56px); margin-top: clamp(32px, 4vw, 48px) !important; }
+.pl-stats div { display: flex; flex-direction: column-reverse; gap: 4px; }
+.pl-stats dd { font: 500 clamp(34px, 1.2rem + 2.2vw, 56px)/1 'Bairam Text', sans-serif; letter-spacing: -.04em; color: var(--bm-gold); }
+.pl-stats dt { color: var(--bm-muted); font-size: var(--step-small); }
+/* Pick a prompt > Fill the brackets > Paste and send: three stones joined by small gold chevrons. */
+.pl-steps { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 0; margin-top: 30px !important; padding: 0; list-style: none; }
+.pl-steps li { display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border: 1px solid #3a382f; background: #0c0e11cc; color: #eef1f1; font-size: 15px; font-weight: 500; }
+.pl-steps li + li::before { content: ''; width: 7px; height: 7px; margin: 0 31px 0 -38px; border-top: 1.5px solid var(--bm-gold); border-right: 1.5px solid var(--bm-gold); rotate: 45deg; }
+.pl-steps li + li { margin-left: 38px; }
+.pl-own { margin-top: 26px !important; color: var(--bm-muted); font-size: 16px; }
+.pl-own a { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; margin-left: 4px; border-bottom: 1px solid #57584f; color: #eef1f1; font-weight: 500; }
+.pl-own a:hover { color: var(--bm-gold); border-color: var(--bm-gold); }
+.pl-own svg { width: 16px; height: 16px; color: var(--bm-gold); }
+
+/* The bar: search, a chip per group and the count, held at the top while you read down the shelf. */
+.pl-tools { position: sticky; top: 0; z-index: 5; border-bottom: 1px solid var(--bm-line); background: #080a0ce0; -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.pl-tools-in { display: grid; grid-template-columns: minmax(200px, 260px) minmax(0, 1fr) auto; align-items: center; gap: 12px 24px; padding: 14px var(--pl-wide); }
+.pl-search { position: relative; display: block; }
+.pl-search svg { position: absolute; left: 14px; top: 50%; width: 18px; height: 18px; translate: 0 -50%; color: var(--bm-muted); pointer-events: none; }
+.pl-search input { width: 100%; min-height: 44px; padding: 0 14px 0 42px; border: 1px solid #3a3e42; border-radius: 0; background: #0f1215; color: #eef1f1; font: inherit; font-size: 16px; }
+.pl-search input::placeholder { color: #8b9296; }
+.pl-search input:focus-visible { outline: 2px solid var(--bm-gold); outline-offset: 1px; border-color: transparent; }
+.pl-chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 2px; margin: -2px; }
+.pl-chips::-webkit-scrollbar { display: none; }
+.pl-chip { flex: 0 0 auto; min-height: 40px; padding: 0 12px; border: 1px solid #3a3e42; border-radius: 999px; background: transparent; color: var(--bm-ink); font: inherit; font-size: 14px; font-weight: 500; cursor: pointer; transition: border-color .2s, background-color .2s, color .2s; }
+.pl-chip:hover { border-color: #8a7340; }
+.pl-chip[aria-pressed="true"] { border-color: var(--bm-gold); background: var(--bm-gold); color: #14120b; }
+.pl-chip:focus-visible, .pl-copy:focus-visible { outline: 2px solid var(--bm-gold); outline-offset: 2px; }
+.pl-count { color: var(--bm-muted); font-size: var(--step-small); white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+/* The shelf: a heading per group, then its prompts as stone cards, two across on wide screens. */
+.pl-shelf { padding-bottom: clamp(88px, 10vw, 140px); }
+.pl-group { padding: clamp(56px, 6vw, 88px) var(--pl-wide) 0; scroll-margin-top: 80px; }
+.pl-group h2 { display: flex; align-items: center; gap: 16px; margin-bottom: clamp(20px, 2.4vw, 32px); font: 500 var(--step-head)/1.06 'Bairam Text', sans-serif; letter-spacing: -.035em; color: #eef1f1; }
+.pl-group h2::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, #e6b94f73, #e6b94f00); }
+.pl-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(16px, 2vw, 24px); padding: 0; list-style: none; }
+.pl-card { display: flex; flex-direction: column; gap: 12px; min-width: 0; padding: clamp(22px, 2.2vw, 32px); border: 1px solid var(--pl-edge); background: linear-gradient(165deg, #14171bd9, #0c0e11d9); box-shadow: inset 0 1px 0 #ffffff0d, 0 18px 40px -20px #000; scroll-margin-top: 96px; transition: border-color .2s; }
+.pl-card:hover, .pl-card:focus-within { border-color: #6b5a2c; }
+.pl-card:target { border-color: var(--bm-gold); box-shadow: inset 0 1px 0 #e6b94f40, 0 0 0 1px var(--bm-gold), 0 18px 40px -20px #000; }
+.pl-card-n { color: var(--bm-gold); font-size: 13.5px; font-weight: 500; letter-spacing: .04em; font-variant-numeric: tabular-nums; }
+.pl-card h3 { font: 500 clamp(20px, 1rem + .5vw, 24px)/1.2 'Bairam Text', sans-serif; letter-spacing: -.02em; color: #eef1f1; text-wrap: balance; }
+.pl-prompt { color: #c9ced1; font-size: 15.5px; line-height: 1.62; white-space: pre-wrap; overflow-wrap: break-word; }
+.pl-fill { padding: 0 .2em; border-radius: 2px; background: #e6b94f24; color: #f3d98f; }
+.pl-copy { display: inline-flex; align-items: center; gap: 10px; align-self: flex-start; margin-top: auto; min-height: 44px; padding: 0 18px; border: 1px solid #57584f; background: transparent; color: #eef1f1; font: inherit; font-size: 15px; font-weight: 500; cursor: pointer; transition: border-color .2s, background-color .2s, color .2s; }
+.pl-copy svg { width: 17px; height: 17px; color: var(--bm-gold); }
+.pl-copy:hover { border-color: var(--bm-gold); }
+.pl-copy.is-done { border-color: var(--bm-gold); background: var(--bm-gold); color: #14120b; }
+.pl-copy.is-done svg { color: #14120b; }
+.pl-empty { display: grid; justify-items: start; gap: 16px; padding: clamp(56px, 6vw, 88px) var(--pl-wide) 0; color: var(--bm-muted); font-size: var(--step-lead); }
+@media (prefers-reduced-motion: reduce) { .pl-card, .pl-chip, .pl-copy { transition: none; } }
+
+/* Too narrow for the chips beside the search: they take a row of their own. */
+@media (max-width: 1360px) {
+  .pl-tools-in { grid-template-columns: minmax(0, 1fr) auto; }
+  .pl-chips { grid-column: 1 / -1; grid-row: 2; }
+}
+@media (max-width: 900px) { .pl-cards { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 760px) {
+  .pl-hero { min-height: 0; padding: 260px 24px 44px; }
+  .pl-hero-art img { object-position: 50% 30%; }
+  .pl-hero::after { background: linear-gradient(180deg, #080a0c99 0%, #080a0c1a 16%, #080a0cb3 34%, #080a0cf2 50%, #080a0c 100%); }
+  .pl-tools-in { padding: 12px 24px; gap: 10px 16px; }
+  /* Phones: one row of chips you swipe along, running to the screen's edges. */
+  .pl-chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: -2px -24px; padding: 2px 24px; scroll-padding-inline: 24px; }
+  .pl-group { padding: 48px 24px 0; }
+  /* Phones: the three steps stand in a column, each chevron pointing down to the next. */
+  .pl-steps { flex-direction: column; align-items: flex-start; gap: 22px; }
+  .pl-steps li { position: relative; font-size: 14.5px; }
+  .pl-steps li + li { margin-left: 0; }
+  .pl-steps li + li::before { position: absolute; top: -16px; left: 22px; margin: 0; rotate: 135deg; }
+  .pl-empty { padding: 48px 24px 0; }
+}
