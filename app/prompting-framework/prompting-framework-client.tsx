@@ -636,6 +636,8 @@ export function PromptingFrameworkClient() {
             <p className="croftc-body">{copy.hero.body}</p>
             <p className="croftc-note">{copy.hero.note}</p>
             <div className="hero-actions"><a className="button primary" href="#builder">Build a prompt</a><a className="button secondary" href="#deepdive">Learn the six parts</a></div>
+            {/* Nov 13: the other way in, for anyone who wants a ready prompt rather than a framework. */}
+            <p className="croftc-note croftc-library">Want ready-made prompts? <a href="/bai-room-of-learning/prompt-library">Browse the prompt library</a></p>
           </div>
           <div className="croftc-strip" aria-label="CROFTC letters">
             {letterMeta.map((letter) => {

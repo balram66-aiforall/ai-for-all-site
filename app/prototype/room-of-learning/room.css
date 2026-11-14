@@ -75,3 +75,12 @@
   .bl-main { padding: 0 24px 88px; }
   .bl-head { padding: 64px 0 40px; }
 }
+
+/* The prompt library's card shows its hall (Nov 14): the picture fills its side of the card, its edges sunk into the stone. */
+.bl-card-hall { overflow: hidden; background: none; }
+.bl-card-hall picture { position: absolute; inset: 0; }
+.bl-card-hall img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 66% 50%; opacity: .92; transition: transform .6s ease, opacity .3s ease; }
+.bl-card-hall::after { content: ''; position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 0 40px 12px #0b0d10; }
+.bl-card-art:hover .bl-card-hall img, .bl-card-art:focus-within .bl-card-hall img { transform: scale(1.03); opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .bl-card-hall img { transition: none; } }
+@media (max-width: 960px) { .bl-card-hall { aspect-ratio: 16 / 9; } }
