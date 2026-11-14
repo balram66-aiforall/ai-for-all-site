@@ -152,9 +152,36 @@ export function Journey({ children }: { children: ReactNode }) {
       scrollTo({ top: Math.max(0, y), behavior: main.dataset.motion === '3d' ? 'smooth' : 'auto' });
       if (location.hash !== link.hash) history.pushState(null, '', link.hash);
       if (!target.matches('a[href], button, input, select, textarea, [tabindex]')) target.setAttribute('tabindex', '-1');
+      jumping = true;
       target.focus({ preventScroll: true });
+      jumping = false;
     };
     document.addEventListener('click', onClick);
+
+    // Keyboard focus: the browser scrolls a newly focused control into view using its chamber's moved box, so Tab into
+    // the next chamber can leave it mid-turn with the control below the screen. Once the browser is done, check against
+    // the true layout and, if needed, scroll to where the chamber is settled and flat with the control in view.
+    let jumping = false;
+    const onFocus = (event: FocusEvent) => {
+      const target = event.target as HTMLElement;
+      if (jumping || !(target instanceof HTMLElement) || !target.matches(':focus-visible')) return;
+      const i = chambers.findIndex(node => node.contains(target));
+      if (i < 0) return;
+      requestAnimationFrame(() => {
+        const box = boxes[i], chamber = chambers[i];
+        if (!box || document.activeElement !== target) return;
+        let off = 0;
+        for (let n: HTMLElement | null = target; n && n !== chamber; n = n.offsetParent as HTMLElement | null) off += n.offsetTop;
+        const stick = Math.min(0, vh - box.height), h = target.offsetHeight;
+        const lo = Math.max(0, box.top - vh * ENTRY_END), hi = i === last || box.run <= 0 ? Infinity : box.exit;
+        const view = (s: number) => Math.max(box.top - s, stick) + off;
+        const s = scrollY;
+        if (s >= lo && s <= hi && view(s) >= 0 && view(s) + h <= vh) return;
+        const y = Math.min(hi, Math.max(lo, box.top + off - vh * .4));
+        scrollTo({ top: y, behavior: 'auto' });
+      });
+    };
+    document.addEventListener('focusin', onFocus);
     const relayout = () => { measure(); schedule(); };
     const setMode = () => { main.dataset.motion = reduce.matches ? 'calm' : '3d'; };
     const onReduce = () => { setMode(); requestAnimationFrame(relayout); };
@@ -174,6 +201,7 @@ export function Journey({ children }: { children: ReactNode }) {
       resize.disconnect();
       removeEventListener('scroll', schedule);
       document.removeEventListener('click', onClick);
+      document.removeEventListener('focusin', onFocus);
       removeEventListener('resize', relayout);
       reduce.removeEventListener('change', onReduce);
       phone.removeEventListener('change', relayout);

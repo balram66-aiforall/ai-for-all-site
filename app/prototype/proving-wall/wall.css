@@ -73,6 +73,8 @@ body:has(.pw-page) > .aifa-assistant-shell { display: none; }
 .pw-photo { position: relative; z-index: 1; display: block; margin-top: 18px; aspect-ratio: 4 / 3; background: #0c0e10;
   border: 1px solid #ffffff1a; box-shadow: 0 6px 16px -6px #000c; }
 .pw-photo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+/* A credential with no certificate shows its badge here: inset from the frame, the file itself untouched. */
+.pw-photo[data-of="badge"] img { box-sizing: border-box; padding: 14px; }
 .pw-kind { margin-top: 4px !important; color: #bac0c5; font-size: var(--step-small); }
 .pw-year { color: var(--pw-gold); font-size: var(--step-small); font-weight: 500; letter-spacing: .12em; font-variant-numeric: tabular-nums; }
 /* Engraved: light inlay with a dark upper edge, so the text reads as cut into the metal. */
