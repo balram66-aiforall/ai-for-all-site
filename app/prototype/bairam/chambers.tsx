@@ -73,7 +73,7 @@ export function LearningDeck() {
       <p className="bj-room-way"><a className="bj-link" href={roomOfLearning.path}>{roomOfLearning.enter} <Arrow /></a></p>
     </Block>
     <Block id="guides" kicker="Practical AI guides" title="Your work. A more useful way to do it.">
-      <p className="bj-lead">Hands-on playbooks for Amazon AI tools, Kiro agentic workflows, Amazon Quick automation, and role-based prompting.</p>
+      <p className="bj-lead">Hands-on playbooks for Amazon AI tools, Kiro agentic workflows, AWS Quick automation, and role-based prompting.</p>
       <div className="bj-cards bj-cards-3">
         {pillarGuides.map((guide) => <article className="bj-card" key={guide.slug}>
           <h3><a className="bj-link" href={`/guides/${guide.slug}`}>{guide.name} <Arrow /></a></h3>

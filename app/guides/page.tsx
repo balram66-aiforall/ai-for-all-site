@@ -3,10 +3,11 @@ import { roleGuides } from "../site-content";
 import { ThemeShell } from "../components/ThemeShell";
 import { pillarGuides } from "../pillar-guides";
 import { pageMetadata } from "../seo";
+import { HUB as AWS_QUICK_HUB, NAME as AWS_QUICK_NAME, hub as awsQuickHub } from "../prototype/aws-quick-guide/guide";
 
 export const metadata = pageMetadata(
-  "Practical AI Guides: Kiro, Amazon Quick and Role Workflows | AI For All",
-  "Explore practical guides to Kiro, Amazon Quick, MCP, and AI workflows for managers, operations, analysts, and client teams.",
+  "AI Guides: Kiro, AWS Quick and Role Workflows | AI For All",
+  "Explore practical guides to Kiro, AWS Quick, MCP, and AI workflows for managers, operations, analysts, and client teams.",
   "/guides",
 );
 
@@ -27,12 +28,18 @@ export default function GuidesIndexPage() {
       </section>
 
       <section className="content-section guide-index-grid" aria-label="Tool guides">
+        <article className="guide-card">
+          <span>complete guide</span>
+          <h2>{AWS_QUICK_NAME}</h2>
+          <p>{awsQuickHub.description}</p>
+          <Link href={AWS_QUICK_HUB} aria-label={`Read the guide: ${AWS_QUICK_NAME}`}>Read the guide</Link>
+        </article>
         {pillarGuides.map((guide) => (
           <article className="guide-card" key={guide.slug}>
             <span>tool guide</span>
             <h2>{guide.name}</h2>
             <p>{guide.description}</p>
-            <Link href={`/guides/${guide.slug}`}>Read the guide</Link>
+            <Link href={`/guides/${guide.slug}`} aria-label={`Read the guide: ${guide.name}`}>Read the guide</Link>
           </article>
         ))}
       </section>

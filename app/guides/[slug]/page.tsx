@@ -5,6 +5,7 @@ import { ThemeShell } from "../../components/ThemeShell";
 import { GuidePractice } from "../../components/GuidePractice";
 import { guideWorkflows } from "../../guide-workflows";
 import { pillarGuides } from "../../pillar-guides";
+import { HUB as AWS_QUICK_HUB, NAME as AWS_QUICK_NAME } from "../../prototype/aws-quick-guide/guide";
 import { roleGuideSeo } from "../../role-guide-seo";
 import { pageMetadata } from "../../seo";
 import { CopyableExample } from "../../components/CopyableExample";
@@ -79,6 +80,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
             {pillarGuides.filter((guide) => guide.slug !== slug).map((guide) => (
               <Link className="button secondary" key={guide.slug} href={`/guides/${guide.slug}`}>{guide.name}</Link>
             ))}
+            <Link className="button secondary" href={AWS_QUICK_HUB}>{`${AWS_QUICK_NAME}: the complete guide`}</Link>
           </div>
         </section>
       </ThemeShell>
@@ -126,7 +128,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
       {slug === "operations" && (
         <section className="content-section practice-section">
           <h2>From an SOP to a Quick Flow</h2>
-          <p>Once a colleague can follow your checklist, try the <Link className="learning-action" href="/guides/amazon-quick">Amazon Quick Flows guide</Link> to turn a recurring report into a draft your team can review.</p>
+          <p>Once a colleague can follow your checklist, try the <Link className="learning-action" href="/guides/amazon-quick">AWS Quick Flows guide</Link> to turn a recurring report into a draft your team can review.</p>
         </section>
       )}
       <GuideFaqs slug={slug} heading={seo.heading} description={seo.description} faqs={seo.faqs} />

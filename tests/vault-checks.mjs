@@ -7,7 +7,7 @@ const base=process.env.TEST_URL||'http://localhost:3199';const url=base+'/protot
 const root=process.env.EVIDENCE_DIR||new URL('../../frontier-aimplify/work/builder/2026-10-17-suit-vault-hover/',import.meta.url).pathname;
 const label=process.env.EVIDENCE_LABEL||'browser';
 await mkdir(root+'shots',{recursive:true});await mkdir(root+'evidence',{recursive:true});
-const names=['ChatGPT','Claude Code','Amazon Quick','Kiro','Gemini'];
+const names=['ChatGPT','Claude Code','AWS Quick','Kiro','Gemini'];
 // Balram-approved copy, Oct 17. First person; his own terms AI-suit and bAI-tech.
 const heading='One orchestrator. An AI-suit for every mission.',lede='Every problem calls for a different AI-suit. I pick the one the job needs, and wear it for the people who need help.';
 const copy=[['The everyday AI-suit','Thinking partner','My daily armour: I think out loud, draft and untangle problems fast.'],['The builder’s AI-suit','Agentic coding','When something needs fixing, I suit up: it reads the code, makes the change and proves it with tests.'],['The intelligence AI-suit','Answers from data','I wear it to find the truth in the data, so decisions rest on numbers, not guesses.'],['The architect’s cloak','Spec-driven building','For big builds I plan first: requirements, design and tasks, then the code.'],['The recon AI-suit','Multimodal research','On research missions it reads text, images and long documents at once.']];

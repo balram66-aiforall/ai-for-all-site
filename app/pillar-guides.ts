@@ -71,17 +71,17 @@ export const pillarGuides: PillarGuide[] = [
   },
   {
     slug: "amazon-quick",
-    name: "Amazon Quick and Quick Flows",
-    heading: "Amazon Quick & Quick Suite Flows: Automating Everyday Business Workflows",
-    title: "Amazon Quick & Quick Suite Flows: Automating Business Workflows | Balram R.",
-    description: "A practical guide for operations and business teams to automate recurring tasks, reporting, and multi-step processes using Amazon Quick and Quick Flows.",
+    name: "AWS Quick and Quick Flows",
+    heading: "AWS Quick Flows: Automating Everyday Business Workflows",
+    title: "AWS Quick Flows: Automate Business Workflows | Balram R.",
+    description: "A practical guide for operations and business teams to automate recurring tasks, reporting, and multi-step processes using AWS Quick and Quick Flows.",
     audience: "Operations and business teams who repeat the same reporting or preparation task every week.",
     outcomes: ["Describe a workflow with explicit inputs and outputs", "Run a draft with safe sample data", "Schedule it with a clear human review step"],
     sections: [
       {
         title: "Pick the part of the job worth repeating",
         paragraphs: [
-          "Amazon Quick brings together AI assistance and connected business information. A Quick Flow gives recurring work a defined sequence: collect inputs, read approved sources, produce a draft, and take an action when one is configured. A process owner can describe or arrange those steps in the Flow builder. A technical teammate can help confirm the data source, its access rules, and what a failed run looks like. You can start with a file and no connected write action.",
+          "AWS Quick (formerly Amazon Quick) brings together AI assistance and connected business information. A Quick Flow gives recurring work a defined sequence: collect inputs, read approved sources, produce a draft, and take an action when one is configured. A process owner can describe or arrange those steps in the Flow builder. A technical teammate can help confirm the data source, its access rules, and what a failed run looks like. You can start with a file and no connected write action.",
           "Use a small weekly exception brief for your first flow. Each Friday, an operations lead reads an export of open requests, identifies overdue items, and prepares a short update. The team already agrees on what overdue means. The frustrating part is making the same table each week, so automate the draft. Let the lead resolve ambiguous dates and decide what goes to the wider team.",
         ],
       },
@@ -118,17 +118,17 @@ export const pillarGuides: PillarGuide[] = [
       { question: "Should my first flow send the report automatically?", answer: "Start by generating a draft. Verify several runs, then decide with the process owner whether to add a confirmed send action." },
     ],
     sources: [
-      { label: "Creating Amazon Quick Flows", href: "https://docs.aws.amazon.com/quick/latest/userguide/creating-flows.html" },
-      { label: "Scheduling Amazon Quick Flows", href: "https://docs.aws.amazon.com/quick/latest/userguide/schedules-in-quick-flows.html" },
-      { label: "Amazon Quick integrations", href: "https://docs.aws.amazon.com/quick/latest/userguide/working-with-integrations.html" },
+      { label: "Creating AWS Quick Flows", href: "https://docs.aws.amazon.com/quick/latest/userguide/creating-flows.html" },
+      { label: "Scheduling AWS Quick Flows", href: "https://docs.aws.amazon.com/quick/latest/userguide/schedules-in-quick-flows.html" },
+      { label: "AWS Quick integrations", href: "https://docs.aws.amazon.com/quick/latest/userguide/working-with-integrations.html" },
     ],
   },
   {
     slug: "mcp-vs-skill-orchestration",
     name: "MCP, SKILL.md and orchestration",
-    heading: "Agentic Orchestration: Combining Amazon Quick, Kiro, MCPs, and SKILL.md",
-    title: "Amazon AI Orchestration: Combining Amazon Quick, Kiro, MCP & SKILL.md",
-    description: "Understand the difference between MCP servers and SKILL.md files, and learn how to orchestrate Amazon Quick and Kiro for end-to-end agentic workflows.",
+    heading: "Agentic Orchestration: Combining AWS Quick, Kiro, MCPs, and SKILL.md",
+    title: "Combining AWS Quick, Kiro, MCP & SKILL.md | Balram R.",
+    description: "Understand the difference between MCP servers and SKILL.md files, and learn how to orchestrate AWS Quick and Kiro for end-to-end agentic workflows.",
     audience: "Teams turning a business request into a reviewed change in a codebase.",
     outcomes: ["Separate tool access from process instructions", "Define a handoff from Quick to Kiro", "Try the pattern with one approved request"],
     sections: [
@@ -143,7 +143,7 @@ export const pillarGuides: PillarGuide[] = [
       {
         title: "Quick as orchestrator, Kiro as executor",
         paragraphs: [
-          "Treat this as an architecture pattern. Use Amazon Quick to gather a request, pull approved business context, and produce a brief for a reviewer. Use Kiro to inspect the codebase, turn the brief into a spec when appropriate, and implement the agreed change on a branch. An authorised person can pass the reviewed brief between the two. You can try the pattern without building an integration or letting an agent write to a ticket system.",
+          "Treat this as an architecture pattern. Use AWS Quick to gather a request, pull approved business context, and produce a brief for a reviewer. Use Kiro to inspect the codebase, turn the brief into a spec when appropriate, and implement the agreed change on a branch. An authorised person can pass the reviewed brief between the two. You can try the pattern without building an integration or letting an agent write to a ticket system.",
           "If you later connect the tools, choose an approved ticket or document system as the handoff. Quick can use supported integrations, including approved MCP tools exposed as connector actions, where available. Kiro can use an approved connector for the same system or read the reviewed brief from a local file. This pattern does not assume a Quick Flow can start a Kiro session or that both tools share credentials. Decide which identity reads or writes the record on each side and keep each permission as narrow as possible.",
         ],
       },
@@ -168,7 +168,7 @@ export const pillarGuides: PillarGuide[] = [
       { label: "MCP architecture", href: "https://modelcontextprotocol.io/docs/learn/architecture" },
       { label: "Kiro Agent Skills", href: "https://kiro.dev/docs/skills/" },
       { label: "Kiro MCP", href: "https://kiro.dev/docs/mcp/" },
-      { label: "Amazon Quick MCP integration", href: "https://docs.aws.amazon.com/quick/latest/userguide/mcp-integration.html" },
+      { label: "AWS Quick MCP integration", href: "https://docs.aws.amazon.com/quick/latest/userguide/mcp-integration.html" },
     ],
   },
 ];

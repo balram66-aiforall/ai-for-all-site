@@ -13,7 +13,7 @@ const suits = [
     line: 'My daily armour: I think out loud, draft and untangle problems fast.' },
   { name: 'Claude Code', x: 35.23, logoX: 35.4, glow: '#d97757', callsign: 'The builder’s AI-suit', tech: 'Agentic coding',
     line: 'When something needs fixing, I suit up: it reads the code, makes the change and proves it with tests.' },
-  { name: 'Amazon Quick', x: 50.17, logoX: 50.17, glow: '#e0219f', callsign: 'The intelligence AI-suit', tech: 'Answers from data',
+  { name: 'AWS Quick', x: 50.17, logoX: 50.17, glow: '#e0219f', callsign: 'The intelligence AI-suit', tech: 'Answers from data',
     line: 'I wear it to find the truth in the data, so decisions rest on numbers, not guesses.' },
   { name: 'Kiro', x: 65.12, logoX: 65.35, glow: '#9046ff', callsign: 'The architect’s cloak', tech: 'Spec-driven building',
     line: 'For big builds I plan first: requirements, design and tasks, then the code.' },

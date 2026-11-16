@@ -12,8 +12,8 @@ export const roleGuideSeo: Record<string, { title: string; description: string; 
     ],
   },
   operations: {
-    title: "AI for Operations Teams: Amazon Quick Flows, SOPs & Workflow Prompts",
-    description: "Automate routine operations, build SOPs, and streamline project updates using Amazon Quick workflows and structured AI prompts.",
+    title: "AI for Operations Teams: AWS Quick Flows, SOPs & Prompts",
+    description: "Automate routine operations, build SOPs, and streamline project updates using AWS Quick workflows and structured AI prompts.",
     heading: "AI for operations teams: SOPs and workflow prompts",
     faqs: [
       { question: "What belongs in an AI-assisted SOP?", answer: "Include purpose, inputs, numbered steps, exception handling, and a final checklist. Have the process owner confirm any unresolved rules." },
