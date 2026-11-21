@@ -3,7 +3,7 @@ import { JsonLd, pageMetadata, personId, siteUrl } from "./seo";
 
 export const metadata = pageMetadata(
   "Balram R. (bAIram) | Amazon AI, Kiro Workflows & Practical Prompt Engineering",
-  "Practical AI guides, Kiro spec-driven workflows, Amazon Quick automation, and the CROFTC prompt engineering framework by Balram R. Making AI accessible for all.",
+  "Practical AI guides, Kiro spec-driven workflows, AWS Quick automation, and the CROFTC prompt engineering framework by Balram R. Making AI accessible for all.",
   "/",
 );
 
